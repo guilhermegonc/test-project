@@ -13,7 +13,7 @@ def index(request):
 <!-- Start of HubSpot Embed Code -->
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/7226535.js"></script>
 <!-- End of HubSpot Embed Code -->
-<h1>Hello!</h1>''')
+<h1>Hello, World!</h1>''')
 
 
 def db(request):

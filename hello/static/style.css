@@ -18,7 +18,11 @@ h1 {
     color: white;
 }
 
+<<<<<<< Updated upstream
 .forms-rd {
+=======
+.forms-rd, .forms-hs {
+>>>>>>> Stashed changes
     background-color: transparent;
     width: 50%;
     height: 100%;   
@@ -26,6 +30,13 @@ h1 {
     margin-top: 30px;
 }
 
+<<<<<<< Updated upstream
+=======
+.forms-hs {
+    background-color: white;
+}
+
+>>>>>>> Stashed changes
 div[role=main] {
     max-width: 480px;
     margin: auto;

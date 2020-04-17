@@ -8,7 +8,7 @@ body {
 }
 
 div.flex-container {
-    height: calc(100vh);
+    min-height: calc(100vh);
     width: 100%;
 }
 

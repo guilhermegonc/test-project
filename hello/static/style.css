@@ -18,15 +18,15 @@ h1 {
     color: white;
 }
 
-.forms-rd, .form-hs {
+.forms-rd, .forms-hs {
     background-color: transparent;
     width: 50%;
     height: 100%;   
     padding: 12px;
     margin-top: 30px;
 }
-
-.form-hs {
+  
+.forms-hs {
     background-color: white;
 }
 

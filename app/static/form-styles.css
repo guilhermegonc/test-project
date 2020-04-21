@@ -1,0 +1,25 @@
+.rd-container, .hs-container {
+    width: 50%;
+    min-width: 300px;
+    border-radius: 2px;
+}
+
+.forms-rd, .forms-hs {
+    margin: 30px auto;
+    max-width: 480px;
+    background-color: white;
+    padding: 24px;
+    
+}
+
+@media (max-width: 992px) {
+    .forms-rd, .forms-hs {
+        max-width: 100%;
+        padding: 8px;
+        margin: 0px;
+    }
+    .rd-container, .hs-container {
+        width: 100%;
+        margin: 8px;
+    }
+}

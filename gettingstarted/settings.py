@@ -27,7 +27,7 @@ ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com', '0.0.0.0']
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'local-secret' if DEBUG else  os.environ.get('SECRET_KEY')
+SECRET_KEY = 'local-secret' if DEBUG else os.environ.get('SECRET_KEY')
 
 
 # Application definition

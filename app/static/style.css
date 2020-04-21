@@ -3,9 +3,31 @@ body {
 }
 
 h1 {
-    margin: auto;
     font-size: 5.25em;
     color: white;
+    margin: 200px auto 12px;
+}
+
+.btn{
+    margin: auto;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    text-decoration: none;
+    font-family: sans-serif;
+    background-color: rgba(50,72,190,1);
+    display: block;
+    height: 60px;
+    border-radius: 3px;
+    line-height: 60px;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
+}
+
+.btn:hover {
+    background-color: rgb(26, 38, 107);
 }
 
 .flex-container {

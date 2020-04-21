@@ -32,7 +32,6 @@ SECRET_KEY = 'local-secret' if DEBUG else  os.environ.get('SECRET_KEY')
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",

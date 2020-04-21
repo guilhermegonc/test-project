@@ -20,7 +20,7 @@ h1 {
     color: white;
 }
 
-div[role=main], .forms-hs {
+div[role=main], .hs-cont {
     margin: 30px auto;
     background-color: transparent;
     height: 100%;

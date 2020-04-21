@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <script src="{% static 'actions.js' %}"></script>
+      
+        {% include "analytics-scripts/cookiebot-script.html" %}
+        {% include "analytics-scripts/ga_head.html" %}
+        {% include "analytics-scripts/gtm_head.html" %}
+      
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        {% include "analytics-scripts/rd-tracking-code.html" %}
+        {% include "analytics-scripts/gtm-body.html" %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

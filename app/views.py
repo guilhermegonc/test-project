@@ -10,4 +10,7 @@ def index(request):
 
 
 def cta(request):
-    return render(request, 'cta-page.html')
+    return render(request, 'cta.html')
+
+def test(request):
+    return render(request, ('main-template.html', {'title': 'Guigo'}))

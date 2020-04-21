@@ -16,6 +16,7 @@ import app.views
 
 urlpatterns = [
     path("", app.views.index, name="index"),
+    path("cta/", app.views.cta, name="cta"),
+    path("test/", app.views.test, name="test"),
     path("admin/", admin.site.urls),
-    path("cta", app.views.cta, name="cta")
 ]

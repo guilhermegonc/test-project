@@ -20,24 +20,26 @@ h1 {
     color: white;
 }
 
-.forms-rd, .forms-hs {
+div[role=main], .forms-hs {
     margin: 30px auto;
     background-color: transparent;
     height: 100%;
-}
-
-.forms-hs {
-    border: 24px;
-}
-
-div[role=main], .forms-hs {
+    width: 50%;
     min-height: calc(60vh);
     max-width: 480px;
     min-width: 280px;
     background-color: white;
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
-    -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
-    border-radius: 2px;
+    /* box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15); */
+    /* -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15); */
+    /* -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15); */
+    /* border-radius: 2px; */
+}
+
+.forms-rd {
+    width:100%;
+}
+
+.forms-hs {
+    border: 24px;
 }
 

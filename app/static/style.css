@@ -20,7 +20,7 @@ h1 {
     color: white;
 }
 
-div[role=main], .hs-cont {
+div[role=main], .forms-hs {
     margin: 30px auto;
     background-color: transparent;
     height: 100%;
@@ -29,6 +29,7 @@ div[role=main], .hs-cont {
     max-width: 480px;
     min-width: 280px;
     background-color: white;
+    display: inline-block;
     /* box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15); */
     /* -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15); */
     /* -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15); */
@@ -37,10 +38,12 @@ div[role=main], .hs-cont {
 
 .forms-rd {
     width:100%;
+    float:left;
 }
 
-.forms-hs {
+.hs-cont {
     border: 24px;
     width: 100%;
+    float:right;
 }
 

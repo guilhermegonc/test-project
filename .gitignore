@@ -131,3 +131,6 @@ dmypy.json
 # Local
 staticfiles
 secret.txt
+
+# Folders
+.DS_Store

@@ -18,8 +18,5 @@ def template(request):
     return render(request, 'base.html')
 
 def db(request):
-    new_ind = Personas(name = 'Frederico')
-    new_ind.save()
-
     names = Personas.objects.all()
     return render(request, 'db.html', {"db_results": names})

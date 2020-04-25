@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Key and Hosts
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
 
 

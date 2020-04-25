@@ -14,5 +14,6 @@ urlpatterns = [
     path("", app.views.index, name="index"),
     path("cta/", app.views.cta, name="cta"),
     path("html-model/", app.views.template, name="test"),
+    path("db/", app.views.db, name="db"),
     path("admin/", admin.site.urls),
 ]

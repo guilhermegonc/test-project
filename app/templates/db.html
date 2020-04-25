@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block Title %}DB Test{% endblock %}
+{% block content %}
+<div class="bg">
+    <ul>
+        {% for result in db_results %}
+        <li>{{result.name}}</li>}
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

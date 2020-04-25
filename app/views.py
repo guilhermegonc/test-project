@@ -3,6 +3,8 @@ import requests
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from .models import Personas
+
 
 # Create your views here.
 def index(request):
@@ -14,3 +16,10 @@ def cta(request):
 
 def template(request):
     return render(request, 'base.html')
+
+def db(request):
+    new_ind = Personas('Guilherme')
+    new_ind.save()
+
+    names = Personas.objects.all()
+    return render(request, 'db.html', {"db_results": names})

@@ -4,12 +4,19 @@ body {
 }
 
 h1 {
-    font-size: 5.25em;
-    line-height: 1em;
+    font-size: 60px;
+    line-height: 60px;
     text-align: center;
     color: white;
     margin: 200px auto 12px;
     padding: 12px;
+}
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 48px;
+        line-height: 48px;
+    }
 }
 
 /* Basic Classes */
@@ -22,7 +29,7 @@ h1 {
     background-image: url("https://images.unsplash.com/photo-1553356084-58ef4a67b2a7");
 }
 
-.btn{
+.btn {
     font-family: sans-serif;
     text-transform: uppercase;
     text-align: center;
@@ -39,7 +46,7 @@ h1 {
     background-color: rgb(26, 38, 107);
 }
 
-.shadow{
+.shadow {
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
     -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
     -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);

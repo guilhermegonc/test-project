@@ -18,7 +18,7 @@ def template(request):
     return render(request, 'base.html')
 
 def db(request):
-    new_ind = Personas('Guilherme')
+    new_ind = Personas(name = 'Frederico')
     new_ind.save()
 
     names = Personas.objects.all()

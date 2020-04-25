@@ -14,8 +14,11 @@ ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
 if DEBUG is True:
     with open('/Users/guilherme/scripts/test-project/secret.txt', 'r') as file:
         SECRET_KEY = file.read()
+    with open('/Users/guilherme/scripts/test-project/db_secret.txt', 'r') as file:
+        PASSWORD = file.read()
 else: 
     SECRET_KEY = os.environ.get('SECRET_KEY')
+    PASSWORD = os.environ.get('DB_PASSWORD')
 
 
 # Application definition
@@ -61,12 +64,13 @@ WSGI_APPLICATION = "project-settings.wsgi.application"
 
 
 # Database
+password = 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dna8k5d2p9ljp',
         'USER': 'wgkafnkejrnyxt',
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'PASSWORD': PASSWORD,
         'HOST': 'ec2-184-72-235-159.compute-1.amazonaws.com',
         'PORT': '5432',
     }

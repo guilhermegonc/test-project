@@ -5,8 +5,11 @@ body {
 
 h1 {
     font-size: 5.25em;
+    line-height: 1em;
+    text-align: center;
     color: white;
     margin: 200px auto 12px;
+    padding: 12px;
 }
 
 /* Basic Classes */
@@ -28,6 +31,7 @@ h1 {
     line-height: 60px;
     display: block;
     border-radius: 3px;
+    margin: 12px;
     background-color: rgba(50,72,190,1);
 }
 

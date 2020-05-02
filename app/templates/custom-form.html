@@ -4,13 +4,12 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'custom-form-styles.css' %}">
 {% endblock %}
-
-{% block Title %}Form{% endblock %}
+{% block Title %}Formulário Integrado{% endblock %}
 {% block content %}
 <div class="flex-container bg">
     <div class="half-view">
         <form action="/" method="">
-            {% csrf_token %}
+            <!-- {% csrf_token %} -->
             {{ form }}
             <!-- <input type="email" id="femail" placeholder="Email"><br> -->
             <!-- <input type="text" id="fname" placeholder="Name"><br><br> -->
@@ -18,15 +17,12 @@
         </form>
     </div>
     <div class="half-view fixed-height">
-        <p class="db-result shadow">gui</p>
+        {% for r in db_results %}
+        <p class="db-result shadow">{{r.name}}</p>
+        {% endfor %}
     </div>
 </div>
 <script>
     document.getElementById("input-btn").addEventListener("click", guigo);
-
-    function guigo() {
-        alert('guigo')
-    }
 </script>
-
 {% endblock %}

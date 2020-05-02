@@ -2,12 +2,11 @@ import os
 import requests
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from .models import Personas
 from .forms import BasicForm
 
-
-# Create your views here.
 def index(request):
     return render(request, 'index.html')
 
@@ -23,6 +22,8 @@ def db(request):
     return render(request, 'db.html', {"db_results": names})
 
 def custom_form(request):
+    names = Personas.objects.all()
+    
     if request.method == 'POST':
         form = BasicForm(request.POST)
         
@@ -32,7 +33,7 @@ def custom_form(request):
             new_input = Personas(name=name)
             new_input.save()
             
-            return HttpResponseRedirect('db/')
+            return HttpResponseRedirect('custom-form/')
 
     form = BasicForm()
-    return render(request, 'custom-form.html', {'form': form})
+    return render(request, 'custom-form.html', {'form': form, 'db_results': names})

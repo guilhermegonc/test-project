@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block extra-css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'custom-form-styles.css' %}">
+{% endblock %}
+
+{% block Title %}Form{% endblock %}
+{% block content %}
+<div class="flex-container bg">
+    <div class="half-view">
+        <form action="/" method="">
+            {% csrf_token %}
+            {{ form }}
+            <!-- <input type="email" id="femail" placeholder="Email"><br> -->
+            <!-- <input type="text" id="fname" placeholder="Name"><br><br> -->
+            <input id="input-btn" type="submit" value="Converter" class="btn shadow">
+        </form>
+    </div>
+    <div class="half-view fixed-height">
+        <p class="db-result shadow">gui</p>
+    </div>
+</div>
+<script>
+    document.getElementById("input-btn").addEventListener("click", guigo);
+
+    function guigo() {
+        alert('guigo')
+    }
+</script>
+
+{% endblock %}

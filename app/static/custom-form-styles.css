@@ -1,0 +1,38 @@
+form {
+    margin: 25%;
+}
+
+input {
+    font-size: 21px;
+    line-height: 60px;
+    border-radius: 4px;
+    border: none;
+    margin: 0 0 12px 0;
+    padding: 0 12px 0 12px;
+    width: calc(100% - 26px);
+}
+
+input[type="submit"] {
+    width: 100%;
+    margin: 0;
+}
+
+.half-view {
+    width: 50%;
+    min-width: 300px;
+}
+
+.fixed-height {
+    margin-top: 10%;
+    height: 300px;
+    overflow: scroll;
+}
+
+.db-result {
+    background-color: white;
+    padding: 12px;
+    width: 90%;
+    margin: 0 auto 6px;
+    border-radius: 3px;
+
+}

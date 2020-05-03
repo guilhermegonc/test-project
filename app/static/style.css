@@ -69,10 +69,10 @@ h1 {
     margin-bottom: 12px;
 }
 
-.fl-r {
-    float: right;
+.light {
+    color: #bbb;
 }
 
-.light {
-    color: #ddd;
+.dark {
+    color: #444;
 }

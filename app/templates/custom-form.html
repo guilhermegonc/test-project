@@ -8,8 +8,8 @@
 {% block content %}
 <div class="flex-container bg">
     <div class="half-view">
-        <form action="/" method="">
-            <!-- {% csrf_token %} -->
+        <form action='/populate-personas/' method="post">
+            {% csrf_token %}
             {{ form }}
             <!-- <input type="email" id="femail" placeholder="Email"><br> -->
             <!-- <input type="text" id="fname" placeholder="Name"><br><br> -->

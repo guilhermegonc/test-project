@@ -14,7 +14,6 @@ urlpatterns = [
     path("", app.views.index, name="index"),
     path("cta/", app.views.cta, name="cta"),
     path("custom-form/", app.views.custom_form, name="custom-form"),
-    path("db/", app.views.db, name="db"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
     path("admin/", admin.site.urls)
 ]

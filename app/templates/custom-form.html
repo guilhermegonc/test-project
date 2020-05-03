@@ -17,8 +17,11 @@
         </form>
     </div>
     <div class="half-view fixed-height">
+        <p class="lbl txt-center m-b-12">Últimos nomes adicionados</p>
         {% for r in db_results %}
-        <p class="db-result shadow">{{r.name}}</p>
+        <p class="db-result shadow">{{r.name}}
+            <span class="fl-r light">{{r.created_at}}</span>
+        </p>
         {% endfor %}
     </div>
 </div>

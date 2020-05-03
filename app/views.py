@@ -17,10 +17,6 @@ def cta(request):
 def template(request):
     return render(request, 'base.html')
 
-def db(request):
-    names = Personas.objects.all()
-    return render(request, 'db.html', {"db_results": names})
-
 def custom_form(request):
     form = BasicForm()
     names = Personas.objects.filter().order_by('-id')[:10]
@@ -37,5 +33,4 @@ def populate_personas(request):
             new_input = Personas(name=name)
             new_input.save()
             
-            return HttpResponseRedirect('/custom-form/')
-    return render(request, 'thank-you-page.html')
+    return HttpResponseRedirect('/custom-form/')

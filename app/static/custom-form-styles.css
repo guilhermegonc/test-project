@@ -12,12 +12,18 @@ input {
     width: calc(100% - 26px);
 }
 
-label {
+label, p.db-result, .lbl{
     text-transform: uppercase;
     font-family: sans-serif;
     font-size: 12px;
     font-weight: 900;
     letter-spacing: 1px;
+    color: white;
+
+}
+
+p.db-result {
+    color: #444;
 }
 
 input[type="submit"] {
@@ -44,7 +50,10 @@ input[type="submit"] {
     width: 90%;
     margin: 0 auto 6px;
     border-radius: 3px;
+}
 
+.db-result:hover {
+    background-color: #eee;
 }
 
 form #input-btn {

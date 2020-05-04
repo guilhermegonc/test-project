@@ -135,3 +135,6 @@ db_secret.txt
 
 # Folders
 .DS_Store
+
+# Settings
+.settings.py

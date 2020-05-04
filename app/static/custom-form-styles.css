@@ -50,8 +50,8 @@ input[type="submit"] {
     margin: 90px 0;
     padding: 24px;
     max-width: 580px;
-    height: 380px;
-    overflow: scroll;
+    /* height: 380px; */
+    /* overflow: scroll; */
 }
 
 .db-result {

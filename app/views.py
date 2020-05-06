@@ -35,3 +35,6 @@ def populate_personas(request):
             new_input.save()
             
     return HttpResponseRedirect('/custom-form/')
+
+def youtube_live(request):
+    return render(request, 'youtube.html')

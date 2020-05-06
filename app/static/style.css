@@ -3,23 +3,16 @@ body {
     margin: 0px;
 }
 
-h1 {
-    font-size: 60px;
+input {
+    font-size: 21px;
     line-height: 60px;
-    text-align: center;
-    color: white;
-    margin: 200px auto 12px;
-    padding: 12px;
+    border-radius: 4px;
+    border: none;
+    margin: 6px 0 12px;
+    padding: 0 12px;
+    width: calc(100% - 26px);
 }
 
-@media (max-width: 992px) {
-    h1 {
-        font-size: 48px;
-        line-height: 48px;
-    }
-}
-
-/* Basic Classes */
 .bg {
     min-height: calc(100vh);
     width: 100%;
@@ -31,14 +24,13 @@ h1 {
 
 .btn {
     font-family: sans-serif;
+    text-decoration: none;
     text-transform: uppercase;
     text-align: center;
-    color: white;
-    text-decoration: none;
     line-height: 60px;
     display: block;
     border-radius: 3px;
-    margin: 12px;
+    color: white;
     background-color: rgba(50,72,190,1);
 }
 
@@ -46,33 +38,85 @@ h1 {
     background-color: rgb(26, 38, 107);
 }
 
-.shadow {
-    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
-    -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
-}
-
-.btn.white {
+.btn.light {
     background-color: white;
-    color: #222;
+    color: #444;
 }
 
-.btn.btn.white:hover {
+.btn.light:hover {
     background-color: #ddd;
 }
 
-.txt-center {
-    text-align: center;
+.p-card {
+    background-color: white;
+    padding: 12px;
+    border-radius: 3px;
+}
+
+.p-card:hover {
+    background-color: #ddd;
+}
+
+/* Margins */
+
+.m-0 {
+    margin: 0;
+}
+
+.m-20-r {
+    margin: 20%;
+}
+
+.m-b-6 {
+    margin-bottom: 6px;
 }
 
 .m-b-12 {
     margin-bottom: 12px;
 }
 
-.light {
-    color: #bbb;
+.m-b-24 {
+    margin-bottom: 24px;
 }
 
-.dark {
-    color: #444;
+.p-12 {
+    padding: 12px;
+}
+
+.p-24 {
+    padding: 24px;
+}
+
+/* Layout */
+.half-view {
+    width: 50%;
+    margin: auto;
+    min-width: 300px;
+}
+
+.two-thirds {
+    width: 66%;
+    margin: auto;
+    min-width: 300px;
+}
+
+.one-third {
+    width: 34%;
+    margin: auto;
+    min-width: 300px;
+}
+
+.fl-r {
+    float: right;
+}
+
+.fl-l {
+    float: left;
+}
+
+/* Styling */
+.shadow {
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.15);
 }

@@ -15,5 +15,6 @@ urlpatterns = [
     path("cta/", app.views.cta, name="cta"),
     path("custom-form/", app.views.custom_form, name="custom-form"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
+    path("youtube/", app.views.youtube_live, name="youtube"),
     path("admin/", admin.site.urls)
 ]

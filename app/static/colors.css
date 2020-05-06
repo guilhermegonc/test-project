@@ -1,0 +1,16 @@
+/* Colors */
+.dark {
+    color: #444;
+}
+
+.light {
+    color: white;
+}
+
+.light-gray {
+    color: #bbb;
+}
+
+.blue {
+    color: rgba(50,72,190,1);
+}

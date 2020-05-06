@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Live do YT{% endblock %}
+{% block content %}
+<div class="two-thirds">
+    <div class="yt-video">
+        <iframe width="100%" height="480px" src="https://www.youtube.com/embed/-K7Tbg7pkOE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+<div class="one-third">
+    <div id='chat_youtube' class="yt-chat" style="color: #ffffff;"></div>
+    <script type="text/javascript">
+        var iframe = document.createElement('iframe');
+        var container =  document.querySelector('#chat_youtube');
+        var idYT = '-K7Tbg7pkOE'
+        var host = window.location.hostname
+        iframe.src = 'https://www.youtube.com/live_chat?v='+idYT+'&embed_domain='+host;
+        iframe.width = '100%';
+        iframe.height = '480px';
+        container.innerHTML = '';
+        container.append(iframe);
+    </script>
+</div>
+<style>
+    .yt-video {
+        padding: 0 24px;
+        margin: auto;
+    }
+    .yt-chat {
+        max-width: 300px;
+        margin: 0;
+    }
+</style>
+{% endblock %}

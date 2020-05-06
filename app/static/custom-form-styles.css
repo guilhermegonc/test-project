@@ -1,18 +1,4 @@
-form {
-    margin: 25%;
-}
-
-input {
-    font-size: 21px;
-    line-height: 60px;
-    border-radius: 4px;
-    border: none;
-    margin: 6px 0 12px;
-    padding: 0 12px;
-    width: calc(100% - 26px);
-}
-
-label, .db-result.lbl, .lbl, .p.info{
+label{
     text-transform: uppercase;
     font-family: sans-serif;
     font-size: 12px;
@@ -21,49 +7,9 @@ label, .db-result.lbl, .lbl, .p.info{
 
 }
 
-p.info {
-    margin: 6px 0;
-    color: rgba(50,72,190,1);
-    font-size: 14px;
-    text-transform: uppercase;
-    font-family: sans-serif;
-    font-weight: 900;
-}
-
-p.light {
-    font-size: 14px;
-    font-family: sans-serif;
-    margin: 0;
-}
-
 input[type="submit"] {
     width: 100%;
     margin: 0;
-}
-
-.half-view {
-    width: 50%;
-    min-width: 300px;
-}
-
-.fixed-height {
-    margin: 90px 0;
-    padding: 24px;
-    max-width: 580px;
-    /* height: 380px; */
-    /* overflow: scroll; */
-}
-
-.db-result {
-    background-color: white;
-    padding: 12px;
-    width: 90%;
-    margin: 0 auto 6px;
-    border-radius: 3px;
-}
-
-.db-result:hover {
-    background-color: #eee;
 }
 
 form #input-btn {
@@ -71,8 +17,24 @@ form #input-btn {
     -webkit-appearance: none;
 }
 
+.fixed-height {
+    margin: 90px 0;
+    padding: 24px;
+    max-width: 580px;
+}
+
+#rd-int-form {
+    margin: auto;
+    max-width: 480px;
+}
+
+.db-results {
+    width: 90%;
+    margin: 0 auto 6px;
+}
+
 @media (max-width: 992px) {
-    form {
+    .db-results {
         margin: 60px 6px 0;
     }
 }

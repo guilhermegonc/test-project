@@ -6,6 +6,8 @@
     
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'fonts.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'colors.css' %}">
         <script src="{% static 'actions.js' %}"></script>
         {% block extra-css %}{% endblock %}
         {% block extra-js %}{% endblock%}
@@ -17,8 +19,10 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
-        {% include "analytics-scripts/rd-tracking-code.html" %}
-        {% include "analytics-scripts/gtm-body.html" %}
-        {% block content %}{% endblock %}
+        <div class="flex-container bg">
+            {% include "analytics-scripts/rd-tracking-code.html" %}
+            {% include "analytics-scripts/gtm-body.html" %}
+            {% block content %}{% endblock %}
+        </div>
     </body>
 </html>

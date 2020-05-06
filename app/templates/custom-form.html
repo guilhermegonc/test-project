@@ -6,23 +6,21 @@
 {% endblock %}
 {% block Title %}Formulário Integrado{% endblock %}
 {% block content %}
-<div class="flex-container bg">
-    <div class="half-view">
-        <form action='/populate-personas/' method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input id="input-btn" type="submit" value="Converter" class="btn shadow">
-        </form>
+<div class="half-view">
+    <form id="rd-int-form"action='/populate-personas/' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="input-btn" type="submit" value="Converter" class="btn shadow">
+    </form>
+</div>
+<div class="half-view fixed-height">
+    <h2 class="s4 str txt-center m-b-24 light">Nomes recentes</h2>
+    {% for r in db_results %}
+    <div class="db-results p-card shadow p-24">
+        <p class="s9 str blue m-b-0">{{r.name}}</p>
+        <p class="s9 light-gray m-0">{{r.email}}</p>
     </div>
-    <div class="half-view fixed-height">
-        <p class="lbl txt-center m-b-12 dark">Últimos nomes adicionados</p>
-        {% for r in db_results %}
-        <div class="db-result shadow">
-            <p class="info">{{r.name}}</p>
-            <p class="light">{{r.email}}</p>
-        </div>
-        {% endfor %}
-    </div>
+    {% endfor %}
 </div>
 <script>
     document.getElementById("input-btn").addEventListener("click", greeting);

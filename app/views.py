@@ -38,3 +38,6 @@ def populate_personas(request):
 
 def youtube_live(request):
     return render(request, 'youtube.html')
+
+def auth_callback(request):
+    return render(request, 'base.html')

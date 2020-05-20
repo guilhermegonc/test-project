@@ -18,19 +18,18 @@ form #input-btn {
 }
 
 .fixed-height {
-    margin: 90px 0;
-    padding: 24px;
-    max-width: 580px;
+    max-width: 50%;
 }
 
 #rd-int-form {
-    margin: auto;
+    margin: 0 auto;
     max-width: 480px;
 }
 
 .db-results {
-    width: 90%;
     margin: 0 auto 6px;
+    max-width: 432px;
+
 }
 
 @media (max-width: 992px) {

@@ -10,6 +10,7 @@
     <form id="rd-int-form"action='/populate-personas/' method="post">
         {% csrf_token %}
         {{ form }}
+        <input type="hidden" name="privacy_data[browser]" id="privacy_data_browser" value="{'analytics': true, 'functional':true, 'banner_type':'info'}">
         <input id="input-btn" type="submit" value="Converter" class="btn shadow">
     </form>
 </div>

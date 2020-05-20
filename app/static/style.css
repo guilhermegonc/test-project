@@ -94,6 +94,12 @@ input {
     min-width: 300px;
 }
 
+@media (max-width: 992px) {
+    .half-view {
+        width: 100%;
+    }
+}
+
 .two-thirds {
     width: 66%;
     margin: auto;

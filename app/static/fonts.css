@@ -8,6 +8,11 @@ p {
     font-family: sans-serif;
 }
 
+input::placeholder {
+    color:#aaa;
+    font-size: 14px;
+}
+
 .s1 {
     font-size: 60px;
     line-height: 60px;

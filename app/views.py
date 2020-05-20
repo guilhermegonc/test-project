@@ -41,3 +41,6 @@ def youtube_live(request):
 
 def auth_callback(request):
     return render(request, 'base.html')
+
+def tic_tac_toe(request):
+    return render(request, 'tic-tac-toe.html')

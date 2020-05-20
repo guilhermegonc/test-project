@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block extra-css %}
+{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'tic-tac-toe.css' %}">
+{% endblock %}
+{% block extra-js %}
+    <script src="{% static 'tic-tac-toe.js' %}"></script>
+{% endblock %}
+{% block title %}Tic tac toe{% endblock %}
+
+{% block content %}
+    <div id="game"></div>
+    <script>
+        createBoard()
+    </script>
+{% endblock %}

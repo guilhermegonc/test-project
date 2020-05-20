@@ -16,6 +16,5 @@ urlpatterns = [
     path("custom-form/", app.views.custom_form, name="custom-form"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
     path("youtube/", app.views.youtube_live, name="youtube"),
-    path("auth/callback/", app.views.auth_callback, name="rd-callback"),
     path("admin/", admin.site.urls)
 ]

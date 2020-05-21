@@ -9,6 +9,16 @@
     margin: 12px 12px;
     background-color: white;
     border-radius: 3px;
+    text-align: center;
+    line-height: 100px;
+    font-family: sans-serif;
+    font-size: 60px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .square:hover {

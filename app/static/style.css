@@ -63,6 +63,10 @@ input {
     margin: 0;
 }
 
+.m-12 {
+    margin: 12px;
+}
+
 .m-20-r {
     margin: 20%;
 }

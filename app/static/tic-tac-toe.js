@@ -21,6 +21,7 @@ let createTitle = (boardDiv) => {
     scoreInfo.classList.add('s1')
     scoreInfo.classList.add('p-12')
     scoreInfo.classList.add('light')
+    scoreInfo.classList.add('txt-center')
     scoreInfo.innerText = 'Tic tac toe'
     
     boardDiv.appendChild(scoreInfo)
@@ -48,7 +49,7 @@ let createSquare = (r, c) => {
     newSquare.id = identifier
     newSquare.classList.add('square')
     newSquare.classList.add('shadow')
-    newSquare.onclick = function(){isGameOver(identifier)}
+    newSquare.onclick = function(){isGameOver(newSquare.id)}
     newSquare.innerText = "-"
 
     return newSquare
@@ -80,7 +81,7 @@ let checkBoard = () => {
 let checkWinner = (piecesPosition) => {
     let wCond = [
         [0, 1, 2],
-        [0, 3, 7],
+        [0, 3, 6],
         [0, 4, 8],
         [1, 4 ,7],
         [2, 5, 8],
@@ -110,27 +111,23 @@ let congratulate = () => {
     let feedback = document.querySelector('#game-title')
     let winner = xNext?'x':'o'
 
-    feedback.innerText = `${winner} venceu`
-    mainDiv.append(feedback)
+    feedback.innerText = `${winner.toUpperCase()} venceu`
 }
 
 let changePlayer = () => xNext = xNext?false:true
 
 let endGame = () => {
     gameOn = false
-    let mainDiv = document.querySelector('#game')
-    let feedback = document.createElement('h1')
-
+    let feedback = document.querySelector('#game-title')
     feedback.innerText = 'Fim de jogo'
-    mainDiv.append(feedback)
 }
 
 let addResetButton = (boardDiv) => {
     let resetBtn = document.createElement('div')
     resetBtn.classList.add('btn')
-    resetBtn.classList.add('text-center')
+    resetBtn.classList.add('txt-center')
     resetBtn.classList.add('shadow')
-    resetBtn.classList.add('m-b-12')
+    resetBtn.classList.add('m-12')
 
     resetBtn.innerText = 'Resetar jogo'
     resetBtn.onclick = function(){reset(boardDiv)}

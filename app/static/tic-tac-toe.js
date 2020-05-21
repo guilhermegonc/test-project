@@ -4,13 +4,14 @@ let rounds = 0
 
 let createBoard = () => {
     let mainDiv  = document.querySelector('#game')
+    
     createTitle(mainDiv)
 
     for (let i = 0; i<3; i++) {
         let row = createRow(i)
         mainDiv.appendChild(row)
     }
-
+    addResetButton(mainDiv)
 }
 
 let createTitle = (boardDiv) => {
@@ -109,7 +110,7 @@ let congratulate = () => {
     let feedback = document.querySelector('#game-title')
     let winner = xNext?'x':'o'
 
-    feedback.innerText = `Vencedor! ${winner}`
+    feedback.innerText = `${winner} venceu`
     mainDiv.append(feedback)
 }
 
@@ -120,6 +121,27 @@ let endGame = () => {
     let mainDiv = document.querySelector('#game')
     let feedback = document.createElement('h1')
 
-    feedback.innerText = 'Fim de jogo!'
+    feedback.innerText = 'Fim de jogo'
     mainDiv.append(feedback)
+}
+
+let addResetButton = (boardDiv) => {
+    let resetBtn = document.createElement('div')
+    resetBtn.classList.add('btn')
+    resetBtn.classList.add('text-center')
+    resetBtn.classList.add('shadow')
+    resetBtn.classList.add('m-b-12')
+
+    resetBtn.innerText = 'Resetar jogo'
+    resetBtn.onclick = function(){reset(boardDiv)}
+
+    boardDiv.appendChild(resetBtn)
+}
+
+let reset = (boardDiv) => {
+    boardDiv.innerHTML = ""
+    xNext = true
+    gameOn = true
+    rounds = 0
+    createBoard()
 }

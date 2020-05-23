@@ -52,7 +52,8 @@ def auth_callback(request):
     with open('api_secret.json') as file:
         json.dump(api_ids, file)
     
-    return HttpResponseRedirect('/cta/')
+    # return HttpResponseRedirect('/cta/')
+    return render(request, 'auth.html', {'client_id': api_ids['client_id']})
 
 def tic_tac_toe(request):
     return render(request, 'tic-tac-toe.html')

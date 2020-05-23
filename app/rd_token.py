@@ -1,3 +1,4 @@
+import os
 import requests
 import json
 
@@ -27,15 +28,11 @@ def is_valid(token):
   return response.status_code == 200
 
 
-
 def refresh(secret_path, token):
-  with open(secret_path, 'r') as file:
-    secret = json.load(file)
-
   url = 'https://api.rd.services/auth/token'
   payload = {
-    'client_id': secret['client_id'],
-    'client_secret': secret['client_secret'],
+    'client_id': os.environ.get('RD_API_CLIENT_ID'),
+    'client_secret':os.environ.get('RD_API_CLIENT_ID'),
     'refresh_token': token['refresh_token']
   }
 

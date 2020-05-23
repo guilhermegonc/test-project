@@ -18,5 +18,6 @@ urlpatterns = [
     path("tictactoe/", app.views.tic_tac_toe, name="tic-tac-toe"),
     path("youtube/", app.views.youtube_live, name="youtube"),
     path("auth/callback/", app.views.auth_callback, name="rd-auth"),
+    path("callback/trk", app.views.trk, name="rd-trk"),
     path("admin/", admin.site.urls)
 ]

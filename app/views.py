@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 
 from .models import Personas
 from .forms import BasicForm
-from rd_token import get_valid_token
+from .rd_token import get_valid_token
 
 
 def index(request):
@@ -45,6 +45,12 @@ def youtube_live(request):
 def auth_callback(request):
     api_code = request.GET.get('code','Sem resposta')
     return render(request, 'auth.html', {'rd_api_code': api_code})
+
+def trk(request):
+    auth = get_valid_token('rd_api_token.json')
+    url = 'https://api.rd.services/marketing/account_info'
+    r = requests.get(url, headers=auth)
+    return render(request, 'trk.html', {'trk_url': r.json()})
 
 def tic_tac_toe(request):
     return render(request, 'tic-tac-toe.html')

@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 
 from .models import Personas
 from .forms import BasicForm
+from rd_token import get_valid_token
+
 
 def index(request):
     return render(request, 'index.html')
@@ -41,7 +43,7 @@ def youtube_live(request):
     return render(request, 'youtube.html')
 
 def auth_callback(request):
-    api_code = request.GET.get('code','Sem resposta.')
+    api_code = request.GET.get('code','Sem resposta')
     return render(request, 'auth.html', {'rd_api_code': api_code})
 
 def tic_tac_toe(request):

@@ -10,15 +10,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = False
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
 
-
-if DEBUG is True:
-    with open('secret.txt', 'r') as file:
-        SECRET_KEY = file.read()
-    with open('db_secret.txt', 'r') as file:
-        PASSWORD = file.read()
-else: 
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    PASSWORD = os.environ.get('DB_PASSWORD')
+SECRET_KEY = os.environ.get('SECRET_KEY')
+PASSWORD = os.environ.get('DB_PASSWORD')
 
 # Application definition
 INSTALLED_APPS = [

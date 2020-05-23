@@ -17,5 +17,6 @@ urlpatterns = [
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
     path("tictactoe/", app.views.tic_tac_toe, name="tic-tac-toe"),
     path("youtube/", app.views.youtube_live, name="youtube"),
+    path("rd-auth-callback/", app.views.auth_callback, name="rd-auth"),
     path("admin/", admin.site.urls)
 ]

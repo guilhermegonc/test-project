@@ -1,5 +1,6 @@
 import os
 import requests
+import simplejson as json
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -40,7 +41,18 @@ def youtube_live(request):
     return render(request, 'youtube.html')
 
 def auth_callback(request):
-    return render(request, 'base.html')
+
+    api_code = request.GET.get('code','')
+    api_ids = {
+        'client_id': os.environ.get('RD_API_CLIENT_ID'),
+        'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),
+        'code': api_code
+    }
+    
+    with open('api_secret.json') as file:
+        json.dump(code_var)
+    
+    return HttpResponseRedirect('/cta/')
 
 def tic_tac_toe(request):
     return render(request, 'tic-tac-toe.html')

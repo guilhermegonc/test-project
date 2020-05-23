@@ -41,11 +41,7 @@ def youtube_live(request):
     return render(request, 'youtube.html')
 
 def auth_callback(request):
-    try:
-        api_code = request.GET.get('code','')
-    except:
-        api_code = 'Local'
-        
+    api_code = request.GET.get('code','local')
     return render(request, 'auth.html', {'rd_api_code': api_code})
 
 def tic_tac_toe(request):

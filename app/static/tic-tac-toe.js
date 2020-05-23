@@ -127,7 +127,6 @@ let addResetButton = (boardDiv) => {
     resetBtn.classList.add('btn')
     resetBtn.classList.add('txt-center')
     resetBtn.classList.add('shadow')
-    resetBtn.classList.add('m-12')
 
     resetBtn.innerText = 'Resetar jogo'
     resetBtn.onclick = function(){reset(boardDiv)}

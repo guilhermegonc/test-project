@@ -1,6 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Teste{% endblock %}
+
+{% block title %}Resposta{% endblock %}
 
 {% block content %}
-{{ rd_api_code }}
+<div class="m-20-r">
+    <h1 class="s1 p-12 light">{{ rd_api_code }}</h1>
+    <a class="btn shadow m-b-12 text-center" href="/">Ver RD Form</a>
+    <a class="btn shadow light" href="/custom-form/">Ver Form integrado</a>
+  </div>
 {% endblock %}

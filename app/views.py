@@ -50,7 +50,7 @@ def auth_callback(request):
     }
     
     with open('api_secret.json') as file:
-        json.dump(code_var)
+        json.dump(api_ids, file)
     
     return HttpResponseRedirect('/cta/')
 

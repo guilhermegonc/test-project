@@ -1,6 +1,6 @@
 import os
 import requests
-import simplejson as json
+# import simplejson as json
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect

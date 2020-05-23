@@ -49,8 +49,8 @@ def auth_callback(request):
         'code': api_code
     }
     
-    with open('api_secret.json') as file:
-        json.dump(api_ids, file)
+    # with open('api_secret.json') as file:
+        # json.dump(api_ids, file)
     
     # return HttpResponseRedirect('/cta/')
     return render(request, 'auth.html', {'client_id': api_ids['client_id']})

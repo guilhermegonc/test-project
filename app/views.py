@@ -48,12 +48,12 @@ def auth_callback(request):
         'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),
         'code': 'gui'
     }
-    
+
     # with open('api_secret.json') as file:
         # json.dump(api_ids, file)
     
     # return HttpResponseRedirect('/cta/')
-    return render(request, 'auth.html', {'client_id': api_ids['client_id']})
+    return render(request, 'auth.html', {'client_id': api_ids})
 
 def tic_tac_toe(request):
     return render(request, 'tic-tac-toe.html')

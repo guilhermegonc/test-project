@@ -42,11 +42,11 @@ def youtube_live(request):
 
 def auth_callback(request):
 
-    api_code = request.GET.get('code','')
+    # api_code = request.GET.get('code','')
     api_ids = {
         'client_id': os.environ.get('RD_API_CLIENT_ID'),
         'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),
-        'code': api_code
+        'code': 'gui'
     }
     
     # with open('api_secret.json') as file:

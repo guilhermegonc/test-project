@@ -14,9 +14,13 @@ urlpatterns = [
     path("", app.views.index, name="index"),
     path("cta/", app.views.cta, name="cta"),
     path("custom-form/", app.views.custom_form, name="custom-form"),
-    path("populate-personas/", app.views.populate_personas, name="populate-personas"),
+    path("trk/", app.views.trk_callback, name="rd-trk"),
     path("tictactoe/", app.views.tic_tac_toe, name="tic-tac-toe"),
+
+
     path("auth/callback/", app.views.auth_callback, name="rd-auth"),
-    path("trk", app.views.trk_callback, name="rd-trk"),
+    path("populate-personas/", app.views.populate_personas, name="populate-personas"),
+
+    
     path("admin/", admin.site.urls)
 ]

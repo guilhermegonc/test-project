@@ -19,6 +19,7 @@
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        {% include "global-navigation.html" %}
         <div class="flex-container bg">
             {% include "analytics-scripts/rd-tracking-code.html" %}
             {% include "analytics-scripts/gtm-body.html" %}

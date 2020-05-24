@@ -50,4 +50,4 @@ def tic_tac_toe(request):
 
 def auth_callback(request):
     api_code = request.GET.get('code','Sem resposta')
-    return render(request, 'auth.html', {'rd_api_code': api_code})
+    return render(request, 'auth-callback.html', {'rd_api_code': api_code})

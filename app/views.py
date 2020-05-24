@@ -42,10 +42,6 @@ def populate_personas(request):
 def youtube_live(request):
     return render(request, 'youtube.html')
 
-def auth_callback(request):
-    api_code = request.GET.get('code','Sem resposta')
-    return render(request, 'auth.html', {'rd_api_code': api_code})
-
 def trk(request):
     auth = get_valid_token()
     url = 'https://api.rd.services/marketing/account_info'
@@ -54,3 +50,7 @@ def trk(request):
 
 def tic_tac_toe(request):
     return render(request, 'tic-tac-toe.html')
+
+def auth_callback(request):
+    api_code = request.GET.get('code','Sem resposta')
+    return render(request, 'auth.html', {'rd_api_code': api_code})

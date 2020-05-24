@@ -39,10 +39,7 @@ def populate_personas(request):
             
     return HttpResponseRedirect('/custom-form/')
 
-def youtube_live(request):
-    return render(request, 'youtube.html')
-
-def trk(request):
+def trk_callback(request):
     auth = get_valid_token()
     url = 'https://api.rd.services/marketing/account_info'
     r = requests.get(url, headers=auth)

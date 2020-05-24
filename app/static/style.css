@@ -43,17 +43,26 @@ input {
     background-color: rgb(26, 38, 107);
 }
 
-.clean-btn {
+.menu-btn {
     border: none;
     background-color: transparent;
+    vertical-align: middle;
     padding: 24px;
     color: white;
     font-size: 14px;
     font-weight: 900;
     text-transform: uppercase;
+    line-height: 17px;
+
 }
 
-.clean-btn:hover {
+.menu-icon {
+    font-size: 17px !important;
+    padding: 0;
+    height: 17px;
+}
+
+.menu-btn:hover, .menu-icon:hover {
     background-color:rgba(0,0,0,0.15);
 }
 
@@ -194,4 +203,5 @@ input {
 .dropdown-content a:hover{
     background-color:#ddd;
 }
+
 

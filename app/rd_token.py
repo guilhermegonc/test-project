@@ -7,7 +7,6 @@ from .aws_connect import connect_to_s3
 def get_valid_token():
   s3 = connect_to_s3()
   token = load_last_token(s3)
-  
   token = token if is_valid(token) else refresh(token, s3)
   return {'Authorization': 'Bearer ' + token['access_token']}
 
@@ -37,12 +36,15 @@ def refresh(token, s3):
     'client_secret':os.environ.get('RD_API_CLIENT_ID'),
     'refresh_token': token['refresh_token']
   }
-
   token = requests.get(url, payload)
-
-  response = s3.put_object(
-    Bucket='test-project-production',
-    Key='not-public/rd_api_token.json'
-  )
-  
+  update_s3(token, s3)
   return token
+
+
+  def update_s3(new_token, s3):
+    response = s3.put_object(
+      Bucket='test-project-production',
+      Key='not-public/rd_api_token.json'
+    )
+  pass
+

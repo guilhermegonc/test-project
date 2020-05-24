@@ -1,7 +1,8 @@
 import os
+import boto3
 import requests
 import json
-from .aws_connect import connect_to_s3
+# from .aws_connect import connect_to_s3
 
 
 def get_valid_token():
@@ -9,6 +10,18 @@ def get_valid_token():
   token = load_last_token(s3)
   token = token if is_valid(token) else refresh(token, s3)
   return {'Authorization': 'Bearer ' + token['access_token']}
+
+
+def connect_to_s3():
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id=os.environ.get('AKIAILBJICJZOMY6FPJA'),
+        aws_secret_access_key=os.environ.get('AKIAILBJICJZOMY6FPJA')
+    )
+    return s3
+# S3_ACCESS_KEY=AKIAILBJICJZOMY6FPJA
+# S3_SECRET_KEY_ID=d9P218hPDhbegVcaXPj91coTurYqA1V6xivBhZNm
+
 
 
 def load_last_token(s3):
@@ -47,3 +60,4 @@ def update_s3(new_token, s3):
     Key='not-public/rd_api_token.json'
   )
 
+get_valid_token()

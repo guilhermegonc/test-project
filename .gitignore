@@ -130,9 +130,6 @@ dmypy.json
 
 # Local
 staticfiles
-secret.txt
-db_secret.txt
-rd_api_secret.json
 
 # Folders
 .DS_Store

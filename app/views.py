@@ -47,7 +47,7 @@ def auth_callback(request):
     return render(request, 'auth.html', {'rd_api_code': api_code})
 
 def trk(request):
-    auth = get_valid_token('rd_api_token.json')
+    auth = get_valid_token()
     url = 'https://api.rd.services/marketing/account_info'
     r = requests.get(url, headers=auth)
     return render(request, 'trk.html', {'trk_url': r.json()})

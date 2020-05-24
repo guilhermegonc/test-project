@@ -41,10 +41,9 @@ def refresh(token, s3):
   return token
 
 
-  def update_s3(new_token, s3):
-    response = s3.put_object(
-      Bucket='test-project-production',
-      Key='not-public/rd_api_token.json'
-    )
-  pass
+def update_s3(new_token, s3):
+  return s3.put_object(
+    Bucket='test-project-production',
+    Key='not-public/rd_api_token.json'
+  )
 

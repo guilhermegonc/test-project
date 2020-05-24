@@ -41,6 +41,20 @@ input {
     background-color: rgb(26, 38, 107);
 }
 
+.clean-btn {
+    border: none;
+    background-color: transparent;
+    padding: 24px;
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.clean-btn:hover {
+    background-color:rgba(0,0,0,0.15);
+}
+
 .btn.light {
     background-color: white;
     color: #444;
@@ -141,20 +155,6 @@ input {
     padding: 0 24px;
     top: 0;
     width: 100%;
-}
-
-.clean-btn {
-    background-color: transparent;
-    border: none;
-    padding: 24px;
-    text-transform: uppercase;
-    font-size: 14px;
-    font-weight: 900;
-    color: white;
-}
-
-.clean-btn:hover {
-    background-color:rgba(0,0,0,0.15);
 }
 
 .dropdown {

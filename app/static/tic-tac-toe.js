@@ -2,29 +2,35 @@ let xNext = true
 let gameOn = true
 let rounds = 0
 
-let createBoard = () => {
-    let mainDiv  = document.querySelector('#game')
-    
-    createTitle(mainDiv)
 
-    for (let i = 0; i<3; i++) {
-        let row = createRow(i)
-        mainDiv.appendChild(row)
-    }
+let createGame = () => {
+    let mainDiv  = document.querySelector('#game')    
+    createTitle(mainDiv)
+    createBoard(mainDiv)
     addResetButton(mainDiv)
 }
 
-let createTitle = (boardDiv) => {
+let createTitle = (mainDiv) => {
     let scoreInfo = document.createElement('h1')
-    
     scoreInfo.id = 'game-title'
     scoreInfo.classList.add('s1')
     scoreInfo.classList.add('p-12')
     scoreInfo.classList.add('light')
     scoreInfo.classList.add('txt-center')
     scoreInfo.innerText = 'Tic tac toe'
-    
-    boardDiv.appendChild(scoreInfo)
+    mainDiv.appendChild(scoreInfo)
+}
+
+let createBoard = (mainDiv) => {
+    let gameBoard = document.createElement('div')
+    gameBoard.id = 'gameBoard'
+    gameBoard.classList.add('m-b-24')
+    mainDiv.appendChild(gameBoard)
+
+    for (let i = 0; i<3; i++) {
+        let row = createRow(i)
+        gameBoard.appendChild(row)
+    }
 }
 
 let createRow = (r) => {
@@ -80,14 +86,8 @@ let checkBoard = () => {
 
 let checkWinner = (piecesPosition) => {
     let wCond = [
-        [0, 1, 2],
-        [0, 3, 6],
-        [0, 4, 8],
-        [1, 4 ,7],
-        [2, 5, 8],
-        [2, 4, 6],
-        [3, 4, 5],
-        [6, 7, 8]
+        [0, 1, 2], [0, 3, 6], [0, 4, 8], [1, 4 ,7], 
+        [2, 5, 8], [2, 4, 6], [3, 4, 5],[6, 7, 8]
     ]
 
     for (i=0; i<wCond.length; i++) {
@@ -122,7 +122,7 @@ let endGame = () => {
     feedback.innerText = 'Fim de jogo'
 }
 
-let addResetButton = (boardDiv) => {
+let addResetButton = (mainDiv) => {
     let resetBtn = document.createElement('div')
     resetBtn.classList.add('btn')
     resetBtn.classList.add('txt-center')
@@ -131,7 +131,7 @@ let addResetButton = (boardDiv) => {
     resetBtn.innerText = 'Resetar jogo'
     resetBtn.onclick = function(){reset(boardDiv)}
 
-    boardDiv.appendChild(resetBtn)
+    mainDiv.appendChild(resetBtn)
 }
 
 let reset = (boardDiv) => {
@@ -139,5 +139,5 @@ let reset = (boardDiv) => {
     xNext = true
     gameOn = true
     rounds = 0
-    createBoard()
+    createGame()
 }

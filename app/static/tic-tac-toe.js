@@ -5,16 +5,16 @@ let rounds = 0
 
 let createGame = () => {
     let mainDiv  = document.querySelector('#game')    
-    createTitle(mainDiv)
     createBoard(mainDiv)
+    createTitle(mainDiv)
     addResetButton(mainDiv)
 }
 
 let createTitle = (mainDiv) => {
     let scoreInfo = document.createElement('h1')
     scoreInfo.id = 'game-title'
-    scoreInfo.classList.add('s1')
-    scoreInfo.classList.add('p-12')
+    scoreInfo.classList.add('s3')
+    // scoreInfo.classList.add('p-12')
     scoreInfo.classList.add('light')
     scoreInfo.classList.add('txt-center')
     scoreInfo.innerText = 'Tic tac toe'
@@ -125,6 +125,7 @@ let endGame = () => {
 let addResetButton = (mainDiv) => {
     let resetBtn = document.createElement('div')
     resetBtn.classList.add('btn')
+    resetBtn.classList.add('m-b-24')
     resetBtn.classList.add('txt-center')
     resetBtn.classList.add('shadow')
 

@@ -129,13 +129,13 @@ let addResetButton = (mainDiv) => {
     resetBtn.classList.add('shadow')
 
     resetBtn.innerText = 'Resetar jogo'
-    resetBtn.onclick = function(){reset(boardDiv)}
+    resetBtn.onclick = function(){reset(mainDiv)}
 
     mainDiv.appendChild(resetBtn)
 }
 
-let reset = (boardDiv) => {
-    boardDiv.innerHTML = ""
+let reset = (mainDiv) => {
+    mainDiv.innerHTML = ""
     xNext = true
     gameOn = true
     rounds = 0

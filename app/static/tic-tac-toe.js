@@ -14,7 +14,6 @@ let createTitle = (mainDiv) => {
     let scoreInfo = document.createElement('h1')
     scoreInfo.id = 'game-title'
     scoreInfo.classList.add('s3')
-    // scoreInfo.classList.add('p-12')
     scoreInfo.classList.add('light')
     scoreInfo.classList.add('txt-center')
     scoreInfo.innerText = 'Tic tac toe'

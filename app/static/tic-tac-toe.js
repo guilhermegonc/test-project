@@ -2,16 +2,17 @@ let xNext = true
 let gameOn = true
 let rounds = 0
 
-
-let createGame = () => {
-    let mainDiv  = document.querySelector('#game')    
+const createGame = () => {
+    const mainDiv = document.querySelector('#game')    
+    
     createBoard(mainDiv)
     createTitle(mainDiv)
     addResetButton(mainDiv)
 }
 
-let createTitle = (mainDiv) => {
-    let scoreInfo = document.createElement('h1')
+const createTitle = mainDiv => {
+    const scoreInfo = document.createElement('h1')
+    
     scoreInfo.id = 'game-title'
     scoreInfo.classList.add('s3')
     scoreInfo.classList.add('light')
@@ -20,124 +21,130 @@ let createTitle = (mainDiv) => {
     mainDiv.appendChild(scoreInfo)
 }
 
-let createBoard = (mainDiv) => {
-    let gameBoard = document.createElement('div')
+const createBoard = mainDiv => {
+    const gameBoard = document.createElement('div')
+    
     gameBoard.id = 'gameBoard'
     gameBoard.classList.add('m-b-24')
     mainDiv.appendChild(gameBoard)
 
-    for (let i = 0; i<3; i++) {
-        let row = createRow(i)
+    for (let i=0; i<3; i++) {
+        const row = createRow(i)
         gameBoard.appendChild(row)
     }
 }
 
-let createRow = (r) => {
-    let newRow = document.createElement('div')
-    let identifier = `r${r}`
-
+const createRow = row => {
+    const newRow = document.createElement('div')
+    const identifier = `r${row}`
+    
     newRow.classList.add('row')
     newRow.id = identifier
 
-    for (let i=0; i<3; i++ ){
-        let square = createSquare(r, i)
+    for (let i=0; i<3; i++) {
+        const square = createSquare(row, i)
         newRow.appendChild(square)
     }
 
     return newRow
 }
 
-let createSquare = (r, c) => {
-    let newSquare = document.createElement('div')
-    let identifier = `s${(r*3)+(c+1)}`
-
+const createSquare = (row, column) => {
+    const newSquare = document.createElement('div')
+    const squareNumber = (row * 3)+(column + 1)
+    const identifier = `s${squareNumber}`
+    
     newSquare.id = identifier
     newSquare.classList.add('square')
     newSquare.classList.add('shadow')
-    newSquare.onclick = function(){isGameOver(newSquare.id)}
-    newSquare.innerText = "-"
+    newSquare.onclick = () => isGameOver(newSquare.id)
+    newSquare.innerText = '-'
 
     return newSquare
 }
 
-let isGameOver = (nextRound) => gameOn?alreadyMarked(nextRound):null
+const isGameOver = nextRound => gameOn ? alreadyMarked(nextRound) : null
 
-let alreadyMarked = (identifier) => {
-    let squareToMark = document.querySelector(`#${identifier}`)
-    squareToMark.innerText == "-"?addMark(squareToMark):null
+const alreadyMarked = identifier => {
+    const squareToMark = document.querySelector(`#${identifier}`)
+    squareToMark.innerText == '-' ? addMark(squareToMark) : null
 }
 
-let addMark = (piecePosition) => {
-    piecePosition.innerText = xNext?'x':'o'
-    rounds ++
+const addMark = piecePosition => {
+    piecePosition.innerText = xNext ? 'x' : 'o'
+    rounds++
     checkBoard()
 }
 
-let checkBoard = () => {
+const checkBoard = () => {
+    const rawValues = document.querySelectorAll('.square')
     let values = []
-    let rawValues = document.querySelectorAll('.square')
-    for (let i=0; i<rawValues.length; i++) {
-        let answers = rawValues[i].innerText
+    
+    for (let rawValue of rawValues) {
+        const answers = rawValue.innerText
         values.push(answers)
     }   
+    
     checkWinner(values)
 }
 
-let checkWinner = (piecesPosition) => {
-    let wCond = [
+const checkWinner = boardPieces => {
+    const winConditions = [
         [0, 1, 2], [0, 3, 6], [0, 4, 8], [1, 4 ,7], 
         [2, 5, 8], [2, 4, 6], [3, 4, 5],[6, 7, 8]
     ]
 
-    for (i=0; i<wCond.length; i++) {
-        let pos1 = piecesPosition[wCond[i][0]]
-        let pos2 = piecesPosition[wCond[i][1]]
-        let pos3 = piecesPosition[wCond[i][2]]
-        
-        if (pos1 != "-") {
-            let isWinner = pos1==pos2 & pos1==pos3
-            isWinner?congratulate():null
-        }
+    for (let winPosition of winConditions) {
+        const pieces = [
+            boardPieces[winPosition[0]],
+            boardPieces[winPosition[1]],
+            boardPieces[winPosition[2]]
+        ]
+
+        if (pieces[0] != '-' && 
+            pieces[0] == pieces[1] && 
+            pieces[0] == pieces[2]) 
+            return congratulate()
     }
-    let itsTie = isBoardFull()
-    itsTie?endGame():changePlayer()
+
+    isBoardFull() ? endGame() : changePlayer()
 }
 
-let isBoardFull = () => rounds==9?true:false
+const isBoardFull = () => rounds==9
 
-let congratulate = () => {
+const congratulate = () => {
+    const feedback = document.querySelector('#game-title')
+    const winner = xNext ? 'X' : 'O'
+
+    feedback.innerText = `${winner} venceu`
     gameOn = false
-    let feedback = document.querySelector('#game-title')
-    let winner = xNext?'x':'o'
-
-    feedback.innerText = `${winner.toUpperCase()} venceu`
 }
 
-let changePlayer = () => xNext = xNext?false:true
+const changePlayer = () => xNext = xNext ? false : true
 
-let endGame = () => {
+const endGame = () => {
     gameOn = false
-    let feedback = document.querySelector('#game-title')
+    const feedback = document.querySelector('#game-title')
     feedback.innerText = 'Fim de jogo'
 }
 
-let addResetButton = (mainDiv) => {
-    let resetBtn = document.createElement('div')
+const addResetButton = mainDiv => {
+    const resetBtn = document.createElement('div')
+
     resetBtn.classList.add('btn')
     resetBtn.classList.add('m-b-24')
     resetBtn.classList.add('txt-center')
     resetBtn.classList.add('shadow')
-
     resetBtn.innerText = 'Resetar jogo'
-    resetBtn.onclick = function(){reset(mainDiv)}
-
+    resetBtn.onclick = () => reset(mainDiv)
     mainDiv.appendChild(resetBtn)
 }
 
-let reset = (mainDiv) => {
-    mainDiv.innerHTML = ""
+const reset = mainDiv => {
+    mainDiv.innerHTML = ''
     xNext = true
     gameOn = true
     rounds = 0
+    
     createGame()
 }

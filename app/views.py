@@ -41,19 +41,20 @@ def auth_callback(request):
     s3 = connect_to_s3()
     api_code = request.GET.get('code','Sem resposta')
 
-    new_code = {
-        'client_id': os.environ.get('RD_API_CLIENT_ID'),
-        'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),
-        'code': api_code
-    }
+    if api_code != 'Sem resposta':
+        new_code = {
+            'client_id': os.environ.get('RD_API_CLIENT_ID'),
+            'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),
+            'code': api_code
+        }
 
-    s3.put_object(
-        Body=json.dump(new_code),
-        Bucket='test-project-production',
-        Key='not-public/rd_code.json'
-    )
-
-    return render(request, 'auth-callback.html', {'rd_api_code': api_code})
+        s3.put_object(
+            Body=json.dumps(new_code),
+            Bucket='test-project-production',
+            Key='not-public/rd_code.json'
+        )
+    
+    return HttpResponseRedirect('/')
 
 
 def populate_personas(request):

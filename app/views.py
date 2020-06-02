@@ -39,9 +39,9 @@ def tic_tac_toe(request):
 
 def auth_callback(request):
     s3 = connect_to_s3()
-    api_code = request.GET.get('code','Sem resposta')
+    api_code = request.GET.get('code', None)
 
-    if api_code != 'Sem resposta':
+    if not api_code:
         new_code = {
             'client_id': os.environ.get('RD_API_CLIENT_ID'),
             'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),

@@ -40,7 +40,9 @@ def refresh(token, s3):
   token = requests.post(url, payload)
   token = token.json()
   token = json.dumps(token)
+  
   update_s3(token, s3)
+  
   return token
 
 def update_s3(token, s3):

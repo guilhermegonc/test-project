@@ -55,7 +55,6 @@ def auth_callback(request):
             Key='not-public/rd_code.json'
         )
     
-    # return HttpResponseRedirect('/')
     return render(request, 'auth-callback.html', {'rd_api_code': api_code})
 
 

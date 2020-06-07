@@ -23,6 +23,7 @@ def embed_form(request):
 def custom_form(request):
     form = BasicForm()
     names = Personas.objects.filter().order_by('-id')[:10]
+
     return render(request, 'custom-form.html', {'form': form, 'db_results': names})
 
 
@@ -54,7 +55,8 @@ def auth_callback(request):
             Key='not-public/rd_code.json'
         )
     
-    return HttpResponseRedirect('/')
+    # return HttpResponseRedirect('/')
+    return render(request, 'auth-callback.html', {'rd_api_code': api_code})
 
 
 def populate_personas(request):
@@ -65,7 +67,7 @@ def populate_personas(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-
+            
             new_input = Personas(name=name, email=email)
             new_input.save()
             

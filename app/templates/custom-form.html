@@ -9,7 +9,8 @@
 
 {% block content %}
 <div class="half-view">
-    <form id="rd-int-form"action='/populate-personas/' method="post">
+    <form id="rd-int-form"action='/populate-personas/' onsubmit="return false" method="post">
+        
         {% csrf_token %}
         {{ form }}
         <input type="hidden" name="privacy_data[browser]" id="privacy_data_browser" value="{'analytics': true, 'functional':true, 'banner_type':'info'}">

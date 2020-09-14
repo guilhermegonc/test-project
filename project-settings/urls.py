@@ -16,7 +16,7 @@ urlpatterns = [
     path("custom-form/", app.views.custom_form, name="custom-form"),
     path("api-name/", app.views.api_name, name="api-name"),
     path("tictactoe/", app.views.tic_tac_toe, name="tic-tac-toe"),
-    path("atomic/", app.views.tic_tac_toe, name="atomic"),
+    path("atomic/", app.views.atomic, name="atomic"),
     path("auth/callback/", app.views.auth_callback, name="rd-auth"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
     path("admin/", admin.site.urls)

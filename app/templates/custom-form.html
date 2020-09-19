@@ -10,12 +10,12 @@
 {% block content %}
 <div class="half-view">
     <form id="rd-int-form"action='/populate-personas/' onsubmit="return false" method="post">
-        <label>
-            <input type="hidden" data-privacy="true" name="privacy_policy" value="1">
-            Ao informar meus dados, eu concordo com a <a href="privacy-policy-link" target="_blank">Política de Privacidade</a>.
-           </label>
         {% csrf_token %}
         {{ form }}
+        <!-- <label>
+            <input type="hidden" data-privacy="true" name="privacy_policy" value="1">
+            Ao informar meus dados, eu concordo com a <a href="privacy-policy-link" target="_blank">Política de Privacidade</a>.
+        </label> -->
         <input id="input-btn" type="submit" value="Converter" class="btn shadow">
     </form>
 </div>

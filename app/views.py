@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
-import models.Personas
+from .models import Personas
 from .forms import BasicForm
 from .rd_token import get_valid_token
 from .aws_connect import connect_to_s3
@@ -62,9 +62,8 @@ def auth_callback(request):
 def populate_personas(request):
 
     if request.method == 'POST':
-        print('Começou')
         form = BasicForm(request.POST)
-        print(form)
+
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']

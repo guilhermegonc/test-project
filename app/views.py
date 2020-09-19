@@ -1,15 +1,15 @@
 import os
 import requests
 import json
+import pdb
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
-from .models import Personas
+import models.Personas
 from .forms import BasicForm
 from .rd_token import get_valid_token
 from .aws_connect import connect_to_s3
-
 
 
 def index(request):
@@ -21,6 +21,7 @@ def embed_form(request):
 
 
 def custom_form(request):
+    breakpoint()
     form = BasicForm()
     names = Personas.objects.filter().order_by('-id')[:10]
 
@@ -61,14 +62,17 @@ def auth_callback(request):
 def populate_personas(request):
 
     if request.method == 'POST':
+        print('Começou')
         form = BasicForm(request.POST)
-        
+        print(form)
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             
             new_input = Personas(name=name, email=email)
             new_input.save()
+        else:
+            print('invalid')
             
     return HttpResponseRedirect('/custom-form/')
 

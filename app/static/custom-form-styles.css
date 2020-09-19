@@ -35,7 +35,7 @@ form #input-btn {
 
 @media (max-width: 992px) {
     .db-results {
-        margin: 12px 6px 0;
+        margin: 12px auto 0;
     }
 
     .fixed-height {

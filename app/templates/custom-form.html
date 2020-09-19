@@ -12,10 +12,10 @@
     <form id="rd-int-form"action='/populate-personas/' onsubmit="return false" method="post">
         {% csrf_token %}
         {{ form }}
-        <!-- <label>
+        <label>
             <input type="hidden" data-privacy="true" name="privacy_policy" value="1">
             Ao informar meus dados, eu concordo com a <a href="privacy-policy-link" target="_blank">Política de Privacidade</a>.
-        </label> -->
+        </label>
         <input id="input-btn" type="submit" value="Converter" class="btn shadow">
     </form>
 </div>

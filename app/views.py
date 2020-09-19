@@ -1,7 +1,6 @@
 import os
 import requests
 import json
-import pdb
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -21,7 +20,6 @@ def embed_form(request):
 
 
 def custom_form(request):
-    breakpoint()
     form = BasicForm()
     names = Personas.objects.filter().order_by('-id')[:10]
 
@@ -60,7 +58,6 @@ def auth_callback(request):
 
 
 def populate_personas(request):
-
     if request.method == 'POST':
         form = BasicForm(request.POST)
 
@@ -70,8 +67,6 @@ def populate_personas(request):
             
             new_input = Personas(name=name, email=email)
             new_input.save()
-        else:
-            print('invalid')
             
     return HttpResponseRedirect('/custom-form/')
 

@@ -9,12 +9,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Key and Hosts
 DEBUG = True
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
-SECRET_KEY = os.environ.get('SECRET_KEY')
-PASSWORD = os.environ.get('DB_PASSWORD')
-SOCIAL_ATUH_TRAILING_SLASH = False
-SOCIAL_AUTH_AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
-SOCIAL_AUTH_AUTH0_KEY = os.environ.get('AUTH0_CLIENT_ID')
-SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
+SECRET_KEY = '747f477a3e68e3ebc6df156ba0a180ff7ee0148f9a443d407b28ccb8b2b61b56'
+PASSWORD = '5914019670d8654250cce54a8be0fcc56849e8ee82c906ceefca00d5ec62685a'
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,7 +21,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "social_django",
-    "test-project",
+    "auth0",
     "app",
 ]
 
@@ -80,6 +76,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Authentication
+SOCIAL_ATUH_TRAILING_SLASH = False
+SOCIAL_AUTH_AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+SOCIAL_AUTH_AUTH0_KEY = os.environ.get('AUTH0_CLIENT_ID')
+SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
+
 SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
     'profile',

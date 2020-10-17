@@ -18,5 +18,4 @@ urlpatterns = [
     path("atomic/", app.views.atomic, name="atomic"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
     path("admin/", admin.site.urls),
-    path("login", app.views.login, name="login"),
 ]

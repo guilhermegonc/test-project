@@ -7,10 +7,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Key and Hosts
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
 SECRET_KEY = os.environ.get('SECRET_KEY')
 PASSWORD = os.environ.get('DB_PASSWORD')
+SOCIAL_ATUH_TRAILING_SLASH = False
+SOCIAL_AUTH_AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+SOCIAL_AUTH_AUTH0_KEY = os.environ.get('AUTH0_CLIENT_ID')
+SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
 
 # Application definition
 INSTALLED_APPS = [
@@ -20,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "social_django",
     "app",
 ]
 
@@ -71,6 +76,13 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+]
+
+# Authentication
+OCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile',
+    'email'
 ]
 
 

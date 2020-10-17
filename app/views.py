@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 
 from .models import Personas
 from .forms import BasicForm
-from .rd_token import get_valid_token
 from .aws_connect import connect_to_s3
 
 
@@ -26,35 +25,8 @@ def custom_form(request):
     return render(request, 'custom-form.html', {'form': form, 'db_results': names})
 
 
-def api_name(request):
-    auth = get_valid_token()
-    url = 'https://api.rd.services/marketing/account_info'
-    r = requests.get(url, headers=auth)
-    return render(request, 'api-name.html', {'trk_url': r.json()})
-
-
 def tic_tac_toe(request):
     return render(request, 'tic-tac-toe.html')
-
-
-def auth_callback(request):
-    s3 = connect_to_s3()
-    api_code = request.GET.get('code', None)
-
-    if not api_code:
-        new_code = {
-            'client_id': os.environ.get('RD_API_CLIENT_ID'),
-            'client_secret': os.environ.get('RD_API_CLIENT_SECRET'),
-            'code': api_code
-        }
-
-        s3.put_object(
-            Body=json.dumps(new_code),
-            Bucket='test-project-production',
-            Key='not-public/rd_code.json'
-        )
-    
-    return render(request, 'auth-callback.html', {'rd_api_code': api_code})
 
 
 def populate_personas(request):
@@ -70,5 +42,14 @@ def populate_personas(request):
             
     return HttpResponseRedirect('/custom-form/')
 
+
 def atomic(request):
     return render(request, 'atomic.html')
+
+
+def confirm_auth0(request):
+    return
+
+
+def logout(request):
+    return

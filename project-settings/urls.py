@@ -14,10 +14,10 @@ urlpatterns = [
     path("", app.views.index, name="index"),
     path("embed-form/", app.views.embed_form, name="embed-form"),
     path("custom-form/", app.views.custom_form, name="custom-form"),
-    path("api-name/", app.views.api_name, name="api-name"),
     path("tictactoe/", app.views.tic_tac_toe, name="tic-tac-toe"),
     path("atomic/", app.views.atomic, name="atomic"),
-    path("auth/callback/", app.views.auth_callback, name="rd-auth"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
-    path("admin/", admin.site.urls)
+    path("admin/", admin.site.urls),
+    path("complete/auth0", app.views.confirm_auth0, name="login"),
+    path("exit", app.views.logout, name="logout")
 ]

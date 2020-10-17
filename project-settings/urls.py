@@ -18,6 +18,5 @@ urlpatterns = [
     path("atomic/", app.views.atomic, name="atomic"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
     path("admin/", admin.site.urls),
-    path("complete/auth0", app.views.confirm_auth0, name="login"),
-    path("exit", app.views.logout, name="logout")
+    path("login", app.views.login, name="login"),
 ]

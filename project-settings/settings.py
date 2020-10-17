@@ -79,11 +79,19 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Authentication
-OCIAL_AUTH_AUTH0_SCOPE = [
+SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
     'profile',
     'email'
 ]
+
+AUTHENTICATION_BACKENDS = {
+    'test-project.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
+
+LOGIN_URL = '/login/auth0'
+LOGIN_REDIRECT_URL = '/tic-tac-toe'
 
 
 # Internationalization

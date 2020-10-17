@@ -45,11 +45,3 @@ def populate_personas(request):
 
 def atomic(request):
     return render(request, 'atomic.html')
-
-
-def confirm_auth0(request):
-    return
-
-
-def logout(request):
-    return

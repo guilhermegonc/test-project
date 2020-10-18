@@ -88,12 +88,12 @@ SOCIAL_AUTH_AUTH0_SCOPE = [
 ]
 
 AUTHENTICATION_BACKENDS = {
-    'test-project.auth0backend.Auth0',
+    'auth0.auth0backend.Auth0',
     'django.contrib.auth.backends.ModelBackend'
 }
 
 LOGIN_URL = '/login/auth0'
-LOGIN_REDIRECT_URL = '/tic-tac-toe'
+LOGIN_REDIRECT_URL = '/dashboard'
 
 
 # Internationalization

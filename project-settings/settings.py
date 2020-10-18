@@ -9,8 +9,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Key and Hosts
 DEBUG = True
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
-SECRET_KEY = '747f477a3e68e3ebc6df156ba0a180ff7ee0148f9a443d407b28ccb8b2b61b56'
-PASSWORD = '5914019670d8654250cce54a8be0fcc56849e8ee82c906ceefca00d5ec62685a'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+PASSWORD = os.environ.get('DB_PASSWORD')
 
 # Application definition
 INSTALLED_APPS = [

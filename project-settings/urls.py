@@ -4,7 +4,7 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-import app.views
+import app.views, auth0.views
 
 # To add a new path, first import the app:
 # import blog
@@ -17,5 +17,9 @@ urlpatterns = [
     path("tictactoe/", app.views.tic_tac_toe, name="tic-tac-toe"),
     path("atomic/", app.views.atomic, name="atomic"),
     path("populate-personas/", app.views.populate_personas, name="populate-personas"),
-    path("admin/", admin.site.urls),
+    path("paywall", auth0.views.paywall),
+    path("dashboard", auth0.views.dashboard),
+    path("logout", auth0.views.logout),
+    path("", include('django.contrib.auth.urls')),
+    path("", include('social_django.urls')),
 ]

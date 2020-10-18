@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     "social_django",
     "auth0",
     "app",
+    "forms",
+    "tic_tac_toe"
 ]
 
 MIDDLEWARE = [

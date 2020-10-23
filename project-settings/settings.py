@@ -24,7 +24,8 @@ INSTALLED_APPS = [
     "auth0",
     "app",
     "forms",
-    "tic_tac_toe"
+    "tic_tac_toe",
+    "smart_home"
 ]
 
 MIDDLEWARE = [

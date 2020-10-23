@@ -27,7 +27,7 @@ def populate_personas(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            random_big_number = form.cleaned_data['email']
+            random_big_number = form.cleaned_data['random_big_number']
             
             new_input = Personas(name=name, email=email, long_number=random_big_number)
             new_input.save()

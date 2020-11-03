@@ -86,6 +86,11 @@ input {
     background-color: #ddd;
 }
 
+input[type="checkbox" i] {
+    width: 16px;
+    display: block;
+}
+
 /* Margins */
 
 .m-0 {

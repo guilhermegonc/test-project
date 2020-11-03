@@ -12,6 +12,8 @@ import app.views, auth0.views, forms.views, tic_tac_toe.views
 # Then add the new path:
 urlpatterns = [
     path("", app.views.index, name="index"),
+    path('callback/', app.views.callback, name='callback'),
+
 
     path("tictactoe/", tic_tac_toe.views.tic_tac_toe, name="tic-tac-toe"),
 

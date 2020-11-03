@@ -10,3 +10,7 @@ from .aws_connect import connect_to_s3
 
 def index(request):
     return render(request, 'index.html')
+
+
+def callback(request):
+    return render(request, 'base.html')

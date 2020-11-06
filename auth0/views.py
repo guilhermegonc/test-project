@@ -7,12 +7,12 @@ from urllib.parse import urlencode
 
 import json
 
-def paywall(request):
+def login(request):
     user = request.user
     if user.is_authenticated:
         return redirect(dashboard)
     else:
-        return render(request, 'paywall.html')
+        return render(request, 'login.html')
 
 
 @login_required

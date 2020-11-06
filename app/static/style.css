@@ -173,7 +173,6 @@ input[type="checkbox" i] {
     z-index: 1000;
     position: fixed;
     background-color: rgba(50,72,190,1);
-    padding: 0 24px;
     top: 0;
     width: 100%;
 }

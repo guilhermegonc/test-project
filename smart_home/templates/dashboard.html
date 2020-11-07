@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ user.username }}{% endblock %}
+
+<!-- {% block extra-js %}
+{% load static %}
+    <script src="{% static 'relay-control.js' %}"></script>
+{% endblock %} -->
+
+{% block content%}
+<div class="min-scroll">
+    <h1 class="s3 p-12 light txt-center">Welcome,<br>{{ user.username }}</h1>
+    <div id="lamp" class="trigger btn m-b-12 light shadow">💡</div>
+    <a class="btn shadow light" href="/logout">Sair</a>
+</div>
+<script>
+    setRelay()
+</script>
+{% endblock %}

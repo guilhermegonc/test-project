@@ -23,10 +23,9 @@ urlpatterns = [
     path("populate-personas/", forms.views.populate_personas, name="populate-personas"),
     
     path("login/", auth0.views.login, name="login"),
-    path("dashboard/", auth0.views.dashboard),
     path("logout/", auth0.views.logout),
     path("", include('django.contrib.auth.urls')),
     path("", include('social_django.urls')),
 
-    path("dashboardi/", smart_home.views.dashboard, name="dashboardi"),
+    path("dashboard/", smart_home.views.dashboard, name="dashboard"),
 ]

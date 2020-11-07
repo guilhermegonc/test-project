@@ -13,6 +13,10 @@ input {
     width: calc(100% - 26px);
 }
 
+.min-scroll {
+    margin: auto;
+}
+
 .bg {
     position: absolute;
     top: 64px;
@@ -89,6 +93,13 @@ input {
 input[type="checkbox" i] {
     width: 16px;
     display: block;
+}
+
+.trigger {
+    width: 300px;
+    height: 300px;
+    line-height: 300px;
+    font-size: 80px;
 }
 
 /* Margins */

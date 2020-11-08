@@ -9,7 +9,7 @@ async function getLampStatus() {
     changeText()
 }
 
-const setRelay = () => {
+const setRelay = (token) => {
     let lampObj = document.querySelector('#lamp')
     lampObj.onclick = () => changeStatus()
 }

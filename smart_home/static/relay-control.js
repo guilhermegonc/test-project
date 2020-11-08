@@ -1,15 +1,14 @@
 const token = '1wSjC7iMMcKzvku4g-mGpOLPQzpQgLu0'
 const pin = 'D2'
-let lampOn = getLampStatus();
+let lampOn = getLampStatus()
 
 async function getLampStatus() {
     let url = `http://blynk-cloud.com/${token}/get/${pin}`
     let status = await fetch(url)
     status = await status.json() == "1"
-    changeText()
 }
 
-const setRelay = (token) => {
+const setRelay = () => {
     let lampObj = document.querySelector('#lamp')
     lampObj.onclick = () => changeStatus()
 }

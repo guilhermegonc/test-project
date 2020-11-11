@@ -12,8 +12,9 @@
     <div id="lamp" class="trigger btn m-b-12 light shadow"></div>
     <a class="btn shadow light" href="/logout">Sair</a>
 </div>
-
 <script>
-    setRelay()
+    const tkn = '{{ token }}'
+    const p = '{{ pin }}'
+    startApp(tkn, p)
 </script>
 {% endblock %}

@@ -23,7 +23,7 @@ class Microcontrollers(models.Model):
     updated_at = models.DateField(auto_now=True)
 
 class Microcontrollers_Accounts(models.Model):
-    microcontrollers_id = models.ForeignKey('Microcontrolllers', on_delete=models.CASCADE)
+    microcontrollers_id = models.ForeignKey('Microcontrollers', on_delete=models.CASCADE)
     accounts_id = models.ForeignKey('Accounts', on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
@@ -34,7 +34,7 @@ class Devices(models.Model):
     updated_at = models.DateField(auto_now=True)
 
 class Microcontroller_Devices(models.Model):
-    microcontrollers_id = models.ForeignKey('Microcontrolllers', on_delete=models.CASCADE)
+    microcontrollers_id = models.ForeignKey('Microcontrollers', on_delete=models.CASCADE)
     device_id = models.ForeignKey('Devices', on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

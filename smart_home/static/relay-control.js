@@ -2,7 +2,7 @@ let status
 let lampObj
 
 const startApp = (tkn, pin) => {
-    lampObj = document.querySelector('#lamp')
+    lampObj = document.querySelector(`#${pin}`)
     status = getLampStatus(tkn, pin)
     listenRelay(tkn, pin)
 }

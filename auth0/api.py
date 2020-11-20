@@ -4,8 +4,8 @@ import os, json
 
 def get_auth0_user(email):
     client_domain = os.environ.get('AUTH0_DOMAIN')
-    client_id = os.environ.get('AUTH0_CLIENT_ID')
-    client_secret = os.environ.get('AUTH0_CLIENT_SECRET')
+    client_id = os.environ.get('M_TO_M_AUTH0_CLIENT_ID')
+    client_secret = os.environ.get('M_TO_M_AUTH0_CLIENT_SECRET')
     
     token = refresh_token(client_domain, client_id, client_secret)
 

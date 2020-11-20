@@ -25,7 +25,7 @@ INSTALLED_APPS = [
     "app",
     "forms",
     "tic_tac_toe",
-    "smart_home"
+    "smart_home",
 ]
 
 MIDDLEWARE = [
@@ -87,7 +87,8 @@ SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
 SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
     'profile',
-    'email'
+    'email',
+    'name'
 ]
 
 AUTHENTICATION_BACKENDS = {

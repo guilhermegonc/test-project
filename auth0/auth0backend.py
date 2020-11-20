@@ -11,7 +11,7 @@ class Auth0(BaseOAuth2):
     REDIRECT_STATE = False
     EXTRA_DATA = [
         ('picture', 'picture'),
-        ('email', 'email')
+        ('email', 'email'),
     ]
 
     def authorization_url(self):

@@ -8,13 +8,13 @@
 
 {% block content%}
 <div class="min-scroll">
-    <h1 class="s3 p-12 light txt-center">Welcome,<br>{{ user.username }}</h1>
+    <h1 class="s3 p-12 light txt-center">Welcome,<br>{{ user }}</h1>
     <div id="lamp" class="trigger btn m-b-12 light shadow"></div>
     <a class="btn shadow light" href="/logout">Sair</a>
 </div>
 <script>
-    const tkn = '{{ token }}'
-    const p = '{{ pin }}'
+    const tkn = '{{ controllers.0 }}'
+    const p = '{{ pins.0 }}'
     startApp(tkn, p)
 </script>
 {% endblock %}

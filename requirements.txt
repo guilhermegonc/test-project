@@ -6,3 +6,4 @@ boto3
 social-auth-app-django
 python-jose
 python-dotenv
+django-decouple

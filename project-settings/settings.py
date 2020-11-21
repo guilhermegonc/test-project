@@ -1,16 +1,22 @@
 import os
 import django_heroku
-
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Key and Hosts
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
-SECRET_KEY = os.environ.get('SECRET_KEY')
-PASSWORD = os.environ.get('DB_PASSWORD')
+# SECRET_KEY = os.environ.get('SECRET_KEY')
+# PASSWORD = os.environ.get('DB_PASSWORD')
+
+# Local Testing
+# if SECRET_KEY is None:
+from decouple import config
+SECRET_KEY = config('SECRET_KEY')
+PASSWORD = config('DB_PASSWORD')
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,7 +31,7 @@ INSTALLED_APPS = [
     "app",
     "forms",
     "tic_tac_toe",
-    "smart_home",
+    "smart_home"
 ]
 
 MIDDLEWARE = [

@@ -1,27 +1,27 @@
-let status
-let lampObj
+class BlynkObject {
+    constructor (token, pin) {
+        this.token = token
+        this.pin = pin
+        this.status = this.getStatus()
+        this.htmlCard = document.querySelector(`#${this.pin}`)
+        this.htmlCard.onclick = () => this.changeStatus()
+    }
+    
+    getStatus = async() => {
+        let uri = `http://blynk-cloud.com/${this.token}/get/${this.pin}`
+        this.status = await fetch(uri)
+        this.status = await this.status.json() == "1"
+        this.changeText()
+    }
 
-const startApp = (tkn, pin) => {
-    lampObj = document.querySelector(`#${pin}`)
-    status = getLampStatus(tkn, pin)
-    listenRelay(tkn, pin)
-}
+    changeStatus = async () => {
+        this.status = !this.status
+        let uri = `http://blynk-cloud.com/${this.token}/update/${this.pin}?value=${this.status*1}`
+        await fetch(uri)
+        this.changeText()
+    }
 
-const getLampStatus = async (tkn, pin) => {
-    let url = `http://blynk-cloud.com/${tkn}/get/${pin}`
-    status = await fetch(url)
-    status = await status.json() == "1"
-    changeText()
-}
-
-const changeText = () => lampObj.innerText = status == true ? '💡' : '🔌'
-
-const listenRelay = (tkn, pin) => lampObj.onclick = () => changePin(tkn, pin)
-
-const changePin = async (tkn, pin) => {
-    status = !status
-    let newVal = status == true ? '1' : '0'
-    let url = `http://blynk-cloud.com/${tkn}/update/${pin}?value=${newVal}`
-    await fetch(url)
-    changeText()
+    changeText = () => {
+        this.htmlCard.innerText = this.status == true ? '💡' : '🔌'
+    }
 }

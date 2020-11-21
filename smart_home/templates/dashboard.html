@@ -8,15 +8,17 @@
 
 {% block content%}
 <div class="min-scroll">
-    <h1 class="s3 p-12 light txt-center">Welcome,<br>{{ user }}</h1>
-    {% for p in pins %}
-        <div id="{{ p }}" class="trigger btn m-b-12 light shadow"></div>
-    {% endfor %}
+    <h1 class="s3 p-12 light txt-center">Welcome, <br>{{ user }}</h1>
+    <div class="lateral-scroll m-b-24">
+        {% for c in controllers %}        
+            <div id="{{ c.0 }}" class="trigger btn m-12 light shadow"></div>
+        {% endfor %}
+    </div>
     <a class="btn shadow light" href="/logout">Sair</a>
 </div>
 <script>
-    const tkn = '{{ controllers.0 }}'
-    const p = '{{ pins.0 }}'
-    startApp(tkn, p)
+    {% for c in controllers %}
+    let {{ c.0 }} = new BlynkObject('{{ c.1 }}', '{{ c.0 }}')
+    {% endfor %}
 </script>
 {% endblock %}

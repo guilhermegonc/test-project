@@ -96,10 +96,18 @@ input[type="checkbox" i] {
 }
 
 .trigger {
-    width: 300px;
-    height: 300px;
-    line-height: 300px;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
     font-size: 80px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.lateral-scroll {
+    overflow: auto;
+    white-space: nowrap;
+    max-width: calc(100vw - 40px);
 }
 
 /* Margins */

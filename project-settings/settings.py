@@ -7,14 +7,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Key and Hosts
-DEBUG = True
+DEBUG = config('DEBUG') == 'True'
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
-# SECRET_KEY = os.environ.get('SECRET_KEY')
-# PASSWORD = os.environ.get('DB_PASSWORD')
-
-# Local Testing
-# if SECRET_KEY is None:
-from decouple import config
 SECRET_KEY = config('SECRET_KEY')
 PASSWORD = config('DB_PASSWORD')
 

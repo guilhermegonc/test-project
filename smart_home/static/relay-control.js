@@ -3,7 +3,7 @@ class BlynkObject {
         this.token = token
         this.pin = pin
         this.status = this.getStatus()
-        this.htmlCard = document.querySelector(`#${this.pin}`)
+        this.htmlCard = document.querySelector(`#${this.pin} div.status`)
         this.htmlCard.onclick = () => this.changeStatus()
     }
     

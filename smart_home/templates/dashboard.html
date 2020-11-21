@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
-{% block title %}{{ user.username }}{% endblock %}
-{% block extra-js %}
+{% block title %}{{ user }}{% endblock %}
 {% load static %}
+
+{% block extra-css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'relay-control.css' %}">
+{% endblock %}
+{% block extra-js %}
     <script src="{% static 'relay-control.js' %}"></script>
 {% endblock %}
 
 {% block content%}
 <div class="min-scroll">
-    <h1 class="s3 p-12 light txt-center">Welcome, <br>{{ user }}</h1>
+    <h1 class="s3 p-12 light txt-center">Espaço de: <br>{{ user }}</h1>
     <div class="lateral-scroll m-b-24">
         {% for c in controllers %}        
-            <div id="{{ c.0 }}" class="trigger btn m-12 light shadow"></div>
+            <div id="{{ c.0 }}" class="trigger btn m-12 light shadow">
+                <div class="status"></div>
+                <p class="device-info">{{ c.0 }}</p>
+            </div>
         {% endfor %}
     </div>
+    <a class="btn m-b-12 shadow light" href="/pin">Configurações</a>
     <a class="btn shadow light" href="/logout">Sair</a>
 </div>
 <script>

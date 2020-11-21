@@ -28,4 +28,5 @@ urlpatterns = [
     path("", include('social_django.urls')),
 
     path("dashboard/", smart_home.views.dashboard, name="dashboard"),
+    path("pin/", smart_home.views.create_pin, name="pin")
 ]

@@ -9,14 +9,14 @@
 
 {% block content %}
 <div class="half-view">
-    <form id="rd-int-form"action='/populate-personas/' method="post">
+    <form id="rd-int-form" class="form-group" action='/populate-personas/' method="post">
         {% csrf_token %}
         {{ form }}
         <label>
             <input type="hidden" data-privacy="true" name="privacy_policy" value="1">
             Ao informar meus dados, eu concordo com a <a href="privacy-policy-link" target="_blank">Política de Privacidade</a>.
         </label>
-        <input id="input-btn" type="submit" value="Converter" class="btn shadow">
+        <input id="input-btn" type="submit" value="Converter" class="btn shadow btn-full">
     </form>
 </div>
 <div class="half-view fixed-height">

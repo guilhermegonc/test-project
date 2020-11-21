@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block Title %}Pin{% endblock %}
+
+{% block content %}
+<div class="min-scroll guigui">
+<form id="pin-form" class="form-group" action='/populate-personas/' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="input-btn" type="submit" value="Converter" class="btn shadow btn-full">
+    </form>
+</div>
+<style>
+    #id_pin {
+        width: 100%;
+    }
+
+    #input-btn {
+        width: 100%;
+    }
+
+    .guigui {
+        width: 300px;
+    }
+</style>
+{% endblock %}

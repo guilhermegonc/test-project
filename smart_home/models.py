@@ -42,6 +42,8 @@ class Devices(models.Model):
     class Meta:
         db_table = 'devices'
     pin = models.CharField(max_length=31)
+    name = models.CharField(max_length=31, null=True)
+    active = models.BooleanField(default=False)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 

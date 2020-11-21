@@ -6,7 +6,9 @@ from .models import Devices
 def get_microcontrollers(a_id):
     micro_account = Microcontrollers_Accounts.objects.filter(account_id = a_id)
     tokens = [get_token(m.microcontroller_id) for m in micro_account]
-    return [tkn for t in tokens for tkn in t]
+    devices = [tkn for t in tokens for tkn in t]
+    devices.sort()
+    return devices
 
 def get_token(m_id):
     micros = Microcontrollers.objects.get(id = m_id)

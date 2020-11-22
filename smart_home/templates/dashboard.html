@@ -10,30 +10,30 @@
 {% endblock %}
 
 {% block content%}
-<div class="min-scroll">
-    <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
-    <div class="lateral-scroll m-b-24">
-        {% for m in microcontrollers %}        
-            <div id="{{ m.pin }}" class="trigger btn m-12 light shadow">
-                <div class="status"></div>
-                <p class="device-info">
-                    {% if m.name == '' %}Sem nome{% else %}{{ m.name }}{% endif %}
-                </p>
-            </div>
-        {% endfor %}
-        <a id="configs" class="trigger btn round m-12 transparent-gray" href="/pins">
-            <div class="status">🔧</div>
-            <p class="device-info light">Ajustes</p>
-        </a>
-        <a id="logout" class="trigger btn round m-12 transparent-gray" href="/pins">
-            <div class="status">🚪</div>
-            <p class="device-info light">Sair</p>
-        </a>
+    <div class="min-scroll">
+        <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
+        <div class="lateral-scroll m-b-24">
+            {% for m in microcontrollers %}        
+                <div id="{{ m.pin }}" class="trigger btn m-12 light shadow">
+                    <div class="status"></div>
+                    <p class="device-info">
+                        {% if m.name == '' %}Sem nome{% else %}{{ m.name }}{% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+            <a id="configs" class="trigger btn round m-12 transparent-gray" href="/pins">
+                <div class="status">🔧</div>
+                <p class="device-info light">Ajustes</p>
+            </a>
+            <a id="logout" class="trigger btn round m-12 transparent-gray" href="/logout">
+                <div class="status">🚪</div>
+                <p class="device-info light">Sair</p>
+            </a>
+        </div>
     </div>
-</div>
-<script>
-    {% for m in microcontrollers %}
-    let {{ m.pin }} = new BlynkObject('{{ m.mtoken }}', '{{ m.pin }}')
-    {% endfor %}
-</script>
+    <script>
+        '{% for m in microcontrollers %}'
+            let {{ m.pin }} = new BlynkObject('{{ m.mtoken }}', '{{ m.pin }}')
+        '{% endfor %}'
+    </script>
 {% endblock %}

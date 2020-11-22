@@ -9,16 +9,15 @@ from .forms import MicrcontrollerCreate, DevicesControl
 
 @login_required
 def dashboard(request):
-    user, auth0_details = get_user(request)
-    account = get_account(user.id)
-    devices = get_microcontrollers(account.account_id)
+    user = get_user(request)
+    account_id = get_account(user['id'])
+    devices = get_microcontrollers(account_id)
     devices = [d for d in devices if d['active'] == True]
 
     payload = {
-        'user' : auth0_details['name'],
+        'user' : user['name'],
         'microcontrollers': devices
     }
-
     return render(request, 'dashboard.html', payload)
 
 @login_required
@@ -33,21 +32,21 @@ def populate_microcontroller(request):
 
         if answer.is_valid():
             token = answer.cleaned_data['token']
-            user, _ = get_user(request)
-            account = get_account(user.id)
+            user = get_user(request.user.email)
+            account_id = get_account(user['id'])
 
             microcontroller = create_microcontroller(token)
             set_pins(microcontroller.id)
-            set_account(account.account_id, microcontroller.id)
+            set_account(account_id, microcontroller.id)
 
     return HttpResponseRedirect('/dashboard/')
 
 @login_required
 def pins_settings(request):
     form = DevicesControl()
-    user, _ = get_user(request)
-    account = get_account(user.id)
-    devices = get_microcontrollers(account.account_id)
+    user = get_user(request.user.email)
+    account_id = get_account(user['id'])
+    devices = get_microcontrollers(account_id)
     payload = {'form': form, 'devices': devices}
     return render(request, 'pins-settings.html', payload)
 

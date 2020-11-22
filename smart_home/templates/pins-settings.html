@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block Title %}Configurações{% endblock %}
+
+{% load static %}
+{% block extra-css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'relay-configs.css' %}">
+{% endblock %}
+
+{% block extra-js %}
+    <script src="{% static 'relay-configs.js' %}"></script>
+{% endblock %}
+
+{% block content%}
+<div class="min-scroll w-300">
+    {% for m in microcontrollers %}
+    <form class="form-group" action='/update-pins/' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input name="device_id" type="hidden" value="{{ m.id }}">
+        <input id="input-btn" type="submit" value="Atualizar" class="btn shadow btn-full">
+    </form>
+    <script>
+        prepopulateFields('{{ m.pin }}', '{{ m.name }}', '{{ m.active }}')
+    </script>
+    {% endfor %}
+</div>
+{% endblock %}

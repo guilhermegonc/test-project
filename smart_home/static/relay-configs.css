@@ -1,0 +1,11 @@
+label[for="id_active"] {
+    position: relative;
+    left: 16px;
+    top: 12px;
+}
+
+input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    float:left;
+}

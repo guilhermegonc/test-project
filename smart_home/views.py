@@ -1,37 +1,78 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 
-import auth0.api
-from .models import Users, Account_Users, Microcontrollers, Devices
-from .microcontrollers import get_microcontrollers
-from .forms import DeviceForm
+from .models import Users, Account_Users, Microcontrollers, Devices, Microcontroller_Devices, Microcontrollers_Accounts
+from .microcontrollerRelations import get_microcontrollers, get_user, get_account
+from .microcontrollerSetup import create_microcontroller, set_pins, set_account
+from .forms import MicrcontrollerCreate, DevicesControl
+
+import logging
 
 @login_required
 def dashboard(request):
-    user = request.user
-    authorized_user = auth0.api.get_auth0_user(user.email)
-    user = Users.objects.get(auth0_id=authorized_user['user_id'])
-    account_users = Account_Users.objects.get(user_id=user.id)
-    devices = get_microcontrollers(account_users.account_id)
+    user, auth0_details = get_user(request)
+    account = get_account(user.id)
+    devices = get_microcontrollers(account.account_id)
 
     payload = {
-        'user' : authorized_user['name'],
-        'controllers': devices
+        'user' : auth0_details['name'],
+        'microcontrollers': devices
     }
 
     return render(request, 'dashboard.html', payload)
 
 @login_required
-def create_pin(request):
-    form = DeviceForm()
-    return render(request, 'pin.html', {'form': form})
+def add_microcontroller(request):
+    form = MicrcontrollerCreate()
+    return render(request, 'add-microcontroller.html', {'form': form})
 
+@login_required
+def populate_microcontroller(request):
+    if request.method == 'POST':
+        answer = MicrcontrollerCreate(request.POST)
 
-def create_device(request):
-    microcontroller = Microcontrollers(token='token')
-    microcontroller.save()
+        if answer.is_valid():
+            token = answer.cleaned_data['token']
+            user, _ = get_user(request)
+            account = get_account(user.id)
 
-    device_pins = ['D1', 'D2', 'D3', 'D4']
-    for p in device_pins:
-        device = Devices(pin=p)
-        device.save()
+            microcontroller = create_microcontroller(token)
+            set_pins(microcontroller.id)
+            set_account(account.account_id, microcontroller.id)
+
+    return HttpResponseRedirect('/dashboard/')
+
+@login_required
+def pins_settings(request):
+    form = DevicesControl()
+    user, _ = get_user(request)
+    account = get_account(user.id)
+    devices = get_microcontrollers(account.account_id)
+
+    payload = {
+        'form': form,
+        'microcontrollers': devices
+    }
+
+    return render(request, 'pins-settings.html', payload)
+
+@login_required
+def update_pins(request):
+    logging.debug(request)
+    if request.method == 'POST':
+        form = DevicesControl(request.POST)
+
+        if form.is_valid():
+            device_id = form.cleaned_data['device_id']
+            name = form.cleaned_data['name']
+            is_active = form.cleaned_data['active']
+                
+            device = Devices.objects.get(id=device_id)
+            device.name = name
+            device.save()
+
+            device.active = is_active
+            device.save()
+
+    return HttpResponseRedirect('/dashboard/')

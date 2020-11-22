@@ -138,6 +138,10 @@ input[type="checkbox" i] {
     max-width: 480px;
 }
 
+.w-300 {
+    width: 300px;
+}
+
 /* Margins */
 
 .m-0 {

@@ -12,6 +12,7 @@ def dashboard(request):
     user, auth0_details = get_user(request)
     account = get_account(user.id)
     devices = get_microcontrollers(account.account_id)
+    devices = [d for d in devices if d['active'] == True]
 
     payload = {
         'user' : auth0_details['name'],

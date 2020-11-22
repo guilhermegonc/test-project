@@ -1,7 +1,11 @@
 .device-info {
     position: relative;
-    bottom: 24px;
-    font-size: 14px;
-    font-weight: 900;
+    bottom: 30px;
+    font-size: 12px;
     line-height: 14px;
+    text-transform: initial;
+}
+
+#configs {
+    margin-left: 60px;
 }

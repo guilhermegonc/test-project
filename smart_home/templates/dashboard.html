@@ -11,17 +11,22 @@
 
 {% block content%}
 <div class="min-scroll">
-    <h1 class="s3 p-12 light txt-center">Espaço de: <br>{{ user }}</h1>
+    <h1 class="s3 p-12 light txt-center">Bem-vindo, <br>{{ user }}</h1>
     <div class="lateral-scroll m-b-24">
         {% for m in microcontrollers %}        
             <div id="{{ m.pin }}" class="trigger btn m-12 light shadow">
                 <div class="status"></div>
-                <p class="device-info">{{ m.name }}</p>
+                <p class="device-info">
+                    {% if m.name == '' %}Sem nome{% else %}{{ m.name }}{% endif %}
+                </p>
             </div>
         {% endfor %}
+        <a id="configs" class="trigger btn round m-12 transparent-gray" href="/pins">
+            <div class="status">🔧</div>
+            <p class="device-info light">Ajustes</p>
+        </a>
     </div>
-    <a class="btn m-b-12 shadow light" href="/pins">Configurações</a>
-    <a class="btn shadow light" href="/logout">Sair</a>
+    <a class="btn shadow light bottom" href="/logout">Sair</a>
 </div>
 <script>
     {% for m in microcontrollers %}

@@ -62,6 +62,14 @@ label{
     width: 100%;
 }
 
+.bottom {
+    margin: 120px auto 60px;
+}
+
+.round {
+    border-radius: 50%;
+}
+
 form .btn {
     margin-top: 12px;
     -webkit-appearance: none;
@@ -88,6 +96,7 @@ form .btn {
     font-size: 17px !important;
     padding: 0;
     height: 17px;
+    vertical-align: middle;
 }
 
 .menu-btn:hover, .menu-icon:hover {
@@ -99,8 +108,17 @@ form .btn {
     color: #444;
 }
 
+.btn.transparent-gray {
+    background-color: rgba(50, 50, 50, 0.2);
+    color: #444;
+}
+
 .btn.light:hover {
     background-color: #ddd;
+}
+
+.btn.transparent-gray:hover {
+    background-color: rgba(50, 50, 50, 0.4);
 }
 
 .p-card {
@@ -119,10 +137,10 @@ input[type="checkbox" i] {
 }
 
 .trigger {
-    width: 200px;
-    height: 200px;
-    line-height: 200px;
-    font-size: 80px;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    font-size: 40px;
     display: inline-block;
     vertical-align: bottom;
 }

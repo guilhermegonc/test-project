@@ -30,6 +30,7 @@ label{
 
 .min-scroll {
     margin: auto;
+    margin-top: 84px;
 }
 
 .bg {
@@ -153,6 +154,11 @@ input[type="checkbox" i] {
 
 .form-group {
     margin: 80px auto 80px;
+    max-width: 480px;
+}
+
+.form-group-compact {
+    margin: 12px auto 12px;
     max-width: 480px;
 }
 

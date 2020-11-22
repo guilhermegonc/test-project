@@ -4,10 +4,11 @@ let rounds = 0
 
 const createGame = () => {
     const mainDiv = document.querySelector('#game')    
-    
-    createBoard(mainDiv)
+
     createTitle(mainDiv)
+    createBoard(mainDiv)
     addResetButton(mainDiv)
+    addReturnButton(mainDiv)
 }
 
 const createTitle = mainDiv => {
@@ -147,4 +148,16 @@ const reset = mainDiv => {
     rounds = 0
     
     createGame()
+}
+
+const addReturnButton = mainDiv => {
+    const returnBtn = document.createElement('a')
+
+    returnBtn.classList.add('btn')
+    returnBtn.classList.add('shadow')
+    returnBtn.classList.add('light')
+
+    returnBtn.innerText = 'Voltar'
+    returnBtn.href = '/'
+    mainDiv.appendChild(returnBtn)
 }

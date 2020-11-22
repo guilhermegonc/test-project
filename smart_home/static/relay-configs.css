@@ -1,3 +1,7 @@
+#id_pin {
+    width: 100%;
+}
+
 label[for="id_active"] {
     position: relative;
     left: 16px;

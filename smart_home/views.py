@@ -48,12 +48,7 @@ def pins_settings(request):
     user, _ = get_user(request)
     account = get_account(user.id)
     devices = get_microcontrollers(account.account_id)
-
-    payload = {
-        'form': form,
-        'microcontrollers': devices
-    }
-
+    payload = {'form': form, 'devices': devices}
     return render(request, 'pins-settings.html', payload)
 
 @login_required

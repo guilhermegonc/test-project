@@ -7,8 +7,6 @@ from .microcontrollerRelations import get_microcontrollers, get_user, get_accoun
 from .microcontrollerSetup import create_microcontroller, set_pins, set_account
 from .forms import MicrcontrollerCreate, DevicesControl
 
-import logging
-
 @login_required
 def dashboard(request):
     user, auth0_details = get_user(request)
@@ -59,7 +57,6 @@ def pins_settings(request):
 
 @login_required
 def update_pins(request):
-    logging.debug(request)
     if request.method == 'POST':
         form = DevicesControl(request.POST)
 

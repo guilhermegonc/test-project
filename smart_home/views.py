@@ -44,7 +44,7 @@ def populate_microcontroller(request):
 @login_required
 def pins_settings(request):
     form = DevicesControl()
-    user = get_user(request.user.email)
+    user = get_user(request)
     account_id = get_account(user['id'])
     devices = get_microcontrollers(account_id)
     payload = {'form': form, 'devices': devices}

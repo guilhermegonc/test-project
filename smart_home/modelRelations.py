@@ -1,25 +1,27 @@
-from .models import Users, Account_Users, Microcontrollers, Microcontrollers_Accounts, Microcontroller_Devices, Devices
-import auth0.api
+from auth0.api_conn import get_auth0_user
+
+from .models import Users, Microcontrollers, Devices, Accounts
+from .models import Account_Users, Microcontrollers_Accounts, Microcontroller_Devices
 
 def get_account(u_id):
-    return Account_Users.objects.get(user_id=u_id).account_id
+    if not Account_Users.objects.filter(user=u_id).exists():
+        return False
+    account_user = Account_Users.objects.get(user_id=u_id)
+    return Accounts.objects.get(id=account_user.account_id)
+
+def get_account_from_token(token):
+    return Accounts.objects.get(token=token)
+
 
 def get_user(request):
     user = request.user
-    authorized_user = auth0.api.get_auth0_user(user.email)
-    
+    authorized_user = get_auth0_user(user.email)
     if not Users.objects.filter(auth0_id=authorized_user['user_id']).exists():
         user = Users(auth0_id=authorized_user['user_id'], role='admin')
         user.save()
-    
     else:
         user = Users.objects.get(auth0_id=authorized_user['user_id'])
-
-    return {
-        'id': user.id,
-        'uid': authorized_user['user_id'],
-        'name': authorized_user['name']
-    }
+    return user
 
 def get_microcontrollers(a_id):
     micro_account = Microcontrollers_Accounts.objects.filter(account_id = a_id)

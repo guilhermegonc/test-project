@@ -10,7 +10,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = config('DEBUG') == 'True'
 ALLOWED_HOSTS = ['http://guilhermegoncalves.herokuapp.com']
 SECRET_KEY = config('SECRET_KEY')
-PASSWORD = config('DB_PASSWORD')
+
+DB_NAME = config('DB_NAME')
+DB_HOST = config('DB_HOST')
+DB_USER = config('DB_USER')
+DB_PASSWORD = config('DB_PASSWORD')
+
+
 
 # Application definition
 INSTALLED_APPS = [
@@ -63,10 +69,10 @@ WSGI_APPLICATION = "project-settings.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dna8k5d2p9ljp',
-        'USER': 'wgkafnkejrnyxt',
-        'PASSWORD': PASSWORD,
-        'HOST': 'ec2-184-72-235-159.compute-1.amazonaws.com',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
         'PORT': '5432',
     }
 }

@@ -5,6 +5,7 @@ class BlynkObject {
         this.status = this.getStatus()
         this.htmlCard = document.querySelector(`#${this.pin} div.status`)
         this.htmlCard.onclick = () => this.changeStatus()
+        document.querySelector('#empty').remove()
     }
     
     getStatus = async() => {

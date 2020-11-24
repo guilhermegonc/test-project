@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Comece por aqui!{% endblock %}
+{% block content %}
+<div class="min-scroll">
+    <form class="form-group-compact" action='/join-account/' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="input-btn" type="submit" value="Atualizar" class="btn shadow btn-full">
+    </form>
+</div>
+{% endblock %}

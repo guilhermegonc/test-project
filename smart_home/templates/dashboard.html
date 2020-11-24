@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block title %}{{ user }}{% endblock %}
 {% load static %}
 {% block extra-css %}
@@ -8,7 +7,6 @@
 {% block extra-js %}
     <script src="{% static 'relay-control.js' %}"></script>
 {% endblock %}
-
 {% block content%}
     <div class="min-scroll">
         <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
@@ -21,7 +19,11 @@
                     </p>
                 </div>
             {% endfor %}
-            <a id="configs" class="trigger btn round m-12 transparent-gray" href="/pins">
+            <a id="empty" class="trigger btn m-12 transparent-gray" href="/pins"><div class="status"></div></a>
+            <a id="empty" class="trigger btn m-12 transparent-gray" href="/pins"><div class="status"></div></a>
+            <a id="empty" class="trigger btn m-12 transparent-gray" href="/pins"><div class="status"></div></a>
+            <a id="empty" class="trigger btn m-12 transparent-gray" href="/pins"><div class="status"></div></a>
+            <a id="configs" class="trigger btn m-12 transparent-gray" href="/pins">
                 <div class="status">🔧</div>
                 <p class="device-info light">Ajustes</p>
             </a>

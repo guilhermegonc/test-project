@@ -44,7 +44,8 @@ label{
     background-image: url("https://images.unsplash.com/photo-1553356084-58ef4a67b2a7");
 }
 
-.btn {
+.btn, input.btn{
+    font-size: 14px;
     font-family: sans-serif;
     text-decoration: none;
     text-transform: uppercase;
@@ -56,15 +57,11 @@ label{
     background-color: rgba(50,72,190,1);
     margin-left: auto;
     margin-right: auto;
-    width: 300px
+    width: 300px;
 }
 
 .btn-full {
     width: 100%;
-}
-
-.bottom {
-    margin: 120px auto 60px;
 }
 
 .round {

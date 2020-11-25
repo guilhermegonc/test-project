@@ -143,6 +143,13 @@ input[type="checkbox" i] {
     vertical-align: bottom;
 }
 
+.token {
+    color: white;
+    font-family: monospace;
+    border-radius: 20px;
+    border: solid 1px;
+}
+
 .lateral-scroll {
     overflow: auto;
     white-space: nowrap;

@@ -20,17 +20,29 @@ def dashboard(request):
     if not account:
         return HttpResponseRedirect('/join/')
     devices = get_microcontrollers(account.id)
-    devices = [d for d in devices if d['active'] == True]
-    payload = {'user' : auth0_data['name'],'microcontrollers': devices}
+    m_tokens = [token[0]['mtoken'] for token in devices]
+    devices = [[pin for pin in dev if pin['active'] == True] for dev in devices]
+    payload = {'user' : auth0_data['name'], 'microcontrollers': devices, 'm_tokens': m_tokens}
     return render(request, 'dashboard.html', payload)
 
 @login_required
-def pins_settings(request):
+def settings(request):
+    user = get_user(request)
+    account = get_account(user.id)
+    payload = {'token': account.token}
+    return render(request, 'settings.html', payload)
+
+@login_required
+def pins_settings(request, microcontroller_token):
+    first_pin = request.GET.get('pin') if request.GET.get('pin') else 'D0' 
     form = DevicesControl()
     user = get_user(request)
     account = get_account(user.id)
     devices = get_microcontrollers(account.id)
-    payload = {'form': form, 'devices': devices}
+    devices = [[pin for pin in dev if pin['mtoken'] == microcontroller_token] for dev in devices]
+    if len(devices) == 0:
+        return HttpResponseRedirect('/dashboard/')
+    payload = {'form': form, 'microcontroller': devices[0], 'first_pin': first_pin}
     return render(request, 'pins-settings.html', payload)
 
 @login_required
@@ -38,8 +50,8 @@ def update_pins(request):
     if request.method == 'POST':
         form = DevicesControl(request.POST)
         if form.is_valid():
-            device_id = form.cleaned_data['device_id']
-            device = Devices.objects.get(id=device_id)
+            device = form.cleaned_data['device']
+            device = Devices.objects.get(id=device)
             name = form.cleaned_data['name']
             device.name = name
             is_active = form.cleaned_data['active']
@@ -91,10 +103,11 @@ def populate_microcontroller(request):
 
         if answer.is_valid():
             token = answer.cleaned_data['token']
-            user = get_user(request.user.email)
+            name = answer.cleaned_data['name']
+            user = get_user(request)
             account = get_account(user.id)
 
-            microcontroller = create_microcontroller(token)
+            microcontroller = create_microcontroller(name, token)
             set_pins(microcontroller.id)
             set_account(account.id, microcontroller.id)
 

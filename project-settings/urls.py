@@ -18,13 +18,13 @@ urlpatterns = [
     path("", include('django.contrib.auth.urls')),
     path("", include('social_django.urls')),
     path("dashboard/", smart_home.views.dashboard, name="dashboard"),
+    path("settings/", smart_home.views.settings, name="settings"),
     path("join/", smart_home.views.join, name="join"),
     path("join-account/", smart_home.views.join_account, name="join-account"),
     path("create-account/", smart_home.views.create_account, name="create-account"),
-    path("pins/", smart_home.views.pins_settings, name="pins-settings"),
+    path("microcontroller/<str:microcontroller_token>", smart_home.views.pins_settings, name="pins-settings"),
     path("update-pins/", smart_home.views.update_pins, name="update-pins"),
     path("add-microcontroller/", smart_home.views.add_microcontroller, name="add-microcontrollers"),
     path("populate-microcontroller/", smart_home.views.populate_microcontroller, name="populate-microcontroller"),
-
 
 ]

@@ -7,8 +7,8 @@ class pinObject {
     }
 }
 
-const populateFields2 = (pinObj) => {
-    let d = document.querySelector('#device_id')
+const populateFields = (pinObj) => {
+    let d = document.querySelector('#id_device')
     d.value = pinObj['id']
 
     let p = document.querySelector('#id_pin')
@@ -26,11 +26,11 @@ const writePlaceholder = (form) => {
     return ''
 }
 
-const startListener = (pins) => {
-    populateFields2(pins['D0'])    
+const startListener = (pins, first) => {
+    populateFields(pins[first])    
     let pin = document.querySelector('#id_pin')
     pin.onchange = () => {
         let pinVal = pins[pin.value]
-        populateFields2(pinVal)
+        populateFields(pinVal)
     }
 }

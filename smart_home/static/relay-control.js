@@ -1,11 +1,11 @@
 class BlynkObject {
-    constructor (token, pin) {
+    constructor (token, pin, htmlId) {
         this.token = token
         this.pin = pin
         this.status = this.getStatus()
-        this.htmlCard = document.querySelector(`#${this.pin} div.status`)
+        this.htmlCard = document.querySelector(`#${htmlId} div.status`)
         this.htmlCard.onclick = () => this.changeStatus()
-        document.querySelector('#empty').remove()
+        document.querySelector(`#empty-${this.token}`).remove()
     }
     
     getStatus = async() => {

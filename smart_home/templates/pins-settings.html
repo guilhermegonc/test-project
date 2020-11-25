@@ -10,22 +10,20 @@
 {% endblock %}
 {% block content%}
 <div class="min-scroll w-300">
-    <h1 class="s3 p-12 light txt-center">Atualizar Tomadas</h1>
+    <h1 class="s3 p-12 light txt-center">Atualizar {{ microcontroller.0.mname }}</h1>
     <form class="form-group-compact" action='/update-pins/' method="post">
         {% csrf_token %}
         {{ form }}
-        <input id="device_id" name="device_id" type="hidden" value="">
         <input id="input-btn" type="submit" value="Atualizar" class="btn shadow btn-full">
     </form>
     <script>
         let pins = {}
-        '{% for d in devices %}'
-            let {{ d.pin}} = new pinObject('{{ d.id }}','{{ d.pin }}','{{ d.name }}','{{ d.active }}')
-            pins['{{ d.pin}}'] = {{ d.pin }}
+        '{% for device in microcontroller %}'
+                let {{ device.pin}} = new pinObject('{{ device.id }}','{{ device.pin }}','{{ device.name }}','{{ device.active }}')
+                pins['{{ device.pin }}'] = {{ device.pin }}
         '{% endfor %}'
-        startListener(pins)
+        startListener(pins, '{{ first_pin }}')
     </script>
-
     <a class="btn shadow light" href="/dashboard">Voltar</a>
 </div>
 {% endblock %}

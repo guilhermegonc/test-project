@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Configurações{% endblock %}
+{% load static %}
+{% block extra-css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'relay-control.css' %}">
+{% endblock %}
+{% block content%}
+    <div class="min-scroll">
+        <div class="p-12 m-b-24">
+            <h1 class="s3 light txt-center m-b-12">Configurações</h1>
+            <p class="s8 token light txt-center m-b-24">{{ token }}</p>
+        </div>
+        <div class="txt-center m-b-24">
+            <a id="controls" class="trigger light btn m-12" href="/add-microcontroller">
+                <div class="status shadow">🕹</div>
+                <p class="device-info">Controles</p>
+            </a>
+            <a id="socket" class="trigger light btn m-12" href="/pins">
+                <div class="status shadow">⚡️</div>
+                <p class="device-info">Tomadas</p>
+            </a>
+        </div>
+    <a class="btn shadow light" href="/dashboard">Voltar</a>
+    </div>
+{% endblock %}

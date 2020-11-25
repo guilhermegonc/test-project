@@ -27,6 +27,7 @@ class Account_Users(models.Model):
 class Microcontrollers(models.Model):
     class Meta:
         db_table = 'microcontrollers'
+    name = models.CharField(max_length=255, null=True)
     token = models.CharField(max_length=255)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

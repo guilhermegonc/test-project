@@ -12,7 +12,6 @@ def get_account(u_id):
 def get_account_from_token(token):
     return Accounts.objects.get(token=token)
 
-
 def get_user(request):
     user = request.user
     authorized_user = get_auth0_user(user.email)
@@ -24,15 +23,14 @@ def get_user(request):
     return user
 
 def get_microcontrollers(a_id):
-    micro_account = Microcontrollers_Accounts.objects.filter(account_id = a_id)
-    tokens = [get_token(m.microcontroller_id) for m in micro_account]
-    devices = [tkn for t in tokens for tkn in t]
-    return devices
+    micro_account = Microcontrollers_Accounts.objects.filter(account_id=a_id)
+    micro = [get_token(m.microcontroller_id) for m in micro_account]
+    return micro
 
 def get_token(m_id):
     micros = Microcontrollers.objects.get(id = m_id)
-    return get_pin(micros.token, micros.id)  
+    return get_pin(micros.token, micros.id, micros.name)  
 
-def get_pin(m_token, m_id):
+def get_pin(m_token, m_id, m_name):
     m_devices = Microcontroller_Devices.objects.filter(microcontroller_id = m_id)
-    return [{'id':d.id, 'pin': d.pin, 'name': d.name, 'active': d.active, 'mtoken': m_token} for m in m_devices for d in Devices.objects.filter(id=m.device_id)]
+    return [{'id':d.id, 'pin': d.pin, 'name': d.name, 'active': d.active, 'mtoken': m_token, 'mname': m_name} for m in m_devices for d in Devices.objects.filter(id=m.device_id)]

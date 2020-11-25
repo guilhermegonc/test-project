@@ -1,11 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Comece por aqui!{% endblock %}
+{% block title %}Comece por aqui{% endblock %}
 {% block content %}
-<div class="min-scroll">
+<div class="m-a w-300">
+    <h1 class="s3 p-12 light txt-center">Ingressar em uma conta</h1>
     <form class="form-group-compact" action='/join-account/' method="post">
         {% csrf_token %}
         {{ form }}
-        <input id="input-btn" type="submit" value="Atualizar" class="btn shadow btn-full">
+        <input id="input-btn" type="submit" value="Vincular conta" class="btn shadow btn-full">
     </form>
+    <form class="form-group-compact m-b-24" action='/create-account/' method="post">
+        {% csrf_token %}
+        <input id="input-btn-2" type="submit" value="Nova conta" class="btn light shadow btn-full">
+    </form>
+    <a class="btn light shadow btn-full" href="/logout">Sair</a>
 </div>
 {% endblock %}

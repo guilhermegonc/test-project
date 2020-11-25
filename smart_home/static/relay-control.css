@@ -6,6 +6,21 @@
     text-transform: initial;
 }
 
+.apps {
+    margin: auto;
+    text-align: center;
+}
+
 #configs {
     margin-left: 60px;
+}
+
+@media (max-width: 992px) {
+    .apps {
+        margin: 0;
+    }
+
+    .lateral-scroll {
+        max-width: 100%;
+    }
 }

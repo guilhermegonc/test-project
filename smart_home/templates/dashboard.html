@@ -9,10 +9,10 @@
 {% endblock %}
 {% block content%}
 <div class="default-margin-bg">
-    <div class="min-scroll">
-        <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
+    <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
+    <div class="m-b-24">
         {% for m in microcontrollers %}
-            <div class="lateral-scroll m-b-24">
+            <div class="apps lateral-scroll m-b-12">
             {% for d in m %}
                 <div id="p{{ d.id }}" class="trigger btn m-12 light shadow">
                     <div class="status"></div>
@@ -29,9 +29,9 @@
                 </a>
             </div>
         {% endfor %}
-        <a class="btn shadow light m-b-12" href="/settings">Configurações</a>
-        <a class="btn shadow light" href="/logout">Sair</a>
     </div>
+    <a class="btn shadow light m-b-12" href="/settings">Configurações</a>
+    <a class="btn shadow light" href="/logout">Sair</a>
 </div>
     <script>
         '{% for m in microcontrollers %}'

@@ -133,7 +133,7 @@ const addResetButton = mainDiv => {
     const resetBtn = document.createElement('div')
 
     resetBtn.classList.add('btn')
-    resetBtn.classList.add('m-b-24')
+    resetBtn.classList.add('m-b-12')
     resetBtn.classList.add('txt-center')
     resetBtn.classList.add('shadow')
     resetBtn.innerText = 'Resetar jogo'

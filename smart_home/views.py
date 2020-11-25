@@ -8,7 +8,7 @@ from auth0.api_conn import get_auth0_user
 from .models import Users, Microcontrollers, Devices, Accounts
 from .models import Account_Users, Microcontroller_Devices, Microcontrollers_Accounts
 
-from .modelRelations import get_microcontrollers, get_user, get_user, get_account, get_account_from_token
+from .modelRelations import get_microcontrollers, get_user, get_user, get_account, get_account_from_token, get_token, get_microcontrollers2, get_pins2
 from .microcontrollerSetup import create_microcontroller, set_pins, set_account
 from .forms import JoinAccount, MicrocontrollerCreate, DevicesControl
 
@@ -19,10 +19,14 @@ def dashboard(request):
     account = get_account(user.id)
     if not account:
         return HttpResponseRedirect('/join/')
-    devices = get_microcontrollers(account.id)
-    m_tokens = [token[0]['mtoken'] for token in devices]
-    devices = [[pin for pin in dev if pin['active'] == True] for dev in devices]
-    payload = {'user' : auth0_data['name'], 'microcontrollers': devices, 'm_tokens': m_tokens}
+    microcontrollers = get_microcontrollers(account.id)
+
+    microcontrollers2 = get_microcontrollers2(account.id)
+    mc2_token = [{mc2.token: get_pins2(mc2)} for mc2 in microcontrollers2]
+
+    m_tokens = [mc[0]['mtoken'] for mc in microcontrollers]
+    microcontrollers = [[pin for pin in mc if pin['active'] == True] for mc in microcontrollers]
+    payload = {'user':auth0_data['name'], 'microcontrollers':microcontrollers, 'm_tokens':m_tokens}
     return render(request, 'dashboard.html', payload)
 
 @login_required
@@ -44,7 +48,7 @@ def pins_settings(request, microcontroller_token):
     if len(devices) == 0:
         return HttpResponseRedirect('/dashboard/')
     payload = {'form': form, 'microcontroller': devices[0], 'first_pin': first_pin}
-    return render(request, 'pins-settings.html', payload)
+    return render(request, 'pins.html', payload)
 
 @login_required
 def update_pins(request):
@@ -64,7 +68,7 @@ def update_pins(request):
 def join(request):
     form = JoinAccount()
     payload = {'form': form}
-    return render(request, 'join.html', payload)
+    return render(request, 'join-account.html', payload)
 
 @login_required
 def join_account(request):

@@ -4,12 +4,13 @@
 {% block extra-css %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'relay-configs.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'checkbox-form.css' %}">
 {% endblock %}
 {% block extra-js %}
     <script src="{% static 'relay-configs.js' %}"></script>
 {% endblock %}
 {% block content%}
-<div class="min-scroll w-300">
+<div class="w-300 m-a">
     <h1 class="s3 p-12 light txt-center">Atualizar {{ microcontroller.0.mname }}</h1>
     <form class="form-group-compact" action='/update-pins/' method="post">
         {% csrf_token %}

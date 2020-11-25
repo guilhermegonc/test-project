@@ -1,8 +1,3 @@
-.fixed-height {
-    max-width: 50%;
-    margin: 40px 0;
-}
-
 .db-results {
     margin: 0 auto 6px;
     max-width: 432px;
@@ -11,9 +6,5 @@
 @media (max-width: 992px) {
     .db-results {
         margin: 12px auto 0;
-    }
-
-    .fixed-height {
-        max-width: 100%;
     }
 }

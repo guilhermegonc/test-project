@@ -3,24 +3,25 @@
 {% block extra-css %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'custom-form-styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'checkbox-form.css' %}">
 {% endblock %}
 
 {% block Title %}Formulário Integrado{% endblock %}
 
 {% block content %}
-<div class="half-view">
+<div class="half-view fl-l m-b-24">
+    <h2 class="s3 txt-center m-b-24 light">Novo contato:</h2>
     <form id="rd-int-form" class="form-group" action='/populate-personas/' method="post">
         {% csrf_token %}
         {{ form }}
-        <label>
-            <input type="hidden" data-privacy="true" name="privacy_policy" value="1">
+        <label><input type="hidden" data-privacy="true" name="privacy_policy" value="1">
             Ao informar meus dados, eu concordo com a <a href="privacy-policy-link" target="_blank">Política de Privacidade</a>.
         </label>
         <input id="input-btn" type="submit" value="Converter" class="btn shadow btn-full">
     </form>
 </div>
-<div class="half-view fixed-height">
-    <h2 class="s4 str txt-center m-b-24 light">Nomes recentes</h2>
+<div class="half-view fl-r">
+    <h2 class="s3 txt-center m-b-24 light">Nomes recentes</h2>
     {% for r in db_results %}
     <div class="db-results p-card shadow p-24">
         <p class="s9 str blue m-b-0">{{r.name}}</p>

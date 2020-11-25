@@ -1,0 +1,12 @@
+input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+}
+
+label[for="id_privacy_politics"], 
+label[for="id_communication_consent"], 
+label[for="id_terms_of_use"]{
+    position: relative;
+    left: 42px;
+    top: 30px;
+}

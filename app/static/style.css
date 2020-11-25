@@ -45,6 +45,7 @@ label{
 
 .default-margin-bg {
     margin: 84px 0;
+    width: 100%;
 }
 
 .btn, input.btn{
@@ -160,7 +161,7 @@ input[type="checkbox" i] {
 }
 
 .form-group {
-    margin: 80px auto 80px;
+    margin: 12px auto;
     max-width: 480px;
 }
 
@@ -211,10 +212,14 @@ input[type="checkbox" i] {
     padding: 24px;
 }
 
+.m-a {
+    margin: auto;
+}
+
 /* Layout */
 .half-view {
     width: 50%;
-    margin: auto;
+    /* margin: auto; */
     min-width: 300px;
 }
 

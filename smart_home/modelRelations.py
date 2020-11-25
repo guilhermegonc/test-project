@@ -34,3 +34,13 @@ def get_token(m_id):
 def get_pin(m_token, m_id, m_name):
     m_devices = Microcontroller_Devices.objects.filter(microcontroller_id = m_id)
     return [{'id':d.id, 'pin': d.pin, 'name': d.name, 'active': d.active, 'mtoken': m_token, 'mname': m_name} for m in m_devices for d in Devices.objects.filter(id=m.device_id)]
+
+def get_microcontrollers2(a_id):
+    mc_account = Microcontrollers_Accounts.objects.filter(account_id=a_id)
+    mc = [Microcontrollers.objects.get(id=mc.microcontroller_id) for mc in mc_account]
+    return mc
+
+def get_pin2(microcontroller):
+    mc = Microcontroller_Devices.objects.filter(microcontroller_id=microcontroller.id)
+    return [Devices.objects.get(id=pin.id) for pin in mc]
+    # return [ for m in m_devices for d in Devices.objects.filter(id=m.device_id)]

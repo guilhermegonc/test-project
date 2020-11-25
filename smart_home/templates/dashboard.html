@@ -8,6 +8,7 @@
     <script src="{% static 'relay-control.js' %}"></script>
 {% endblock %}
 {% block content%}
+<div class="default-margin-bg">
     <div class="min-scroll">
         <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
         {% for m in microcontrollers %}
@@ -31,6 +32,7 @@
         <a class="btn shadow light m-b-12" href="/settings">Configurações</a>
         <a class="btn shadow light" href="/logout">Sair</a>
     </div>
+</div>
     <script>
         '{% for m in microcontrollers %}'
             '{% for d in m %}'

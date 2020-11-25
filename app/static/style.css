@@ -29,8 +29,7 @@ label{
 }
 
 .min-scroll {
-    margin: auto;
-    margin-top: 84px;
+    margin-top: 84px auto;
 }
 
 .bg {
@@ -42,6 +41,10 @@ label{
     flex-wrap: wrap;
     justify-content: center;
     background-image: url("https://images.unsplash.com/photo-1553356084-58ef4a67b2a7");
+}
+
+.default-margin-bg {
+    margin: 84px 0;
 }
 
 .btn, input.btn{

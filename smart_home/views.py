@@ -40,6 +40,7 @@ def pins_settings(request, microcontroller_token):
     account = get_account(user.id)
     devices = get_microcontrollers(account.id)
     devices = [[pin for pin in dev if pin['mtoken'] == microcontroller_token] for dev in devices]
+    devices = [d for d in devices if d != []]
     if len(devices) == 0:
         return HttpResponseRedirect('/dashboard/')
     payload = {'form': form, 'microcontroller': devices[0], 'first_pin': first_pin}

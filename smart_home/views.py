@@ -21,8 +21,8 @@ def dashboard(request):
         return HttpResponseRedirect('/join/')
     microcontrollers = get_microcontrollers(account.id)
 
-    microcontrollers2 = get_microcontrollers2(account.id)
-    mc2_token = [{mc2.token: get_pins2(mc2)} for mc2 in microcontrollers2]
+    # microcontrollers2 = get_microcontrollers2(account.id)
+    # mc2_token = [{mc2.token: get_pins2(mc2)} for mc2 in microcontrollers2]
 
     m_tokens = [mc[0]['mtoken'] for mc in microcontrollers]
     microcontrollers = [[pin for pin in mc if pin['active'] == True] for mc in microcontrollers]

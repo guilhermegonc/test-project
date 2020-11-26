@@ -48,6 +48,12 @@ label{
     width: 100%;
 }
 
+@media (max-width: 992px) {
+    .default-margin-bg {
+        margin: 36px 0;
+    }
+}
+
 .btn, input.btn{
     font-size: 14px;
     font-family: sans-serif;

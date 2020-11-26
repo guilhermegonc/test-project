@@ -8,7 +8,7 @@ from auth0.api_conn import get_auth0_user
 from .models import Users, Microcontrollers, Devices, Accounts
 from .models import Account_Users, Microcontroller_Devices, Microcontrollers_Accounts
 
-from .modelRelations import get_microcontrollers, get_user, get_user, get_account, get_account_from_token, get_token, get_microcontrollers2, get_pins2
+from .modelRelations import get_microcontrollers, get_user, get_user, get_account, get_account_from_token, get_token
 from .microcontrollerSetup import create_microcontroller, set_pins, set_account
 from .forms import JoinAccount, MicrocontrollerCreate, DevicesControl
 

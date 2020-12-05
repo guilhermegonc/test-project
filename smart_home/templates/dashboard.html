@@ -12,16 +12,16 @@
 <div class="m-b-24">
     {% for m in microcontrollers %}
         <div class="apps lateral-scroll m-b-12">
-        {% for d in m %}
-            <div id="p{{ d.id }}" class="trigger btn m-12 light shadow">
-                <div class="status"></div>
-                <p class="device-info">{% if d.name == '' %}Sem nome{% else %}{{ d.name }}{% endif %}</p>
-            </div>
+        {% for d in m.device %}
+            {% if d.active == True %}
+                <div id="p{{ d.id }}" class="trigger btn m-12 light shadow">
+                    <div class="status"></div>
+                    <p class="device-info">{% if d.name == '' %}Sem nome{% else %}{{ d.name }}{% endif %}</p>
+                </div>
+            {% else %}
+                <a id="empty-{{ m.token }}" class="trigger btn m-12 transparent-gray" href="/microcontroller/{{ m.token }}?pin={{ d.pin }}"><div class="status">+</div></a>            
+            {% endif %}
         {% endfor %}
-            <a id="empty-{{ m.0.mtoken }}" class="trigger btn m-12 transparent-gray" href="/microcontroller/{{ m.0.mtoken }}?pin=D0"><div class="status">+</div></a>
-            <a id="empty-{{ m.0.mtoken }}" class="trigger btn m-12 transparent-gray" href="/microcontroller/{{ m.0.mtoken }}?pin=D1"><div class="status">+</div></a>
-            <a id="empty-{{ m.0.mtoken }}" class="trigger btn m-12 transparent-gray" href="/microcontroller/{{ m.0.mtoken }}?pin=D2"><div class="status">+</div></a>
-            <a id="empty-{{ m.0.mtoken }}" class="trigger btn m-12 transparent-gray" href="/microcontroller/{{ m.0.mtoken }}?pin=D3"><div class="status">+</div></a>
             <a id="configs-unset" class="trigger round btn m-12 transparent-gray" href="/">
                 <div class="status">🔧</div>
                 <p class="device-info light">Ajustes</p>
@@ -33,12 +33,12 @@
 <a class="btn shadow light" href="/logout">Sair</a>
     <script>
         '{% for m in microcontrollers %}'
-            '{% for d in m %}'
-            let p{{ d.id }} = new BlynkObject('{{ d.mtoken }}', '{{ d.pin }}', 'p{{ d.id }}')
+            '{% for d in m.device %}'
+                '{% if d.active == True %}'
+                    let p{{ d.id }} = new BlynkObject('{{ m.token }}', '{{ d.pin }}', 'p{{ d.id }}')
+                '{% endif %}'
             '{% endfor %}'
-        '{% endfor %}'
-        '{% for t in m_tokens%}'
-            document.querySelector('#configs-unset').href = "/microcontroller/{{ t }}"
+            document.querySelector('#configs-unset').href = "/microcontroller/{{ m.token }}"
             document.querySelector('#configs-unset').id = 'configs'
         '{% endfor %}'
     </script>

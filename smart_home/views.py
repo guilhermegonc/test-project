@@ -1,38 +1,42 @@
+from uuid import uuid4
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from uuid import uuid4
 
-from auth0.api_conn import get_auth0_user
+from .models import Devices
+from .models import Accounts
+from .models import Account_Users
 
-from .models import Users, Microcontrollers, Devices, Accounts
-from .models import Account_Users, Microcontroller_Devices, Microcontrollers_Accounts
+from .forms import JoinAccount
+from .forms import MicrocontrollerCreate
+from .forms import DevicesControl
 
-from .modelRelations import get_microcontrollers, get_user, get_user, get_account, get_account_from_token, get_token
-from .microcontrollerSetup import create_microcontroller, set_pins, set_account
-from .forms import JoinAccount, MicrocontrollerCreate, DevicesControl
+from .userHelper import get_user
+
+from .accountHelper import get_account
+from .accountHelper import  find_account
+from .accountHelper import get_account_from_token
+
+from .microcontrollerHelper import get_microcontroller_details
+from .microcontrollerHelper import create_microcontroller
+from .microcontrollerHelper import set_pins
+from .microcontrollerHelper import set_account
 
 @login_required
 def dashboard(request):
-    auth0_data = get_auth0_user(request.user.email)
     user = get_user(request)
-    account = get_account(user.id)
+    account = get_account(user)
     if not account:
         return HttpResponseRedirect('/join/')
-    microcontrollers = get_microcontrollers(account.id)
-
-    # microcontrollers2 = get_microcontrollers2(account.id)
-    # mc2_token = [{mc2.token: get_pins2(mc2)} for mc2 in microcontrollers2]
-
-    m_tokens = [mc[0]['mtoken'] for mc in microcontrollers]
-    microcontrollers = [[pin for pin in mc if pin['active'] == True] for mc in microcontrollers]
-    payload = {'user':auth0_data['name'], 'microcontrollers':microcontrollers, 'm_tokens':m_tokens}
+    microcontrollers = get_microcontroller_details(account)
+    payload = {'user':user.auth0_name, 'microcontrollers':microcontrollers}
     return render(request, 'dashboard.html', payload)
 
 @login_required
 def settings(request):
     user = get_user(request)
-    account = get_account(user.id)
+    account = get_account(user)
     payload = {'token': account.token}
     return render(request, 'settings.html', payload)
 
@@ -41,13 +45,12 @@ def pins_settings(request, microcontroller_token):
     first_pin = request.GET.get('pin') if request.GET.get('pin') else 'D0' 
     form = DevicesControl()
     user = get_user(request)
-    account = get_account(user.id)
-    devices = get_microcontrollers(account.id)
-    devices = [[pin for pin in dev if pin['mtoken'] == microcontroller_token] for dev in devices]
-    devices = [d for d in devices if d != []]
-    if len(devices) == 0:
+    account = get_account(user)
+    microcontrollers = get_microcontroller_details(account)
+    microcontrollers = [mc for mc in microcontrollers if mc.token == microcontroller_token]
+    if len(microcontrollers) == 0:
         return HttpResponseRedirect('/dashboard/')
-    payload = {'form': form, 'microcontroller': devices[0], 'first_pin': first_pin}
+    payload = {'form': form, 'microcontroller': microcontrollers[0], 'first_pin': first_pin}
     return render(request, 'pins.html', payload)
 
 @login_required
@@ -73,7 +76,7 @@ def join(request):
 @login_required
 def join_account(request):
     user = get_user(request)
-    if Account_Users.objects.filter(user=user.id).exists():
+    if not find_account(user):
         return HttpResponseRedirect('/dashboard/')
     if request.method == 'POST':
         answer = JoinAccount(request.POST)
@@ -87,7 +90,7 @@ def join_account(request):
 @login_required
 def create_account(request):
     user = get_user(request)
-    if Account_Users.objects.filter(user=user.id).exists():
+    if not find_account(user):
         return HttpResponseRedirect('/dashboard/')
     if request.method == 'POST':
         account = Accounts(token=uuid4().hex)
@@ -110,7 +113,7 @@ def populate_microcontroller(request):
             token = answer.cleaned_data['token']
             name = answer.cleaned_data['name']
             user = get_user(request)
-            account = get_account(user.id)
+            account = get_account(user)
 
             microcontroller = create_microcontroller(name, token)
             set_pins(microcontroller.id)

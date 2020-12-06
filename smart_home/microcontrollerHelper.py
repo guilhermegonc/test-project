@@ -14,19 +14,30 @@ def create_microcontroller(name, token):
     microcontroller.save()
     return microcontroller
 
-def set_pins(m_id):
-    device_pins = ['D0', 'D1', 'D2', 'D3']
-    for p in device_pins:
-        device = Devices(pin=p)
-        device.save()
-        m_c = Microcontroller_Devices(microcontroller_id=m_id, device_id=device.id)
-        m_c.save()
-    return
+def update(microcontroller, name):
+    microcontroller.name = name
+    microcontroller.save()
+    return microcontroller
 
-def set_account(a_id, m_id):
-    m_a = Microcontrollers_Accounts(account_id=a_id, microcontroller_id=m_id)
+def destroy(microcontroller):
+    microcontroller.delete()
+    devices = get_devices(microcontroller)
+    devices = [d.delete() for d in devices]
+    return microcontroller
+
+def set_account(account, microcontroller):
+    m_a = Microcontrollers_Accounts(account_id=account.id, microcontroller_id=microcontroller.id)
     m_a.save()
     return
+
+def set_pins(microcontroller):
+    pins = ['D0', 'D1', 'D2', 'D3']
+    for p in pins:
+        d = Devices(pin=p)
+        d.save()
+        mc_device = Microcontroller_Devices(microcontroller_id=microcontroller.id, device_id=d.id)
+        mc_device.save()
+    return 
 
 def get_microcontroller_details(account):
     microcontrollers = get_microcontrollers(account)
@@ -38,6 +49,12 @@ def get_microcontrollers(account):
     mc_account = Microcontrollers_Accounts.objects.filter(account_id=account.id)
     return [Microcontrollers.objects.get(id=mc.microcontroller_id) for mc in mc_account]
 
+def get_microcontroller_from_token(token):
+    return Microcontrollers.objects.get(token=token)
+
 def get_devices(microcontroller):
     devices = Microcontroller_Devices.objects.filter(microcontroller=microcontroller.id)
     return  [Devices.objects.get(id=d.device_id) for d in devices]
+
+def user_has_permission(account, microcontroller):
+    return Microcontrollers_Accounts.objects.filter(account=account.id, microcontroller=microcontroller.id).exists()

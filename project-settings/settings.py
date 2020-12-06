@@ -16,8 +16,6 @@ DB_HOST = config('DB_HOST')
 DB_USER = config('DB_USER')
 DB_PASSWORD = config('DB_PASSWORD')
 
-
-
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -26,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "social_django",
     "auth0",
     "app",

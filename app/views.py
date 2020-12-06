@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 
 from .aws_connect import connect_to_s3
 
-
 def index(request):
     return render(request, 'index.html')
 

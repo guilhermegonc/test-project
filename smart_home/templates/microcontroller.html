@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block Title %}Pin{% endblock %}
+{% load static %}
+{% block extra-js %}
+    <script src="{% static 'microcontroller-configs.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="m-a w-300">
+    <h1 class="s3 p-12 light txt-center">Editar {{ microcontroller.name }}</h1>
+    <form id="pin-form" class="form-group-compact" action='{{ microcontroller.token }}/update' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="input-btn" type="submit" value="Atualizar Nome" class="btn shadow light btn-full">
+    </form>
+    <a class="btn m-b-12 shadow light" href="{{ microcontroller.token }}/device">Atualizar tomadas</a>
+    <a class="btn shadow light m-b-24" href="/dashboard">Voltar</a>
+    <a class="btn shadow danger" href="{{ microcontroller.token }}/destroy">Excluir</a>
+
+</div>
+<script>
+    populateField('{{ microcontroller.name }}', '{{ microcontroller.token }}')
+</script>
+{% endblock %}

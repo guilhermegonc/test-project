@@ -52,11 +52,7 @@ class Devices(models.Model):
 class Microcontroller_Devices(models.Model):
     class Meta:
         db_table = 'microcontroller_devices'
-    microcontroller = models.ForeignKey(
-        'Microcontrollers',
-        on_delete=models.CASCADE,
-        primary_key=True
-        )
+    microcontroller = models.ForeignKey('Microcontrollers',on_delete=models.CASCADE)
     device = models.ForeignKey('Devices', on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

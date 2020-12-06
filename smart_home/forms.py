@@ -6,7 +6,7 @@ class JoinAccount(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': 'Token da Conta'})
         )
 
-class MicrocontrollerCreate(forms.Form):
+class CreateMicrocontroller(forms.Form):
     name = forms.CharField(
         max_length=255,
         widget=forms.TextInput(attrs={'placeholder': 'Dê um apelido para o seu assistente!'})
@@ -14,6 +14,12 @@ class MicrocontrollerCreate(forms.Form):
     token = forms.CharField(
         max_length=255,
         widget=forms.TextInput(attrs={'placeholder': 'Token do Controle'})
+    )
+
+class UpdateMicrocontroller(forms.Form):
+    name = forms.CharField(
+        max_length=255,
+        widget=forms.TextInput(attrs={'placeholder': 'Dê um apelido para o seu assistente!'})
     )
 
 class DevicesControl(forms.Form):

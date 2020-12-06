@@ -11,10 +11,6 @@
     text-align: center;
 }
 
-#configs {
-    margin-left: 60px;
-}
-
 @media (max-width: 992px) {
     .apps {
         margin: 0;

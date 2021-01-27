@@ -25,6 +25,9 @@
         {% include "analytics-scripts/gtm_head.html" %}
       
         <title>{% block title %}{% endblock %}</title>
+        <script>
+            fbq('PageView', {content_type: "web page"});
+          </script>
     </head>
     <body>
         {% include "global-navigation.html" %}

@@ -6,6 +6,8 @@ admin.autodiscover()
 
 urlpatterns = [
     path("", app.views.index, name="index"),
+    path("webhook/", app.views.webhook),
+    path("automation_webhook/", app.views.automation_webhook),
     path("tictactoe/", tic_tac_toe.views.tic_tac_toe, name="tic-tac-toe"),
     path("embed-form/", forms.views.embed_form, name="embed-form"),
     path("custom-form/", forms.views.custom_form, name="custom-form"),

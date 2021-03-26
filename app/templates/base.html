@@ -16,18 +16,18 @@
         <script src="{% static 'actions.js' %}"></script>
         {% block extra-css %}{% endblock %}
         {% block extra-js %}{% endblock%}
-      
+
         {% include "analytics-scripts/cookiebot-script.html" %}
         {% include "analytics-scripts/facebook-pixel.html" %}
         {% include "analytics-scripts/adopt.html" %}
         {% include "analytics-scripts/ga_head.html" %}
         {% include "analytics-scripts/gtm_head.html" %}
-        {% include "analytics-scripts/hubspot-remove-cookies.html" %}
-      
+        {% include "analytics-scripts/google_ads.html" %}
+
         <title>{% block title %}{% endblock %}</title>
         <script>
             fbq('PageView', {content_type: "web page"});
-          </script>
+        </script>
     </head>
     <body>
         {% include "global-navigation.html" %}

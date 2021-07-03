@@ -32,4 +32,4 @@ def populate_personas(request):
             new_input = Personas(name=name, email=email, long_number=random_big_number)
             new_input.save()
             
-    return HttpResponseRedirect('/custom-form/')
+    return HttpResponseRedirect('/custom-form')

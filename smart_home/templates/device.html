@@ -12,7 +12,7 @@
 {% block content%}
 <div class="w-300 m-a">
     <h1 class="s3 p-12 light txt-center">Atualizar {{ microcontroller.name }}</h1>
-    <form class="form-group-compact" action='/update-pins/' method="post">
+    <form class="form-group-compact" action='/update-pins' method="post">
         {% csrf_token %}
         {{ form }}
         <input id="input-btn" type="submit" value="Atualizar" class="btn shadow btn-full">

@@ -33,7 +33,7 @@ def smart_home(request):
     user = get_user(request)
     account = get_account(user)
     if not account:
-        return HttpResponseRedirect('/join/')
+        return HttpResponseRedirect('/join')
     microcontrollers = get_microcontroller_details(account)
     payload = {'user':user.auth0_name, 'microcontrollers':microcontrollers}
     return render(request, 'smart-home.html', payload)
@@ -42,13 +42,13 @@ def smart_home(request):
 def create_account(request):
     user = get_user(request)
     if not find_account(user):
-        return HttpResponseRedirect('/smart-home/')
+        return HttpResponseRedirect('/smart-home')
     if request.method == 'POST':
         account = Accounts(token=uuid4().hex)
         account.save()
         account_user = Account_Users(account=account, user=user)
         account_user.save()
-    return HttpResponseRedirect('/smart-home/')
+    return HttpResponseRedirect('/smart-home')
 
 @login_required
 def join(request):
@@ -60,7 +60,7 @@ def join(request):
 def join_account(request):
     user = get_user(request)
     if not find_account(user):
-        return HttpResponseRedirect('/smart-home/')
+        return HttpResponseRedirect('/smart-home')
     if request.method == 'POST':
         answer = JoinAccount(request.POST)
         if answer.is_valid():
@@ -68,7 +68,7 @@ def join_account(request):
             account = get_account_from_token(a_token)
             account_user = Account_Users(account=account, user=user)
             account_user.save()
-    return HttpResponseRedirect('/smart-home/')
+    return HttpResponseRedirect('/smart-home')
 
 @login_required
 def settings(request):
@@ -86,7 +86,7 @@ def device_settings(request, microcontroller_token):
     microcontrollers = get_microcontroller_details(account)
     microcontrollers = [mc for mc in microcontrollers if mc.token == microcontroller_token]
     if len(microcontrollers) == 0:
-        return HttpResponseRedirect('/smart-home/')
+        return HttpResponseRedirect('/smart-home')
     payload = {'form': form, 'microcontroller': microcontrollers[0], 'first_pin': first_pin}
     return render(request, 'device.html', payload)
 
@@ -102,7 +102,7 @@ def update_device(request):
             is_active = form.cleaned_data['active']
             device.active = is_active
             device.save()
-    return HttpResponseRedirect('/smart-home/')
+    return HttpResponseRedirect('/smart-home')
 
 @login_required
 def add_microcontroller(request):
@@ -121,18 +121,18 @@ def populate_microcontroller(request):
             microcontroller = create_microcontroller(name, token)
             set_account(account, microcontroller)
             set_pins(microcontroller)
-    return HttpResponseRedirect('/smart-home/')
+    return HttpResponseRedirect('/smart-home')
 
 @login_required
 def microcontroller(request, microcontroller_token):
     user = get_user(request)
     account = get_account(user)
     if not account:
-        return HttpResponseRedirect('/smart-home/')
+        return HttpResponseRedirect('/smart-home')
     microcontrollers = get_microcontroller_details(account)
     microcontrollers = [mc for mc in microcontrollers if mc.token == microcontroller_token]
     if len(microcontrollers) == 0:
-        return HttpResponseRedirect('/smart-home/')
+        return HttpResponseRedirect('/smart-home')
     form = UpdateMicrocontroller()
     payload = {'form': form, 'microcontroller': microcontrollers[0]}
     return render(request, 'microcontroller.html', payload)
@@ -145,7 +145,7 @@ def update_microcontroller(request, microcontroller_token):
             name = answer.cleaned_data['name']
             microcontroller = get_microcontroller_from_token(microcontroller_token)
             update(microcontroller, name)
-    return HttpResponseRedirect('/smart-home/')
+    return HttpResponseRedirect('/smart-home')
 
 @login_required
 def destroy_microcontroller(request, microcontroller_token):
@@ -154,4 +154,4 @@ def destroy_microcontroller(request, microcontroller_token):
     microcontroller = get_microcontroller_from_token(microcontroller_token)
     if user_has_permission(account, microcontroller):
         destroy(microcontroller)
-    return HttpResponseRedirect('/smart-home/')
+    return HttpResponseRedirect('/smart-home')

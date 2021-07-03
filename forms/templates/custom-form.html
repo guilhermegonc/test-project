@@ -11,7 +11,7 @@
 {% block content %}
 <div class="half-view fl-l m-b-24">
     <h2 class="s3 txt-center m-b-24 light">Novo contato:</h2>
-    <form id="rd-int-form" class="form-group" action='/populate-personas/' method="post">
+    <form id="rd-int-form" class="form-group" action='/populate-personas' method="post">
         {% csrf_token %}
         {{ form }}
         <label><input type="hidden" data-privacy="true" name="privacy_policy" value="1">

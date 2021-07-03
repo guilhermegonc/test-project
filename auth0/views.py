@@ -11,7 +11,7 @@ import json
 def login(request):
     user = request.user
     if user.is_authenticated:
-        return HttpResponseRedirect('/dashboard/')
+        return HttpResponseRedirect('/dashboard')
     else:
         return HttpResponseRedirect('/')
 

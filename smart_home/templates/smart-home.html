@@ -12,7 +12,7 @@
 <div class="m-b-24">
     {% for m in microcontrollers %}
         <div class="apps lateral-scroll m-b-12">
-            <a class="seal s-8 btn m-12 rotate" href="/{{ m.token}}"><div>{{ m.name }}</div></a>
+            <a class="seal s-8 btn m-12 rotate" href="m/{{ m.token}}"><div>{{ m.name }}</div></a>
             {% for d in m.device %}
             {% if d.active == True %}
                 <div id="p{{ d.id }}" class="trigger btn m-12 light shadow">
@@ -20,18 +20,18 @@
                     <p class="device-info">{% if d.name == '' %}Sem nome{% else %}{{ d.name }}{% endif %}</p>
                 </div>
             {% else %}
-                <a id="empty-{{ m.token }}" class="trigger btn m-12 transparent-gray" href="/{{ m.token }}/device?pin={{ d.pin }}"><div class="status">+</div></a>            
+                <a id="empty-{{ m.token }}" class="trigger btn m-12 transparent-gray" href="m/{{ m.token }}/device?pin={{ d.pin }}"><div class="status">+</div></a>            
             {% endif %}
             {% endfor %}
-            <a id="configs-unset" class="trigger btn m-12 transparent-gray" href="/{{ m.token }}">
+            <a id="configs-unset" class="trigger btn m-12 transparent-gray" href="m/{{ m.token }}">
                 <div class="status">🔧</div>
                 <p class="device-info light">Ajustes</p>
             </a>
         </div>
     {% endfor %}
 </div>
-<a class="btn shadow light m-b-12" href="/settings/">Configurações</a>
-<a class="btn shadow light" href="/logout/">Sair</a>
+<a class="btn shadow light m-b-12" href="/settings">Configurações</a>
+<a class="btn shadow light" href="/logout">Sair</a>
     <script>
         '{% for m in microcontrollers %}'
             '{% for d in m.device %}'

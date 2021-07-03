@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     "app",
     "forms",
     "tic_tac_toe",
-    "smart_home"
+    "smart_home",
+    "menu"
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,7 @@ AUTHENTICATION_BACKENDS = {
 }
 
 LOGIN_URL = '/login/auth0'
-LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_REDIRECT_URL = '/dashboard/'
 
 
 # Internationalization

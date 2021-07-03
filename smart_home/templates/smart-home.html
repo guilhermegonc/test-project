@@ -8,7 +8,7 @@
     <script src="{% static 'relay-control.js' %}"></script>
 {% endblock %}
 {% block content%}
-<h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
+<h1 class="s3 p-12 light txt-center m-b-24">Smart Home</h1>
 <div class="m-b-24">
     {% for m in microcontrollers %}
         <div class="apps lateral-scroll m-b-12">
@@ -22,16 +22,16 @@
             {% else %}
                 <a id="empty-{{ m.token }}" class="trigger btn m-12 transparent-gray" href="/{{ m.token }}/device?pin={{ d.pin }}"><div class="status">+</div></a>            
             {% endif %}
-        {% endfor %}
-            <a id="configs-unset" class="trigger btn m-12 transparent-gray" href="/">
+            {% endfor %}
+            <a id="configs-unset" class="trigger btn m-12 transparent-gray" href="/{{ m.token }}">
                 <div class="status">🔧</div>
                 <p class="device-info light">Ajustes</p>
             </a>
         </div>
     {% endfor %}
 </div>
-<a class="btn shadow light m-b-12" href="/settings">Configurações</a>
-<a class="btn shadow light" href="/logout">Sair</a>
+<a class="btn shadow light m-b-12" href="/settings/">Configurações</a>
+<a class="btn shadow light" href="/logout/">Sair</a>
     <script>
         '{% for m in microcontrollers %}'
             '{% for d in m.device %}'
@@ -39,7 +39,6 @@
                     let p{{ d.id }} = new BlynkObject('{{ m.token }}', '{{ d.pin }}', 'p{{ d.id }}')
                 '{% endif %}'
             '{% endfor %}'
-            document.querySelector('#configs-unset').href = "/{{ m.token }}"
         '{% endfor %}'
     </script>
 {% endblock %}

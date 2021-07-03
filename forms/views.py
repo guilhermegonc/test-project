@@ -33,7 +33,3 @@ def populate_personas(request):
             new_input.save()
             
     return HttpResponseRedirect('/custom-form/')
-
-
-def atomic(request):
-    return render(request, 'atomic.html')

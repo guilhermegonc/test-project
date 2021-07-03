@@ -1,5 +1,7 @@
 from django.db import models
 
+from menu.models import Users
+
 
 class Accounts(models.Model):
     class Meta:
@@ -8,19 +10,11 @@ class Accounts(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
-class Users(models.Model):
-    class Meta:
-        db_table = 'users'
-    auth0_id = models.CharField(max_length=255)
-    role = models.CharField(max_length=31)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
-
 class Account_Users(models.Model):
     class Meta:
         db_table = 'account_users'
     account = models.ForeignKey('Accounts', on_delete=models.CASCADE, primary_key = True)
-    user = models.ForeignKey('Users', on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 

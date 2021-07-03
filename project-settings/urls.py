@@ -1,6 +1,6 @@
 from django.urls import path, include
 from django.contrib import admin
-import app.views, auth0.views, forms.views, tic_tac_toe.views, smart_home.views
+import app.views, auth0.views, forms.views, tic_tac_toe.views, smart_home.views, menu.views
 
 admin.autodiscover()
 
@@ -16,7 +16,8 @@ urlpatterns = [
     path("logout/", auth0.views.logout),
     path("", include('django.contrib.auth.urls')),
     path("", include('social_django.urls')),
-    path("dashboard/", smart_home.views.dashboard, name="dashboard"),
+    path("dashboard/", menu.views.dashboard, name="dashboard"),
+    path("smart-home/", smart_home.views.smart_home, name="smart-home"),
     path("settings/", smart_home.views.settings, name="settings"),
     path("join/", smart_home.views.join, name="join"),
     path("join-account/", smart_home.views.join_account, name="join-account"),

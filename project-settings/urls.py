@@ -1,9 +1,10 @@
 from django.urls import path, include
 from django.contrib import admin
+from django.conf.urls import handler404
 import app.views, auth0.views, forms.views, tic_tac_toe.views, smart_home.views, menu.views
 
 admin.autodiscover()
-
+handler404 = app.views.handler_404
 urlpatterns = [
     path("", app.views.index, name="index"),
     path("webhook", app.views.webhook),

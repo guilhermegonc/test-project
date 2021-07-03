@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 def index(request):
     return render(request, 'index.html')
 
+def handler_404(request, *args, **kwargs):
+   return render(request,'404.html')
 
 @csrf_exempt
 def webhook(request):

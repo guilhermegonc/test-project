@@ -1,7 +1,7 @@
 from django.urls import path, include
 from django.contrib import admin
 from django.conf.urls import handler404
-import app.views, auth0.views, forms.views, tic_tac_toe.views, smart_home.views, menu.views
+import app.views, auth0.views, forms.views, tic_tac_toe.views, smart_home.views, menu.views,stocks.views
 
 admin.autodiscover()
 handler404 = app.views.handler_404
@@ -35,4 +35,6 @@ urlpatterns = [
     path("update-pins", smart_home.views.update_device, name="update-pins"),
     path("add-microcontroller", smart_home.views.add_microcontroller, name="add-microcontrollers"),
     path("populate-microcontroller", smart_home.views.populate_microcontroller, name="populate-microcontroller"),
+
+    path("wallet", stocks.views.wallet, name="wallet"),
 ]

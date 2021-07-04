@@ -52,9 +52,18 @@ label{
     width: 100%;
 }
 
+.db-results {
+    margin: 0 auto 6px;
+    max-width: 432px;
+}
+
 @media (max-width: 992px) {
     .default-margin-bg {
         margin: 36px 0;
+    }
+
+    .db-results {
+        margin: 12px auto 0;
     }
 }
 

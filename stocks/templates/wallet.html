@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ user }}{% endblock %}
+{% load static %}
+{% block content%}
+<div>
+    <h1 class="s3 p-12 light txt-center m-b-24">Carteira</h1>
+    <div class="db-results p-card shadow p-24">
+        <p class="s9 str blue m-b-0">Nome da Ação</p>
+        <p class="s9 light-gray m-0">Número de Cotas</p>
+    </div>
+</div>
+    <a class="btn shadow light" href="/logout">Sair</a>
+{% endblock %}

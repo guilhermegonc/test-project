@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     "forms",
     "tic_tac_toe",
     "smart_home",
-    "menu"
+    "menu",
+    "stocks",
 ]
 
 MIDDLEWARE = [

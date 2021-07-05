@@ -48,5 +48,5 @@ def register_profit(quantity, value, transaction_date):
     return profit
 
 def get_wallet(user):
-    stocks = UserStocks.objects.filter(user=user.data.id)
+    stocks = UserStocks.objects.filter(user=user.data.id).order_by('code')
     return [s for s in stocks if s.quantity > 0]

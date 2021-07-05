@@ -2,12 +2,16 @@
 {% block title %}{{ user }}{% endblock %}
 {% load static %}
 {% block content%}
-<div>
+<div class="half-view fl-l">
     <h1 class="s3 p-12 light txt-center m-b-24">Carteira</h1>
+    {% for s in stocks %}
     <div class="db-results p-card shadow p-24">
-        <p class="s9 str blue m-b-0">Nome da Ação</p>
-        <p class="s9 light-gray m-0">Número de Cotas</p>
+        <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
+        <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.wighted_average_cost }}</p>
     </div>
+    {% endfor %}
 </div>
-    <a class="btn shadow light" href="/logout">Sair</a>
+<div class="half-view fl-r">
+    <h1 class="s3 p-12 light txt-center m-b-24">Recomendações</h1>
+</div>
 {% endblock %}

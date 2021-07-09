@@ -7,7 +7,7 @@
     {% for s in stocks %}
     <div class="db-results p-card shadow p-24">
         <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
-        <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.wighted_average_cost }}</p>
+        <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.weighted_average_cost }}</p>
     </div>
     {% endfor %}
 </div>

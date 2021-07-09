@@ -12,6 +12,14 @@
     {% endfor %}
 </div>
 <div class="half-view fl-r">
-    <h1 class="s3 p-12 light txt-center m-b-24">Recomendações</h1>
+    <h2 class="s3 txt-center m-b-24 light">Novo contato:</h2>
+    <form id="rd-int-form" class="form-group" action='/update-wallet' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="input-btn" type="submit" value="Converter" class="btn shadow btn-full">
+    </form>
 </div>
+<script>
+    document.getElementById("input-btn").addEventListener("click", greeting);
+</script>
 {% endblock %}

@@ -2,23 +2,22 @@ from .models import UserStocksTransactions
 from .models import UserStocks
 from .models import TransactionProfit
 
+import sys
+
 
 def update_transactions(user, transaction_type, code, quantity, value, transaction_date):
-    transaction = UserStocksTransactions(type=transaction_type, 
-                                        user=user.data.id,
-                                        code=code,
-                                        quantity=quantity,
-                                        value=value,
-                                        transaction_date=transaction_date)
-    update_wallet(user, code, transaction_type, value, quantity)
-    transaction.save()
-    return transaction
+    new_transaction = UserStocksTransactions(action=transaction_type, user=user, 
+    code=code, quantity=quantity, value=value, transaction_date=transaction_date)    
+
+    update_wallet(user, code, transaction_type, value, quantity, transaction_date)
+    new_transaction.save()
+    return new_transaction
 
 def update_wallet(user, code, transaction_type, value, quantity, transaction_date):
-    if not UserStocks.objects.filter(user=user.data.id, code=code).exists():
+    if not UserStocks.objects.filter(user=user, code=code).exists():
         create_user_stock(user, code)
 
-    stock = UserStocks.objects.get(user=user.data.id, code=code)
+    stock = UserStocks.objects.get(user=user, code=code)
     stock.quantity += quantity
 
     if transaction_type == 'buy':
@@ -37,8 +36,8 @@ def update_wallet(user, code, transaction_type, value, quantity, transaction_dat
     return stock
 
 def create_user_stock(user, code):
-    stock = UserStocks(user=user.data.id, code=code,
-                        quantity=0, weighted_average_cost=0)
+    stock = UserStocks(user=user, code=code,
+                        quantity=0, weighted_average_cost=0) 
     stock.save()
     return stock
 
@@ -48,5 +47,5 @@ def register_profit(quantity, value, transaction_date):
     return profit
 
 def get_wallet(user):
-    stocks = UserStocks.objects.filter(user=user.data.id).order_by('code')
+    stocks = UserStocks.objects.filter(user=user).order_by('code')
     return [s for s in stocks if s.quantity > 0]

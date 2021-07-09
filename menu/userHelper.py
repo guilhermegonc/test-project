@@ -19,3 +19,12 @@ def get_user(request):
 
 def find(auth0_user):
     return Users.objects.filter(auth0_id=auth0_user['user_id']).exists()
+
+def get_user_object(request):
+    user = request.user
+    authorized_user = get_auth0_user(user.email)
+    if not find(authorized_user):
+        return
+    user = Users.objects.get(auth0_id=authorized_user['user_id'])
+    return user
+

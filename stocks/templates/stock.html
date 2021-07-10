@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block Title %}Editar ações{% endblock %}
+
+{% load static %}
+{% block extra-js %}
+    <script src="{% static 'stock-actions.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="m-a w-300">
+    <h1 class="s3 p-12 light txt-center">{{ stock.code }}</h1>
+    <p class="s8 p-12 token light txt-center m-b-24">{{ stock.quantity }} cotas - R$ {{ stock.weighted_average_cost  }}</p>
+
+    <form id="stock" class="form-group-compact" action='/update-wallet' method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="input-btn" type="submit" value="Vender cotas" class="btn shadow btn-full">
+    </form>
+    <a class="btn shadow light m-b-24" href="/wallet">Voltar</a>
+</div>
+<script>
+    populateField('{{ stock.code  }}');
+</script>
+{% endblock %}

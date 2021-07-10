@@ -5,10 +5,11 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
-from .stocksHelper import get_wallet, update_transactions
+from .stocksHelper import get_wallet, update_transactions, get_stock
 from .forms import StockForm
 
 from datetime import date
+
 
 @login_required
 def wallet(request):
@@ -29,7 +30,17 @@ def update_wallet(request):
 
         if form.is_valid():
             code = form.cleaned_data['code']
+            action = form.cleaned_data['action']
             units = form.cleaned_data['quantity']
             value = form.cleaned_data['unit_price']
-            update_transactions(user, 'buy', code, units, value, date.today())
+
+            update_transactions(user, action, code, units, value, date.today())
     return HttpResponseRedirect('/wallet')
+
+@login_required
+def view_stock(request, stock_code):
+    user = get_user_object(request)
+    stock = get_stock(user, stock_code.upper())
+    form = StockForm()
+    payload = {'form': form, 'stock': stock}
+    return render(request, 'stock.html', payload)

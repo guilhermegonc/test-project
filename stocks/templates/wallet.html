@@ -1,18 +1,26 @@
 {% extends "base.html" %}
 {% block title %}{{ user }}{% endblock %}
+
 {% load static %}
+{% block extra-js %}
+    <script src="{% static 'stock-actions.js' %}"></script>
+{% endblock %}
+
 {% block content%}
 <div class="half-view fl-l">
     <h1 class="s3 p-12 light txt-center m-b-24">Carteira</h1>
     {% for s in stocks %}
     <div class="db-results p-card shadow p-24">
-        <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
-        <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.weighted_average_cost }}</p>
+        <a class="card-btn" href="s/{{ s.code  }}">
+            <i class="material-icons menu-icon fl-r blue">edit</i>
+            <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
+            <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.weighted_average_cost }}</p>    
+        </a>
     </div>
     {% endfor %}
 </div>
 <div class="half-view fl-r">
-    <h2 class="s3 txt-center m-b-24 light">Novo contato:</h2>
+    <h2 class="s3 txt-center m-b-24 light">Comprar cotas:</h2>
     <form id="rd-int-form" class="form-group" action='/update-wallet' method="post">
         {% csrf_token %}
         {{ form }}
@@ -20,6 +28,6 @@
     </form>
 </div>
 <script>
-    document.getElementById("input-btn").addEventListener("click", greeting);
+    classifyTransaction('buy');
 </script>
 {% endblock %}

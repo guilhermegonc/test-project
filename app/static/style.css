@@ -57,6 +57,11 @@ label{
     max-width: 432px;
 }
 
+.db-results>a {
+    text-decoration: none;
+}
+
+
 @media (max-width: 992px) {
     .default-margin-bg {
         margin: 36px 0;

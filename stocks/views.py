@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
 from .stocksHelper import get_wallet, update_transactions, get_stock
-from .recomendationHelper import get_momentum
+# from .recomendationHelper import get_momentum
 
 from .forms import StockForm
 
@@ -42,7 +42,7 @@ def update_wallet(request):
 def recomendations(request):
     return render(request, 'recomendation.html')
 
-@login_required
-def get_recomendations(request, dt):
-    recomendation = get_momentum(end_date=dt)
-    return JsonResponse(recomendation)
+# @login_required
+# def get_recomendations(request, dt):
+#     recomendation = get_momentum(end_date=dt)
+#     return JsonResponse(recomendation)

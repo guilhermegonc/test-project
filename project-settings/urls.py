@@ -49,6 +49,6 @@ urlpatterns = [
     path('wallet', stocks.views.wallet, name='wallet'),
     path('update-wallet', stocks.views.update_wallet, name='wallet_update'),
     path('recomendations', stocks.views.recomendations, name='recomendations'),
-    path('recomendations/<str:dt>', stocks.views.get_recomendations, name='recomendations'),  
+    # path('recomendations/<str:dt>', stocks.views.get_recomendations, name='recomendations'),  
 
 ]

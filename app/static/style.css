@@ -285,7 +285,6 @@ input[type="checkbox" i] {
 /* Layout */
 .half-view {
     width: 50%;
-    /* margin: auto; */
     min-width: 300px;
 }
 

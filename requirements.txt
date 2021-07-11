@@ -7,3 +7,7 @@ social-auth-app-django
 python-jose
 python-dotenv
 django-decouple
+yahooquery
+dateutil
+pandas
+numpy

@@ -46,5 +46,4 @@ urlpatterns = [
 
     path("wallet", stocks.views.wallet, name="wallet"),
     path("update-wallet", stocks.views.update_wallet, name="wallet_update"),
-    path("s/<str:stock_code>", stocks.views.view_stock, name="stock details"),
 ]

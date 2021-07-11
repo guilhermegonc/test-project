@@ -7,27 +7,39 @@
 {% endblock %}
 
 {% block content%}
-<div class="half-view fl-l">
+<div class="m-a">
     <h1 class="s3 p-12 light txt-center m-b-24">Carteira</h1>
+    <div id="new-purchase" class="db-results p-card shadow m-b-24 p-24">
+        <div class="card-btn">
+            <i class="material-icons menu-icon fl-r dark">add</i>
+            <p class="s9 str dark m-b-0">Adicionar nova ação ou cotas</p>
+            <p class="s9 light-gray m-0">Clique para adicionar</p>    
+        </div>
+    </div>
     {% for s in stocks %}
-    <div class="db-results p-card shadow p-24">
-        <a class="card-btn" href="s/{{ s.code  }}">
+    <div id="{{ s.code  }}"class="db-results p-card shadow p-24">
+        <div class="card-btn" href="s/{{ s.code  }}">
             <i class="material-icons menu-icon fl-r blue">edit</i>
             <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
             <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.weighted_average_cost }}</p>    
-        </a>
+        </div>
     </div>
     {% endfor %}
 </div>
-<div class="half-view fl-r">
-    <h2 class="s3 txt-center m-b-24 light">Comprar cotas:</h2>
-    <form id="rd-int-form" class="form-group" action='/update-wallet' method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input id="input-btn" type="submit" value="Converter" class="btn shadow btn-full">
-    </form>
-</div>
 <script>
-    classifyTransaction('buy');
+    const token = `{% csrf_token %}`
+    const forms = `{{ form }}`
+    
+    document.querySelector('#new-purchase')
+    .addEventListener("click", function() {
+        addBuyingContent(token, forms)
+    });
+    
+    '{% for s in stocks %}'
+        document.querySelector('#{{ s.code  }}')
+        .addEventListener("click", function() {
+            addSellingContent(token, forms, '{{ s.code  }}')
+        });
+    '{% endfor %}'
 </script>
 {% endblock %}

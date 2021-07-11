@@ -15,7 +15,6 @@ from datetime import date
 def wallet(request):
     user = get_user(request)
     stocks = get_wallet(user.data.id)
-
     form = StockForm()
 
     payload = {'user': user.auth0_name, 'stocks': stocks, 'form': form}
@@ -36,11 +35,3 @@ def update_wallet(request):
 
             update_transactions(user, action, code, units, value, date.today())
     return HttpResponseRedirect('/wallet')
-
-@login_required
-def view_stock(request, stock_code):
-    user = get_user_object(request)
-    stock = get_stock(user, stock_code.upper())
-    form = StockForm()
-    payload = {'form': form, 'stock': stock}
-    return render(request, 'stock.html', payload)

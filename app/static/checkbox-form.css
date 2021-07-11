@@ -6,7 +6,11 @@ input[type="checkbox"] {
 label[for="id_privacy_politics"], 
 label[for="id_communication_consent"], 
 label[for="id_terms_of_use"]{
+    display: inherit;
+    color: white;
     position: relative;
     left: 42px;
     top: 30px;
+    font-size: 17px;
+    font-family: sans-serif;
 }

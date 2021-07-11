@@ -3,6 +3,7 @@
 {% block extra-css %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'checkbox-form.css' %}">
+<script src="{% static 'custom-form.js' %}"></script>
 {% endblock %}
 
 {% block Title %}Formulário Integrado{% endblock %}
@@ -29,6 +30,6 @@
     {% endfor %}
 </div>
 <script>
-    document.getElementById("input-btn").addEventListener("click", greeting);
+    document.getElementById("input-btn").addEventListener("click", greetingSubmission);
 </script>
 {% endblock %}

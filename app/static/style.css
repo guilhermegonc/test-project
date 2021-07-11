@@ -7,7 +7,7 @@ input, select {
     font-size: 21px;
     height: 60px;
     border-radius: 4px;
-    border: none;
+    border: 1px #ddd solid;
     margin: 6px 0 12px;
     padding: 0 12px;
     width: calc(100% - 26px);
@@ -20,12 +20,7 @@ input[type="submit"] {
 }
 
 label{
-    text-transform: uppercase;
-    font-family: sans-serif;
-    font-size: 12px;
-    font-weight: 900;
-    color: white;
-
+    display: none;
 }
 
 .min-scroll {
@@ -61,6 +56,23 @@ label{
     text-decoration: none;
 }
 
+.modal-bg {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background-color: #5b798e87;
+}
+
+.modal {
+    margin: 120px auto;
+    width: 300px;
+    padding: 24px;
+    border-radius: 4px;
+    background-color: white;
+}
 
 @media (max-width: 992px) {
     .default-margin-bg {
@@ -86,6 +98,7 @@ label{
     margin-left: auto;
     margin-right: auto;
     width: 300px;
+    border: 0px;
 }
 
 .btn.danger {
@@ -336,8 +349,10 @@ input[type="checkbox" i] {
     margin: 0;
 }
 
-.dropdown-content a:hover{
+.dropdown-content a:hover {
     background-color:#ddd;
 }
 
-
+.hidden {
+    display: none;
+}

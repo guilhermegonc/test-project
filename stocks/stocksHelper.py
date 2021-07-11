@@ -3,30 +3,30 @@ from .models import UserStocks
 from .models import TransactionProfit
 
 
-def update_transactions(user, action, code, quantity, value, transaction_date):
+def update_transactions(user, action, code, quantity, value, dt):
     transaction = UserStocksTransactions(action=action, user=user, 
-    code=code, quantity=quantity, value=value, transaction_date=transaction_date)    
-    update_wallet(user, transaction, code, quantity, value)
-    new_transaction.save()
-    return new_transaction
+    code=code, quantity=quantity, value=value, transaction_date=dt)    
+    transaction.save()
+    update_wallet(user, transaction)
+    return transaction
 
-def update_wallet(user, transaction, code, quantity, value):
-    if not UserStocks.objects.filter(user=user, code=code).exists():
-        create_user_stock(user, code)
+def update_wallet(user, transaction):
+    if not UserStocks.objects.filter(user=user, code=transaction.code).exists():
+        create_user_stock(user, transaction.code)
 
-    stock = UserStocks.objects.get(user=user, code=code)
+    stock = UserStocks.objects.get(user=user, code=transaction.code)
 
     if transaction.action == 'buy':
         new_value = ((stock.quantity * stock.weighted_average_cost) + \
-            (quantity * value)) / (stock.quantity + quantity)
+            (transaction.quantity * transaction.value)) / (stock.quantity + transaction.quantity)
         stock.weighted_average_cost = new_value
     
     if transaction.action == 'sell':
-        profit = value - stock.weighted_average_cost
-        register_profit(transaction, quantity, profit)
-        quantity *= -1
+        profit = transaction.value - stock.weighted_average_cost
+        register_profit(transaction, profit)
+        transaction.quantity *= -1
 
-    stock.quantity += quantity
+    stock.quantity += transaction.quantity
     
     if stock.quantity < 0:
         raise ValueError('Insuficient Stocks')
@@ -40,9 +40,9 @@ def create_user_stock(user, code):
     stock.save()
     return stock
 
-def register_profit(transaction, quantity, value):
-    profit = TransactionProfit(transaction=transaction, 
-    quantity=quantity, unitary_profit=value, transaction_date=transaction.transaction_date)
+def register_profit(transaction, profit):
+    profit = TransactionProfit(transaction=transaction, quantity=transaction.quantity, 
+    unitary_profit=profit, transaction_date=transaction.transaction_date)
     profit.save()
     return profit
 

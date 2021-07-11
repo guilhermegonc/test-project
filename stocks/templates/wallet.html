@@ -11,7 +11,7 @@
     <h1 class="s3 p-12 light txt-center m-b-24">Carteira</h1>
     <div id="new-purchase" class="db-results p-card shadow m-b-24 p-24">
         <div class="card-btn">
-            <i class="material-icons menu-icon fl-r dark">add</i>
+            <i class="material-icons menu-icon fl-r dark no-hover">add</i>
             <p class="s9 str dark m-b-0">Adicionar nova ação ou cotas</p>
             <p class="s9 light-gray m-0">Clique para adicionar</p>    
         </div>
@@ -19,7 +19,7 @@
     {% for s in stocks %}
     <div id="{{ s.code  }}"class="db-results p-card shadow p-24">
         <div class="card-btn" href="s/{{ s.code  }}">
-            <i class="material-icons menu-icon fl-r blue">edit</i>
+            <i class="material-icons menu-icon fl-r blue no-hover">edit</i>
             <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
             <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.weighted_average_cost }}</p>    
         </div>

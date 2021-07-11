@@ -21,8 +21,10 @@ urlpatterns = [
     path("tictactoe", tic_tac_toe.views.tic_tac_toe, name="tic-tac-toe"),
     
     path("embed-form", forms.views.embed_form, name="embed-form"),
+    
     path("custom-form", forms.views.custom_form, name="custom-form"),
     path("populate-personas", forms.views.populate_personas, name="populate-personas"),
+    path("delete-persona/<int:persona_id>", forms.views.delete_persona, name="delete-persona"),
         
     path("login", auth0.views.login, name="login"),
     path("logout", auth0.views.logout),

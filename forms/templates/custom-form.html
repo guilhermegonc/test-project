@@ -23,13 +23,18 @@
 <div class="half-view fl-r">
     <h2 class="s3 txt-center m-b-24 light">Nomes recentes</h2>
     {% for r in db_results %}
-    <div class="db-results p-card shadow p-24">
-        <p class="s9 str blue m-b-0">{{r.name}}</p>
+    <a id="a-{{ r.id }}" href="delete-persona/{{ r.id }}" class="db-results p-card shadow p-24">
+        <i class="material-icons menu-icon fl-r dark no-hover">delete</i>
+        <p id="p-{{ r.id }}" class="s9 str blue m-b-0">{{r.name}}</p>
         <p class="s9 light-gray m-0">{{r.email}}</p>
-    </div>
+    </a>
     {% endfor %}
 </div>
 <script>
-    document.getElementById("input-btn").addEventListener("click", greetingSubmission);
+    document.querySelector("#input-btn").addEventListener("click", greetingSubmission);
+    '{% for r in db_results %}'
+        document.querySelector("#a-{{ r.id }}").addEventListener("mouseover", function() {handleText('{{ r.id}}')});
+        document.querySelector("#a-{{ r.id }}").addEventListener("mouseout", function() {handleText('{{ r.id}}', '{{ r.name }}')});
+'{% endfor %}'
 </script>
 {% endblock %}

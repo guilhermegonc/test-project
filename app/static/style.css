@@ -56,6 +56,11 @@ label{
     text-decoration: none;
 }
 
+a.db-results {
+    display:block;
+    text-decoration: none;
+}
+
 .modal-bg {
     z-index: 1;
     position: fixed;
@@ -160,6 +165,10 @@ form .btn {
 
 .menu-btn:hover, .menu-icon:hover {
     background-color:rgba(0,0,0,0.15);
+}
+
+.no-hover:hover {
+    background: none;
 }
 
 .btn.light {

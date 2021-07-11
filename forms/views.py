@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
+from .personasHelper import find_persona
 from .models import Personas
 from .forms import BasicForm
 
@@ -32,4 +33,10 @@ def populate_personas(request):
             new_input = Personas(name=name, email=email, long_number=random_big_number)
             new_input.save()
             
+    return HttpResponseRedirect('/custom-form')
+
+
+def delete_persona(request, persona_id):
+    persona = find_persona(persona_id)
+    persona.delete()
     return HttpResponseRedirect('/custom-form')

@@ -1,11 +1,14 @@
 import os
 import requests
 import json
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
+from .personasHelper import list_personas
 from .personasHelper import find_persona
+
 from .models import Personas
 from .forms import BasicForm
 
@@ -16,9 +19,9 @@ def embed_form(request):
 
 def custom_form(request):
     form = BasicForm()
-    names = Personas.objects.filter().order_by('-id')[:10]
-
-    return render(request, 'custom-form.html', {'form': form, 'db_results': names})
+    names = list_personas()
+    payload = {'form': form, 'db_results': names}
+    return render(request, 'custom-form.html', payload)
 
 
 def populate_personas(request):
@@ -28,9 +31,9 @@ def populate_personas(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
-            random_big_number = form.cleaned_data['random_big_number']
+            number = form.cleaned_data['random_big_number']
             
-            new_input = Personas(name=name, email=email, long_number=random_big_number)
+            new_input = Personas(name=name, email=email, long_number=number)
             new_input.save()
             
     return HttpResponseRedirect('/custom-form')

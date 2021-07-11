@@ -33,7 +33,7 @@ def populate_personas(request):
             email = form.cleaned_data['email']
             number = form.cleaned_data['random_big_number']
             
-            new_input = Personas(name=name, email=email, long_number=number)
+            new_input = Personas(name=name,email=email, long_number=number)
             new_input.save()
             
     return HttpResponseRedirect('/custom-form')

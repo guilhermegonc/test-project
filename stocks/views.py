@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
 from .stocksHelper import get_wallet, update_transactions, get_stock
-# from .recomendationHelper import get_momentum
 
 from .forms import StockForm
 

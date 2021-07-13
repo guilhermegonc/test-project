@@ -5,13 +5,13 @@ let rounds = 0
 const createGame = () => {
     const mainDiv = document.querySelector('#game')    
 
-    createTitle(mainDiv)
+    createGameTitle(mainDiv)
     createBoard(mainDiv)
     addResetButton(mainDiv)
     addReturnButton(mainDiv)
 }
 
-const createTitle = mainDiv => {
+const createGameTitle = mainDiv => {
     const scoreInfo = document.createElement('h1')
     
     scoreInfo.id = 'game-title'

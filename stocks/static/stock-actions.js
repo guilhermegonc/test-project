@@ -14,6 +14,7 @@ const createForm = (token, forms, content, code=null) => {
     formInput.innerHTML = token
     formInput.innerHTML += forms
 
+
     content.appendChild(formInput)
     code == null ? classifyTransaction('buy') : lockStockCode(code)
     createSubmissionBtn(formInput)

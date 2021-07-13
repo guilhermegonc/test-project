@@ -11,7 +11,6 @@ from .stocksHelper import get_wallet, update_transactions, get_stock
 
 from .forms import StockForm
 
-
 @login_required
 def wallet(request):
     user = get_user(request)
@@ -40,8 +39,3 @@ def update_wallet(request):
 @login_required
 def recomendations(request):
     return render(request, 'recomendation.html')
-
-# @login_required
-# def get_recomendations(request, dt):
-#     recomendation = get_momentum(end_date=dt)
-#     return JsonResponse(recomendation)

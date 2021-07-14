@@ -7,4 +7,5 @@ social-auth-app-django
 python-jose
 python-dotenv
 django-decouple
-yahooquery
+yfinance
+pandas

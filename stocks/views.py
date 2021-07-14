@@ -7,10 +7,10 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
+from .recomendationHelper import gui
 from .stocksHelper import get_wallet, update_transactions, get_stock
 
 from .forms import StockForm
-import yahooquery
 
 @login_required
 def wallet(request):
@@ -39,4 +39,5 @@ def update_wallet(request):
 
 @login_required
 def recomendations(request):
+    a = gui()
     return render(request, 'recomendation.html')

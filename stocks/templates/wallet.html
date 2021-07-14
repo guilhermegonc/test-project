@@ -9,6 +9,7 @@
 {% block content%}
 <div class="m-a">
     <h1 class="s3 p-12 light txt-center m-b-24">Carteira</h1>
+    <p id="info"></p>
     <div id="new-purchase" class="db-results p-card shadow m-b-24 p-24">
         <div class="card-btn">
             <i class="material-icons menu-icon fl-r dark no-hover">add</i>
@@ -29,7 +30,12 @@
 <script>
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    
+
+    const parag = document.querySelector('#info')
+
+    let walletValue = 0
+    let walletSize = 0
+
     document.querySelector('#new-purchase')
     .addEventListener("click", function() {
         addBuyingContent(token, forms)
@@ -40,6 +46,10 @@
         .addEventListener("click", function() {
             addSellingContent(token, forms, '{{ s.code  }}')
         });
+        walletValue += {{s.weighted_average_cost}}
+        walletSize += 1
     '{% endfor %}'
+
+    parag.innerText = 'R$: 'walletValue + ' - ' walletSize 'Empresas'
 </script>
 {% endblock %}

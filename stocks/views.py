@@ -10,6 +10,7 @@ from menu.userHelper import get_user, get_user_object
 from .stocksHelper import get_wallet, update_transactions, get_stock
 
 from .forms import StockForm
+import yahooquery
 
 @login_required
 def wallet(request):

@@ -47,4 +47,3 @@ const addSellingContent = (token, forms, code) => {
     createTitle(modal, `Vender cotas\n${code}`)
     createForm(token, forms, modal, code)
 }
-

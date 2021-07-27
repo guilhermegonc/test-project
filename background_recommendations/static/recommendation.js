@@ -1,9 +1,10 @@
 const getRecomendation = async() => {
     addFeedback()
-    let uri = `/recomendations/a`
+    let uri = `/recomendations/2021-07-15`
     let response = await fetch(uri)
     responseDetails = await response.json()
     removeFeedback()
+    console.log(responseDetails)
     return responseDetails
 }
 

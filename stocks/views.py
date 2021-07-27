@@ -1,16 +1,13 @@
-from enum import auto
-from datetime import date
-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
-from .recomendationHelper import gui
-from .stocksHelper import get_wallet, update_transactions, get_stock
-
+from .stocksHelper import get_wallet, update_transactions
 from .forms import StockForm
+
+from datetime import date
+
 
 @login_required
 def wallet(request):
@@ -37,7 +34,3 @@ def update_wallet(request):
             update_transactions(user, action, code, units, value, date.today())
     return HttpResponseRedirect('/wallet')
 
-@login_required
-def recomendations(request):
-    a = gui()
-    return render(request, 'recomendation.html')

@@ -1,5 +1,4 @@
 from django.db import models
-
 from menu.models import Users
 
 
@@ -13,7 +12,7 @@ class Accounts(models.Model):
 class Account_Users(models.Model):
     class Meta:
         db_table = 'account_users'
-    account = models.ForeignKey('Accounts', on_delete=models.CASCADE, primary_key = True)
+    account = models.ForeignKey('Accounts', on_delete=models.CASCADE, primary_key=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)

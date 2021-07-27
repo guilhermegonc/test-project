@@ -1,5 +1,4 @@
 from django.db import models
-
 from menu.models import Users
 
 
@@ -34,3 +33,4 @@ class TransactionProfit(models.Model):
     transaction_date = models.DateTimeField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
+

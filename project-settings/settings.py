@@ -16,7 +16,7 @@ DB_HOST = config('DB_HOST')
 DB_USER = config('DB_USER')
 DB_PASSWORD = config('DB_PASSWORD')
 
-REDIS = config('REDIS')
+# REDIS = config('REDIS')
 
 # Application definition
 INSTALLED_APPS = [
@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     "smart_home",
     "menu",
     "stocks",
-    "background_recommendations"
+    # "background_recommendations"
 ]
 
 MIDDLEWARE = [
@@ -117,12 +117,12 @@ USE_L10N = True
 USE_TZ = True
 
 # Celery Configuration Options
-CELERY_BROKER_URL = REDIS
-CELERY_TIMEZONE = "Australia/Tasmania"
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
+# CELERY_BROKER_URL = REDIS
+# CELERY_TIMEZONE = "Australia/Tasmania"
+# CELERY_TASK_TRACK_STARTED = True
+# CELERY_TASK_TIME_LIMIT = 30 * 60
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"

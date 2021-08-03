@@ -9,4 +9,3 @@ python-dotenv
 requests
 social-auth-app-django
 yfinance
-celery

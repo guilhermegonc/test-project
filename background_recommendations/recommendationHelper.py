@@ -1,4 +1,3 @@
-from datetime import datetime
 from .models import StockRecommendations
 from .models import IbovespaCompanies
 

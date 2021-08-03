@@ -49,6 +49,5 @@ urlpatterns = [
 
     path('wallet', stocks.views.wallet, name='wallet'),
     path('update-wallet', stocks.views.update_wallet, name='wallet_update'),
-    path('recommendations', background_recommendations.views.recommendations, name='recomendations'),
-    path('recommendations/update-momentum', background_recommendations.views.get_recommendations, name='update-momentum'),
+    path('recommendations', background_recommendations.views.recommendations, name='recomendations')
 ]

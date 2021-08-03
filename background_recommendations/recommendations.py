@@ -4,18 +4,24 @@ from datetime import datetime, date
 from dateutil.relativedelta import *
 
 
-from .recommendationHelper import filter_companies
-from .recommendationHelper import update_companies
+from background_recommendations.recommendationHelper import filter_companies
+from background_recommendations.recommendationHelper import update_companies
 
 
 import sys
+import time
+
+def testit():
+    time.sleep(5)
+    print('Foi!')
+    sys.stdout.flush()
+    return
 
 def get_momentum(step=6, size=15):
     end_date=datetime.today().strftime('%Y-%m-10')
     ibov = get_companies()
     start_date = get_reference_date(end_date, step)
     prices = retrieve_results(ibov, start_date)
-    return
     recommendation = df_dict(prices, size)
     update_companies(recommendation, end_date)
     return recommendation
@@ -77,3 +83,5 @@ def df_dict(df, limit):
     df = df.reset_index()
     df = df.rename({'index': 'code'}, axis=1)
     return df.to_dict(orient='records')
+
+testit()

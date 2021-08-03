@@ -1,12 +1,10 @@
+from __future__ import unicode_literals
+
 from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
 
 
 @login_required
 def recommendations(request):
     return render(request, 'recomendations.html')
-
-@login_required
-def get_recommendations(request):
-    return HttpResponseRedirect('/wallet')

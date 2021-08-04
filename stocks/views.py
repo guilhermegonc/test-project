@@ -33,4 +33,3 @@ def update_wallet(request):
 
             update_transactions(user, action, code, units, value, date.today())
     return HttpResponseRedirect('/wallet')
-

@@ -48,6 +48,5 @@ urlpatterns = [
     path('populate-microcontroller', smart_home.views.populate_microcontroller, name='populate-microcontroller'),
 
     path('wallet', stocks.views.wallet, name='wallet'),
-    path('update-wallet', stocks.views.update_wallet, name='wallet_update'),
-    # path('recommendations', background_recommendations.views.recommendations, name='recomendations')
+    path('update-wallet', stocks.views.update_wallet, name='wallet_update')
 ]

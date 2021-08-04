@@ -135,4 +135,4 @@ staticfiles
 .DS_Store
 
 # Settings
-project_settings/settings.py
+project-settings/settings.py

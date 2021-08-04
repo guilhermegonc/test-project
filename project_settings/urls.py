@@ -8,7 +8,7 @@ import tic_tac_toe.views
 import smart_home.views
 import menu.views
 import stocks.views
-import background_recommendations.views
+# import background_recommendations.views
 
 
 admin.autodiscover()
@@ -49,5 +49,5 @@ urlpatterns = [
 
     path('wallet', stocks.views.wallet, name='wallet'),
     path('update-wallet', stocks.views.update_wallet, name='wallet_update'),
-    path('recommendations', background_recommendations.views.recommendations, name='recomendations')
+    # path('recommendations', background_recommendations.views.recommendations, name='recomendations')
 ]

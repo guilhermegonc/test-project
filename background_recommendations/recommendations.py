@@ -83,6 +83,3 @@ def df_dict(df, limit):
     df = df.reset_index()
     df = df.rename({'index': 'code'}, axis=1)
     return df.to_dict(orient='records')
-
-
-testit()

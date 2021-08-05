@@ -31,7 +31,8 @@ INSTALLED_APPS = [
     "tic_tac_toe",
     "smart_home",
     "menu",
-    "stocks"
+    "stocks",
+    "background_recommendations"
 ]
 
 MIDDLEWARE = [

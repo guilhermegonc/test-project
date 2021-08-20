@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
+from background_recommendations.recommendationHelper import get_recommendations
 from .stocksHelper import get_wallet, update_transactions
 from .forms import StockForm
 
@@ -17,6 +18,7 @@ def wallet(request):
 
     payload = {'user': user.auth0_name, 'stocks': stocks, 'form': form}
     return render(request, 'wallet.html', payload)
+
 
 @login_required
 def update_wallet(request):
@@ -33,3 +35,10 @@ def update_wallet(request):
 
             update_transactions(user, action, code, units, value, date.today())
     return HttpResponseRedirect('/wallet')
+
+
+@login_required
+def recommendations(request):
+    stocks = get_recommendations()
+    payload = {'stocks': stocks}
+    return render(request, 'recommendations.html', payload)

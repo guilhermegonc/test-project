@@ -28,13 +28,14 @@
         </div>
     </div>
     {% endfor %}
+    <a class="btn shadow light m-b-12" href="/recommendations">Recomendações</a>
+    <a class="btn shadow light" href="/dashboard">Voltar</a>
+
 </div>
 <script>
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-
     const parag = document.querySelector('#info')
-
     let walletValue = 0
     let walletSize = 0
 

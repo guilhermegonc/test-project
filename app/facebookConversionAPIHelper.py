@@ -1,4 +1,5 @@
 import requests
+import json
 import time
 import os
 
@@ -7,7 +8,7 @@ def fb_view_content(request):
     pixel_id = os.environ.get('FACEBOOK_PIXEL_ID')
     token = os.environ.get('FACEBOOK_TOKEN')
     url = f'https://graph.facebook.com/{api_version}/{pixel_id}/events?access_token={token}'
-    
+
     ip = request.META.get('REMOTE_ADDR')
     agent = request.headers['User-Agent']
     payload = {
@@ -23,7 +24,8 @@ def fb_view_content(request):
             }
         ]
     }
-    r = requests.post(url, params=payload)
-    return
-
+    payload = json.dumps(payload)
+    headers = {'Content-Type': 'application/json'}
+    response = requests.request("POST", url, headers=headers, data=payload)
+    return response.json()
 

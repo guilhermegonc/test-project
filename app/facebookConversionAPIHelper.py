@@ -14,7 +14,7 @@ def fb_view_content(request):
     payload = {
         "data": [
             {
-                "event_name": "View Content",
+                "event_name": "ViewContent",
                 "event_time": int(time.time()),
                 "action_source": "website",
                 "user_data": {
@@ -23,9 +23,9 @@ def fb_view_content(request):
                 }
             }
         ]
-    }
+    }       
     payload = json.dumps(payload)
     headers = {'Content-Type': 'application/json'}
     response = requests.request("POST", url, headers=headers, data=payload)
+    
     return response.json()
-

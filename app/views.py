@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .facebookConversionAPIHelper import fb_view_content
 
+import sys
 
 def index(request):
     fb_view_content(request)

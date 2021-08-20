@@ -14,7 +14,7 @@ def fb_view_content(request):
         "data": [
             {
                 "event_name": "View Content",
-                "event_time": time.time(),
+                "event_time": int(time.time()),
                 "action_source": "website",
                 "user_data": {
                     "client_ip_address": ip,
@@ -25,3 +25,5 @@ def fb_view_content(request):
     }
     r = requests.post(url, params=payload)
     return
+
+

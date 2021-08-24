@@ -8,7 +8,7 @@ import tic_tac_toe.views
 import smart_home.views
 import menu.views
 import stocks.views
-# import background_recommendations.views
+# import stocks_background.views
 
 
 admin.autodiscover()

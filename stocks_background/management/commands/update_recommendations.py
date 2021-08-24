@@ -3,8 +3,8 @@ import pandas as pd
 from datetime import datetime, date
 from dateutil.relativedelta import *
 from django.core.management.base import BaseCommand, CommandError
-from background_recommendations.recommendationHelper import filter_companies
-from background_recommendations.recommendationHelper import update_companies
+from stocks_background.recommendationHelper import filter_companies
+from stocks_background.recommendationHelper import update_companies
 
 
 class Command(BaseCommand):

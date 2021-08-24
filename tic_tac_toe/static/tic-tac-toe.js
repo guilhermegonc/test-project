@@ -72,7 +72,7 @@ const alreadyMarked = identifier => {
 }
 
 const addMark = piecePosition => {
-    piecePosition.innerText = xNext ? 'x' : 'o'
+    piecePosition.innerText = xNext ? '🍔' : '🍕'
     rounds++
     checkBoard()
 }
@@ -115,7 +115,7 @@ const isBoardFull = () => rounds==9
 
 const congratulate = () => {
     const feedback = document.querySelector('#game-title')
-    const winner = xNext ? 'X' : 'O'
+    const winner = xNext ? '🍔' : '🍕'
 
     feedback.innerText = `${winner} venceu`
     gameOn = false

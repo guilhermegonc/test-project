@@ -9,7 +9,7 @@ from .facebookConversionAPIHelper import fb_view_content
 import sys
 
 def index(request):
-    fb_view_content(request)
+    # fb_view_content(request)
     return render(request, 'index.html')
 
 def handler_404(request, *args, **kwargs):

@@ -4,6 +4,7 @@
 {% load static %}
 {% block extra-js %}
     <script src="{% static 'stock-actions.js' %}"></script>
+    <script src="{% static 'stock-prices.js' %}"></script>
 {% endblock %}
 
 {% block content%}
@@ -20,15 +21,14 @@
         </div>
     </div>
     {% for s in stocks %}
-    <div id="{{ s.code  }}"class="db-results p-card shadow p-24">
-        <div class="card-btn" href="s/{{ s.code  }}">
+    <div class="db-results p-card shadow p-24">
+        <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
             <i class="material-icons menu-icon fl-r blue no-hover">edit</i>
             <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
-            <p class="s9 light-gray m-0">Preço médio de compra: R${{ s.weighted_average_cost }}</p>    
+            <p class="s9 light-gray m-0">R${{ s.weighted_average_cost }} (preço médio)</p>    
         </div>
     </div>
     {% endfor %}
-    <a class="btn shadow light m-b-12" href="/recommendations">Recomendações</a>
     <a class="btn shadow light" href="/dashboard">Voltar</a>
 
 </div>
@@ -45,12 +45,16 @@
     });
     
     '{% for s in stocks %}'
-        document.querySelector('#{{ s.code  }}')
-        .addEventListener("click", function() {
+        var stock = document.querySelector('#{{ s.code  }}')
+        
+        stock.addEventListener("click", function() {
             addSellingContent(token, forms, '{{ s.code  }}')
-        });
+        })
+
         walletValue += {{s.weighted_average_cost}} * {{ s.quantity }}
         walletSize += 1
+
+        let {{ s.code }} = new StockObject(`{{ s.code }}`) 
     '{% endfor %}'
 
     parag.innerText = 'R$: ' + walletValue.toFixed(2) + ' - ' + walletSize + ' Empresas'

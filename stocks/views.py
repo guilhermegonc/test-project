@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
-from background_recommendations.recommendationHelper import get_recommendations
+from stocks_background.recommendationHelper import get_recommendations
 from .stocksHelper import get_wallet, update_transactions
 from .forms import StockForm
 

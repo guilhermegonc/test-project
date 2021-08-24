@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "smart_home",
     "menu",
     "stocks",
-    "background_recommendations"
+    "stocks_background"
 ]
 
 MIDDLEWARE = [
@@ -79,6 +79,7 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},

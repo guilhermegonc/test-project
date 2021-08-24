@@ -10,6 +10,7 @@ def update_transactions(user, action, code, quantity, value, dt):
     update_wallet(user, transaction)
     return transaction
 
+
 def update_wallet(user, transaction):
     if not UserStocks.objects.filter(user=user, code=transaction.code).exists():
         create_user_stock(user, transaction.code)
@@ -34,11 +35,13 @@ def update_wallet(user, transaction):
     stock.save()
     return stock
 
+
 def create_user_stock(user, code):
     stock = UserStocks(user=user, code=code,
                         quantity=0, weighted_average_cost=0) 
     stock.save()
     return stock
+
 
 def register_profit(transaction, profit):
     profit = TransactionProfit(transaction=transaction, quantity=transaction.quantity, 
@@ -46,9 +49,24 @@ def register_profit(transaction, profit):
     profit.save()
     return profit
 
+
 def get_wallet(user):
-    stocks = UserStocks.objects.filter(user=user).order_by('code')
-    return [s for s in stocks if s.quantity > 0]
+    stocks = UserStocks.objects.filter(user=user, quantity__gt=0).order_by('code')
+    return [parse_stock(s) for s in stocks]
+
+
+def parse_stock(data):
+    data.weighted_average_cost = round(data.weighted_average_cost, 2)
+    return data
+
 
 def get_stock(user, code):
     return UserStocks.objects.get(user=user, code=code)
+
+
+def get_companies_in_wallets():
+    stocks = UserStocks.objects.filter(quantity__gt = 0)\
+        .order_by('code')\
+        .distinct('code')\
+        .values('code')
+    return stocks

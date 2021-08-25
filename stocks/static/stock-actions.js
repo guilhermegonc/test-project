@@ -69,7 +69,7 @@ const populateStocks = (stocks, token, forms) => {
     }
 }
 
-const writeSummary = (stocks, date) => {
+const writeSummary = (stocks) => {
     let walletInvestment = 0
     let walletValue = 0
     const parag = document.querySelector('#info')
@@ -77,5 +77,5 @@ const writeSummary = (stocks, date) => {
         walletInvestment += stocks[s].price * stocks[s].quantity
         walletValue += stocks[s].value * stocks[s].quantity
     }
-    parag.innerText = `🛍 R$${walletInvestment.toFixed(2)} | R$${walletValue.toFixed(2)} 🛒\n\n${date}`
+    parag.innerText = `🧾 R$${walletInvestment.toFixed(2)} | R$${walletValue.toFixed(2)} 📊`
 }

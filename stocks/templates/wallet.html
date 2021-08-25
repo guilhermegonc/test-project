@@ -10,7 +10,7 @@
 {% block content%}
 <div class="m-a">
     <div class="txt-center m-b-24 light">
-        <h1 class="s3 p-12 m-b-12">Carteira</h1>
+        <h1 class="s3 p-12 m-b-12">Carteira {{ stock_values.0.reference_date.day }}/{{ stock_values.0.reference_date.month }}/{{ stock_values.0.reference_date.year }}</h1>
         <p id="info" class="s8 p-12 token w-300 m-a"></p>
     </div>
     <div id="new-purchase" class="db-results p-card shadow m-b-24 p-24">
@@ -44,10 +44,9 @@
 
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    const referenceDate = `{{ stock_values.0.reference_date.day }}/{{ stock_values.0.reference_date.month }}/{{ stock_values.0.reference_date.year }}`
 
     createBuyingListener(token, forms)
     populateStocks(stocks, token, forms)
-    writeSummary(stocks, referenceDate)
+    writeSummary(stocks)
 </script>
 {% endblock %}

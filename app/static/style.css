@@ -216,7 +216,7 @@ input[type="checkbox" i] {
 .token {
     color: white;
     font-family: monospace;
-    border-radius: 20px;
+    border-radius: 24px;
     border: solid 1px;
 }
 

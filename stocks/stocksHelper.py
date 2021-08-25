@@ -1,7 +1,9 @@
 from .models import UserStocksTransactions
 from .models import UserStocks
 from .models import TransactionProfit
+from .models import StockValues
 
+import sys
 
 def update_transactions(user, action, code, quantity, value, dt):
     transaction = UserStocksTransactions(action=action, user=user, 
@@ -70,3 +72,9 @@ def get_companies_in_wallets():
         .distinct('code')\
         .values('code')
     return stocks
+
+
+def get_stocks_last_close():
+    last_date = StockValues.objects.order_by('-id').values('reference_date').last()
+    last_date = last_date['reference_date'].strftime('%Y-%m-%d')
+    return StockValues.objects.filter(reference_date=last_date)

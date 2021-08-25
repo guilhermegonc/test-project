@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from menu.userHelper import get_user, get_user_object
 from stocks_background.recommendationHelper import get_recommendations
-from .stocksHelper import get_wallet, update_transactions
+from .stocksHelper import get_wallet, update_transactions, get_stocks_last_close
 from .forms import StockForm
 
 from datetime import date
@@ -14,9 +14,14 @@ from datetime import date
 def wallet(request):
     user = get_user(request)
     stocks = get_wallet(user.data.id)
+    stock_values = get_stocks_last_close()
     form = StockForm()
 
-    payload = {'user': user.auth0_name, 'stocks': stocks, 'form': form}
+    payload = {'user': user.auth0_name, 
+               'stocks': stocks, 
+               'form': form, 
+               'stock_values': stock_values}
+    
     return render(request, 'wallet.html', payload)
 
 

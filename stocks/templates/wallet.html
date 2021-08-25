@@ -3,8 +3,8 @@
 
 {% load static %}
 {% block extra-js %}
-    <script src="{% static 'stock-actions.js' %}"></script>
     <script src="{% static 'stock-prices.js' %}"></script>
+    <script src="{% static 'stock-actions.js' %}"></script>
 {% endblock %}
 
 {% block content%}
@@ -24,39 +24,30 @@
     <div class="db-results p-card shadow p-24">
         <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
             <i class="material-icons menu-icon fl-r blue no-hover">edit</i>
-            <p class="s9 str blue m-b-0">{{ s.code }} ({{ s.quantity }})</p>
-            <p class="s9 light-gray m-0">R${{ s.weighted_average_cost }} (preço médio)</p>    
         </div>
     </div>
     {% endfor %}
     <a class="btn shadow light" href="/dashboard">Voltar</a>
 
 </div>
-<script>
-    const token = `{% csrf_token %}`
-    const forms = `{{ form }}`
-    const parag = document.querySelector('#info')
-    let walletValue = 0
-    let walletSize = 0
-
-    document.querySelector('#new-purchase')
-    .addEventListener("click", function() {
-        addBuyingContent(token, forms)
-    });
-    
+<script>    
+    let stocks = {}
     '{% for s in stocks %}'
-        var stock = document.querySelector('#{{ s.code  }}')
-        
-        stock.addEventListener("click", function() {
-            addSellingContent(token, forms, '{{ s.code  }}')
-        })
-
-        walletValue += {{s.weighted_average_cost}} * {{ s.quantity }}
-        walletSize += 1
-
-        let {{ s.code }} = new StockObject(`{{ s.code }}`) 
+        stocks.{{ s.code }} = {
+            price: {{ s.weighted_average_cost }}, 
+            quantity: {{ s.quantity }}
+        }
+    '{% endfor %}'
+    '{% for sv in stock_values %}'
+        stocks.{{ sv.code }}.value = {{ sv.value }}.toFixed(2)
     '{% endfor %}'
 
-    parag.innerText = 'R$: ' + walletValue.toFixed(2) + ' - ' + walletSize + ' Empresas'
+    const token = `{% csrf_token %}`
+    const forms = `{{ form }}`
+    const referenceDate = `{{ stock_values.0.reference_date.day }}/{{ stock_values.0.reference_date.month }}/{{ stock_values.0.reference_date.year }}`
+
+    createBuyingListener(token, forms)
+    populateStocks(stocks, token, forms)
+    writeSummary(stocks, referenceDate)
 </script>
 {% endblock %}

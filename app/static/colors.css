@@ -15,6 +15,14 @@
     color: rgba(50,72,190,1);
 }
 
+.green {
+    color: rgb(113, 218, 97);
+}
+
+.red {
+    color: rgb(208, 26, 83);
+}
+
 .transparent-gray {
     color: rgba(50, 50, 50, 0.2);
 }

@@ -1,17 +1,19 @@
+from datetime import date
+
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from menu.userHelper import get_user, get_user_object
-from stocks_background.recommendationHelper import get_recommendations
 from .stocksHelper import get_wallet, update_transactions, get_stocks_last_close
 from .forms import StockForm
-
-from datetime import date
+from menu.userHelper import get_user, get_user_object
+from stocks_background.recommendationHelper import get_recommendations
+from app.facebookConversionAPIHelper import fb_view_content
 
 
 @login_required
 def wallet(request):
+    fb_view_content(request)
     user = get_user(request)
     stocks = get_wallet(user.data.id)
     stock_values = get_stocks_last_close()
@@ -44,6 +46,7 @@ def update_wallet(request):
 
 @login_required
 def recommendations(request):
+    fb_view_content(request)
     stocks = get_recommendations()
     payload = {'stocks': stocks}
     return render(request, 'recommendations.html', payload)

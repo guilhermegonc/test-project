@@ -4,12 +4,11 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from .facebookConversionAPIHelper import fb_view_content
+from facebookConversionAPIHelper import fb_view_content
 
-import sys
 
 def index(request):
-    # fb_view_content(request)
+    fb_view_content(request)
     return render(request, 'index.html')
 
 def handler_404(request, *args, **kwargs):

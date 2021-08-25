@@ -1,12 +1,8 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as log_out
 from django.conf import settings
 from urllib.parse import urlencode
 
-
-import json
 
 def login(request):
     user = request.user

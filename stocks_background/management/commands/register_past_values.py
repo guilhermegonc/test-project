@@ -7,11 +7,9 @@ from django.core.management.base import BaseCommand, CommandError
 from stocks.models import StockValues
 from stocks.stocksHelper import get_companies_in_wallets
 
-import sys
 
 class Command(BaseCommand):
     help = 'Update Stock Values'
-
     def handle(self, *args, **options):
         self.get_values()
         return
@@ -31,7 +29,7 @@ class Command(BaseCommand):
     def retrieve_results(self, companies):
         start, end = self.filter_dates()
         try:
-            company_values = yf.download(companies, start='2021-08-23', end='2021-08-24')['Close'].iloc[0]
+            company_values = yf.download(companies, start=start, end=end)['Close'].iloc[0]
             return self.parse_stocks(company_values)
         except:
             pass

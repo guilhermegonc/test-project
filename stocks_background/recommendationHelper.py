@@ -1,5 +1,5 @@
-from .models import StockRecommendations
-from .models import IbovespaCompanies
+from .models import StockRecommendations,\
+                    IbovespaCompanies
 
 
 def filter_companies():
@@ -21,5 +21,4 @@ def update_companies(recommendations, reference_date):
 
 def get_recommendations():
     reference = StockRecommendations.objects.latest('month')
-    recommendations = StockRecommendations.objects.filter(month=reference.month)
-    return recommendations
+    return StockRecommendations.objects.filter(month=reference.month)

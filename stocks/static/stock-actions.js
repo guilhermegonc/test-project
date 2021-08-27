@@ -5,6 +5,12 @@ const createBuyingListener = (token, forms) => {
     })
 }
 
+const addBuyingContent = (token, forms) => {
+    const modal = addModal()
+    createTitle(modal, 'Comprar cotas')
+    createForm(token, forms, modal)
+}
+
 const createSellingListener = (key, token, forms) => {
     var stockDiv = document.querySelector(`#${key}`)
     stockDiv.addEventListener("click", function() {
@@ -12,10 +18,10 @@ const createSellingListener = (key, token, forms) => {
     })
 }
 
-const addBuyingContent = (token, forms) => {
+const addSellingContent = (token, forms, code) => {
     const modal = addModal()
-    createTitle(modal, 'Comprar cotas')
-    createForm(token, forms, modal)
+    createTitle(modal, `Vender cotas\n${code}`)
+    createForm(token, forms, modal, code)
 }
 
 const createForm = (token, forms, content, code=null) => {
@@ -56,12 +62,6 @@ const createSubmissionBtn = inputElement => {
     inputElement.appendChild(submissionBtn)
 }
 
-const addSellingContent = (token, forms, code) => {
-    const modal = addModal()
-    createTitle(modal, `Vender cotas\n${code}`)
-    createForm(token, forms, modal, code)
-}
-
 const populateStocks = (stocks, token, forms) => {
     for (key in stocks) {
         new StockObject(stocks[key], key)
@@ -78,4 +78,21 @@ const writeSummary = (stocks) => {
         walletValue += stocks[s].value * stocks[s].quantity
     }
     parag.innerText = `🧾 R$${walletInvestment.toFixed(2)} | R$${walletValue.toFixed(2)} 📊`
+}
+
+const createRecommendationListener = (stocks) => {
+    document.querySelector('#rec-btn')
+    .addEventListener("click", function() {
+        highlightStocks(stocks)
+    })
+}
+
+const highlightStocks = (stocks) => {
+    for (s in stocks) {
+        let d = document.querySelector(`#${s}`)
+        console.log(stocks)
+        let color = stocks ? 'green' : 'red'
+        d.classList.add(color)
+
+    }
 }

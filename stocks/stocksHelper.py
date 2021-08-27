@@ -1,7 +1,19 @@
-from .models import UserStocksTransactions
-from .models import UserStocks
-from .models import TransactionProfit
-from .models import StockValues
+from .models import UserStocksTransactions,\
+                    UserStocks,\
+                    TransactionProfit,\
+                    StockValues
+
+from stocks_background.recommendationHelper import get_recommendations
+
+
+class EnrichedStock:
+    def __init__(self, code, quantity, price, value, recommended, close_date):
+        self.code = code
+        self.quantity = quantity
+        self.price = price
+        self.value = value
+        self.close_date = close_date,
+        self.recommended = recommended 
 
 
 def update_transactions(user, action, code, quantity, value, dt):
@@ -56,13 +68,18 @@ def get_wallet(user):
     return [parse_stock(s) for s in stocks]
 
 
-def parse_stock(data):
-    data.weighted_average_cost = round(data.weighted_average_cost, 2)
-    return data
-
-
-def get_stock(user, code):
-    return UserStocks.objects.get(user=user, code=code)
+def parse_stock(stock_object):
+    close = get_last_close(stock_object.code)
+    recommendations = get_recommendations()
+    rec = [r.code[:-3] for r in recommendations]
+    return EnrichedStock(
+        code=stock_object.code, 
+        quantity=stock_object.quantity, 
+        price=round(stock_object.weighted_average_cost, 2), 
+        value=close.value,
+        close_date=close.reference_date.strftime('%d/%m/%Y'),
+        recommended=stock_object.code in rec
+    )
 
 
 def get_companies_in_wallets():
@@ -73,7 +90,7 @@ def get_companies_in_wallets():
     return stocks
 
 
-def get_stocks_last_close():
+def get_last_close(stock):
     last_date = StockValues.objects.values('reference_date').last()
     last_date = last_date['reference_date'].strftime('%Y-%m-%d')
-    return StockValues.objects.filter(reference_date=last_date)
+    return StockValues.objects.get(reference_date=last_date, code=stock)

@@ -4,6 +4,7 @@ class StockObject {
         this.price = stockObj.price
         this.quantity = stockObj.quantity
         this.value = stockObj.value
+        this.recommended = stockObj.recommended
         this.htmlCard = document.querySelector(`#${this.code}`)
         this.addInfo()
     }
@@ -38,5 +39,9 @@ class StockObject {
         let color = growth >= 0 ? 'green' : 'red'
         paragraph.innerText = `R$${this.value} (${growth}%)`
         paragraph.classList.add(color, 'str')
+    }
+
+    highlightRecommendation = () => {
+        this.htmlCard.classList.add('green')
     }
 }

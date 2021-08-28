@@ -1,15 +1,18 @@
 {% extends "base.html" %}
-{% block title %}{{ user }}{% endblock %}
+{% block title %}Carteira{% endblock %}
 
 {% load static %}
+{% block extra-css %}
+<link rel="stylesheet" type="text/css" href="{% static 'stock-styles.css' %}">
+{% endblock %}
 {% block extra-js %}
     <script src="{% static 'stock-prices.js' %}"></script>
     <script src="{% static 'stock-actions.js' %}"></script>
 {% endblock %}
 
 {% block content%}
-<div class="m-a">
-    <div class="m-b-24">
+<div class="m-b-24">
+    <div class="m-a half-view fl-l">
         <div class="txt-center m-b-24 light">
             <h1 class="s3 p-12 m-b-12">Carteira {{ stocks.0.close_date.0 }}</h1>
             <p id="info" class="s8 p-12 token w-300 m-a"></p>
@@ -24,20 +27,24 @@
         {% for s in stocks %}
         <div class="db-results p-card shadow p-24">
             <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
-                <i class="material-icons menu-icon fl-r blue no-hover">edit</i>
+                <div class="recommendation-tag"></div>
+                <i class="material-icons menu-icon blue fl-r no-hover">edit</i>
             </div>
         </div>
         {% endfor %}
+    </div>
+    <div class="m-a half-view fl-r">
+        <div id="recommendations" class="m-b-24">
+            <div class="txt-center m-b-24 light rec-fake-margin">
+                <h1 class="s3 p-12 m-b-12">Recomendações</h1>
+            </div>
         </div>
-    <div>
-        <div id="rec-btn" class="btn shadow light m-b-12">Ver recomendações</a>
     </div>
-    <div>
-        <a class="btn shadow light" href="/dashboard">Voltar</a>
-    </div>
-
 </div>
-<script>    
+<div class="fl-l btn-full">
+    <a class="btn shadow light" href="/dashboard">Voltar</a>
+</div>
+<script>
     let stocks = {}
     '{% for s in stocks %}'
         stocks.{{ s.code }} = {
@@ -48,12 +55,19 @@
         }
     '{% endfor %}'
 
+    let recommendations = {}
+    '{% for m in momentum %}'
+        recommendations.{{ m.code }} = {
+            price: {{ m.value }}, 
+            growth: {{ m.growth }},
+        }
+    '{% endfor %}'
+
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-
     createBuyingListener(token, forms)
     populateStocks(stocks, token, forms)
-    writeSummary(stocks)
-    createRecommendationListener(stocks)
+    highlightStocks(stocks)
+    buildRecommendation(stocks, recommendations)
 </script>
 {% endblock %}

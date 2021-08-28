@@ -21,4 +21,10 @@ def update_companies(recommendations, reference_date):
 
 def get_recommendations():
     reference = StockRecommendations.objects.latest('month')
-    return StockRecommendations.objects.filter(month=reference.month)
+    stocks = StockRecommendations.objects.filter(month=reference.month)
+    return [parse_recommendations(s) for s in stocks]
+
+
+def parse_recommendations(stock):
+    stock.code = stock.code[:-3]
+    return stock

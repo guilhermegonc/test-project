@@ -16,12 +16,14 @@ def wallet(request):
     fb_view_content(request)
     user = get_user(request)
     stocks = get_wallet(user.data.id)
+    momentum = get_recommendations()
     form = StockForm()
 
     payload = {
         'user': user.auth0_name, 
         'stocks': stocks,
-        'form': form, 
+        'form': form,
+        'momentum': momentum, 
     }
     
     return render(request, 'wallet.html', payload)

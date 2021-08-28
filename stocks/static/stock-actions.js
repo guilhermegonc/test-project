@@ -34,18 +34,17 @@ const createForm = (token, forms, content, code=null) => {
     formInput.innerHTML = token
     formInput.innerHTML += forms
 
-
     content.appendChild(formInput)
     code == null ? classifyTransaction('buy') : lockStockCode(code)
     createSubmissionBtn(formInput)
 }
 
-const classifyTransaction = (method) => {
+const classifyTransaction = method => {
     hiddenInput = document.querySelector('#id_action')
     hiddenInput.value = method
 }
 
-const lockStockCode = (code) => {
+const lockStockCode = code => {
     codeInput = document.querySelector('#id_code')
     codeInput.value = code
     codeInput.type = 'hidden'
@@ -67,12 +66,14 @@ const populateStocks = (stocks, token, forms) => {
         new StockObject(stocks[key], key)
         createSellingListener(key, token, forms)
     }
+    writeSummary(stocks)   
 }
 
-const writeSummary = (stocks) => {
+const writeSummary = stocks => {
     let walletInvestment = 0
     let walletValue = 0
     const parag = document.querySelector('#info')
+
     for (s in stocks) {
         walletInvestment += stocks[s].price * stocks[s].quantity
         walletValue += stocks[s].value * stocks[s].quantity
@@ -80,19 +81,84 @@ const writeSummary = (stocks) => {
     parag.innerText = `🧾 R$${walletInvestment.toFixed(2)} | R$${walletValue.toFixed(2)} 📊`
 }
 
-const createRecommendationListener = (stocks) => {
-    document.querySelector('#rec-btn')
-    .addEventListener("click", function() {
-        highlightStocks(stocks)
-    })
+const highlightStocks = stocks => {
+    for (s in stocks) {
+        let tag = document.querySelector(`#${s} div`)
+        let recommendation = stocks[s].recommended ? 'buy' : 'sell'
+        tag.classList.add(recommendation)
+    }    
 }
 
-const highlightStocks = (stocks) => {
-    for (s in stocks) {
-        let d = document.querySelector(`#${s}`)
-        console.log(stocks)
-        let color = stocks ? 'green' : 'red'
-        d.classList.add(color)
+const buildRecommendation = (wallet, recommendation) => {
+    let inWallet = Object.keys(wallet)
+    let inRecommendations = Object.keys(recommendation)
+    let toRecommend = inRecommendations.filter(s => inWallet.indexOf(s) === -1)
+    toRecommend.length > 0 ? listStocks(toRecommend, recommendation) : returnEmpty()
+}
 
+const listStocks = (toAdd, stockData) => {
+    let recDiv = document.querySelector('#recommendations')
+    for (let s of toAdd) {
+        let stockDiv = document.createElement('div')
+        stockDiv.id = `rec-${s}`
+        stockDiv.classList.add('db-results', 'p-card', 'shadow', 'p-24')
+        createStockRecCard(stockDiv, s, stockData[s])
+        recDiv.appendChild(stockDiv)
     }
+}
+
+const createStockRecCard = (parentDiv, code, stock) => {
+    let card = document.createElement('div')
+    card.classList.add('card-btn')
+
+    parentDiv.appendChild(card)
+    addCardDetails(card, code, stock)
+}
+
+const addCardDetails = (parentDiv, code, stock) => {
+    let pCode = document.createElement('p')
+    pCode.classList.add('s9', 'str', 'blue', 'm-b-0')
+    pCode.innerText = `${code}`
+    parentDiv.appendChild(pCode)
+    
+    let price = document.createElement('p')
+    price.classList.add('s9', 'light-gray', 'm-0')
+    price.innerText = `R$${stock.price.toFixed(2)}`
+    parentDiv.appendChild(price)
+
+    let growth = document.createElement ('p')
+    let growthValue = (stock.growth * 100).toFixed(2)
+    let color = growthValue > 0 ? 'green' : 'red'
+    growth.classList.add('s9', 'light-gray', 'm-0', 'str', color)
+    growth.innerText = `${growthValue}% (6 meses)`
+    parentDiv.appendChild(growth)
+}
+
+const returnEmpty = () => {
+    let toAppend = document.querySelector('#recommendations')
+    let emptyDiv = document.createElement('div')
+    emptyDiv.classList.add('db-results', 'p-card-empty', 'm-b-24', 'p-24')
+    
+    toAppend.appendChild(emptyDiv)
+    createEmptyCard(emptyDiv)
+}
+
+const createEmptyCard = parentDiv => {
+    let emptyCard = document.createElement('div')
+    emptyCard.classList.add('card-btn')
+
+    parentDiv.appendChild(emptyCard)
+    addCardEmptyDetails(emptyCard)
+}
+
+const addCardEmptyDetails = cardDiv => {
+    let pText = document.createElement('p')
+    pText.classList.add('s9', 'str', 'light', 'm-b-0')
+    pText.innerText = 'Sem novas recomendações'
+    cardDiv.appendChild(pText)
+
+    let pSub = document.createElement('p')
+    pSub.classList.add('s9', 'light', 'm-0')
+    pSub.innerText = 'Lista atualizada no dia 10 de cada mês'
+    cardDiv.appendChild(pSub)
 }

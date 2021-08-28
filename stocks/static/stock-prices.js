@@ -13,7 +13,7 @@ class StockObject {
         let balance = (this.value * this.quantity).toFixed(2)
         let pDiv = document.createElement('p')
         pDiv.classList.add('s9', 'str', 'blue', 'm-b-0')
-        pDiv.innerText = `${this.code} - R$${balance}`
+        pDiv.innerText = `${this.code} - R$${balance} (${this.quantity})`
         this.htmlCard.appendChild(pDiv)
         this.addPrice()
     }
@@ -21,7 +21,7 @@ class StockObject {
     addPrice = () => {
         let pDiv = document.createElement('p')
         pDiv.classList.add('s9', 'light-gray', 'm-0')
-        pDiv.innerText = `R$${this.price} (${this.quantity} un.)`
+        pDiv.innerText = `R$${this.price} un.`
         this.htmlCard.appendChild(pDiv)
         this.addValue()        
     }

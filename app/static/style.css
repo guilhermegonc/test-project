@@ -85,7 +85,7 @@ a.db-results {
     }
 
     .db-results {
-        margin: 12px auto 0;
+        margin: 12px 6px 0;
     }
 }
 
@@ -197,6 +197,13 @@ form .btn {
 
 .p-card:hover {
     background-color: #ddd;
+}
+
+.p-card-empty {
+    background-color: transparent;
+    border: solid 1px white;
+    padding: 12px;
+    border-radius: 3px;
 }
 
 input[type="checkbox" i] {

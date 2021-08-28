@@ -71,7 +71,7 @@ def get_wallet(user):
 def parse_stock(stock_object):
     close = get_last_close(stock_object.code)
     recommendations = get_recommendations()
-    rec = [r.code[:-3] for r in recommendations]
+    rec = [r.code for r in recommendations] + ['IVVB11']
     return EnrichedStock(
         code=stock_object.code, 
         quantity=stock_object.quantity, 

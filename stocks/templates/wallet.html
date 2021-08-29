@@ -11,21 +11,28 @@
 {% endblock %}
 
 {% block content%}
+<div class="featured p-24 light">
+    <h1 class="s3 m-0">Carteira</h1>
+    <div id="value" class="fl-l p-12">
+        <p class="s9 pre-label">Valor da carteira:</p>
+        <h3 class="s6"></h3>
+    </div>
+    <div id="price" class="fl-l p-12">
+        <p class="s9 pre-label">Preço da carteira:</p>
+        <h3 class="s6"></h3>
+    </div>
+    <div id="date" class="fl-l p-12">
+        <p class="s9 pre-label">Atualizado em:</p>
+        <h3 class="s6">{{ stocks.0.close_date.0 }}</h3>
+    </div>
+</div>
 <div class="m-b-24">
     <div class="m-a half-view fl-l">
-        <div class="txt-center m-b-24 light">
-            <h1 class="s3 p-12 m-b-12">Carteira {{ stocks.0.close_date.0 }}</h1>
-            <p id="info" class="s8 p-12 token w-300 m-a"></p>
-        </div>
-        <div id="new-purchase" class="db-results p-card shadow m-b-24 p-24">
-            <div class="card-btn">
-                <i class="material-icons menu-icon fl-r dark no-hover">add</i>
-                <p class="s9 str dark m-b-0">Adicionar nova ação ou cotas</p>
-                <p class="s9 light-gray m-0">Clique para adicionar</p>
-            </div>
+        <div class="m-b-24 light">
+            <h2 class="s6 p-12 m-b-12">Ações</h1>
         </div>
         {% for s in stocks %}
-        <div class="db-results p-card shadow p-24">
+        <div class="db-results p-card shadow p-24 m-12">
             <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
                 <div class="recommendation-tag"></div>
                 <i class="material-icons menu-icon blue fl-r no-hover">edit</i>
@@ -35,8 +42,8 @@
     </div>
     <div class="m-a half-view fl-r">
         <div id="recommendations" class="m-b-24">
-            <div class="txt-center m-b-24 light rec-fake-margin">
-                <h1 class="s3 p-12 m-b-12">Recomendações</h1>
+            <div class="m-b-24 light">
+                <h2 class="s6 p-12 m-b-12">Recomendações</h1>
             </div>
         </div>
     </div>
@@ -54,7 +61,6 @@
             recommended: `{{ s.recommended }}` == "True"
         }
     '{% endfor %}'
-
     let recommendations = {}
     '{% for m in momentum %}'
         recommendations.{{ m.code }} = {
@@ -62,12 +68,8 @@
             growth: {{ m.growth }},
         }
     '{% endfor %}'
-
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    createBuyingListener(token, forms)
-    populateStocks(stocks, token, forms)
-    highlightStocks(stocks)
-    buildRecommendation(stocks, recommendations)
+    setStocks(stocks, token, forms, recommendations)
 </script>
 {% endblock %}

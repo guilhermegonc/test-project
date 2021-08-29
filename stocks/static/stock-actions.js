@@ -1,14 +1,14 @@
-const createBuyingListener = (token, forms) => {
-    document.querySelector('#new-purchase')
-    .addEventListener("click", function() {
-        addBuyingContent(token, forms)
-    })
+const setStocks = (stocks, token, forms, recommendation) => {
+    populateStocks(stocks, token, forms)
+    consolidateWalletResults(stocks)
+    buildRecommendation(stocks, recommendation)
 }
 
-const addBuyingContent = (token, forms) => {
-    const modal = addModal()
-    createTitle(modal, 'Comprar cotas')
-    createForm(token, forms, modal)
+const populateStocks = (stocks, token, forms) => {
+    for (s in stocks) {
+        new StockObject(stocks[s], s)
+        createSellingListener(s, token, forms)
+    }
 }
 
 const createSellingListener = (key, token, forms) => {
@@ -61,32 +61,19 @@ const createSubmissionBtn = inputElement => {
     inputElement.appendChild(submissionBtn)
 }
 
-const populateStocks = (stocks, token, forms) => {
-    for (key in stocks) {
-        new StockObject(stocks[key], key)
-        createSellingListener(key, token, forms)
-    }
-    writeSummary(stocks)   
-}
+const consolidateWalletResults = stocks => {
+    const wPrice = document.querySelector('#price h3')
+    const wValue = document.querySelector('#value h3')
 
-const writeSummary = stocks => {
     let walletInvestment = 0
     let walletValue = 0
-    const parag = document.querySelector('#info')
-
     for (s in stocks) {
         walletInvestment += stocks[s].price * stocks[s].quantity
         walletValue += stocks[s].value * stocks[s].quantity
     }
-    parag.innerText = `🧾 R$${walletInvestment.toFixed(2)} | R$${walletValue.toFixed(2)} 📊`
-}
 
-const highlightStocks = stocks => {
-    for (s in stocks) {
-        let tag = document.querySelector(`#${s} div`)
-        let recommendation = stocks[s].recommended ? 'buy' : 'sell'
-        tag.classList.add(recommendation)
-    }    
+    wPrice.innerText = `R$${walletInvestment.toFixed(2)}`
+    wValue.innerText = `R$${walletValue.toFixed(2)}`
 }
 
 const buildRecommendation = (wallet, recommendation) => {
@@ -94,6 +81,7 @@ const buildRecommendation = (wallet, recommendation) => {
     let inRecommendations = Object.keys(recommendation)
     let toRecommend = inRecommendations.filter(s => inWallet.indexOf(s) === -1)
     toRecommend.length > 0 ? listStocks(toRecommend, recommendation) : returnEmpty()
+    createBuyingListener(token, forms)
 }
 
 const listStocks = (toAdd, stockData) => {
@@ -101,7 +89,7 @@ const listStocks = (toAdd, stockData) => {
     for (let s of toAdd) {
         let stockDiv = document.createElement('div')
         stockDiv.id = `rec-${s}`
-        stockDiv.classList.add('db-results', 'p-card', 'shadow', 'p-24')
+        stockDiv.classList.add('db-results', 'p-card', 'shadow', 'p-24', 'm-12')
         createStockRecCard(stockDiv, s, stockData[s])
         recDiv.appendChild(stockDiv)
     }
@@ -110,7 +98,6 @@ const listStocks = (toAdd, stockData) => {
 const createStockRecCard = (parentDiv, code, stock) => {
     let card = document.createElement('div')
     card.classList.add('card-btn')
-
     parentDiv.appendChild(card)
     addCardDetails(card, code, stock)
 }
@@ -137,7 +124,7 @@ const addCardDetails = (parentDiv, code, stock) => {
 const returnEmpty = () => {
     let toAppend = document.querySelector('#recommendations')
     let emptyDiv = document.createElement('div')
-    emptyDiv.classList.add('db-results', 'p-card-empty', 'm-b-24', 'p-24')
+    emptyDiv.classList.add('db-results', 'p-card-empty', 'p-24', 'm-12')
     
     toAppend.appendChild(emptyDiv)
     createEmptyCard(emptyDiv)
@@ -161,4 +148,42 @@ const addCardEmptyDetails = cardDiv => {
     pSub.classList.add('s9', 'light', 'm-0')
     pSub.innerText = 'Lista atualizada no dia 10 de cada mês'
     cardDiv.appendChild(pSub)
+}
+
+const createBuyingListener = (token, forms) => {
+    let recDiv = document.querySelector('#recommendations')
+    
+    let purchaseDiv = document.createElement('div')
+    purchaseDiv.classList.add('db-results', 'shadow', 'p-card', 'p-24', 'm-12')
+
+    let cardDiv = document.createElement('div')
+    cardDiv.classList.add('card-btn')
+
+    let pTitle = document.createElement('p')
+    pTitle.classList.add('s9', 'str', 'm-b-0')
+    pTitle.innerText = 'Adicionar novas cotas ou ações'
+    cardDiv.appendChild(pTitle)
+
+    let pLine = document.createElement('p')
+    pLine.classList.add('s9', 'm-0', 'light-gray')
+    pLine.innerText = '-'
+    cardDiv.appendChild(pLine)
+
+    let pSubline = document.createElement('p')
+    pSubline.classList.add('s9', 'm-0', 'light-gray')
+    pSubline.innerText = 'Clique aqui para adicionar'
+    cardDiv.appendChild(pSubline)
+
+    purchaseDiv.appendChild(cardDiv)
+    recDiv.appendChild(purchaseDiv)
+
+    purchaseDiv.addEventListener("click", function() {
+        addBuyingContent(token, forms)
+    })
+}
+
+const addBuyingContent = (token, forms) => {
+    const modal = addModal()
+    createTitle(modal, 'Comprar cotas')
+    createForm(token, forms, modal)
 }

@@ -7,6 +7,7 @@ class StockObject {
         this.recommended = stockObj.recommended
         this.htmlCard = document.querySelector(`#${this.code}`)
         this.addInfo()
+        this.highlightRecommendation()
     }
 
     addInfo = () => {
@@ -42,6 +43,8 @@ class StockObject {
     }
 
     highlightRecommendation = () => {
-        this.htmlCard.classList.add('green')
+        let recClass = this.recommended === true ? 'buy' : 'sell'
+        let recDiv = document.querySelector(`#${this.code} div`)
+        recDiv.classList.add(recClass)
     }
 }

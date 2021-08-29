@@ -227,6 +227,10 @@ input[type="checkbox" i] {
     border: solid 1px;
 }
 
+span.token {
+    padding: 0 24px;
+}
+
 .lateral-scroll {
     overflow: auto;
     white-space: nowrap;

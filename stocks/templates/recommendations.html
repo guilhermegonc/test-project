@@ -2,22 +2,35 @@
 {% block title %}Momentum{% endblock %}
 
 {% load static %}
+{% block extra-js %}
+    <script src="{% static 'stock-actions.js' %}"></script>
+    <script src="{% static 'balance-stocks.js' %}"></script>
+{% endblock %}
 
 {% block content%}
-<div class="m-a">
+<div class="m-b-24">
     <div class="txt-center m-b-24 light">
         <h1 class="s3 p-12 m-b-12">Momentum</h1>
-        <p id="info" class="s8 p-12 token w-300 m-a">Ref: {{ stocks.0.month }}</p>
+        <p id="info" class="s8 p-12 token w-300 m-a">Atualizado em: {{ stocks.0.month.day }}/{{ stocks.0.month.month }}/{{ stocks.0.month.year }}</p>
     </div>
-    {% for s in stocks %}
-    <div id="{{ s.code  }}"class="db-results p-card shadow p-24">
-        <div class="card-btn" href="s/{{ s.code  }}">
-            <p class="s9 str blue m-b-0">{{ s.code }}</p>
-            <p class="s9 light-gray m-0">Crescimento: {{ s.growth }}x</p>    
-            <p class="s9 light-gray m-0">Preço: R${{ s.value }}</p>    
-        </div>
+    <div>
+        <form id="balance" action="" class="db-results m-b-24">
+            <input type="number" name="Orçamento">
+            <div class="btn shadow light">Distribuir valores</div>
+        </form>
     </div>
-    {% endfor %}
+    <div id="recommendations"></div>
 </div>
 <a class="btn shadow light" href="/dashboard">Voltar</a>
+<script>
+    let rec = {}
+    '{% for s in stocks %}'
+        rec.{{ s.code }} = {
+            growth: {{ s.growth }},
+            price: {{ s.value }}
+        }
+    '{% endfor %}'
+    listStocks(Object.keys(rec), rec)
+    balanceWallet(rec)
+</script>
 {% endblock %}

@@ -27,10 +27,10 @@
 <div class="m-b-24">
     <div class="m-a half-view fl-l">
         <div class="m-b-24 light">
-            <h2 class="s6 p-12 m-b-12">Ações</h1>
+            <h2 class="s6 db-results m-b-12">Ações</h1>
         </div>
         {% for s in stocks %}
-        <div class="db-results p-card shadow p-24 m-12">
+        <div class="db-results p-card shadow p-24 m-l-a m-r-a m-b-12">
             <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
                 <div class="recommendation-tag"></div>
                 <i class="material-icons menu-icon blue fl-r no-hover">edit</i>
@@ -41,7 +41,7 @@
     <div class="m-a half-view fl-r">
         <div id="recommendations" class="m-b-24">
             <div class="m-b-24 light">
-                <h2 class="s6 p-12 m-b-12">Recomendações</h1>
+                <h2 class="s6 db-results m-b-12">Recomendações</h1>
             </div>
         </div>
     </div>

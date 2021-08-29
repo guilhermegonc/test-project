@@ -89,7 +89,7 @@ const listStocks = (toAdd, stockData) => {
     for (let s of toAdd) {
         let stockDiv = document.createElement('div')
         stockDiv.id = `rec-${s}`
-        stockDiv.classList.add('db-results', 'p-card', 'shadow', 'p-24', 'm-12')
+        stockDiv.classList.add('db-results', 'p-card', 'shadow', 'p-24', 'm-l-a', 'm-r-a', 'm-b-12')
         createStockRecCard(stockDiv, s, stockData[s])
         recDiv.appendChild(stockDiv)
     }
@@ -124,7 +124,7 @@ const addCardDetails = (parentDiv, code, stock) => {
 const returnEmpty = () => {
     let toAppend = document.querySelector('#recommendations')
     let emptyDiv = document.createElement('div')
-    emptyDiv.classList.add('db-results', 'p-card-empty', 'p-24', 'm-12')
+    emptyDiv.classList.add('db-results', 'p-card-empty', 'p-24', 'm-l-a', 'm-r-a', 'm-b-12')
     
     toAppend.appendChild(emptyDiv)
     createEmptyCard(emptyDiv)
@@ -154,7 +154,7 @@ const createBuyingListener = (token, forms) => {
     let recDiv = document.querySelector('#recommendations')
     
     let purchaseDiv = document.createElement('div')
-    purchaseDiv.classList.add('db-results', 'shadow', 'p-card', 'p-24', 'm-12')
+    purchaseDiv.classList.add('db-results', 'shadow', 'p-card', 'p-24', 'm-l-a', 'm-r-a', 'm-b-12')
 
     let cardDiv = document.createElement('div')
     cardDiv.classList.add('card-btn')

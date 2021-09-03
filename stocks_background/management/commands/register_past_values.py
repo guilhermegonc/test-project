@@ -28,11 +28,11 @@ class Command(BaseCommand):
 
     def retrieve_results(self, companies):
         start, end = self.filter_dates()
-        try:
-            company_values = yf.download(companies, start=start, end=end)['Close'].iloc[0]
-            return self.parse_stocks(company_values)
-        except:
-            pass
+        company_values = yf.download(companies, start=start, end=end)['Close'].reset_index()
+        company_values = self.parse_yf(company_values, start)
+        if company_values.shape[0] > 0:
+            return self.parse_stocks(company_values, start)
+        pass
 
 
     def filter_dates(self):
@@ -40,18 +40,21 @@ class Command(BaseCommand):
         start = end - relativedelta(days=1)
         return start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')
 
+    def parse_yf(self, stock_data, reference_date):
+        stock_data = stock_data.loc[stock_data['Date'] == reference_date].dropna()
+        return stock_data.drop('Date', axis=1).iloc[0]
 
-    def parse_stocks(self, companies):
+    def parse_stocks(self, companies, reference_date):
         companies = companies.to_dict()
-        results = [self.save_stock_value(c, v) for c, v in companies.items()]
+        results = [self.save_stock_value(c, v, reference_date) for c, v in companies.items()]
         return results
 
     
-    def save_stock_value(self, company, value):
+    def save_stock_value(self, company, value, dt):
         stock = StockValues(
             code = company[:-3],
             value = value,
-            reference_date = date.today() - relativedelta(days=1)
+            reference_date = dt
         )
         stock.save()
         return stock

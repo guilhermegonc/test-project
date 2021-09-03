@@ -1,3 +1,5 @@
+from stocks_background import views
+import stocks_background
 from django.urls import path, include
 from django.contrib import admin
 from django.conf.urls import handler404
@@ -8,7 +10,7 @@ import tic_tac_toe.views
 import smart_home.views
 import menu.views
 import stocks.views
-# import stocks_background.views
+import stocks_background.views
 
 
 admin.autodiscover()

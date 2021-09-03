@@ -45,6 +45,6 @@ class StockValues(models.Model):
     id = models.AutoField(primary_key=True)
     code = models.CharField(max_length=31)
     value = models.FloatField()
-    reference_date = models.DateField(auto_now_add=True)
+    reference_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)

@@ -1,6 +1,7 @@
 import yfinance as yf
 import pandas as pd
 from datetime import datetime, date
+
 from dateutil.relativedelta import *
 from django.core.management.base import BaseCommand, CommandError
 from stocks_background.recommendationHelper import filter_companies

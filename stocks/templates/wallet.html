@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Carteira{% endblock %}
+{% include "chart-js/chart.html"%}
 
 {% load static %}
 {% block extra-css %}
 <link rel="stylesheet" type="text/css" href="{% static 'stock-styles.css' %}">
 {% endblock %}
 {% block extra-js %}
-    <script src="{% static 'stock-prices.js' %}"></script>
+    <script src="{% static 'list-stocks.js' %}"></script>
     <script src="{% static 'stock-actions.js' %}"></script>
+    <script src="{% static 'stock-obj.js' %}"></script>
+    <script src="{% static 'wallet-overview.js' %}"></script>
+    <script src="{% static 'recommendation-list.js' %}"></script>
+    <script src="{% static 'recommendation-actions.js' %}"></script>
+    <script src="{% static 'balance-stocks.js' %}"></script>
+
 {% endblock %}
 
 {% block content%}
 <div class="featured p-24 light">
+    <!-- <canvas id="productsChart" width="300" height="300"></canvas> -->
     <h1 class="s3 m-0">Carteira
         <span class="s8 token blue tag-title">{{ stocks.0.close_date.0 }}</span>
     </h1>
@@ -25,15 +33,20 @@
     </div>
 </div>
 <div class="m-b-24">
-    <div class="m-a half-view fl-l">
+    <div id="stocks" class="m-a half-view fl-l">
         <div class="m-b-24 light">
             <h2 class="s6 db-results m-b-12">Ações</h1>
+        </div>
+        <div id="buy-btn" class="db-results shadow p-card p-24 m-l-a m-r-a m-b-12">
+            <div class="card-btn">
+                <p class="s9 str m-0 blue">Adicionar novas cotas ou ações</p>
+                <p class="s9 m-0 light-gray">Clique aqui para adicionar</p>
+            </div>
         </div>
         {% for s in stocks %}
         <div class="db-results p-card shadow p-24 m-l-a m-r-a m-b-12">
             <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
                 <div class="recommendation-tag"></div>
-                <i class="material-icons menu-icon blue fl-r no-hover">edit</i>
             </div>
         </div>
         {% endfor %}
@@ -43,11 +56,17 @@
             <div class="m-b-24 light">
                 <h2 class="s6 db-results m-b-12">Recomendações</h1>
             </div>
+            <div id="balance-btn" class="db-results shadow p-card p-24 m-l-a m-r-a m-b-12">
+                <div class="card-btn">
+                    <p class="s9 str m-0 blue">Simular balanceamento</p>
+                    <p class="s9 m-0 light-gray">Clique aqui para simular</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <div class="fl-l btn-full">
-    <a class="btn shadow light m-b-12" href="/recommendations">Ver momentum</a>
+    <a class="btn shadow light m-b-12" href="/recommendations">Editar recomendações</a>
 </div>
 <div class="fl-l btn-full">
     <a class="btn shadow light" href="/dashboard">Voltar</a>

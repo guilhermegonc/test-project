@@ -11,12 +11,35 @@ class StockObject {
     }
 
     addInfo = () => {
-        let balance = (this.value * this.quantity).toFixed(2)
-        let pDiv = document.createElement('p')
-        pDiv.classList.add('s9', 'str', 'blue', 'm-b-0')
-        pDiv.innerText = `${this.code} - R$${balance} (${this.quantity})`
-        this.htmlCard.appendChild(pDiv)
+        this.addBalance()
+        this.addCode()
         this.addPrice()
+    }
+
+    addBalance = () => {
+        let balance = (this.value * this.quantity).toFixed(2)
+        let pBalance = document.createElement('p')
+        pBalance.classList.add('s9', 'str', 'blue', 'm-0', 'fl-r')
+        pBalance.innerText = `R$${balance} (${this.quantity}) `
+        
+        let icon = this.addEditIcon()
+        pBalance.appendChild(icon)
+        
+        this.htmlCard.appendChild(pBalance)
+    }
+
+    addEditIcon = () => {
+        let icon = document.createElement('i')
+        icon.classList.add('material-icons', 'menu-icon')
+        icon.innerText = 'edit'
+        return icon
+    }
+
+    addCode = () => {
+        let pCode = document.createElement('p')
+        pCode.classList.add('s9', 'str', 'blue', 'm-0')
+        pCode.innerText = `${this.code}`
+        this.htmlCard.appendChild(pCode)
     }
 
     addPrice = () => {

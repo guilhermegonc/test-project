@@ -4,16 +4,17 @@
 
     top: -24px;
     right: -24px;
-    height: 70px;
+    height: 69px;
     width: 6px;
-    padding-top: 53px;
+    padding-top: 42px;
     border-radius: 2px;
-
-    text-align: center;
-    color: white;
 }
 
-.buy {
+.new-stock {
+    background-color: rgba(50,72,190,1);
+}
+
+.buy, .old-stock {
     background-color: rgb(113, 218, 97);
 }
 

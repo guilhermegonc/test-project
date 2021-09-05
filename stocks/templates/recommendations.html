@@ -2,22 +2,25 @@
 {% block title %}Momentum{% endblock %}
 
 {% load static %}
+{% block extra-css %}
+<link rel="stylesheet" type="text/css" href="{% static 'stock-styles.css' %}">
+{% endblock %}
 {% block extra-js %}
+    <script src="{% static 'list-stocks.js' %}"></script>
     <script src="{% static 'stock-actions.js' %}"></script>
+    <script src="{% static 'stock-obj.js' %}"></script>
+    <script src="{% static 'wallet-overview.js' %}"></script>
+    <script src="{% static 'recommendation-list.js' %}"></script>
     <script src="{% static 'balance-stocks.js' %}"></script>
+
 {% endblock %}
 
 {% block content%}
 <div class="m-b-24">
     <div class="txt-center m-b-24 light">
-        <h1 class="s3 p-12 m-b-12">Momentum</h1>
-        <p id="info" class="s8 p-12 token w-300 m-a">Atualizado em: {{ stocks.0.month.day }}/{{ stocks.0.month.month }}/{{ stocks.0.month.year }}</p>
-    </div>
-    <div>
-        <form id="balance" action="" class="db-results m-b-24">
-            <input type="number" name="Orçamento">
-            <div class="btn shadow light">Distribuir valores</div>
-        </form>
+        <h1 class="s3 m-0 m-b-24">Recomendações</h1>
+        <p class="db-results s8 p-12 token light txt-center m-b-24">Atualizado em: {{ stocks.0.month.day }}/{{ stocks.0.month.month }}/{{ stocks.0.month.year }}</p>
+
     </div>
     <div id="recommendations"></div>
 </div>
@@ -30,7 +33,6 @@
             price: {{ s.value }}
         }
     '{% endfor %}'
-    listStocks(Object.keys(rec), rec)
-    balanceWallet(rec)
+    listRecommendationStocks(Object.keys(rec), rec)
 </script>
 {% endblock %}

@@ -28,7 +28,7 @@ const createCustomInput = (parentDiv) => {
 
     let btn = document.createElement('div')
     btn.id = 'balance-form-btn'
-    btn.classList.add('shadow', 'btn', 'light')
+    btn.classList.add('shadow', 'btn')
     btn.innerText = 'Distribuir valores'
     form.appendChild(btn)
 
@@ -39,5 +39,6 @@ const addBalanceInputListener = (recommended) => {
     let btn = document.querySelector('#balance-form-btn')
     btn.addEventListener("click", function() {
         distributeBalance(recommended)
+        close()
     })
 }

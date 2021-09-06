@@ -22,12 +22,13 @@ const addCloseBtn = modal => {
     closeIcon.classList.add('menu-icon')
     closeIcon.classList.add('fl-r')
     closeIcon.innerText = 'close'
-    closeIcon.addEventListener('click', function(){close(modal)})
+    closeIcon.addEventListener('click', function(){close()})
     
     content.appendChild(closeIcon)
 }
 
-const close = modal => {
+const close = () => {
+    let modal = document.querySelector('.modal-bg')
     modal.remove()
 }
 

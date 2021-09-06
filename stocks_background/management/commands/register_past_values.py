@@ -28,11 +28,12 @@ class Command(BaseCommand):
 
     def retrieve_results(self, companies):
         start, end = self.filter_dates()
-        company_values = yf.download(companies, start=start, end=end)['Close'].reset_index()
-        company_values = self.parse_yf(company_values, start)
-        if company_values.shape[0] > 0:
-            return self.parse_stocks(company_values, start)
-        pass
+        try:
+            company_values = yf.download(companies, start=start, end=end)['Close'].reset_index()
+            company_values = self.parse_yf(company_values, start)
+            return self.parse_stocks(company_values, start) if company_values.shape[0] > 0 else None
+        except:
+            return
 
 
     def filter_dates(self):

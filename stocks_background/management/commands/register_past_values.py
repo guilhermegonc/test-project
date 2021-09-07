@@ -1,11 +1,12 @@
-import yfinance as yf
-import pandas as pd
-from datetime import datetime, date
 from dateutil.relativedelta import *
 from django.core.management.base import BaseCommand, CommandError
 
 from stocks.models import StockValues
 from stocks.stocksHelper import get_companies_in_wallets
+
+import yfinance as yf
+import pandas as pd
+from datetime import datetime
 
 
 class Command(BaseCommand):

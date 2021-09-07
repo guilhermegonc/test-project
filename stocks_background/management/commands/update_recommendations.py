@@ -16,7 +16,7 @@ class Command(BaseCommand):
         return
 
 
-    def get_momentum(self, step=6, size=15):
+    def get_momentum(self, step=6, size=20):
         end_date = datetime.today().strftime('%Y-%m-10')
         ibov = self.get_companies()
         start_date = self.get_reference_date(end_date, step)

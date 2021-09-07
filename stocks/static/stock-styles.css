@@ -10,8 +10,20 @@
     border-radius: 2px;
 }
 
-.new-stock {
+.new-stock, .active-stock {
     background-color: rgba(50,72,190,1);
+}
+
+.inactive-stock {
+    background-color: #bbb;
+}
+
+.active-icon {
+    color: rgba(50,72,190,1);
+}
+
+.inactive-icon {
+    color: #bbb;
 }
 
 .buy, .old-stock {

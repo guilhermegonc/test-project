@@ -8,7 +8,7 @@ from .stocksHelper import get_wallet, update_transactions
 from .forms import StockForm
 from app.facebookConversionAPIHelper import fb_view_content
 from menu.userHelper import get_user, get_user_object
-from stocks_background.recommendationHelper import get_recommendations
+from stocks_background.recommendationHelper import get_recommendations,update_status
 
 
 @login_required
@@ -49,6 +49,14 @@ def update_wallet(request):
 @login_required
 def recommendations(request):
     fb_view_content(request)
-    stocks = get_recommendations()
+    stocks = get_recommendations([True, False])
     payload = {'stocks': stocks}
     return render(request, 'recommendations.html', payload)
+
+
+@login_required
+def change_recommendation_status(request):
+    code = request.GET.get('code')
+    status = request.GET.get('status')
+    update_status(code, status)
+    return HttpResponseRedirect('/recommendations')

@@ -6,7 +6,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'stock-styles.css' %}">
 {% endblock %}
 {% block extra-js %}
-    <script src="{% static 'recommendation-list.js' %}"></script>
+    <script src="{% static 'recommendation-actions.js' %}"></script>
+    <script src="{% static 'recommendation-obj.js' %}"></script>
 {% endblock %}
 
 {% block content%}
@@ -20,14 +21,14 @@
 </div>
 <a class="btn shadow light" href="/wallet">Voltar</a>
 <script>
-    let rec = {}
+    let recommendations = {}
     '{% for s in stocks %}'
-        rec.{{ s.code }} = {
+        recommendations.{{ s.code }} = {
             growth: {{ s.growth }},
             active: '{{ s.active }}' === "True",
             price: {{ s.value }}
         }
     '{% endfor %}'
-    listRecommendationStocks(Object.keys(rec), rec, true)
+    setupRecommendations()
 </script>
 {% endblock %}

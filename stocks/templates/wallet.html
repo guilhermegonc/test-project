@@ -7,14 +7,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'stock-styles.css' %}">
 {% endblock %}
 {% block extra-js %}
-    <script src="{% static 'list-stocks.js' %}"></script>
-    <script src="{% static 'stock-actions.js' %}"></script>
-    <script src="{% static 'stock-obj.js' %}"></script>
+    <script src="{% static 'wallet-actions.js' %}"></script>
     <script src="{% static 'wallet-overview.js' %}"></script>
-    <script src="{% static 'recommendation-list.js' %}"></script>
-    <script src="{% static 'recommendation-actions.js' %}"></script>
-    <script src="{% static 'balance-stocks.js' %}"></script>
-
+    <script src="{% static 'stock-obj.js' %}"></script>
+    <script src="{% static 'recommendation-obj.js' %}"></script>
+    <script src="{% static 'transaction-modals.js' %}"></script>
+    <script src="{% static 'balance-modals.js' %}"></script>
+    <script src="{% static 'balance-calculator.js' %}"></script>
 {% endblock %}
 
 {% block content%}
@@ -90,6 +89,6 @@
     '{% endfor %}'
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    setStocks(stocks, token, forms, recommendations)
+    setupWallet()
 </script>
 {% endblock %}

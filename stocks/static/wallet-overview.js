@@ -1,19 +1,22 @@
-const consolidateWalletResults = stocks => {
-    const wPrice = document.querySelector('#price h3')
-    const wValue = document.querySelector('#value h3')
-
-    let walletInvestment = 0
-    let walletValue = 0
-    for (s in stocks) {
-        walletInvestment += stocks[s].price * stocks[s].quantity
-        walletValue += stocks[s].value * stocks[s].quantity
-    }
-
-    wPrice.innerText = `R$${walletInvestment.toFixed(2)}`
-    wValue.innerText = `R$${walletValue.toFixed(2)}`
+const consolidateWalletResults = () => {
+    sumWalletValue()
+    sumWalletPrice()
 }
 
-const buildRecommendation = (wallet, recommendation) => {
-    let inWallet = Object.keys(wallet)
-    listRecommendationStocks(inWallet, recommendation)
+const sumWalletValue = () => {
+    const div = document.querySelector('#value h3')
+    let value = 0
+    for (s in stocks) {
+        value += stocks[s].value * stocks[s].quantity
+    }
+    div.innerText = `R$${value.toFixed(2)}`
+}
+
+const sumWalletPrice = () => {
+    const div = document.querySelector('#price h3')
+    let price = 0
+    for (s in stocks) {
+        price += stocks[s].price * stocks[s].quantity
+    }
+    div.innerText = `R$${price.toFixed(2)}`
 }

@@ -22,7 +22,7 @@ const findClosest = (price, target) => Math.round(target / price)
 
 const showBalance = (code, price, quantity) => {
     let cost = (quantity * price).toFixed(2)
-    let card = document.querySelector(`#balance-${code}`)
+    let card = document.querySelector(`#recommendations #balance-${code}`)
     card.innerText = `R$${cost} (${quantity})`
 }
 

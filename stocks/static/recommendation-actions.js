@@ -3,11 +3,12 @@ const setupRecommendations = () => {
 }
 
 const populateRecommendations = () => {
-    let rec, tag
+    let card
     for (r in recommendations) {
-        rec = new RecommendedObject(recommendations[r], r)
-        tag = rec.stockObj.active ? 'active-stock' : 'inactive-stock'
-        rec.fullfillTag(tag)
-        rec.addStatusControl()
+        card = new StockObject(recommendations[r], r, 'recommendations')
+        card.compareGrowth()
+        card.addStatusLabel()
+        card.addStatusControl()
+        card.addSearchLink()
     }
 }

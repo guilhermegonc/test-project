@@ -42,13 +42,6 @@
                 <p class="s9 m-0 light-gray">Clique aqui para adicionar</p>
             </div>
         </div>
-        {% for s in stocks %}
-        <div class="db-results p-card shadow p-24 m-l-a m-r-a m-b-12">
-            <div id="{{ s.code }}" class="card-btn" href="s/{{ s.code  }}">
-                <div class="recommendation-tag"></div>
-            </div>
-        </div>
-        {% endfor %}
     </div>
     <div class="m-a half-view fl-r">
         <div id="recommendations" class="m-b-24">
@@ -77,14 +70,20 @@
             price: {{ s.price }}, 
             quantity: {{ s.quantity }},
             value: {{ s.value }},
-            recommended: `{{ s.recommended }}` == "True"
+            recommended: `{{ s.recommended }}` == "True",
+            growth: null,
+            origin: 'wallet',
         }
     '{% endfor %}'
     let recommendations = {}
     '{% for m in momentum %}'
         recommendations.{{ m.code }} = {
-            price: {{ m.value }}, 
+            price: {{ m.value }},
+            quantity: null,
+            value: null,
+            recommended: true,
             growth: {{ m.growth }},
+            origin: 'recommendation',
         }
     '{% endfor %}'
     const token = `{% csrf_token %}`

@@ -7,18 +7,26 @@ const setupWallet = () => {
 }
 
 const populateStocks = () => {
+    let card
     for (s in stocks) {
-        new StockObject(stocks[s], s)
+        card = new StockObject(stocks[s], s, 'stocks')
+        card.addValue()
+        card.comparePrice()
+        card.addRecommendedTransaction()
+        card.addTransactionListener('sell')
     }
 }
 
 const populateRecommendations = () => {
-    let rec, tag
+    let card
     let stockCodes = Object.keys(stocks)
     for (r in recommendations) {
-        rec = new RecommendedObject(recommendations[r], r)
-        tag = stockCodes.indexOf(rec.code) === -1 ? 'new-stock' : 'old-stock'
-        rec.fullfillTag(tag)    }
+        card = new StockObject(recommendations[r], r, 'recommendations')
+        card.compareGrowth()
+        card.highlightNotInWallet(stockCodes)
+        card.addTransactionListener('buy')
+
+    }
 }
 
 const createTransactionControl = () => {

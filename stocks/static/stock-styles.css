@@ -10,11 +10,11 @@
     border-radius: 2px;
 }
 
-.new-stock, .active-stock, .active-icon {
+.new-stock, .active-stock {
     background-color: rgba(50,72,190,1);
 }
 
-.inactive-stock, .inactive-icon {
+.inactive-stock {
     background-color: #bbb;
 }
 

@@ -61,7 +61,7 @@ class StockObject {
     }
 
     compareResult = (paragraph) => {
-        let growth = ((this.stockObj.value - this.stockObj.price) / this.stockObj.value * 100).toFixed(2)
+        let growth = this.stockObj.value === 0 ? 0 : ((this.stockObj.value - this.stockObj.price) / this.stockObj.value * 100).toFixed(2)
         let color = growth >= 0 ? 'green' : 'red'
         paragraph.innerText = `R$${this.stockObj.value} (${growth}%)`
         paragraph.classList.add(color, 'str')

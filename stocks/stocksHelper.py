@@ -5,6 +5,7 @@ from .models import UserStocksTransactions,\
 
 from stocks_background.recommendationHelper import get_recommendations
 
+import datetime
 
 class EnrichedStock:
     def __init__(self, code, quantity, price, value, recommended, close_date):
@@ -93,4 +94,7 @@ def get_companies_in_wallets():
 def get_last_close(stock):
     last_date = StockValues.objects.values('reference_date').last()
     last_date = last_date['reference_date'].strftime('%Y-%m-%d')
-    return StockValues.objects.get(reference_date=last_date, code=stock)
+    try:
+        return StockValues.objects.get(reference_date=last_date, code=stock)
+    except: 
+        return StockValues(code=stock, value=0, reference_date=datetime.date.today())

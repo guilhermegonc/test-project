@@ -75,7 +75,7 @@ class StockObject {
 
     addValue = () => {
         const balanceStock = (this.stockObj.quantity * this.stockObj.value).toFixed(2)
-        this.extraData.innerText = `R$${balanceStock} (${this.stockObj.quantity})`
+        this.extraData.innerText = `R$${balanceStock} (${this.stockObj.quantity})\n`
     }
 
     addRecommendedTransaction = () => {

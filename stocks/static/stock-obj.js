@@ -97,17 +97,9 @@ class StockObject {
 
     compareGrowth = () => {
         const growthValue = (this.stockObj.growth * 100).toFixed(2)
-        console.log(growthValue)
         const color = growthValue > 0 ? 'green' : 'red'
-        console.log(color)
         this.relativeData.classList.add('s9', 'light-gray', 'm-0', 'str', color)
         this.relativeData.innerText = `${growthValue}% (6 meses)`
-    }
-
-    highlightNotInWallet = stockCodes => {
-        const inWallet = stockCodes.indexOf(this.code) != -1
-        const colorClass = inWallet ? 'old-stock' : 'new-stock'
-        this.label.classList.add(colorClass)
     }
 
     addStatusLabel = () => {
@@ -129,5 +121,34 @@ class StockObject {
         this.cardCode.innerText += ' 📈'
         this.cardCode.href = `https://www.google.com/search?q=${this.code}`
         this.cardCode.target = 'blank'
+    }
+}
+
+class EmptyCard {
+    constructor (stockObj, code, divID) {
+        this.createEmptyCard()
+    }
+    
+    createEmptyCard = () => {
+        const div = document.querySelector('#recommendations')
+        const card = document.createElement('div')
+        card.classList.add('db-results', 'p-card-empty', 'p-24', 'm-l-a', 'm-r-a', 'm-b-12')
+        div.appendChild(card)
+        this.addTitle(card)
+    }
+
+    addTitle = parentDiv => {
+        const title = document.createElement('p')
+        title.classList.add('s9', 'str', 'light', 'm-0')
+        title.innerText = 'Sem novas recomendações'
+        parentDiv.appendChild(title)
+        this.addParagraph(parentDiv)
+    }
+
+    addParagraph = parentDiv => {
+        const paragraph = document.createElement('p')
+        paragraph.classList.add('s9', 'light', 'm-0')
+        paragraph.innerText = 'Novas recomendações são adicionadas\n no dia 10 de cada mês'
+        parentDiv.appendChild(paragraph)
     }
 }

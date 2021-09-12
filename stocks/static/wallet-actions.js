@@ -18,15 +18,24 @@ const populateStocks = () => {
 }
 
 const populateRecommendations = () => {
+    const recommendationCodes  = Object.keys(recommendations)
+    const newRecommended = recommendationCodes.filter(InWallet)
+    newRecommended.length === 0 ? new EmptyCard() : loopRecommended(newRecommended)
+}
+
+const loopRecommended = recommended => {
     let card
-    let stockCodes = Object.keys(stocks)
-    for (r in recommendations) {
+    for (r in recommended) {
         card = new StockObject(recommendations[r], r, 'recommendations')
         card.compareGrowth()
-        card.highlightNotInWallet(stockCodes)
         card.addTransactionListener('buy')
 
     }
+}
+
+const InWallet = (value) => {
+    let stockCodes = Object.keys(stocks)
+    return stockCodes.indexOf(value) === -1
 }
 
 const createTransactionControl = () => {

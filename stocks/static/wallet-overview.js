@@ -1,22 +1,27 @@
 const consolidateWalletResults = () => {
-    sumWalletValue()
-    sumWalletPrice()
-}
-
-const sumWalletValue = () => {
-    const div = document.querySelector('#value h3')
-    let value = 0
-    for (s in stocks) {
-        value += stocks[s].value * stocks[s].quantity
-    }
-    div.innerText = `R$${value.toFixed(2)}`
+    price = sumWalletPrice()
+    value = sumWalletValue(price)
 }
 
 const sumWalletPrice = () => {
-    const div = document.querySelector('#price h3')
+    const div = document.querySelector('#wallet-cost')
     let price = 0
     for (s in stocks) {
         price += stocks[s].price * stocks[s].quantity
     }
     div.innerText = `R$${price.toFixed(2)}`
+    return price
 }
+
+const sumWalletValue = price => {
+    const div = document.querySelector('#wallet-value')
+    let value = 0
+    for (s in stocks) {
+        value += stocks[s].value * stocks[s].quantity
+    }
+    div.innerText = `R$${value.toFixed(2)}`
+    const color = value >= price ? 'green' : 'red'
+    div.classList.add(color)
+    return value
+}
+

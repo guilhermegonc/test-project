@@ -201,7 +201,7 @@ form .btn {
 
 .p-card-empty {
     background-color: transparent;
-    border: solid 1px white;
+    border: solid 1px #ddd;
     padding: 12px;
     border-radius: 3px;
 }
@@ -313,7 +313,13 @@ span.token {
 
 /* Layout */
 .featured {
-    display: inline-block;
+    min-height: 100px;
+}
+
+@media (max-width: 992px) {
+    .featured {
+        min-height: 48px;
+    }
 }
 
 .half-view {
@@ -364,6 +370,10 @@ span.token {
 
 .dropdown {
     position: relative;
+    display: inline-block;
+}
+
+.row {
     display: inline-block;
 }
 

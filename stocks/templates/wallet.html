@@ -10,49 +10,32 @@
     <script src="{% static 'wallet-actions.js' %}"></script>
     <script src="{% static 'wallet-overview.js' %}"></script>
     <script src="{% static 'stock-obj.js' %}"></script>
-    <script src="{% static 'recommendation-obj.js' %}"></script>
     <script src="{% static 'transaction-modals.js' %}"></script>
     <script src="{% static 'balance-modals.js' %}"></script>
     <script src="{% static 'balance-calculator.js' %}"></script>
 {% endblock %}
 
 {% block content%}
-<div class="featured p-24 light">
-    <!-- <canvas id="productsChart" width="300" height="300"></canvas> -->
-    <h1 class="s3 m-0">Carteira
-        <span class="s8 token blue tag-title">{{ stocks.0.close_date.0 }}</span>
-    </h1>
-    <div id="value" class="fl-l p-12 no-indent">
-        <p class="s8 pre-label">Valor da carteira:</p>
-        <h3 class="s5"></h3>
-    </div>
-    <div id="price" class="fl-l p-12">
-        <p class="s8 pre-label">Preço da carteira:</p>
-        <h3 class="s5"></h3>
-    </div>
+<div id="wallet" class="db-results p-card shadow p-24 m-l-a m-r-a m-b-24">
+    <p id="reference-date" class="s8 str blue fl-r">{{ stocks.0.close_date.0 }}</p>
+    <h1 id="wallet-title" class="s3 blue">Carteira</h1>
+    <p id="wallet-cost" class="s8 light-gray m-0">Custo médio</p>
+    <p id="wallet-value" class="s8">Valor</p>
+    <p id='balance-btn' class="light-gray s8 m-0">Clique para simular balanceamento</p>
 </div>
 <div class="m-b-24">
-    <div id="stocks" class="m-a half-view fl-l">
-        <div class="m-b-24 light">
-            <h2 class="s6 db-results m-b-12">Ações</h1>
-        </div>
-        <div id="buy-btn" class="db-results shadow p-card p-24 m-l-a m-r-a m-b-12">
-            <div class="card-btn">
-                <p class="s9 str m-0 blue">Adicionar novas cotas ou ações</p>
-                <p class="s9 m-0 light-gray">Clique aqui para adicionar</p>
-            </div>
+    <div id="stocks" class="m-b-12">
+    </div>
+    <div id="buy-btn" class="shadow p-card p-24 db-results m-b-24">
+        <div class="card-btn">
+            <p class="s9 str m-0 blue">Adicionar cotas</p>
+            <p class="s9 m-0 light-gray">Clique aqui para adicionar</p>
         </div>
     </div>
-    <div class="m-a half-view fl-r">
+    <div class="m-a">
         <div id="recommendations" class="m-b-24">
             <div class="m-b-24 light">
-                <h2 class="s6 db-results m-b-12">Recomendações</h1>
-            </div>
-            <div id="balance-btn" class="db-results shadow p-card p-24 m-l-a m-r-a m-b-12">
-                <div class="card-btn">
-                    <p class="s9 str m-0 blue">Simular balanceamento</p>
-                    <p class="s9 m-0 light-gray">Clique aqui para simular</p>
-                </div>
+                <h2 class="s6 db-results m-b-12 txt-center">Recomendações</h1>
             </div>
         </div>
     </div>

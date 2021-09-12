@@ -4,10 +4,10 @@ const distributeBalance = () => {
     const target = val / walletLength
     let walletPrice = 0
     
-    for (r in recommendations) {
-        let result = findClosest(recommendations[r].price, target)
-        walletPrice += result * recommendations[r].price
-        showBalance(r, recommendations[r].price, result)
+    for (s in stocks) {
+        let result = findClosest(stocks[s].price, target)
+        walletPrice += result * stocks[s].price
+        showBalance(s, stocks[s].price, result)
     }
 
     writeSummary(walletPrice)
@@ -21,12 +21,17 @@ const getBalance = () => {
 const findClosest = (price, target) => Math.round(target / price)
 
 const showBalance = (code, price, quantity) => {
-    let cost = (quantity * price).toFixed(2)
-    let card = document.querySelector(`#recommendations #balance-${code}`)
-    card.innerText = `R$${cost} (${quantity})`
+    const span = document.createElement('span')
+    const cost = (quantity * price).toFixed(2)
+    const card = document.querySelector(`#stocks #balance-${code}`)
+    card.classList.remove('blue', 'str')
+    card.classList.add('light-gray')
+    span.classList.add('green', 'str')
+    span.innerText = `\nR$${cost} (${quantity})`
+    card.appendChild(span)
 }
 
 const writeSummary = total => {
-    const card = document.querySelector('#balance-btn div p')
-    card.innerText = `Total: R$${total.toFixed(2)}`
+    const title = document.querySelector('#balance-btn')
+    title.innerText = `R$${total.toFixed(2)} - Clique para simular novamente`
 }

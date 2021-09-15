@@ -3,8 +3,22 @@
 
 {% load static %}
 {% block content%}
-    <h1 class="s3 p-12 light txt-center m-b-24">Bem-vindo, <br>{{ user }}</h1>
-    <a class="btn shadow m-b-12" href="/smart-home">Smart Home</a>
-    <a class="btn shadow light m-b-12" href="/wallet">Investimentos</a>
-    <a class="btn shadow light" href="/logout">Sair</a>
+<h1 class="s3 p-12 light txt-center m-b-24">Página inicial</h1>
+<div class="m-b-24">
+    <div class="txt-center m-b-12">
+        <a href="/expenses" class="trigger btn m-12 light shadow">
+            <div>💵</div>
+            <p class="app-label">Gastos</p>
+        </a>
+        <a href="/wallet" class="trigger btn m-12 light shadow">
+            <div class="status">💰</div>
+            <p class="app-label">Investimentos</p>
+        </a>
+        <a href="smart-home" class="trigger btn m-12 light shadow">
+            <div class="status">🏠</div>
+            <p class="app-label">Smart Home</p>
+        </a>
+    </div>
+</div>
+<a class="btn shadow light" href="/logout">Sair</a>
 {% endblock %}

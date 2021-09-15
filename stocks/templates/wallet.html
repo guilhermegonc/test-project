@@ -16,17 +16,17 @@
 {% endblock %}
 
 {% block content%}
-<div id="wallet" class="db-results p-card shadow p-24 m-l-a m-r-a m-b-24">
+<div id="wallet" class="db-results p-card shadow p-24 m-b-24">
     <p id="reference-date" class="s8 str blue fl-r">{{ stocks.0.close_date.0 }}</p>
     <h1 id="wallet-title" class="s3 blue">Carteira</h1>
-    <p id="wallet-cost" class="s8 light-gray m-0">Custo médio</p>
-    <p id="wallet-value" class="s8">Valor</p>
+    <p id="wallet-value" class="s7 m-0">Valor</p>
+    <p id="wallet-cost" class="s8 light-gray">Custo médio</p>
     <p id='balance-btn' class="light-gray s8 m-0">Clique para simular balanceamento</p>
 </div>
 <div class="m-b-24">
     <div id="stocks" class="m-b-12">
     </div>
-    <div id="buy-btn" class="shadow p-card p-24 db-results m-b-24">
+    <div id="buy-btn" class="shadow p-card p-24 db-results m-b-80">
         <div class="card-btn">
             <p class="s9 str m-0 blue">Adicionar cotas</p>
             <p class="s9 m-0 light-gray">Clique aqui para adicionar</p>

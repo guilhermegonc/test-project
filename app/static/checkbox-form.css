@@ -1,4 +1,4 @@
-input[type="checkbox"] {
+input[type="checkbox"], input[type="radio"]{
     height: 30px;
     width: 30px;
 }

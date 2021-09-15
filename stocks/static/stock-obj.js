@@ -15,7 +15,7 @@ class StockObject {
         const stockList = document.querySelector(`#${divID}`)
         const card = document.createElement('div')        
         card.id = `rec-${this.code}`
-        card.classList.add('db-results', 'p-card', 'shadow', 'p-24', 'm-l-a', 'm-r-a', 'm-b-12')
+        card.classList.add('db-results', 'p-card', 'shadow', 'p-24', 'm-b-12')
         stockList.appendChild(card)
         return card
     }

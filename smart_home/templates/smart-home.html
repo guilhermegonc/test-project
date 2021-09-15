@@ -17,7 +17,7 @@
             {% if d.active == True %}
                 <div id="p{{ d.id }}" class="trigger btn m-12 light shadow">
                     <div class="status"></div>
-                    <p class="device-info">{% if d.name == '' %}Sem nome{% else %}{{ d.name }}{% endif %}</p>
+                    <p class="app-label">{% if d.name == '' %}Sem nome{% else %}{{ d.name }}{% endif %}</p>
                 </div>
             {% else %}
                 <a id="empty-{{ m.token }}" class="trigger btn m-12 transparent-gray" href="m/{{ m.token }}/device?pin={{ d.pin }}"><div class="status">+</div></a>            
@@ -25,7 +25,7 @@
             {% endfor %}
             <a id="configs-unset" class="trigger btn m-12 transparent-gray" href="m/{{ m.token }}">
                 <div class="status">🔧</div>
-                <p class="device-info light">Ajustes</p>
+                <p class="app-label light">Ajustes</p>
             </a>
         </div>
     {% endfor %}

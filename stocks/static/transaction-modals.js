@@ -28,9 +28,10 @@ class TransactionModal {
 
     createSubmissionBtn = inputElement => {
         const submissionBtn = document.createElement('input')
+        const btnLabel = this.type == 'buy' ? 'Comprar' : 'Vender'
         submissionBtn.id = 'input-btn'
         submissionBtn.type = 'submit'
-        submissionBtn.value = 'Confirmar'
+        submissionBtn.value = btnLabel
         submissionBtn.classList.add('btn','shadow','btn-full')
     
         inputElement.appendChild(submissionBtn) 

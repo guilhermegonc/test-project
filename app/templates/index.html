@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% block title %}Página inicial{% endblock %}
 {% block content %}
-  <h1 class="s1 p-12 light txt-center">Site de Testes</h1>
-  <a class="btn shadow m-b-12" href="/custom-form">Formulário integrado</a>
-  <a class="btn shadow m-b-12 light" href="/embed-form">Formulário Embutido</a>
-  <a class="btn shadow m-b-12 light" href="/tictactoe">Tic tac toe</a>
+<h1 class="s1 p-12 light txt-center">Site de Testes</h1>
+<div class="m-b-24">
+  <div class="txt-center m-b-12">
+      <a href="/custom-form" class="trigger btn m-12 light shadow">
+          <div>☑️</div>
+          <p class="app-label">Form. Integrado</p>
+      </a>
+      <a href="/embed-form" class="trigger btn m-12 light shadow">
+          <div class="status">🔘</div>
+          <p class="app-label">Form. Embutido</p>
+      </a>
+      <a href="/tictactoe" class="trigger btn m-12 light shadow">
+          <div class="status">♣️</div>
+          <p class="app-label">Tic tac toe</p>
+      </a>
+  </div>
+</div>
 {% endblock %}

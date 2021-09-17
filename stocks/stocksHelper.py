@@ -7,6 +7,7 @@ from stocks_background.recommendationHelper import get_recommendations
 
 import datetime
 
+
 class EnrichedStock:
     def __init__(self, code, quantity, price, value, recommended, close_date):
         self.code = code
@@ -98,3 +99,15 @@ def get_last_close(stock):
         return StockValues.objects.get(reference_date=last_date, code=stock)
     except: 
         return StockValues(code=stock, value=0, reference_date=datetime.date.today())
+
+
+def total_invested(user):
+    transactions = UserStocksTransactions.objects.filter(user=user, 
+        transaction_date__lt=datetime.date.today())
+    return sum_wallet(transactions)
+
+
+def sum_wallet(transactions):
+    values = [t.value * t.quantity if t.action == 'buy' else t.value * t.quantity * -1 \
+        for t in transactions]
+    return sum(values)

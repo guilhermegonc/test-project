@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
-from .stocksHelper import get_wallet, update_transactions
+from .stocksHelper import get_wallet, update_transactions, total_invested
 from .forms import StockForm
 from app.facebookConversionAPIHelper import fb_view_content
 from menu.userHelper import get_user, get_user_object
@@ -18,12 +18,14 @@ def wallet(request):
     stocks = get_wallet(user.data.id)
     momentum = get_recommendations()
     form = StockForm()
+    invested = total_invested(user.data.id)
 
     payload = {
         'user': user.auth0_name, 
         'stocks': stocks,
         'form': form,
-        'momentum': momentum, 
+        'momentum': momentum,
+        'invested': invested
     }
     
     return render(request, 'wallet.html', payload)

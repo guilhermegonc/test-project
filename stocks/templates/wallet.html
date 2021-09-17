@@ -20,7 +20,7 @@
     <p id="reference-date" class="s8 str blue fl-r">{{ stocks.0.close_date.0 }}</p>
     <h1 id="wallet-title" class="s3 blue">Carteira</h1>
     <p id="wallet-value" class="s7 m-0">Valor</p>
-    <p id="wallet-cost" class="s8 light-gray">Custo médio</p>
+    <p id="wallet-cost" class="s8 light-gray">Custo</p>
     <p id='balance-btn' class="light-gray s8 m-0">Clique para simular balanceamento</p>
 </div>
 <div class="m-b-24">
@@ -69,6 +69,7 @@
             origin: 'recommendation',
         }
     '{% endfor %}'
+    const invested = {{ invested }}
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
     setupWallet()

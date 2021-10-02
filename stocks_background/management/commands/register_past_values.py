@@ -8,6 +8,7 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime
 
+import sys
 
 class Command(BaseCommand):
     help = 'Update Stock Values'
@@ -17,11 +18,11 @@ class Command(BaseCommand):
 
 
     def get_values(self):
-        wallet = self.get_companies_in_wallet()
+        wallet = self.list_companies()
         return self.retrieve_results(wallet)
 
 
-    def get_companies_in_wallet(self):
+    def list_companies(self):
         companies = get_companies_in_wallets()
         companies = [c['code'] + '.SA' for c in companies]
         return ' '.join(companies)
@@ -43,7 +44,10 @@ class Command(BaseCommand):
         return start.strftime('%Y-%m-%d'), end.strftime('%Y-%m-%d')
 
     def parse_yf(self, stock_data, reference_date):
-        stock_data = stock_data.loc[stock_data['Date'] == reference_date].dropna()
+        stock_data = stock_data.loc[stock_data['Date'] == reference_date]
+        stocks = stock_data.drop('Date', axis=1).iloc[0]
+        if stocks.sum() == 0:
+            return
         return stock_data.drop('Date', axis=1).iloc[0]
 
     def parse_stocks(self, companies, reference_date):

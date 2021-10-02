@@ -1,9 +1,9 @@
+from django.db import connection
+from stocks_background.recommendationHelper import get_recommendations
 from .models import UserStocksTransactions,\
                     UserStocks,\
                     TransactionProfit,\
                     StockValues
-
-from stocks_background.recommendationHelper import get_recommendations
 
 import datetime
 
@@ -111,3 +111,57 @@ def sum_wallet(transactions):
     values = [t.value * t.quantity if t.action == 'buy' else t.value * t.quantity * -1 \
         for t in transactions]
     return sum(values)
+
+
+def wallet_chart(user):
+    dates = get_valid_dates_from_range()
+    return sum_daily_values(user, dates)
+
+
+def get_valid_dates_from_range():
+    end = datetime.date.today() - datetime.timedelta(days=1)
+    start = end - datetime.timedelta(days=180)
+    end = end.strftime('%Y-%m-%d')
+    start = start.strftime('%Y-%m-%d')
+
+    with connection.cursor() as cursor:
+        cursor.execute(f'''
+        SELECT DISTINCT reference_date
+        FROM stock_values sv
+        WHERE sv.reference_date > '{start}'
+          AND sv.reference_date < '{end}'
+        ''')
+        dates = cursor.fetchall()
+    return [d[0].strftime('%Y-%m-%d') for d in dates]
+
+
+def sum_daily_values(user, dates):
+    query = f'''
+    SELECT DATE(reference_date),
+        sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END)
+    FROM user_stocks_transactions ust
+    INNER JOIN stock_values sv on ust.code = sv.code
+    WHERE ust.user_id = {user}
+    AND ust.transaction_date < '{dates[0]}'
+    AND sv.reference_date = '{dates[0]}'
+    GROUP BY sv.reference_date
+    HAVING sum(CASE WHEN ust.action = 'buy' THEN ust.quantity ELSE ust.quantity * -1 END) > 0
+    '''
+    for d in dates[1:]:
+        query += f'''
+        UNION ALL
+        SELECT DATE(reference_date),
+            sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END)
+        FROM user_stocks_transactions ust
+        INNER JOIN stock_values sv on ust.code = sv.code
+        WHERE ust.user_id = {user}
+        AND ust.transaction_date < '{d}'
+        AND sv.reference_date = '{d}'
+        GROUP BY sv.reference_date
+        HAVING sum(CASE WHEN ust.action = 'buy' THEN ust.quantity ELSE ust.quantity * -1 END) > 0
+        '''
+    
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        data = cursor.fetchall()
+    return [(d[0].strftime('%Y-%m-%d'), d[1]) for d in data]

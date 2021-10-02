@@ -8,7 +8,6 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime
 
-import sys
 
 class Command(BaseCommand):
     help = 'Update Stock Values'
@@ -59,7 +58,7 @@ class Command(BaseCommand):
     def save_stock_value(self, company, value, dt):
         stock = StockValues(
             code = company[:-3],
-            value = value,
+            value = value if value > 0 else 0,
             reference_date = dt
         )
         stock.save()

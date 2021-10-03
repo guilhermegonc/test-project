@@ -60,7 +60,7 @@ def create_user_stock(user, code):
 
 def register_profit(transaction, profit):
     profit = TransactionProfit(transaction=transaction, quantity=transaction.quantity, 
-    unitary_profit=profit, transaction_date=transaction.transaction_date)
+    unitary_profit=profit)
     profit.save()
     return profit
 

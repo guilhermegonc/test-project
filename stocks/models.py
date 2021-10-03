@@ -35,7 +35,6 @@ class TransactionProfit(models.Model):
     transaction = models.ForeignKey('UserStocksTransactions', on_delete=models.CASCADE)    
     quantity = models.FloatField()
     unitary_profit = models.FloatField()
-    transaction_date = models.DateTimeField()
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 

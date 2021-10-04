@@ -4,6 +4,7 @@
 
 {% load static %}
 {% block extra-css %}
+<link rel="stylesheet" type="text/css" href="{% static 'expenses-style.css' %}">
 {% endblock %}
 {% block extra-js %}
     <script src="{% static 'expenses.js' %}"></script>
@@ -22,6 +23,8 @@
 <script>
     let counter = 0
     let expenses = []
+    const token = `{% csrf_token %}`
+    const forms = `{{ form }}`
     createTable()
 </script>
 {% endblock %}

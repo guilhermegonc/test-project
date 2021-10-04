@@ -6,14 +6,12 @@ from django.contrib.auth.decorators import login_required
 
 from .stocksHelper import get_wallet, update_transactions, total_invested, wallet_chart
 from .forms import StockForm
-from app.facebookConversionAPIHelper import fb_view_content
 from menu.userHelper import get_user, get_user_object
 from stocks_background.recommendationHelper import get_recommendations,update_status
 
 
 @login_required
 def wallet(request):
-    fb_view_content(request)
     user = get_user(request)
     stocks = get_wallet(user.data.id)
     momentum = get_recommendations()
@@ -52,7 +50,6 @@ def update_wallet(request):
 
 @login_required
 def recommendations(request):
-    fb_view_content(request)
     stocks = get_recommendations([True, False])
     payload = {'stocks': stocks}
     return render(request, 'recommendations.html', payload)

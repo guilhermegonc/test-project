@@ -4,7 +4,6 @@ const createTable = () => {
     table.classList.add('shadow', 'm-a')
     appendTable(table)
     loadExpenses()
-    createInputBtn()
 }
 
 const appendTable = table => {
@@ -22,7 +21,28 @@ const createHeader = table => {
     <th class="s10 t-right">Valor</th>
     `
     table.appendChild(header)
+    addFirstRow(table)
+}
+
+const addFirstRow = (table) => {
+    const row = document.createElement('tr')
+    row.id = 'input-listener'
+    row.innerHTML = `
+        <td class="s10 str main-column gray">Adicionar serviço</td>
+        <td class="s9 light-gray m-0 hide-mobile">-</td>
+        <td class="s9 light-gray m-0 hide-mobile">-</td>
+        <td class="s9 light-gray m-0 t-right">R$ 00,00</td>
+        `
+    table.appendChild(row)
+    addInputListener(row.id)
     createLoadBtn(table)
+}
+
+const addInputListener = id => {
+    const row = document.querySelector(`#${id}`)
+    row.addEventListener('click', function(){
+        addInputModal()
+    })
 }
 
 const createLoadBtn = div => {
@@ -30,10 +50,10 @@ const createLoadBtn = div => {
     const a = document.createElement('a')
     td.colSpan = 4
     td.id = 'expenses-btn'
-    td.appendChild(a)
 
     a.classList.add('btn', 'light')
     a.innerText = 'Carregar mais antigas'
+    td.appendChild(a)
     
     div.appendChild(td)
     a.addEventListener('click', function() {
@@ -60,7 +80,7 @@ const populateTable = expenses => {
     
     for (let i = 0; i < expenses.length; i++) {
         let row = document.createElement('tr')
-        row.id = `${expenses[i].name}-${i}`
+        row.id = `expenses-${i+counter*50}`
         recurringDecoration = expenses[i].recurring === true ? '⏱' : ''
         valueDecoration = expenses[i].value > 0 ? 'red' : 'green'
         row.innerHTML = `
@@ -71,22 +91,6 @@ const populateTable = expenses => {
         `
         table.appendChild(row)
         table.insertBefore(row, btn)
+        addInputListener(row.id)
     }
-}
-
-const createInputBtn = () => {
-    const td = document.createElement('td')
-    td.colSpan = 4
-    td.id = 'input-btn'
-    td.appendChild(a)
-
-    const a = document.createElement('a')
-    a.classList.add('btn', 'light')
-    a.innerText = 'Nova despesa'
-    
-    const div = document.querySelector('#expenses')
-    div.insertBefore(td, div.firstChild)
-    a.addEventListener('click', function() {
-        addInputModal()
-    })
 }

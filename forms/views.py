@@ -7,16 +7,12 @@ from .personasHelper import find_persona
 from .models import Personas
 from .forms import BasicForm
 
-from app.facebookConversionAPIHelper import fb_view_content
-
 
 def embed_form(request):
-    fb_view_content(request)
     return render(request, 'embed-form.html')
 
 
 def custom_form(request):
-    fb_view_content(request)
     form = BasicForm()
     names = list_personas()
     payload = {'form': form, 'db_results': names}

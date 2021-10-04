@@ -23,11 +23,10 @@ from .microcontrollerHelper import set_account
 from .microcontrollerHelper import user_has_permission
 from .microcontrollerHelper import get_microcontroller_from_token
 from menu.userHelper import get_user
-from app.facebookConversionAPIHelper import fb_view_content
+
 
 @login_required
 def smart_home(request):
-    fb_view_content(request)
     user = get_user(request)
     account = get_account(user)
     if not account:
@@ -50,7 +49,6 @@ def create_account(request):
 
 @login_required
 def join(request):
-    fb_view_content(request)
     form = JoinAccount()
     payload = {'form': form}
     return render(request, 'join-account.html', payload)
@@ -71,7 +69,6 @@ def join_account(request):
 
 @login_required
 def settings(request):
-    fb_view_content(request)
     user = get_user(request)
     account = get_account(user)
     payload = {'token': account.token}
@@ -79,7 +76,6 @@ def settings(request):
 
 @login_required
 def device_settings(request, microcontroller_token):
-    fb_view_content(request)
     first_pin = request.GET.get('pin') if request.GET.get('pin') else 'D0' 
     form = DevicesControl()
     user = get_user(request)
@@ -107,7 +103,6 @@ def update_device(request):
 
 @login_required
 def add_microcontroller(request):
-    fb_view_content(request)
     form = CreateMicrocontroller()
     return render(request, 'add-microcontroller.html', {'form': form})
 
@@ -127,7 +122,6 @@ def populate_microcontroller(request):
 
 @login_required
 def microcontroller(request, microcontroller_token):
-    fb_view_content(request)
     user = get_user(request)
     account = get_account(user)
     if not account:

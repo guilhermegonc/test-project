@@ -15,11 +15,11 @@ const appendTable = table => {
 const createHeader = table => {
     const header = document.createElement('tr')
     header.innerHTML = `
-    <th class="s10 main-column">Serviço</th>
-    <th class="s10 hide-mobile">Tipo</th>
-    <th class="s10 hide-mobile">Data</th>
-    <th class="s10 t-right">Valor</th>
-    `
+        <th class="s10 main-column">Serviço</th>
+        <th class="s10 hide-mobile">Tipo</th>
+        <th class="s10 hide-mobile">Data</th>
+        <th class="s10 t-right">Valor</th>
+        `
     table.appendChild(header)
     addFirstRow(table)
 }
@@ -35,22 +35,22 @@ const addFirstRow = (table) => {
         `
     table.appendChild(row)
     addInputListener(row.id)
-    createLoadBtn(table)
+    addLoadBtn(table)
 }
 
 const addInputListener = id => {
     const row = document.querySelector(`#${id}`)
     row.addEventListener('click', function(){
-        addInputModal()
+        new ExpenseModal()
     })
 }
 
-const createLoadBtn = div => {
+const addLoadBtn = div => {
     const td = document.createElement('td')
-    const a = document.createElement('a')
     td.colSpan = 4
     td.id = 'expenses-btn'
 
+    const a = document.createElement('a')
     a.classList.add('btn', 'light')
     a.innerText = 'Carregar mais antigas'
     td.appendChild(a)
@@ -62,8 +62,8 @@ const createLoadBtn = div => {
 }
 
 const loadExpenses = async() => {
-    const start = counter * 50
-    const end = start + 50
+    const start = counter * 20
+    const end = start + 20
     const uri = `load-expenses?start=${start}&end=${end}`
     
     response = await fetch(uri)
@@ -80,17 +80,21 @@ const populateTable = expenses => {
     
     for (let i = 0; i < expenses.length; i++) {
         let row = document.createElement('tr')
-        row.id = `expenses-${i+counter*50}`
+        row.id = `expenses-${i+counter*20}`
+        
         recurringDecoration = expenses[i].recurring === true ? '⏱' : ''
         valueDecoration = expenses[i].value > 0 ? 'red' : 'green'
+        
         row.innerHTML = `
-        <td class="s10 str main-column blue">${expenses[i].name}</td>
-        <td class="s9 light-gray m-0 hide-mobile">${expenses[i].type}</td>
-        <td class="s9 light-gray m-0 hide-mobile">${expenses[i].date}</td>
-        <td class="s9 light-gray m-0 ${valueDecoration} t-right">R$ ${expenses[i].value.toFixed(2)} ${recurringDecoration}</td>
-        `
+            <td class="s10 str main-column blue">${expenses[i].name}</td>
+            <td class="s9 light-gray m-0 hide-mobile">${expenses[i].type}</td>
+            <td class="s9 light-gray m-0 hide-mobile">${expenses[i].date}</td>
+            <td class="s9 light-gray m-0 ${valueDecoration} t-right">R$ ${expenses[i].value.toFixed(2)} ${recurringDecoration}</td>
+            `
         table.appendChild(row)
         table.insertBefore(row, btn)
-        addInputListener(row.id)
+        row.addEventListener('click', function(){
+            new ExpenseModal(expenses[i])
+        })
     }
 }

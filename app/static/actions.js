@@ -22,9 +22,8 @@ const addCloseBtn = modal => {
     closeIcon.classList.add('menu-icon')
     closeIcon.classList.add('fl-r')
     closeIcon.innerText = 'close'
-    closeIcon.addEventListener('click', function(){close()})
-    
     content.appendChild(closeIcon)
+    closeIcon.addEventListener('click', function(){close()})    
 }
 
 const close = () => {

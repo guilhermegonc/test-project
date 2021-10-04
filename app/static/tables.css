@@ -1,0 +1,38 @@
+table {
+    background-color: white;
+    padding: 12px 12px 0;
+    max-width: 600px;
+    width: 100%;
+    border-bottom: none;
+    border-spacing: 0;
+    border-radius: 8px;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    font-family: sans-serif;
+    text-decoration: none;
+    border-bottom: 1px solid #ddd;
+    font-weight: normal;
+    min-width: 80px;
+}
+
+tr {
+    min-height: 60px;
+}
+
+.t-right {
+    text-align: right;
+
+}
+
+.main-column {
+    min-width: 180px;
+}
+
+@media (max-width: 992px) {
+    .hide-mobile {
+        display: none;
+    }
+}

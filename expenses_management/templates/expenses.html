@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Despesas{% endblock %}
+{% include "chart-js/chart.html"%}
+
+{% load static %}
+{% block extra-css %}
+{% endblock %}
+{% block extra-js %}
+    <script src="{% static 'expenses.js' %}"></script>
+    <script src="{% static 'expenses-modal.js' %}"></script>
+    {% endblock %}
+
+{% block content%}
+<div class="txt-center m-b-24 light">
+    <h1 class="s3 m-0 m-b-24">Despesas</h1>
+</div>
+<div id="expenses-list" class="m-b-24">
+</div>
+<div class="fl-l btn-full">
+    <a class="btn shadow light" href="/dashboard">Voltar</a>
+</div>
+<script>
+    let counter = 0
+    let expenses = []
+    createTable()
+</script>
+{% endblock %}

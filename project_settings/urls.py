@@ -11,6 +11,7 @@ import smart_home.views
 import menu.views
 import stocks.views
 import stocks_background.views
+import expenses_management.views
 
 
 admin.autodiscover()
@@ -52,6 +53,9 @@ urlpatterns = [
     path('wallet', stocks.views.wallet, name='wallet'),
     path('update-wallet', stocks.views.update_wallet, name='wallet_update'),
     path('recommendations', stocks.views.recommendations, name='recommendations'),
-    path('change-recommendation-status', stocks.views.change_recommendation_status, name='update-recommendation-status')
+    path('change-recommendation-status', stocks.views.change_recommendation_status, name='update-recommendation-status'),
+
+    path('expenses', expenses_management.views.expenses, name='expenses'),
+    path('load-expenses', expenses_management.views.load_older_expenses, name='load_expenses'),
 
 ]

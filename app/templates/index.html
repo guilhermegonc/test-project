@@ -3,7 +3,7 @@
 {% block content %}
 <h1 class="s1 p-12 light txt-center">Boas vindas!</h1>
 <div class="m-b-24">
-  <div class="txt-center m-b-12">
+    <div class="txt-center m-b-24">
         <a href="/custom-form" class="trigger btn m-12 light shadow">
             <div>✅</div>
             <p class="app-label">Form. Integrado</p>
@@ -17,24 +17,20 @@
             <p class="app-label">Tic tac toe</p>
         </a>
         {% if is_auth %}
-        <div class="m-b-24">
-            <div class="txt-center m-b-12">
-                <a href="/expenses" class="trigger btn m-12 light shadow">
-                    <div>💵</div>
-                    <p class="app-label">Gastos</p>
-                </a>
-                <a href="/wallet" class="trigger btn m-12 light shadow">
-                    <div class="status">💰</div>
-                    <p class="app-label">Investimentos</p>
-                </a>
-                <a href="smart-home" class="trigger btn m-12 light shadow">
-                    <div class="status">🏠</div>
-                    <p class="app-label">Smart Home</p>
-                </a>
-            </div>
-        </div>
-        <a class="btn shadow light" href="/logout">Sair</a>
+        <a href="/expenses" class="trigger btn m-12 light shadow">
+            <div>💵</div>
+            <p class="app-label">Gastos</p>
+        </a>
+        <a href="/wallet" class="trigger btn m-12 light shadow">
+            <div class="status">💰</div>
+            <p class="app-label">Investimentos</p>
+        </a>
+        <a href="smart-home" class="trigger btn m-12 light shadow">
+            <div class="status">🏠</div>
+            <p class="app-label">Smart Home</p>
+        </a>
       {% endif %}
-  </div>
+    </div>
+    <a class="btn shadow light" href="/logout">Sair</a>
 </div>
 {% endblock %}

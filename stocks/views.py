@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from .stocksHelper import get_wallet, update_transactions, total_invested, wallet_chart
 from .forms import StockForm
-from menu.userHelper import get_user, get_user_object
+from app.userHelper import get_user, get_user_object
 from stocks_background.recommendationHelper import get_recommendations,update_status
 
 

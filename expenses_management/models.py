@@ -1,5 +1,5 @@
 from django.db import models
-from menu.models import Users
+from app.models import Users
 
 class UserExpenses(models.Model):
     class Meta:

@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'forms',
     'tic_tac_toe',
     'smart_home',
-    'menu',
     'stocks',
     'stocks_background',
     'expenses_management'
@@ -107,7 +106,7 @@ AUTHENTICATION_BACKENDS = {
 }
 
 LOGIN_URL = '/login/auth0'
-LOGIN_REDIRECT_URL = '/dashboard'
+LOGIN_REDIRECT_URL = '/'
 
 
 # Internationalization

@@ -4,9 +4,13 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from app.userHelper import is_authenticated
+
 
 def index(request):
-    return render(request, 'index.html')
+    is_auth = is_authenticated(request)
+    payload = {'is_auth': is_auth}
+    return render(request, 'index.html', payload)
 
 def handler_404(request, *args, **kwargs):
    return render(request,'404.html')

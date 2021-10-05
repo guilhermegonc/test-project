@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('transaction_date', models.DateTimeField()),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_stocks_transactions',
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('weighted_average_cost', models.FloatField()),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_stocks',

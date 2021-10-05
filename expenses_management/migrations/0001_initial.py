@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                 ('value', models.FloatField()),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_savings',
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
                 ('active', models.BooleanField(default=False)),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_recurring_expenses',
@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('savings', models.FloatField()),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_goals',
@@ -73,7 +73,7 @@ class Migration(migrations.Migration):
                 ('expense_date', models.DateField()),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_expenses',
@@ -89,7 +89,7 @@ class Migration(migrations.Migration):
                 ('paid', models.BooleanField(default=False)),
                 ('created_at', models.DateField(auto_now_add=True)),
                 ('updated_at', models.DateField(auto_now=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users')),
             ],
             options={
                 'db_table': 'user_darfs',

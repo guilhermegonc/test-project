@@ -1,6 +1,7 @@
 from auth0.api_conn import get_auth0_user
 from .models import Users
 
+
 class AuthUser:
     def __init__(self, auth0, user):
         self.auth0_name = auth0['name']
@@ -28,3 +29,5 @@ def get_user_object(request):
     user = Users.objects.get(auth0_id=authorized_user['user_id'])
     return user
 
+def is_authenticated(request):
+    return not(request.user.is_anonymous)

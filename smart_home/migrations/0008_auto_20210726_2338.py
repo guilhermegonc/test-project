@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='account_users',
             name='user',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='menu.users'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='app.users'),
         ),
         migrations.AlterField(
             model_name='accounts',

@@ -7,7 +7,7 @@ from urllib.parse import urlencode
 def login(request):
     user = request.user
     if user.is_authenticated:
-        return HttpResponseRedirect('/dashboard')
+        return HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/')
 

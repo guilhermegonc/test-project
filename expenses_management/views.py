@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 
 from django.contrib.auth.decorators import login_required
 
-from menu.userHelper import get_user, get_user_object
+from app.userHelper import get_user, get_user_object
 from .expensesHelper import create_expense, edit_expense, get_expenses, dict_expenses
 from .forms import ExpenseForm
 

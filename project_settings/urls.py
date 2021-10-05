@@ -1,5 +1,3 @@
-from stocks_background import views
-import stocks_background
 from django.urls import path, include
 from django.contrib import admin
 from django.conf.urls import handler404
@@ -8,7 +6,7 @@ import auth0.views
 import forms.views
 import tic_tac_toe.views
 import smart_home.views
-import menu.views
+import app.views
 import stocks.views
 import stocks_background.views
 import expenses_management.views
@@ -34,8 +32,6 @@ urlpatterns = [
     path('logout', auth0.views.logout),
     path('', include('django.contrib.auth.urls')),
     path('', include('social_django.urls')),
-
-    path('dashboard', menu.views.dashboard, name='dashboard'),
 
     path('smart-home', smart_home.views.smart_home, name='smart-home'),
     path('settings', smart_home.views.settings, name='settings'),

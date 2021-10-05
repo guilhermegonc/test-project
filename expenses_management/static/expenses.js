@@ -89,7 +89,7 @@ const populateTable = expenses => {
             <td class="s10 str main-column ${valueDecoration}">${expenses[i].name}</td>
             <td class="s9 light-gray m-0 hide-mobile">${expenses[i].type}</td>
             <td class="s9 light-gray m-0 hide-mobile">${expenses[i].date}</td>
-            <td class="s9 light-gray m-0 ${valueDecoration} t-right">R$ ${expenses[i].value.toFixed(2)} ${recurringDecoration}</td>
+            <td class="s9 light-gray m-0 ${valueDecoration} t-right">${recurringDecoration} R$ ${expenses[i].value.toFixed(2)}</td>
             `
         table.appendChild(row)
         table.insertBefore(row, btn)

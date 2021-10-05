@@ -22,7 +22,7 @@ from .microcontrollerHelper import set_pins
 from .microcontrollerHelper import set_account
 from .microcontrollerHelper import user_has_permission
 from .microcontrollerHelper import get_microcontroller_from_token
-from menu.userHelper import get_user
+from app.userHelper import get_user
 
 
 @login_required

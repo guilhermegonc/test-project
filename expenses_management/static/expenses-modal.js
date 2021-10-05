@@ -24,7 +24,17 @@ class ExpenseModal {
         modal.appendChild(formInput)
         this.addFormBtn(formInput)
 
-        this.expenseObj === null ? null : this.addExpenseData()
+        this.expenseObj === null ? this.addNewDate() : this.addExpenseData()
+    }
+
+    addNewDate = () => {
+        const date = new Date()
+        const dd = String(date.getDate()).padStart(2, '0')
+        const mm = String(date.getMonth()).padStart(2, '0')
+        const yyyy = String(date.getFullYear())
+
+        const dateInput = document.querySelector('#id_date')
+        dateInput.value = `${yyyy}-${mm}-${dd}`
     }
 
     addExpenseData = () => {

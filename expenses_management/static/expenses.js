@@ -86,7 +86,7 @@ const populateTable = expenses => {
         valueDecoration = expenses[i].value > 0 ? 'red' : 'green'
         
         row.innerHTML = `
-            <td class="s10 str main-column blue">${expenses[i].name}</td>
+            <td class="s10 str main-column ${valueDecoration}">${expenses[i].name}</td>
             <td class="s9 light-gray m-0 hide-mobile">${expenses[i].type}</td>
             <td class="s9 light-gray m-0 hide-mobile">${expenses[i].date}</td>
             <td class="s9 light-gray m-0 ${valueDecoration} t-right">R$ ${expenses[i].value.toFixed(2)} ${recurringDecoration}</td>

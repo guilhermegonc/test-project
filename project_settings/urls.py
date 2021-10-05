@@ -57,5 +57,6 @@ urlpatterns = [
 
     path('expenses', expenses_management.views.expenses, name='expenses'),
     path('load-expenses', expenses_management.views.load_older_expenses, name='load_expenses'),
+    path('update-expense', expenses_management.views.update_expense, name='update_expense'),
 
 ]

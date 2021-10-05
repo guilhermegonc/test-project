@@ -152,6 +152,10 @@ form .btn {
     -webkit-appearance: none;
 }
 
+select {
+    -webkit-appearance: none;
+}
+
 .btn:hover {
     background-color: rgb(26, 38, 107);
 }
@@ -225,10 +229,10 @@ input[type="checkbox" i] {
 }
 
 .trigger {
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    font-size: 40px;
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 30px;
     display: inline-block;
     vertical-align: bottom;
 }

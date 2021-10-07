@@ -17,6 +17,7 @@ class GoalsTable {
     populateHeader = () => {
         const h = document.querySelectorAll('th')
         h[0].innerText = 'Mês'
+        h[0].classList.remove('main-column')
 
         h[1].innerText = 'Despesas'
         h[1].classList.remove('hide-mobile')
@@ -32,6 +33,7 @@ class GoalsTable {
     detailFirstRow = () => {
         const r = document.querySelectorAll('td')
         r[0].innerText = 'Adicionar meta'
+        r[1].classList.remove('hide-mobile')
         r[2].remove()
     }
 
@@ -40,7 +42,7 @@ class GoalsTable {
             let row = document.createElement('tr')            
             
             row.innerHTML = `
-                <td class="s9 str main-column">${data[i].date}</td>
+                <td class="s9 str">${data[i].date}</td>
                 <td class="s9 light-gray m-0 red t-right">R$ ${data[i].expense}</td>
                 <td class="s9 light-gray m-0 green t-right">R$ ${data[i].saving}</td>
             `

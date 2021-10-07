@@ -27,7 +27,7 @@ class Table {
     addFirstRow = type => {
         const row = document.createElement('tr')
         row.innerHTML = `
-            <td id="row-empty-state" class="s10 str main-column gray"></td>
+            <td id="row-empty-state" class="s10 str gray"></td>
             <td class="s9 light-gray m-0 hide-mobile"></td>
             <td class="s9 light-gray m-0 hide-mobile"></td>
             <td class="s9 light-gray m-0 t-right"></td>

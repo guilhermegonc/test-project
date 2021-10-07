@@ -8,7 +8,6 @@ import tic_tac_toe.views
 import smart_home.views
 import app.views
 import stocks.views
-import stocks_background.views
 import expenses_management.views
 
 
@@ -47,12 +46,20 @@ urlpatterns = [
     path('populate-microcontroller', smart_home.views.populate_microcontroller, name='populate-microcontroller'),
 
     path('wallet', stocks.views.wallet, name='wallet'),
-    path('update-wallet', stocks.views.update_wallet, name='wallet_update'),
+    path('update-wallet', stocks.views.update_wallet, name='wallet-update'),
     path('recommendations', stocks.views.recommendations, name='recommendations'),
     path('change-recommendation-status', stocks.views.change_recommendation_status, name='update-recommendation-status'),
 
     path('expenses', expenses_management.views.expenses, name='expenses'),
-    path('load-expenses', expenses_management.views.load_older_expenses, name='load_expenses'),
-    path('update-expense', expenses_management.views.update_expense, name='update_expense'),
-
+    path('load-expenses', expenses_management.views.load_older_expenses, name='load-expenses'),
+    path('update-expense', expenses_management.views.update_expense, name='update-expense'),
+    path('destroy-expense', expenses_management.views.destroy_expense, name='destroy-expense'),
+    path('recurring-payments', expenses_management.views.recurring, name='recurring-payments'),
+    path('load-recurring', expenses_management.views.load_recurring, name='load-recurring'),
+    path('update-recurring', expenses_management.views.update_recurring, name='update-recurring'),
+    path('destroy-recurring', expenses_management.views.destroy_recurring, name='destroy-recurring'),
+    path('goals', expenses_management.views.goals, name='goals'),
+    path('load-goals', expenses_management.views.load_goals, name='load-goals'),
+    path('update-goals', expenses_management.views.update_goal, name='update-goals'),
+    path('destroy-goals', expenses_management.views.destroy_goal, name='destroy-goals'),
 ]

@@ -81,11 +81,13 @@ a.db-results {
 }
 
 .modal {
-    margin: 120px auto;
+    margin: 100px auto;
     width: 300px;
     padding: 24px;
     border-radius: 4px;
     background-color: white;
+    height: 340px;
+    overflow: scroll;
 }
 
 @media (max-width: 992px) {
@@ -116,7 +118,7 @@ a.db-results {
 }
 
 .modal .btn {
-    line-height: inherit;
+    line-height: 48px;
 }
 
 .btn.danger {

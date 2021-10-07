@@ -1,9 +1,10 @@
 {% extends "base.html" %}
-{% block title %}Despesas{% endblock %}
+{% block title %}Recorrentes{% endblock %}
 {% include "chart-js/chart.html"%}
 
 {% load static %}
 {% block extra-css %}
+<link rel="stylesheet" type="text/css" href="{% static 'recurring-style.css' %}">
 {% endblock %}
 {% block extra-js %}
     <script src="{% static 'expenses.js' %}"></script>
@@ -13,21 +14,20 @@
 
 {% block content%}
 <div class="txt-center m-b-24 light">
-    <h1 class="s3 m-0 m-b-24">Despesas</h1>
+    <h1 class="s3 m-0 m-b-24">Recorrentes</h1>
 </div>
-<div id="expenses-list" class="m-6 m-b-24">
+<div id="recurring-list" class="m-6 m-b-24">
 </div>
 <div class="fl-l btn-full">
-    <a class="btn shadow light m-b-12" href="/recurring-payments">Despesas recorrentes</a>
-    <a class="btn shadow light m-b-12" href="/goals">Metas</a>
+    <a class="btn shadow light m-b-12" href="/expenses">Despesas</a>
     <a class="btn shadow light" href="/">Voltar</a>
 </div>
 <script>
     let counter = 0
-    let expenses = []
+    let recurring = []
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    const tableDiv = document.querySelector('#expenses-list')
-    addExpensesTable(tableDiv)
+    const tableDiv = document.querySelector('#recurring-list')
+    addRecurringTable(tableDiv)
 </script>
 {% endblock %}

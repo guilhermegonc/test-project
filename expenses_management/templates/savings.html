@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Metas{% endblock %}
+{% block title %}Economias{% endblock %}
 {% include "chart-js/chart.html"%}
 
 {% load static %}
@@ -8,15 +8,15 @@
 {% block extra-js %}
     <script src="{% static 'expenses.js' %}"></script>
     <script src="{% static 'general-table.js' %}"></script>
-    <script src="{% static 'goals-table.js' %}"></script>
+    <script src="{% static 'savings-table.js' %}"></script>
     <script src="{% static 'general-modal.js' %}"></script>
-    <script src="{% static 'goal-modal.js' %}"></script>
+    <script src="{% static 'saving-modal.js' %}"></script>
 
 {% endblock %}
 
 {% block content%}
 <div class="txt-center m-b-24 light">
-    <h1 class="s3 m-0 m-b-24">Metas</h1>
+    <h1 class="s3 m-0 m-b-24">Economias</h1>
 </div>
 <div id="table-list" class="m-6 m-b-24">
 </div>
@@ -25,22 +25,25 @@
     <a class="btn shadow light" href="/">Voltar</a>
 </div>
 <script>
-    const token = `{% csrf_token %}`
-    const forms = `{{ form }}`
-    const div = document.querySelector('#table-list')
-    let goals = []
+    let counter = 1
+    let savings = []
     let obj, dd, mm
     '{% for r in rows %}'
         dd = '{{ r.date.day }}'.padStart(2, '0')
         mm = '{{ r.date.month }}'.padStart(2, '0')
         obj = {
             'id': {{ r.id }},
+            'name': '{{ r.name }}',
+            'objective': '{{ r.objective }}',
+            'value': {{ r.value }},
             'date': `{{ r.date.year }}-${mm}-${dd}`,
-            'expense': {{ r.expenses }}.toFixed(2),
-            'saving': {{ r.savings }}.toFixed(2),
         }
-        goals.push(obj)
+        savings.push(obj)
     '{% endfor %}'
-    addGoalsTable(div)
+
+    const token = `{% csrf_token %}`
+    const forms = `{{ form }}`
+    const div = document.querySelector('#table-list')
+    addSavingsTable(div)
 </script>
 {% endblock %}

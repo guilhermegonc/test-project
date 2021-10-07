@@ -9,3 +9,7 @@ const addRecurringTable = div => {
 const addGoalsTable = div => {
     const html = new GoalsTable(div)
 }
+
+const addSavingsTable = div => {
+    const html = new SavingsTable(div)
+}

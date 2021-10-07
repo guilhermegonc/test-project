@@ -35,6 +35,6 @@
     '{% for r in db_results %}'
         document.querySelector("#a-{{ r.id }}").addEventListener("mouseover", function() {handleText('{{ r.id}}')});
         document.querySelector("#a-{{ r.id }}").addEventListener("mouseout", function() {handleText('{{ r.id}}', '{{ r.name }}')});
-'{% endfor %}'
+    '{% endfor %}'
 </script>
 {% endblock %}

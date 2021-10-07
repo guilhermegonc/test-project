@@ -2,8 +2,7 @@ from .models import UserExpenses
 
 
 def get_expenses(user, start=0, end=20):
-    expenses = UserExpenses.objects.filter(user=user).order_by('-id')[start:end]
-    return expenses
+    return UserExpenses.objects.filter(user=user).order_by('-id')[start:end]
 
 
 def dict_expenses(expenses):

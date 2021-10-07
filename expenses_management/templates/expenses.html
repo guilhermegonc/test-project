@@ -7,27 +7,45 @@
 {% endblock %}
 {% block extra-js %}
     <script src="{% static 'expenses.js' %}"></script>
+    <script src="{% static 'general-table.js' %}"></script>
     <script src="{% static 'expenses-table.js' %}"></script>
-    <script src="{% static 'expenses-modal.js' %}"></script>
-{% endblock %}
+    <script src="{% static 'general-modal.js' %}"></script>
+    <script src="{% static 'expense-modal.js' %}"></script>
+    {% endblock %}
 
 {% block content%}
 <div class="txt-center m-b-24 light">
     <h1 class="s3 m-0 m-b-24">Despesas</h1>
 </div>
-<div id="expenses-list" class="m-6 m-b-24">
+<div id="table-list" class="m-6 m-b-24">
 </div>
 <div class="fl-l btn-full">
     <a class="btn shadow light m-b-12" href="/recurring-payments">Despesas recorrentes</a>
+    <a class="btn shadow light m-b-12" href="/savings">Economias</a>
     <a class="btn shadow light m-b-12" href="/goals">Metas</a>
     <a class="btn shadow light" href="/">Voltar</a>
 </div>
 <script>
-    let counter = 0
+    let counter = 1
     let expenses = []
+    let obj, dd, mm
+    '{% for r in rows %}'
+        dd = '{{ r.date.day }}'.padStart(2, '0')
+        mm = '{{ r.date.month }}'.padStart(2, '0')    
+        obj = {
+            'id': {{ r.id }},
+            'name': '{{ r.name }}',
+            'type': '{{ r.type }}',
+            'recurring': '{{ r.recurring  }}' === 'True',
+            'value': {{ r.value }},
+            'date': `{{ r.date.year }}-${mm}-${dd}`
+        }
+        expenses.push(obj)
+    '{% endfor %}'
+
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    const tableDiv = document.querySelector('#expenses-list')
-    addExpensesTable(tableDiv)
+    const div = document.querySelector('#table-list')
+    addExpensesTable(div)
 </script>
 {% endblock %}

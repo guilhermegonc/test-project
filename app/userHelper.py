@@ -8,6 +8,7 @@ class AuthUser:
         self.auth0_id = auth0['user_id']
         self.data = user
 
+
 def get_user(request):
     user = request.user
     authorized_user = get_auth0_user(user.email)
@@ -18,8 +19,10 @@ def get_user(request):
         user = Users.objects.get(auth0_id=authorized_user['user_id'])
     return AuthUser(authorized_user, user)
 
+
 def find(auth0_user):
     return Users.objects.filter(auth0_id=auth0_user['user_id']).exists()
+
 
 def get_user_object(request):
     user = request.user
@@ -29,5 +32,10 @@ def get_user_object(request):
     user = Users.objects.get(auth0_id=authorized_user['user_id'])
     return user
 
+
 def is_authenticated(request):
     return not(request.user.is_anonymous)
+
+
+def get_all_users():
+    return Users.objects.all()

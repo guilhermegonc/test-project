@@ -12,27 +12,22 @@ def dict_goals(goals):
 def parse_goals(goal):
     return {
             'id': goal.id,
-            'name': goal.name,
-            'type': goal.type,
-            'recurring': goal.recurring,
-            'value': goal.value,
-            'date': goal.date.strftime('%Y-%m-%d')
+            'date': goal.date.strftime('%d/%m/%Y'),
+            'expense': goal.expenses,
+            'saving': goal.savings,
         }
 
 def create_goal(payload):
-    expense = UserGoals(user=payload['user'],name=payload['name'],type=payload['type'],
-        date=payload['date'],value=payload['value'],recurring=payload['recurring'])
-    expense.save()
+    goal = UserGoals(user=payload['user'],date=payload['date'],
+                        expense=payload['expense'],saving=payload['saving'])
+    goal.save()
     return
 
 def edit_goal(payload):
     expense = UserGoals.objects.get(id=payload['id'], user=payload['user'])
-    expense.user = payload['user']
-    expense.name = payload['name']
-    expense.type = payload['type']
-    expense.date = payload['date']
-    expense.value = payload['value']
-    expense.recurring = payload['recurring']
+    expense.user = payload['date']
+    expense.name = payload['expense']
+    expense.type = payload['saving']
     expense.save()
     return
 

@@ -17,7 +17,7 @@ def parse_expense(e):
             'type': e.type,
             'recurring': e.recurring,
             'value': e.value,
-            'date': e.date.strftime('%Y-%m-%d')
+            'date': e.date.strftime('%d/%m/%Y')
         }
 
 def create_expense(payload):

@@ -6,6 +6,9 @@
 {% block extra-css %}
 {% endblock %}
 {% block extra-js %}
+    <script src="{% static 'expenses.js' %}"></script>
+    <script src="{% static 'expenses-table.js' %}"></script>
+    <script src="{% static 'expenses-modal.js' %}"></script>
 {% endblock %}
 
 {% block content%}
@@ -19,5 +22,7 @@
     <a class="btn shadow light" href="/">Voltar</a>
 </div>
 <script>
+const div = document.querySelector('#table-list')
+addGoalsTable(div)
 </script>
 {% endblock %}

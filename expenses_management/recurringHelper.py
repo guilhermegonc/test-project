@@ -2,7 +2,7 @@ from .models import UserExpenses, UserRecurringExpenses
 
 
 def get_recurring(user, active=[True, False]):
-    return UserRecurringExpenses.objects.filter(user=user, active__in=[active]).order_by('name')
+    return UserRecurringExpenses.objects.filter(user=user, active__in=active).order_by('name')
 
 
 def create_recurring(payload):

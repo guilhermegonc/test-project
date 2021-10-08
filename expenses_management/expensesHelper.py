@@ -1,4 +1,3 @@
-from sys import stdout
 from .models import UserExpenses
 
 
@@ -20,11 +19,13 @@ def parse_expense(e):
             'date': e.date.strftime('%d/%m/%Y')
         }
 
+
 def create_expense(payload):
     expense = UserExpenses(user=payload['user'],name=payload['name'],type=payload['type'],
         date=payload['date'],value=payload['value'],recurring=payload['recurring'])
     expense.save()
     return
+
 
 def edit_expense(payload):
     expense = UserExpenses.objects.get(id=payload['id'], user=payload['user'])
@@ -37,7 +38,8 @@ def edit_expense(payload):
     expense.save()
     return
 
-def destroy_expense(payload):
+
+def remove_expense(payload):
     expense = UserExpenses.objects.get(id=payload['id'], user=payload['user'])
     expense.delete()
     return

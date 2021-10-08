@@ -20,24 +20,24 @@ def parse_savings(s):
 
 
 def create_saving(payload):
-    expense = UserSavings(user=payload['user'],name=payload['name'],objective=payload['objective'],
+    saving = UserSavings(user=payload['user'],name=payload['name'],objective=payload['objective'],
         date=payload['date'],value=payload['value'])
-    expense.save()
+    saving.save()
     return
 
 
 def edit_saving(payload):
-    expense = UserSavings.objects.get(id=payload['id'], user=payload['user'])
-    expense.user = payload['user']
-    expense.name = payload['name']
-    expense.objective = payload['objective']
-    expense.date = payload['date']
-    expense.value = payload['value']
-    expense.save()
+    saving = UserSavings.objects.get(id=payload['id'], user=payload['user'])
+    saving.user = payload['user']
+    saving.name = payload['name']
+    saving.objective = payload['objective']
+    saving.date = payload['date']
+    saving.value = payload['value']
+    saving.save()
     return
 
 
-def destroy_saving(payload):
-    expense = UserSavings.objects.get(id=payload['id'], user=payload['user'])
-    expense.delete()
+def remove_saving(payload):
+    saving = UserSavings.objects.get(id=payload['id'], user=payload['user'])
+    saving.delete()
     return

@@ -3,6 +3,7 @@ class EditModal {
         this.type = type
         this.modal = this.addInputModal()
         this.form = this.createForm()
+        this.addID()
         this.addCurrentDate()
         this.addFormBtn()
     }
@@ -25,6 +26,11 @@ class EditModal {
     
         this.modal.appendChild(form)
         return form
+    }
+
+    addID = () => {
+        const id = document.querySelector('#id_id')
+        id.value = 0
     }
 
     addCurrentDate = () => {

@@ -1,4 +1,4 @@
-from .models import UserExpenses, UserRecurringExpenses
+from .models import UserRecurringExpenses
 
 
 def get_recurring(user, active=[True, False]):
@@ -6,24 +6,24 @@ def get_recurring(user, active=[True, False]):
 
 
 def create_recurring(payload):
-    expense = UserRecurringExpenses(user=payload['user'],name=payload['name'],type=payload['type'],
-        date=payload['date'],value=payload['value'],recurring=payload['recurring'])
-    expense.save()
+    recurring = UserRecurringExpenses(user=payload['user'],name=payload['name'],
+        type=payload['type'],value=payload['value'],active=payload['active'])
+    recurring.save()
     return
 
 
 def edit_recurring(payload):
-    expense = UserRecurringExpenses.objects.get(id=payload['id'], user=payload['user'])
-    expense.user = payload['user']
-    expense.name = payload['name']
-    expense.type = payload['type']
-    expense.value = payload['value']
-    expense.active = payload['active']
-    expense.save()
+    recurring = UserRecurringExpenses.objects.get(id=payload['id'], user=payload['user'])
+    recurring.user = payload['user']
+    recurring.name = payload['name']
+    recurring.type = payload['type']
+    recurring.value = payload['value']
+    recurring.active = payload['active']
+    recurring.save()
     return
 
 
-def destroy_recurring(payload):
-    expense = UserRecurringExpenses.objects.get(id=payload['id'], user=payload['user'])
-    expense.delete()
+def remove_recurring(payload):
+    recurring = UserRecurringExpenses.objects.get(id=payload['id'], user=payload['user'])
+    recurring.delete()
     return

@@ -34,7 +34,7 @@ class RecurringForm(forms.Form):
 class SavingsForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Serviço'}))
-    objective = forms.ChoiceField(required=False, choices=saving_choices)
+    objective = forms.ChoiceField(choices=saving_choices)
     value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '2021-01-01'}))
 
@@ -42,5 +42,5 @@ class SavingsForm(forms.Form):
 class GoalsForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
     date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '2021-01-01'}))
-    savings = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
-    expenses = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
+    savings = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'Economias R$ 00,00'}))
+    expenses = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'Despesas R$ 00,00'}))

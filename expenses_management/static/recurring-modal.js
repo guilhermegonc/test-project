@@ -1,6 +1,6 @@
 class RecurringModal {
     constructor(obj=null) {
-        this.html = new EditModal('expense')
+        this.html = new EditModal('recurring')
         this.obj = obj
         this.fullfillForm()
     }

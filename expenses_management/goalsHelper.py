@@ -7,21 +7,22 @@ def get_goals(user):
 
 def create_goal(payload):
     goal = UserGoals(user=payload['user'],date=payload['date'],
-                        expense=payload['expense'],saving=payload['saving'])
+                        expenses=payload['expense'],savings=payload['saving'])
     goal.save()
     return
 
 
 def edit_goal(payload):
-    expense = UserGoals.objects.get(id=payload['id'], user=payload['user'])
-    expense.user = payload['date']
-    expense.name = payload['expense']
-    expense.type = payload['saving']
-    expense.save()
+    goal = UserGoals.objects.get(id=payload['id'], user=payload['user'])
+    goal.user = payload['user']
+    goal.date = payload['date']
+    goal.expenses = payload['expense']
+    goal.savings = payload['saving']
+    goal.save()
     return
 
 
-def destroy_goal(payload):
-    expense = UserGoals.objects.get(id=payload['id'], user=payload['user'])
-    expense.delete()
+def remove_goal(payload):
+    goal = UserGoals.objects.get(id=payload['id'], user=payload['user'])
+    goal.delete()
     return

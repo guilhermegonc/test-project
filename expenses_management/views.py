@@ -4,11 +4,16 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from app.userHelper import get_user, get_user_object
-from .expensesHelper import create_expense, edit_expense, destroy_expense, get_expenses, dict_expenses
-from .savingsHelper import create_saving, edit_saving, destroy_saving, get_savings, dict_savings
-from .recurringHelper import create_recurring, edit_recurring, destroy_recurring, get_recurring
-from .goalsHelper import create_goal, edit_goal, destroy_goal, get_goals
+from .expensesHelper import create_expense, edit_expense, remove_expense, get_expenses, dict_expenses
+from .savingsHelper import create_saving, edit_saving, remove_saving, get_savings, dict_savings
+from .recurringHelper import create_recurring, edit_recurring, remove_recurring, get_recurring
+from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
+
+
+@login_required
+def dashboard(request):
+    return render(request, 'finance-dashboard.html')
 
 
 @login_required
@@ -49,12 +54,13 @@ def update_expense(request):
     
     return HttpResponseRedirect('/expenses')
 
+
 @login_required
 def destroy_expense(request):
     user = get_user_object(request)
     id = int(request.GET.get('id'))
     payload = {'user': user, 'id': id}
-    destroy_expense(payload)
+    remove_expense(payload)
     return HttpResponseRedirect('/expenses')
 
 
@@ -93,7 +99,7 @@ def destroy_recurring(request):
     user = get_user_object(request)
     id = int(request.GET.get('id'))
     payload = {'user': user, 'id': id}
-    destroy_recurring(payload)
+    remove_recurring(payload)
     return HttpResponseRedirect('/recurring-payments')
 
 
@@ -104,6 +110,7 @@ def goals(request):
     goals = get_goals(user.data.id)
     payload = {'user': user, 'form': form, 'rows': goals}
     return render(request, 'goals.html', payload)
+
 
 @login_required
 def update_goal(request):
@@ -117,8 +124,8 @@ def update_goal(request):
                 'id': int(form.cleaned_data['id']),
                 'user': user,
                 'date': form.cleaned_data['date'],
-                'savings': form.cleaned_data['savings'],
-                'expenses': form.cleaned_data['expenses'],
+                'saving': form.cleaned_data['savings'],
+                'expense': form.cleaned_data['expenses'],
             }
             create_goal(payload) if payload['id'] == 0 else edit_goal(payload)
     
@@ -129,13 +136,8 @@ def destroy_goal(request):
     user = get_user_object(request)
     id = int(request.GET.get('id'))
     payload = {'user': user, 'id': id}
-    destroy_goal(payload)
+    remove_goal(payload)
     return HttpResponseRedirect('/goals')
-
-
-
-
-
 
 
 @login_required
@@ -161,21 +163,20 @@ def update_saving(request):
     user = get_user_object(request)
 
     if request.method == 'POST':
-        form = ExpenseForm(request.POST)
+        form = SavingsForm(request.POST)
 
         if form.is_valid():
             payload = {
                 'id': int(form.cleaned_data['id']),
                 'user': user,
                 'name': form.cleaned_data['name'],
-                'type': form.cleaned_data['type'],
+                'objective': form.cleaned_data['objective'],
                 'date': form.cleaned_data['date'],
                 'value': float(form.cleaned_data['value']),
-                'recurring': bool(form.cleaned_data['recurring']),
             }
-            create_expense(payload) if payload['id'] == 0 else edit_expense(payload)
+            create_saving(payload) if payload['id'] == 0 else edit_saving(payload)
     
-    return HttpResponseRedirect('/expenses')
+    return HttpResponseRedirect('/savings')
 
 
 @login_required
@@ -183,5 +184,5 @@ def destroy_saving(request):
     user = get_user_object(request)
     id = int(request.GET.get('id'))
     payload = {'user': user, 'id': id}
-    destroy_expense(payload)
-    return HttpResponseRedirect('/expenses')
+    remove_saving(payload)
+    return HttpResponseRedirect('/savings')

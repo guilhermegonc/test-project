@@ -2,7 +2,7 @@ class ExpenseModal {
     constructor(obj=null) {
         this.html = new EditModal('expense')
         this.obj = obj
-        this.fullfillForm()
+        this.obj != null ? this.fullfillForm() : this.prefillForm()
     }
 
     fullfillForm = () => {
@@ -21,6 +21,14 @@ class ExpenseModal {
         const date = document.querySelector('#id_date')
         date.value = this.obj.date
 
+        const recurring = document.querySelector('#id_recurring')
+        recurring.value = this.obj.recurring
+
         this.html.addDestroyBtn(this.obj.id)
+    }
+
+    prefillForm = () => {
+        const recurring = document.querySelector('#id_recurring')
+        recurring.value = false
     }
 }

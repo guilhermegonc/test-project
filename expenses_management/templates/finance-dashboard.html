@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Gestão financeira{% endblock %}
+{% include "chart-js/chart.html"%}
+
+{% load static %}
+{% block extra-css %}
+{% endblock %}
+{% block extra-js %}
+    <script src="{% static 'expenses.js' %}"></script>
+    {% endblock %}
+
+{% block content%}
+<div class="txt-center m-b-24 light">
+    <h1 class="s3 m-0 m-b-24">Gestão financeira</h1>
+</div>
+<div id="summary" class="m-6 m-b-24">
+</div>
+<div class="fl-l btn-full">
+    <a class="btn shadow light m-b-12" href="/expenses">Despesas</a>
+    <a class="btn shadow light m-b-12" href="/savings">Economias</a>
+    <a class="btn shadow light m-b-12" href="/goals">Metas</a>
+    <a class="btn shadow light" href="/">Voltar</a>
+</div>
+<script>
+    
+</script>
+{% endblock %}

@@ -1,6 +1,6 @@
 class SavingModal {
     constructor(obj=null) {
-        this.html = new EditModal('expense')
+        this.html = new EditModal('saving')
         this.obj = obj
         this.form = this.html.form
         this.fullfillForm()

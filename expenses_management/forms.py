@@ -16,10 +16,10 @@ saving_choices = [
 
 class ExpenseForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
+    value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Serviço'}))
     type = forms.ChoiceField(required=False, choices=choices)
     date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '2021-01-01'}))
-    value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     recurring = forms.BooleanField(widget=forms.HiddenInput(), required=False)
 
 

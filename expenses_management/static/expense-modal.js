@@ -2,7 +2,8 @@ class ExpenseModal {
     constructor(obj=null) {
         this.html = new EditModal('expense')
         this.obj = obj
-        this.obj != null ? this.fullfillForm() : this.prefillForm()
+        this.obj != null ? this.fullfillForm() : null
+        this.addTypeHelper()
     }
 
     fullfillForm = () => {
@@ -27,8 +28,10 @@ class ExpenseModal {
         this.html.addDestroyBtn(this.obj.id)
     }
 
-    prefillForm = () => {
-        const recurring = document.querySelector('#id_recurring')
-        recurring.value = false
+    addTypeHelper = () => {
+        const name = document.querySelector('#id_name')
+        name.addEventListener('blur', function () {
+            console.log('type')
+        })
     }
 }

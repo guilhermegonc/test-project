@@ -1,5 +1,5 @@
 class EditModal {
-    constructor(type){
+    constructor(type, obj=null){
         this.type = type
         this.modal = this.addInputModal()
         this.form = this.createForm()

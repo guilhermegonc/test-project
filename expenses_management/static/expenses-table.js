@@ -1,6 +1,5 @@
 class ExpensesTable {
     constructor(div) {
-        this.parent = div
         this.html = new Table('expense')
         div.appendChild(this.html.table)        
 

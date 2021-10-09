@@ -4,16 +4,19 @@
 
 {% load static %}
 {% block extra-css %}
+<link rel="stylesheet" type="text/css" href="{% static 'finance-styles.css' %}">
 {% endblock %}
 {% block extra-js %}
-    <script src="{% static 'expenses.js' %}"></script>
+    <script src="{% static 'monthly-summary.js' %}"></script>
     {% endblock %}
 
 {% block content%}
 <div class="txt-center m-b-24 light">
-    <h1 class="s3 m-0 m-b-24">Gestão financeira</h1>
+    <h1 class="s3 m-0 m-b-24">Esse mês</h1>
 </div>
-<div id="summary" class="m-6 m-b-24">
+<div class="txt-center m-b-24">
+    <div id="summary" class="m-6 m-b-24">
+    </div>
 </div>
 <div class="fl-l btn-full">
     <a class="btn shadow light m-b-12" href="/expenses">Despesas</a>
@@ -22,6 +25,27 @@
     <a class="btn shadow light" href="/">Voltar</a>
 </div>
 <script>
+    let expenses = {}
+    '{% for k,v in sum.items %}'
+        expenses['{{ k }}'] = {{ v }}
+    '{% endfor %}'
     
+    let dd, mm
+    let goals = {}
+    '{% for l in limit %}'
+        dd = '{{ l.date.day }}'.padStart(2, '0')
+        mm = '{{ l.date.month }}'.padStart(2, '0')
+        goals[`{{ l.date.year }}-${mm}-${dd}`] = {{ l.expenses }}
+    '{% endfor %}'
+
+    const date = new Date()
+    yyyy = String(date.getFullYear())
+    mm = String(date.getMonth() + 1).padStart(2, '0')
+
+    const div = document.querySelector('#summary')
+    const sum = expenses[`${yyyy}-${mm}-01`].toFixed(2)
+    const limit = goals[`${yyyy}-${mm}-01`].toFixed(2)
+    const balance = limit - sum
+    new ExpenseCard(div, sum, limit, balance)
 </script>
 {% endblock %}

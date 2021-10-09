@@ -1,0 +1,31 @@
+.summary-card {
+    display: inline-block;
+    height: 136px;
+    max-width: 360px;
+    min-width: 300px;
+    margin: 0 auto 6px;
+    margin: 12px;
+}
+
+.card-footer {
+    display: inline-block;
+    width: 100%;
+    position: relative;
+    bottom: -48px;
+    left: -24px;
+    padding: 12px 24px;
+    border-radius: 2px;
+    background-color: #fff;
+}
+
+.good {
+    background-color: rgb(113, 218, 97);
+}
+
+.warning {
+    background-color: rgb(227, 146, 16);
+}
+
+.danger {
+    background-color: rgb(216, 93, 44);
+}

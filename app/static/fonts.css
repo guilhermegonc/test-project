@@ -73,6 +73,10 @@ input::placeholder {
     text-align: center;
 }
 
+.txt-left {
+    text-align: left;
+}
+
 @media (max-width: 992px) {
     .s1 {
         font-size: 48px;

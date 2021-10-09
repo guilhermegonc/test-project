@@ -34,18 +34,7 @@ class Table {
         `
         this.table.appendChild(row)
         row.addEventListener('click', function(){
-            if (type === 'expense') {
-                new ExpenseModal()
-            }
-            if (type === 'recurring') {
-                new RecurringModal()
-            }
-            if (type === 'goal') {
-                new GoalModal()
-            }
-            if (type === 'saving') {
-                new SavingModal()
-            }
+            new EditModal(type)
         })
     }
 

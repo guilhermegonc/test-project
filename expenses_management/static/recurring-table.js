@@ -41,7 +41,7 @@ class RecurringTable {
             `
             this.table.appendChild(row)
             row.addEventListener('click', function(){
-                new RecurringModal(data[i])
+                new EditModal('recurring', data[i])
             })
         }
     }

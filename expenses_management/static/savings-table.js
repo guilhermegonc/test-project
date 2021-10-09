@@ -42,7 +42,7 @@ class SavingsTable {
             `
             this.table.insertBefore(row, this.btn)            
             row.addEventListener('click', function(){
-                new SavingModal(data[i])
+                new EditModal('saving', data[i])
             })
         }
     }

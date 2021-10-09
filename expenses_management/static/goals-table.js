@@ -43,12 +43,12 @@ class GoalsTable {
             
             row.innerHTML = `
                 <td class="s9 str">${data[i].date}</td>
-                <td class="s9 light-gray m-0 red t-right">R$ ${data[i].expense}</td>
-                <td class="s9 light-gray m-0 green t-right">R$ ${data[i].saving}</td>
+                <td class="s9 light-gray m-0 red t-right">R$ ${data[i].expenses}</td>
+                <td class="s9 light-gray m-0 green t-right">R$ ${data[i].savings}</td>
             `
             this.table.appendChild(row)
             row.addEventListener('click', function(){
-                new GoalModal(data[i])
+                new EditModal('goal', data[i])
             })
         }
     }

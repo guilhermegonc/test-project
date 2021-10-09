@@ -9,8 +9,7 @@
     <script src="{% static 'expenses.js' %}"></script>
     <script src="{% static 'general-table.js' %}"></script>
     <script src="{% static 'goals-table.js' %}"></script>
-    <script src="{% static 'general-modal.js' %}"></script>
-    <script src="{% static 'goal-modal.js' %}"></script>
+    <script src="{% static 'edit-modal.js' %}"></script>
 
 {% endblock %}
 
@@ -35,8 +34,8 @@
         obj = {
             'id': {{ r.id }},
             'date': `{{ r.date.year }}-${mm}-${dd}`,
-            'expense': {{ r.expenses }}.toFixed(2),
-            'saving': {{ r.savings }}.toFixed(2),
+            'expenses': {{ r.expenses }}.toFixed(2),
+            'savings': {{ r.savings }}.toFixed(2),
         }
         goals.push(obj)
     '{% endfor %}'

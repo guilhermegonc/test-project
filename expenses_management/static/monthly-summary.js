@@ -7,7 +7,7 @@ class ExpenseCard{
         this.footer = this.addDetails()
         this.expenses = this.addTotalExpense(sum)
         this.limit = this.addTarget(limit)
-        this.populateData()
+        this.populateData(balance)
     }
 
     createCard = () => {
@@ -57,7 +57,15 @@ class ExpenseCard{
         return p
     }
 
-    populateData = () => {
-        this.card.classList.add('good')
+    populateData = (reference, limit) => {
+        let label
+        if (reference < 0) {
+            label = 'danger'
+        } else if (limit * 0.9 > reference){
+            label = 'warning'
+        } else {
+            label = 'good'
+        }
+        this.card.classList.add(label)
     }
 }

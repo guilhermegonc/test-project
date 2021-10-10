@@ -33,6 +33,8 @@
     </div>
     {% if is_auth %}
     <a class="btn shadow light" href="/logout">Sair</a>
+    {% else %}
+    <a class="btn shadow" href="login/auth0">Entrar</a>
     {% endif %}
 </div>
 {% endblock %}

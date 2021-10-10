@@ -31,14 +31,16 @@
     {% endfor %}
 </div>
 <a class="btn shadow light m-b-12" href="/settings">Configurações</a>
-<a class="btn shadow light" href="/">Voltar</a>
-    <script>
-        '{% for m in microcontrollers %}'
-            '{% for d in m.device %}'
-                '{% if d.active == True %}'
-                    let p{{ d.id }} = new BlynkObject('{{ m.token }}', '{{ d.pin }}', 'p{{ d.id }}')
-                '{% endif %}'
-            '{% endfor %}'
+<div class="footer-btn fl-r">
+    <a class="btn light m-b-12" href="/">Início</a>
+</div>
+<script>
+    '{% for m in microcontrollers %}'
+        '{% for d in m.device %}'
+            '{% if d.active == True %}'
+                let p{{ d.id }} = new BlynkObject('{{ m.token }}', '{{ d.pin }}', 'p{{ d.id }}')
+            '{% endif %}'
         '{% endfor %}'
-    </script>
+    '{% endfor %}'
+</script>
 {% endblock %}

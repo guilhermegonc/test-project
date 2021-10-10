@@ -1,6 +1,6 @@
 .summary-card {
     display: inline-block;
-    height: 136px;
+    height: 180px;
     margin: 12px;
 }
 
@@ -8,7 +8,7 @@
     display: inline-block;
     width: 100%;
     position: relative;
-    bottom: -48px;
+    bottom: -90px;
     left: -24px;
     padding: 12px 24px;
     border-radius: 2px;
@@ -33,7 +33,7 @@
         top: -58px;
         left: 0;
         margin: 0;
-        height: 160px;
+        height: 200px;
         width: calc(100% - 48px);
         border-radius: 0px;
     }

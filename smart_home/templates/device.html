@@ -17,6 +17,7 @@
         {{ form }}
         <input id="input-btn" type="submit" value="Atualizar" class="btn shadow btn-full">
     </form>
+    <a class="btn shadow light" href="/smart-home">Voltar</a>
     <script>
         let pins = {}
         '{% for device in microcontroller.device %}'
@@ -25,6 +26,8 @@
         '{% endfor %}'
         startListener(pins, '{{ first_pin }}')
     </script>
-    <a class="btn shadow light" href="/smart-home">Voltar</a>
+</div>
+<div class="footer-btn fl-r">
+    <a class="btn light m-b-12" href="/">Início</a>
 </div>
 {% endblock %}

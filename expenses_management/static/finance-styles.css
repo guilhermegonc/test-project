@@ -1,15 +1,16 @@
 .summary-card {
     display: inline-block;
     height: 180px;
-    margin: 12px;
+    margin: 24px 12px 12px;
+    width: 600px;
 }
 
 .card-footer {
     display: inline-block;
     width: 100%;
     position: relative;
-    bottom: -90px;
-    left: -24px;
+    bottom: -118px;
+    left: -248px;
     padding: 12px 24px;
     border-radius: 2px;
     background-color: #fff;
@@ -17,6 +18,8 @@
 
 .good {
     background-color: rgb(113, 218, 97);
+    /* background-image: url("https://images.unsplash.com/photo-1549490316-686f9b5d359f"); */
+    /* background-size: cover;ç */
 }
 
 .warning {
@@ -30,7 +33,7 @@
 @media (max-width: 992px) {
     .summary-card {
         position: relative;
-        top: -58px;
+        top: 0px;
         left: 0;
         margin: 0;
         height: 200px;
@@ -43,10 +46,6 @@
         left: 0;
         bottom: 4px;
         width: calc(100% - 48px);
-
-    }
-
-    .m-t-adjust {
-        margin-top: -58px;
+        border-radius: 0px;
     }
 }

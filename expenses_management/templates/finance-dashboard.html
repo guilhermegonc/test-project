@@ -11,16 +11,11 @@
     {% endblock %}
 
 {% block content%}
-<!-- <div class="txt-center m-b-24 light">
-    <h1 class="s3 m-0 m-b-24">Esse mês</h1>
-</div> -->
 <div class="txt-center m-b-24">
-    <div id="summary" class="m-b-24">
-        <div id="summary" class="m-b-24">
-        </div>
+    <div id="summary" class="m-b-24 header-scroll">
     </div>
 </div>
-<div class="fl-l btn-full m-t-adjust">
+<div class="fl-l btn-full">
     <a class="btn shadow light m-b-12" href="/expenses">Despesas</a>
     <a class="btn shadow light m-b-12" href="/savings">Economias</a>
     <a class="btn shadow light m-b-12" href="/goals">Metas</a>
@@ -29,6 +24,8 @@
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
+    const container = document.querySelector('.default-margin-bg')
+    container.style.margin = '0'
     let expenses = {}
     '{% for k,v in sum.items %}'
         expenses['{{ k }}'] = {{ v }}

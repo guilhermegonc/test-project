@@ -31,12 +31,23 @@
 @media (max-width: 992px) {
     .summary-card {
         position: relative;
-        top: -36px;
+        top: -58px;
+        left: 0;
         margin: 0;
         height: 160px;
+        width: calc(100% - 48px);
+        border-radius: 0px;
     }
 
     .card-footer {
-        bottom: -72px;
+        position: absolute;
+        left: 0;
+        bottom: 4px;
+        width: calc(100% - 48px);
+
+    }
+
+    .m-t-adjust {
+        margin-top: -58px;
     }
 }

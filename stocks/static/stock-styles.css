@@ -1,7 +1,6 @@
 .recommendation-tag {
     position: relative;
     float: right;
-
     top: -24px;
     right: -24px;
     height: 69px;
@@ -34,7 +33,7 @@
 
 @media (max-width: 992px) {
     .recommendation-tag {
-        height: 42px;
+        height: 63px;
         padding-top: 48px;
     }
 

@@ -29,7 +29,7 @@ class ExpenseCard{
         const h1 = document.createElement('h1')
         h1.id = 'expense-sum'
         h1.classList.add('s4', 'light', 'fl-l')
-        h1.innerText = `R$ ${balance}`
+        h1.innerText = `R$ ${balance.toFixed(2)}`
         this.card.appendChild(h1)
         return h1
     }

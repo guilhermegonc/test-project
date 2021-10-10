@@ -2,7 +2,6 @@
     display: inline-block;
     height: 136px;
     max-width: 360px;
-    margin: 0 auto 6px;
     margin: 12px;
 }
 
@@ -27,4 +26,17 @@
 
 .danger {
     background-color: rgb(216, 93, 44);
+}
+
+@media (max-width: 992px) {
+    .summary-card {
+        position: relative;
+        top: -36px;
+        margin: 0;
+        height: 160px;
+    }
+
+    .card-footer {
+        bottom: -72px;
+    }
 }

@@ -1,5 +1,8 @@
 const setupPage = () => {
     writeTitle()
+    let yyyy = String(date.getFullYear())
+    let mm = String(date.getMonth() + 1).padStart(2, '0')
+
     let sum = expenses[`${yyyy}-${mm}-01`].toFixed(2)
     let limit = goals[`${yyyy}-${mm}-01`][0].toFixed(2)
     let balance = limit - sum

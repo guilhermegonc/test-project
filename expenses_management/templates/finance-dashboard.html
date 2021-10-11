@@ -27,6 +27,8 @@
     const token = `{% csrf_token %}`
     const date = new Date()
     const div = document.querySelector('#summary')
+    const formExpense = `{{ form_expense }}`
+    const formSaving = `{{ form_saving }}`
 
     let expenses = {}
     '{% for k,v in expenses.items %}'
@@ -45,10 +47,6 @@
         mm = '{{ l.date.month }}'.padStart(2, '0')
         goals[`{{ l.date.year }}-${mm}-${dd}`] = [{{ l.expenses }}, {{ l.savings }}]
     '{% endfor %}'
-
-    yyyy = String(date.getFullYear())
-    mm = String(date.getMonth() + 1).padStart(2, '0')
-    
     setupPage()
     </script>
 {% endblock %}

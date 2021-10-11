@@ -10,16 +10,12 @@
         position: relative;
         top: 0px;
         left: 0;
-        margin: 0 12px 0 0;
-        height: calc(90vh - 60px);
-        width: calc(90% - 48px);
+        margin: 12px;
+        height: calc(55vh);
+        width: calc(85% - 48px);
         border-radius: 0px;
     }
 }
-
-/* .summary-card:hover {
-    background-color: #ddd;
-} */
 
 .card-footer {
     display: inline-block;
@@ -47,6 +43,12 @@
     height: 30px;
     position: relative;
     top:50px;
+}
+
+@media (max-width: 992px) {
+    .action-icon {
+        top: 0;
+    }
 }
 
 .action-icon:hover {

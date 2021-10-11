@@ -1,16 +1,51 @@
+const setupPage = () => {
+    writeTitle()
+    let sum = expenses[`${yyyy}-${mm}-01`].toFixed(2)
+    let limit = goals[`${yyyy}-${mm}-01`][0].toFixed(2)
+    let balance = limit - sum
+    const formExpense = `{{ form_expense }}`
+    new ExpenseCard('expense', formExpense, div, sum, limit, balance)
+    
+    sum = savings[`${yyyy}-${mm}-01`].toFixed(2)
+    limit = goals[`${yyyy}-${mm}-01`][1].toFixed(2)
+    balance = limit - sum
+    const formSaving = `{{ form_saving }}`
+    new ExpenseCard('saving', formSaving, div, sum, limit, balance)
+}
+
+const writeTitle = () => {
+    const months = {
+        0: 'Janeiro',
+        1: 'Favereiro',
+        2: 'Março',
+        3: 'Abril',
+        4: 'Maio',
+        5: 'Junho',
+        6: 'Julho',
+        7: 'Agosto',
+        8: 'Setembro',
+        9: 'Outubro',
+        10: 'Novembro',
+        11: 'Dezembro'
+    }
+    const title = document.querySelector('#title')
+    const month = months[new Date().getMonth()]
+    title.innerText = month
+}
+
 class ExpenseCard{
     constructor(type, form, div, sum, limit, balance){
         this.type = type
         this.card = this.createCard()
-        div.appendChild(this.card)
-        this.addSettings(form)
+        this.addShortcut(form)
         this.addLabel()
         this.balance = this.addBalance(balance)
-        this.expenses = this.addTotalExpense(sum)
+        this.expenses = this.addConsolidated(sum)
         this.limit = this.addTarget(limit)
-        this.recent = this.addRecent()
+        this.recent = this.addRecent(type)
         this.footer = this.addDetails()
-        this.populateData(sum, limit)
+        this.populateData(type, sum, limit)
+        div.appendChild(this.card)
     }
 
     createCard = () => {
@@ -20,22 +55,21 @@ class ExpenseCard{
         return div
     }
 
-    addSettings = form => {
+    addShortcut = (form, type) => {
         const i = document.createElement('i')
-        i.id = 'settings'
         i.classList.add('fl-r', 'light', 'material-icons', 'p-12', 'action-icon')
         i.innerText = 'add'
         i.addEventListener('click', function(){
-            new EditModal(this.type, form)
+            new EditModal(type, form)
         })
         this.card.appendChild(i)
     }
 
-    addLabel = () => {
+    addLabel = type => {
         const p = document.createElement('p')
         p.id = 'card-label'
         p.classList.add('s9', 'str', 'light', 'm-0', 'txt-left')
-        p.innerText = this.type === 'expense' ? 'Disponível' : 'A investir'
+        p.innerText = type === 'expense' ? 'Disponível' : 'A investir'
         this.card.appendChild(p)
     }
 
@@ -48,10 +82,10 @@ class ExpenseCard{
         return h1
     }
 
-    addTotalExpense = sum => {
+    addConsolidated = val => {
         const p = document.createElement('p')
         p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
-        p.innerText = `No mês: R$ ${sum}`
+        p.innerText = `No mês: R$ ${val}`
         this.card.appendChild(p)
         return p
     }
@@ -64,14 +98,12 @@ class ExpenseCard{
         return p
     }
 
-    addRecent = async() => {
+    addRecent = async(type) => {
         const p = document.createElement('p')
+        const uri = `load-${type}s?start=0&end=1`
         p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
         p.innerText = 'Carregando'
         this.card.appendChild(p)
-
-
-        const uri = `load-${this.type}s?start=0&end=1`
         const obj = await fetch(uri)
         let name = await obj.json()
         p.innerText = `Recente: ${name['data'][0].name}`
@@ -86,15 +118,15 @@ class ExpenseCard{
         btn.classList.add('btn', 'light', 'card-footer')
         btn.href = `/${this.type}`
         btn.innerText = 'Ver mais'
-
         div.appendChild(btn)
+
         this.card.appendChild(div)
         return div
     }
 
-    populateData = (sum, limit) => {
+    populateData = (type, sum, limit) => {
         let label
-        if (this.type != 'expense') {
+        if (type != 'expense') {
             label = 'generic'
         } else if (sum > limit) {
             label = 'danger'

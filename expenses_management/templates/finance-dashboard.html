@@ -13,24 +13,21 @@
     {% endblock %}
 
 {% block content%}
+<div class="txt-center m-b-24 light">
+    <h1 id="title" class="s3 m-0 m-b-24">Esse mês</h1>
+</div>
 <div class="txt-center m-b-24">
     <div id="summary" class="m-b-24 header-scroll">
     </div>
 </div>
-<!-- <div class="fl-l btn-full">
-    <a class="btn shadow light m-b-12" href="/savings">Economias</a>
-</div> -->
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
-    const formExpense = `{{ form_expense }}`
-    const formSaving = `{{ form_saving }}`
     const token = `{% csrf_token %}`
+    const date = new Date()
+    const div = document.querySelector('#summary')
 
-    const container = document.querySelector('.default-margin-bg')
-    container.style.margin = '0'
-    
     let expenses = {}
     '{% for k,v in expenses.items %}'
         expenses['{{ k }}'] = {{ v }}
@@ -49,19 +46,9 @@
         goals[`{{ l.date.year }}-${mm}-${dd}`] = [{{ l.expenses }}, {{ l.savings }}]
     '{% endfor %}'
 
-    const date = new Date()
     yyyy = String(date.getFullYear())
     mm = String(date.getMonth() + 1).padStart(2, '0')
-
-    let div = document.querySelector('#summary')
-    let sum = expenses[`${yyyy}-${mm}-01`].toFixed(2)
-    let limit = goals[`${yyyy}-${mm}-01`][0].toFixed(2)
-    let balance = limit - sum
-    new ExpenseCard('expense', formExpense, div, sum, limit, balance)
     
-    sum = savings[`${yyyy}-${mm}-01`].toFixed(2)
-    limit = goals[`${yyyy}-${mm}-01`][1].toFixed(2)
-    balance = limit - sum
-    new ExpenseCard('saving', formSaving, div, sum, limit, balance)
+    setupPage()
     </script>
 {% endblock %}

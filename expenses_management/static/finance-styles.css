@@ -47,7 +47,8 @@
 
 @media (max-width: 992px) {
     .action-icon {
-        top: 0;
+        top: -24px;
+        right: -24px;
     }
 }
 

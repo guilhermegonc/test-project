@@ -1,19 +1,22 @@
 const setupPage = () => {
     writeTitle()
+    const truncDate = truncCurrentDate()
+
+    let consolidated = expenses[truncDate].toFixed(2)
+    let limit = goals[truncDate][0].toFixed(2)
+    let balance = limit - consolidated
+    new ExpenseCard('expense', formExpense, div, consolidated, limit, balance)
+    
+    consolidated = savings[truncDate].toFixed(2)
+    limit = goals[truncDate][1].toFixed(2)
+    balance = limit - consolidated
+    new ExpenseCard('saving', formSaving, div, consolidated, limit, balance)
+}
+
+const truncCurrentDate = () => {
     let yyyy = String(date.getFullYear())
     let mm = String(date.getMonth() + 1).padStart(2, '0')
-
-    let sum = expenses[`${yyyy}-${mm}-01`].toFixed(2)
-    let limit = goals[`${yyyy}-${mm}-01`][0].toFixed(2)
-    let balance = limit - sum
-    const formExpense = `{{ form_expense }}`
-    new ExpenseCard('expense', formExpense, div, sum, limit, balance)
-    
-    sum = savings[`${yyyy}-${mm}-01`].toFixed(2)
-    limit = goals[`${yyyy}-${mm}-01`][1].toFixed(2)
-    balance = limit - sum
-    const formSaving = `{{ form_saving }}`
-    new ExpenseCard('saving', formSaving, div, sum, limit, balance)
+    return `${yyyy}-${mm}-01`
 }
 
 const writeTitle = () => {

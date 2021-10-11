@@ -122,7 +122,7 @@ class ExpenseCard{
 
         const btn = document.createElement('a')
         btn.classList.add('btn', 'light', 'card-footer')
-        btn.href = `/${type}`
+        btn.href = `/${type}s`
         btn.innerText = 'Ver mais'
         div.appendChild(btn)
 

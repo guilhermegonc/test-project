@@ -1,9 +1,9 @@
 class EditModal {
-    constructor(type, obj=null){
+    constructor(type, form, obj=null){
         this.type = type
         this.obj = obj
         this.modal = this.addInputModal()
-        this.form = this.createForm()
+        this.form = this.createForm(form)
         this.addFormBtn()
         this.prefillForm()
         this.obj != null ? this.fullfillForm() : null
@@ -17,14 +17,14 @@ class EditModal {
         return modal
     }
 
-    createForm = () => {
+    createForm = (formElement) => {
         const form = document.createElement('form')
         form.classList.add('form-group')
         form.action = `/update-${this.type}`
         form.method = 'post'
     
         form.innerHTML = token
-        form.innerHTML += forms
+        form.innerHTML += formElement
     
         this.modal.appendChild(form)
         return form

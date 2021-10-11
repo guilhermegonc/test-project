@@ -1,31 +1,32 @@
 class ExpenseCard{
-    constructor(div, sum, limit, balance){
+    constructor(type, form, div, sum, limit, balance){
+        this.type = type
         this.card = this.createCard()
         div.appendChild(this.card)
-        this.addSettings()
+        this.addSettings(form)
         this.addLabel()
         this.balance = this.addBalance(balance)
         this.expenses = this.addTotalExpense(sum)
         this.limit = this.addTarget(limit)
         this.recent = this.addRecent()
-        this.populateData(balance)
         this.footer = this.addDetails()
+        this.populateData(sum, limit)
     }
 
     createCard = () => {
         const div = document.createElement('div')
         div.id = 'total-expenses'
-        div.classList.add('summary-card', 'shadow-mobile', 'p-24', 'm-b-24')
+        div.classList.add('summary-card', 'shadow', 'p-24', 'm-b-24')
         return div
     }
 
-    addSettings = () => {
+    addSettings = form => {
         const i = document.createElement('i')
         i.id = 'settings'
         i.classList.add('fl-r', 'light', 'material-icons', 'p-12', 'action-icon')
         i.innerText = 'add'
         i.addEventListener('click', function(){
-            new EditModal('expense')
+            new EditModal(this.type, form)
         })
         this.card.appendChild(i)
     }
@@ -34,7 +35,7 @@ class ExpenseCard{
         const p = document.createElement('p')
         p.id = 'card-label'
         p.classList.add('s9', 'str', 'light', 'm-0', 'txt-left')
-        p.innerText = 'Disponível'
+        p.innerText = this.type === 'expense' ? 'Disponível' : 'A investir'
         this.card.appendChild(p)
     }
 
@@ -50,7 +51,7 @@ class ExpenseCard{
     addTotalExpense = sum => {
         const p = document.createElement('p')
         p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
-        p.innerText = `Gasto: R$ ${sum}`
+        p.innerText = `No mês: R$ ${sum}`
         this.card.appendChild(p)
         return p
     }
@@ -58,7 +59,7 @@ class ExpenseCard{
     addTarget = limit => {        
         const p = document.createElement('p')
         p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
-        p.innerText = `Limite: R$ ${limit}`
+        p.innerText = `Planejado: R$ ${limit}`
         this.card.appendChild(p)
         return p
     }
@@ -69,7 +70,8 @@ class ExpenseCard{
         p.innerText = 'Carregando'
         this.card.appendChild(p)
 
-        const uri = 'load-expenses?start=0&end=1'
+
+        const uri = `load-${this.type}s?start=0&end=1`
         const obj = await fetch(uri)
         let name = await obj.json()
         p.innerText = `Recente: ${name['data'][0].name}`
@@ -82,7 +84,7 @@ class ExpenseCard{
 
         const btn = document.createElement('a')
         btn.classList.add('btn', 'light', 'card-footer')
-        btn.href = '/expenses'
+        btn.href = `/${this.type}`
         btn.innerText = 'Ver mais'
 
         div.appendChild(btn)
@@ -90,11 +92,13 @@ class ExpenseCard{
         return div
     }
 
-    populateData = (reference, limit) => {
+    populateData = (sum, limit) => {
         let label
-        if (reference < 0) {
+        if (this.type != 'expense') {
+            label = 'generic'
+        } else if (sum > limit) {
             label = 'danger'
-        } else if (limit * 0.9 > reference){
+        } else if (sum > limit * 0.9) {
             label = 'warning'
         } else {
             label = 'good'

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from app.userHelper import get_user, get_user_object
 from .expensesHelper import create_expense, edit_expense, remove_expense, get_expenses, dict_expenses, get_monthly_balance
-from .savingsHelper import create_saving, edit_saving, remove_saving, get_savings, dict_savings
+from .savingsHelper import create_saving, edit_saving, remove_saving, get_savings, dict_savings, get_monthly_saving
 from .recurringHelper import create_recurring, edit_recurring, remove_recurring, get_recurring
 from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
@@ -16,9 +16,10 @@ def dashboard(request):
     user = get_user(request)
     date = datetime.datetime.now().year
     expenses_sum = get_monthly_balance(user.data.id, date)
-    expenses_limit = get_goals(user.data.id)
-    form = ExpenseForm()
-    payload = {'sum': expenses_sum, 'limit': expenses_limit, 'form_expense': form}
+    savings_sum = get_monthly_saving(user.data.id, date)
+    limits = get_goals(user.data.id)
+    payload = {'expenses': expenses_sum, 'savings': savings_sum, 'limit': limits, 
+        'form_expense': ExpenseForm(), 'form_saving': SavingsForm()}
     return render(request, 'finance-dashboard.html', payload)
 
 

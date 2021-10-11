@@ -46,3 +46,4 @@ const createParagraph = (content, text) => {
 
     content.appendChild(paragraph)
 }
+

@@ -48,7 +48,7 @@ class GoalsTable {
             `
             this.table.appendChild(row)
             row.addEventListener('click', function(){
-                new EditModal('goal', data[i])
+                new EditModal('goal', forms, data[i])
             })
         }
     }

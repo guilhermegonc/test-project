@@ -34,7 +34,7 @@ class Table {
         `
         this.table.appendChild(row)
         row.addEventListener('click', function(){
-            new EditModal(type)
+            new EditModal(type, forms)
         })
     }
 

@@ -42,7 +42,7 @@ class ExpensesTable {
             `
             this.table.insertBefore(row, this.btn)            
             row.addEventListener('click', function(){
-                new EditModal('expense', data[i])
+                new EditModal('expense', forms, data[i])
             })
         }
     }

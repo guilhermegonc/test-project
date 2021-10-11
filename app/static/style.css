@@ -45,10 +45,12 @@ label{
     flex-wrap: wrap;
     justify-content: center;
     background-image: url("https://images.unsplash.com/photo-1553356084-58ef4a67b2a7");
+    background-size: cover;
 }
 
 .empty-bg {
     background-image: url("https://images.unsplash.com/photo-1542401886-65d6c61db217");
+    background-size: cover;
 }
 
 .default-margin-bg {

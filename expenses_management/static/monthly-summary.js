@@ -5,12 +5,12 @@ const setupPage = () => {
     let consolidated = expenses[truncDate].toFixed(2)
     let limit = goals[truncDate][0].toFixed(2)
     let balance = limit - consolidated
-    new ExpenseCard('expenses', formExpense, div, consolidated, limit, balance)
+    new ExpenseCard('expense', formExpense, div, consolidated, limit, balance)
     
     consolidated = savings[truncDate].toFixed(2)
     limit = goals[truncDate][1].toFixed(2)
     balance = limit - consolidated
-    new ExpenseCard('savings', formSaving, div, consolidated, limit, balance)
+    new ExpenseCard('saving', formSaving, div, consolidated, limit, balance)
 }
 
 const truncCurrentDate = () => {
@@ -43,13 +43,13 @@ class ExpenseCard{
     constructor(type, form, div, sum, limit, balance){
         this.type = type
         this.card = this.createCard()
-        this.addShortcut(form)
-        this.addLabel()
+        this.addShortcut(form, type)
+        this.addLabel(type)
         this.balance = this.addBalance(balance)
         this.expenses = this.addConsolidated(sum)
         this.limit = this.addTarget(limit)
         this.recent = this.addRecent(type)
-        this.footer = this.addDetails()
+        this.footer = this.addDetails(type)
         this.populateData(type, sum, limit)
         div.appendChild(this.card)
     }
@@ -75,7 +75,7 @@ class ExpenseCard{
         const p = document.createElement('p')
         p.id = 'card-label'
         p.classList.add('s9', 'str', 'light', 'm-0', 'txt-left')
-        p.innerText = type === 'expenses' ? 'Disponível' : 'A investir'
+        p.innerText = type == 'expense' ? 'Disponível' : 'A investir'
         this.card.appendChild(p)
     }
 
@@ -116,13 +116,13 @@ class ExpenseCard{
         return p
     }
 
-    addDetails = () => {
+    addDetails = type => {
         const div = document.createElement('div')
         div.classList.add('fl-l', 'btn-full')
 
         const btn = document.createElement('a')
         btn.classList.add('btn', 'light', 'card-footer')
-        btn.href = `/${this.type}`
+        btn.href = `/${type}`
         btn.innerText = 'Ver mais'
         div.appendChild(btn)
 
@@ -132,7 +132,7 @@ class ExpenseCard{
 
     populateData = (type, sum, limit) => {
         let label
-        if (type != 'expenses') {
+        if (type != 'expense') {
             label = 'generic'
         } else if (sum > limit) {
             label = 'danger'

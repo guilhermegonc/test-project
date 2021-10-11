@@ -5,12 +5,12 @@ const setupPage = () => {
     let consolidated = expenses[truncDate].toFixed(2)
     let limit = goals[truncDate][0].toFixed(2)
     let balance = limit - consolidated
-    new ExpenseCard('expense', formExpense, div, consolidated, limit, balance)
+    new ExpenseCard('expenses', formExpense, div, consolidated, limit, balance)
     
     consolidated = savings[truncDate].toFixed(2)
     limit = goals[truncDate][1].toFixed(2)
     balance = limit - consolidated
-    new ExpenseCard('saving', formSaving, div, consolidated, limit, balance)
+    new ExpenseCard('savings', formSaving, div, consolidated, limit, balance)
 }
 
 const truncCurrentDate = () => {
@@ -75,7 +75,7 @@ class ExpenseCard{
         const p = document.createElement('p')
         p.id = 'card-label'
         p.classList.add('s9', 'str', 'light', 'm-0', 'txt-left')
-        p.innerText = type === 'expense' ? 'Disponível' : 'A investir'
+        p.innerText = type === 'expenses' ? 'Disponível' : 'A investir'
         this.card.appendChild(p)
     }
 
@@ -106,7 +106,7 @@ class ExpenseCard{
 
     addRecent = async(type) => {
         const p = document.createElement('p')
-        const uri = `load-${type}s?start=0&end=1`
+        const uri = `load-${type}?start=0&end=1`
         p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
         p.innerText = 'Carregando'
         this.card.appendChild(p)
@@ -122,7 +122,7 @@ class ExpenseCard{
 
         const btn = document.createElement('a')
         btn.classList.add('btn', 'light', 'card-footer')
-        btn.href = `/${this.type}s`
+        btn.href = `/${this.type}`
         btn.innerText = 'Ver mais'
         div.appendChild(btn)
 
@@ -132,7 +132,7 @@ class ExpenseCard{
 
     populateData = (type, sum, limit) => {
         let label
-        if (type != 'expense') {
+        if (type != 'expenses') {
             label = 'generic'
         } else if (sum > limit) {
             label = 'danger'

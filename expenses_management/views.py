@@ -17,7 +17,8 @@ def dashboard(request):
     date = datetime.datetime.now().year
     expenses_sum = get_monthly_balance(user.data.id, date)
     expenses_limit = get_goals(user.data.id)
-    payload = {'sum': expenses_sum, 'limit': expenses_limit}
+    form = ExpenseForm()
+    payload = {'sum': expenses_sum, 'limit': expenses_limit, 'form_expense': form}
     return render(request, 'finance-dashboard.html', payload)
 
 

@@ -1,6 +1,6 @@
 /* Fonts */
 h1, h2, h3, h4, h5, h6, p {
-    font-family: serif;
+    font-family: Montserrat, sans-serif;
     margin: 0 0 12px;
 }
 
@@ -75,6 +75,10 @@ input::placeholder {
 
 .txt-left {
     text-align: left;
+}
+
+.txt-right {
+    text-align: right;
 }
 
 /* @media (max-width: 992px) {

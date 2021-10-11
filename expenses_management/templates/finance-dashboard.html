@@ -8,6 +8,8 @@
 {% endblock %}
 {% block extra-js %}
     <script src="{% static 'monthly-summary.js' %}"></script>
+    <script src="{% static 'edit-modal.js' %}"></script>
+    <script src="{% static 'services-dict.js' %}"></script>
     {% endblock %}
 
 {% block content%}
@@ -16,14 +18,15 @@
     </div>
 </div>
 <div class="fl-l btn-full">
-    <a class="btn shadow light m-b-12" href="/expenses">Despesas</a>
+    <!-- <a class="btn shadow light m-b-12" href="/expenses">Despesas</a> -->
     <a class="btn shadow light m-b-12" href="/savings">Economias</a>
-    <a class="btn shadow light m-b-12" href="/goals">Metas</a>
 </div>
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
+    const forms = `{{ form_expense }}`
+    const token = `{% csrf_token %}`
     const container = document.querySelector('.default-margin-bg')
     container.style.margin = '0'
     let expenses = {}
@@ -48,5 +51,5 @@
     const limit = goals[`${yyyy}-${mm}-01`].toFixed(2)
     const balance = limit - sum
     new ExpenseCard(div, sum, limit, balance)
-</script>
+    </script>
 {% endblock %}

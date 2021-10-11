@@ -12,7 +12,7 @@ class EditModal {
 
     addInputModal = () => {
         const modal = addModal()
-        const title = 'Editar'
+        const title = this.obj != null ? 'Editar' : 'Adicionar'
         createTitle(modal, title)
         return modal
     }

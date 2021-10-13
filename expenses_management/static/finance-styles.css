@@ -42,7 +42,7 @@
 @media (max-width: 992px) {
     .card-footer {
         left: -24px;
-        bottom: -218px;
+        bottom: -156px;
         width: calc(100% - 48px);
         border-radius: 0px;
     }

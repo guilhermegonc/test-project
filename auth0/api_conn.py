@@ -1,8 +1,10 @@
 import http.client
 import os, json
+import requests
 
 
 def get_auth0_user(email):
+    email = requests.utils.quote(email)
     client_domain = os.environ.get('AUTH0_DOMAIN')
     client_id = os.environ.get('M_TO_M_AUTH0_CLIENT_ID')
     client_secret = os.environ.get('M_TO_M_AUTH0_CLIENT_SECRET')
@@ -37,3 +39,20 @@ def refresh_token(domain, c_id, secret):
     data = json.loads(data)
 
     return data['access_token']
+
+
+def delete_auth0_user(id):
+    client_domain = os.environ.get('AUTH0_DOMAIN')
+    client_id = os.environ.get('M_TO_M_AUTH0_CLIENT_ID')
+    client_secret = os.environ.get('M_TO_M_AUTH0_CLIENT_SECRET')
+    
+    token = refresh_token(client_domain, client_id, client_secret)
+
+    headers = {'authorization': f'Bearer {token}'}    
+    conn = http.client.HTTPSConnection(client_domain)
+    conn.request("DELETE", f'https://{client_domain}/api/v2/users/{id}', headers=headers)
+    
+    res = conn.getresponse()
+    data = res.read()
+
+    return res

@@ -18,7 +18,9 @@ urlpatterns = [
     path('', app.views.index, name='index'),
     path('webhook', app.views.webhook),
     path('automation_webhook', app.views.automation_webhook),
-    
+    path('profile', app.views.profile),
+    path('destroy-user', app.views.destroy_user),
+
     path('tictactoe', tic_tac_toe.views.tic_tac_toe, name='tic-tac-toe'),
     
     path('embed-form', forms.views.embed_form, name='embed-form'),

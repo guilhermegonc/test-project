@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Página inicial{% endblock %}
+{% block content %}
+<div>
+    <div class="txt-center m-b-12">
+        <img class="avatar" src="{{ user.auth0.picture }}" alt="profile picture"></div>
+    <h1 class="s6 m-0 m-b-24 txt-center light">
+        <a href="/" class="clean-a">
+            <i class="material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
+        </a>{{ user.auth0.name }}
+    </h1>
+</div>
+<div class="m-b-24">
+    <table class="shadow m-a"><tr>
+        <th class="s10">Dados do usuário</th>
+        <th class="s10 main-column t-right"></th>
+        </tr><tr>
+            <td class="s10 light-gray">Criado em:</td>
+            <td class="s9 m-0 main-column t-right">{{ user.auth0.created_at }}</td>
+        </tr><tr>
+            <td class="s10 light-gray">Último login:</td>
+            <td class="s9 m-0 main-column t-right">{{ user.auth0.last_login }}</td>
+        </tr><tr>
+            <td class="s10 light-gray">IP:</td>
+            <td class="s9 m-0 main-column t-right">{{ user.auth0.last_ip }}</td>
+        </tr><tr>
+            <td class="s10 light-gray">Total de logins:</td>
+            <td class="s9 m-0 main-column t-right">{{ user.auth0.logins_count }}</td>
+        </tr>
+    </table>
+</div>
+    <a class="btn shadow m-b-12 danger" href="/destroy-user">Excluir conta</a>
+    <a class="btn shadow light" href="/logout">Sair</a>
+</div>
+<div class="footer-btn fl-r">
+    <a class="btn light m-b-12" href="/">Início</a>
+</div>
+{% endblock %}

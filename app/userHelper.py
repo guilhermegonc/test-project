@@ -6,6 +6,7 @@ class AuthUser:
     def __init__(self, auth0, user):
         self.auth0_name = auth0['name']
         self.auth0_id = auth0['user_id']
+        self.auth0 = auth0
         self.data = user
 
 
@@ -13,7 +14,7 @@ def get_user(request):
     user = request.user
     authorized_user = get_auth0_user(user.email)
     if not find(authorized_user):
-        user = Users(auth0_id=authorized_user['user_id'], role='admin')
+        user = Users(auth0_id=authorized_user['user_id'], role='user')
         user.save()
     else:
         user = Users.objects.get(auth0_id=authorized_user['user_id'])
@@ -39,3 +40,10 @@ def is_authenticated(request):
 
 def get_all_users():
     return Users.objects.all()
+
+
+def anonimate_user(id):
+    user = Users.objects.get(id=id)
+    user.auth0_id = 'removed'
+    user.save()
+    return

@@ -347,6 +347,13 @@ span.token {
     }
 }
 
+.avatar {
+    border: 1px solid white;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+}
+
 /* Margins */
 
 .m-0 {

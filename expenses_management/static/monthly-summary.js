@@ -1,16 +1,30 @@
 const setupPage = () => {
-    writeTitle()
+    writePageTitle()
     const truncDate = truncCurrentDate()
-
-    let consolidated = expenses[truncDate].toFixed(2)
-    let limit = goals[truncDate][0].toFixed(2)
-    let balance = limit - consolidated
-    new ExpenseCard('expense', formExpense, div, consolidated, limit, balance)
     
-    consolidated = savings[truncDate].toFixed(2)
-    limit = goals[truncDate][1].toFixed(2)
-    balance = limit - consolidated
-    new ExpenseCard('saving', formSaving, div, consolidated, limit, balance)
+    let modalTitle = 'Disponível:'
+    let objectName = 'expense'
+    let paginationUri = '/load-expenses'
+    let requestUri = '/expenses'
+    let realized = expenses[truncDate].toFixed(2)
+    let planned = goals[truncDate][0].toFixed(2)
+    let balance = planned - realized
+    let fontColor = 'light'
+    let cardColor = planned * 0.9 > realized ? 'good' : 'danger'
+    new ExpenseCard(div, formExpense, modalTitle, objectName, paginationUri, 
+        requestUri, realized, planned, balance, fontColor, cardColor)
+    
+    modalTitle = 'A investir:'
+    objectName = 'saving'
+    paginationUri = '/load-savings'
+    requestUri = '/savings'
+    realized = savings[truncDate].toFixed(2)
+    planned = goals[truncDate][1].toFixed(2)
+    balance = planned - realized
+    fontColor = 'black'
+    cardColor = 'generic'
+    new ExpenseCard(div, formExpense, modalTitle, objectName, paginationUri, 
+        requestUri, realized, planned, balance, fontColor, cardColor)
 }
 
 const truncCurrentDate = () => {
@@ -19,7 +33,7 @@ const truncCurrentDate = () => {
     return `${yyyy}-${mm}-01`
 }
 
-const writeTitle = () => {
+const writePageTitle = () => {
     const months = {
         0: 'Janeiro',
         1: 'Favereiro',
@@ -40,107 +54,100 @@ const writeTitle = () => {
 }
 
 class ExpenseCard{
-    constructor(type, form, div, sum, limit, balance){
-        this.type = type
-        this.card = this.createCard()
-        this.addShortcut(form, type)
-        this.addLabel(type)
-        this.balance = this.addBalance(balance)
-        this.expenses = this.addConsolidated(sum)
-        this.limit = this.addTarget(limit)
-        this.recent = this.addRecent(type)
-        this.footer = this.addDetails(type)
-        this.populateData(type, sum, limit)
+    constructor(div, form, cardTitle, modalType, requestURI, 
+        viewMoreURI, realized, planned, balance, fontColor, cardColor) {
+        
+        this.realized = realized
+        this.planned = planned
+        this.balance = balance
+        this.card = this.createCard(fontColor, cardColor)
+        
+        this.addShortcut(modalType, form)
+        this.addLabel(cardTitle)
+        this.addTitle(balance)
+        this.addSubtext('No mês: R$', realized)
+        this.addSubtext('Planejado: R$', planned)
+        this.addRecent(requestURI)
+        this.addLoadBtn(viewMoreURI)
+        
         div.appendChild(this.card)
     }
 
-    createCard = () => {
+    createCard = (font, color) => {
         const div = document.createElement('div')
-        div.id = 'total-expenses'
-        div.classList.add('summary-card', 'shadow', 'p-24', 'm-b-24')
+        div.classList.add('summary-card', 'shadow', 'p-24', 'm-b-24', 'txt-left', font, color)
         return div
     }
 
-    addShortcut = (form, type) => {
+    addShortcut = (modalType, form) => {
         const i = document.createElement('i')
-        i.classList.add('fl-r', 'light', 'material-icons', 'p-12', 'action-icon')
+        i.classList.add('fl-r', 'material-icons', 'p-12', 'action-icon')
         i.innerText = 'add'
         i.addEventListener('click', function(){
-            new EditModal(type, form)
+            new EditModal(modalType, form)
         })
         this.card.appendChild(i)
     }
 
-    addLabel = type => {
+    addLabel = text => {
         const p = document.createElement('p')
         p.id = 'card-label'
-        p.classList.add('s9', 'str', 'light', 'm-0', 'txt-left')
-        p.innerText = type == 'expense' ? 'Disponível' : 'A investir'
+        p.classList.add('s9', 'str', 'm-0')
+        p.innerText = text
         this.card.appendChild(p)
     }
 
-    addBalance = balance => {
+    addTitle = value => {
         const h1 = document.createElement('h1')
         h1.id = 'expense-sum'
-        h1.classList.add('s3', 'light', 'txt-left', 'm-b-12')
-        h1.innerText = `R$ ${balance.toFixed(2)}`
+        h1.classList.add('s3', 'm-b-12')
+        h1.innerText = `R$ ${value.toFixed(2)}`
         this.card.appendChild(h1)
-        return h1
     }
 
-    addConsolidated = val => {
+    addSubtext = (text, value) => {
         const p = document.createElement('p')
-        p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
-        p.innerText = `No mês: R$ ${val}`
+        p.classList.add('s9', 'm-0', 'str')
+        p.innerText = `${text} ${value}`
         this.card.appendChild(p)
-        return p
     }
 
-    addTarget = limit => {        
+    addRecent = async(requestURI) => {
         const p = document.createElement('p')
-        p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
-        p.innerText = `Planejado: R$ ${limit}`
-        this.card.appendChild(p)
-        return p
-    }
-
-    addRecent = async(type) => {
-        const p = document.createElement('p')
-        const uri = `load-${type}?start=0&end=1`
-        p.classList.add('s9', 'm-0', 'txt-left', 'str', 'light')
+        const uri = `${requestURI}?start=0&end=1`
+        p.classList.add('s9', 'm-0', 'str')
         p.innerText = 'Carregando'
         this.card.appendChild(p)
         const obj = await fetch(uri)
         let name = await obj.json()
         p.innerText = `Recente: ${name['data'][0].name}`
-        return p
     }
 
-    addDetails = type => {
+    addLoadBtn = uri => {
         const div = document.createElement('div')
         div.classList.add('fl-l', 'btn-full')
-
         const btn = document.createElement('a')
-        btn.classList.add('btn', 'light', 'card-footer')
-        btn.href = `/${type}s`
+        btn.classList.add('btn', 'light', 'card-footer', 'primary')
+        btn.href = `${uri}`
         btn.innerText = 'Ver mais'
         div.appendChild(btn)
-
         this.card.appendChild(div)
-        return div
+        this.addSettingsBtn()
     }
 
-    populateData = (type, sum, limit) => {
-        let label
-        if (type != 'expense') {
-            label = 'generic'
-        } else if (sum > limit) {
-            label = 'danger'
-        } else if (sum > limit * 0.9) {
-            label = 'warning'
-        } else {
-            label = 'good'
-        }
-        this.card.classList.add(label)
+    addSettingsBtn = () => {
+        const div = document.createElement('div')
+        div.classList.add('btn-full')
+        const btn = document.createElement('a')
+        btn.classList.add('btn', 'light', 'card-footer', 'secondary')
+        btn.href = `/goals`
+        
+        const i = document.createElement('i')
+        i.classList.add('material-icons', 'icon-adjust')
+        i.innerText = 'settings'
+
+        btn.appendChild(i)
+        div.appendChild(btn)
+        this.card.appendChild(div)
     }
 }

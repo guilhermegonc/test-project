@@ -24,8 +24,17 @@
     bottom: -24px;
     left: -24px;
     padding: 0px 24px;
-    border-radius: 2px;
+    border-radius: 0;
     background-color: #fff;
+}
+
+.card-footer.primary {
+    width: calc(100% - 88px);
+}
+
+.card-footer.secondary {
+    width: 40px;
+    margin-left: -40px;
 }
 
 @media (max-width: 992px) {
@@ -35,6 +44,16 @@
         bottom: 4px;
         width: calc(100% - 48px);
         border-radius: 0px;
+    }
+
+    .card-footer.primary {
+        width: calc(100% - 120px);
+    }
+    
+    .card-footer.secondary {
+        width: 24px;
+        left: -36px;
+        margin-left: -60px;
     }
 }
 
@@ -59,12 +78,6 @@
 
 .good {
     background-color: rgb(113, 218, 97);
-    /* background-image: url("https://images.unsplash.com/photo-1549490316-686f9b5d359f"); */
-    /* background-size: cover; */
-}
-
-.warning {
-    background-color: rgb(227, 146, 16);
 }
 
 .danger {
@@ -72,5 +85,5 @@
 }
 
 .generic {
-    background-color: rgba(50,72,190,1);
+    background-color: white;
 }

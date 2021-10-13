@@ -5,7 +5,7 @@ const consolidateWalletResults = () => {
 
 const sumWalletPrice = () => {
     const div = document.querySelector('#wallet-cost')
-    div.innerText = `R$${invested.toFixed(2)}`
+    div.innerText = `Preço médio: R$${invested.toFixed(2)}`
 }
 
 const sumWalletValue = () => {

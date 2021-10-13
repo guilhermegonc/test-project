@@ -39,13 +39,13 @@ const inWallet = value => {
 }
 
 const createTransactionControl = () => {
-    const btn = document.querySelector('#buy-btn')
+    const btn = document.querySelector('#wallet')
     btn.addEventListener("click", function () {
         new TransactionModal('Comprar cotas', 'buy')
     })
 }
 
 const createBalanceControl = () => {
-    const balance = document.querySelector('#wallet')
+    const balance = document.querySelector('#buy-btn')
     balance.addEventListener("click", addBalanceContent)
 }

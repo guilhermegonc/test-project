@@ -109,10 +109,11 @@ a.db-results {
 @media (max-width: 992px) {
     .default-margin-bg {
         margin: 36px 0;
+        padding: 12px;
     }
 
     .db-results {
-        margin: 12px 6px 0;
+        margin: 12px auto 0;
     }
 
     .hide-mobile {

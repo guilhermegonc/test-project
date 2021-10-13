@@ -139,7 +139,7 @@ class EmptyCard {
 
     addTitle = parentDiv => {
         const title = document.createElement('p')
-        title.classList.add('s9', 'str', 'light', 'm-0')
+        title.classList.add('s9', 'str', 'light', 'm-24')
         title.innerText = 'Sem novas recomendações'
         parentDiv.appendChild(title)
         this.addParagraph(parentDiv)

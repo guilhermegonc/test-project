@@ -16,21 +16,29 @@
 {% endblock %}
 
 {% block content%}
+<div class="txt-center m-b-24 light">
+    <h1 id="title" class="s3 m-0 m-b-24">Carteira</h1>
+</div>
 <div id="wallet" class="db-results p-card shadow p-24 m-b-24">
-    <p id="reference-date" class="s8 str blue fl-r">{{ stocks.0.close_date.0 }}</p>
-    <h1 id="wallet-title" class="s3 blue">Carteira</h1>
-    <p id="wallet-value" class="s7 m-0">Valor</p>
-    <p id="wallet-cost" class="s8 light-gray">Custo</p>
-    <p id='balance-btn' class="light-gray s8 m-0">Clique para simular balanceamento</p>
+    <p id="card-label" class="s9 str m-0">Valor estimado:</p>
+    <h1 id="wallet-value" class="s3 m-b-12">Carteira</h1>
+    <p id="wallet-cost" class="s9 str m-0">Custo</p>
+    <p id="reference-date" class="s9 str m-b-80">Atualizado em: {{ stocks.0.close_date.0 }}</p>
+    <p class="light-gray s8 m-0">Clique para adicionar cotas</p>
 </div>
 <div class="m-b-24">
-    <div id="stocks" class="m-b-12">
+    <div class="m-b-24 light">
+        <h2 class="s6 db-results m-b-12 txt-center">Ações</h1>
     </div>
-    <div id="buy-btn" class="shadow p-card p-24 db-results m-b-80">
+</div>
+<div class="m-b-24">
+    <div id="buy-btn" class="shadow p-card p-24 db-results m-b-12">
         <div class="card-btn">
-            <p class="s9 str m-0 blue">Adicionar cotas</p>
-            <p class="s9 m-0 light-gray">Clique aqui para adicionar</p>
+            <p class="s9 str m-0 blue">Simular distribuição</p>
+            <p id="balance-btn" class="s9 m-0 light-gray">Clique aqui para simular novo valor</p>
         </div>
+    </div>
+    <div id="stocks" class="m-b-80">
     </div>
     <div class="m-a">
         <div id="recommendations" class="m-b-24">

@@ -33,9 +33,9 @@ class RecurringForm(forms.Form):
 
 class SavingsForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
+    value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Serviço'}))
     objective = forms.ChoiceField(choices=saving_choices)
-    value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '2021-01-01'}))
 
 

@@ -23,7 +23,7 @@ const setupPage = () => {
     balance = planned - realized
     fontColor = 'black'
     cardColor = 'generic'
-    new ExpenseCard(div, formExpense, modalTitle, objectName, paginationUri, 
+    new ExpenseCard(div, formSaving, modalTitle, objectName, paginationUri, 
         requestUri, realized, planned, balance, fontColor, cardColor)
 }
 

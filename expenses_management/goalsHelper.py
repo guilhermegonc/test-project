@@ -1,6 +1,5 @@
 from django.db import connection
 from .models import UserGoals
-import sys
 
 
 def get_goals(user):
@@ -47,9 +46,6 @@ def get_monthly_goals(user, year):
     with connection.cursor() as cursor:
         cursor.execute(query)
         goals = cursor.fetchall()
-
-    print(goals)
-    sys.stdout.flush()
 
     [dict_monthly(m, e, s, summary) for m, e, s in goals]
     return summary

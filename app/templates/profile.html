@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+
+{% load static %}
+{% block extra-js %}
+    <script src="{% static 'profile.js' %}"></script>
+{% endblock %}
+
 {% block title %}Página inicial{% endblock %}
 {% block content %}
 <div>
@@ -29,10 +35,13 @@
         </tr>
     </table>
 </div>
-    <a class="btn shadow m-b-12 danger" href="/destroy-user">Excluir conta</a>
+    <a id="exclusion" class="btn shadow m-b-12 danger">Excluir conta</a>
     <a class="btn shadow light" href="/logout">Sair</a>
 </div>
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
+<script>
+    destroyConfirmation()
+</script>
 {% endblock %}

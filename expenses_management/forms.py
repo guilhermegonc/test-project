@@ -8,12 +8,13 @@ choices = [
     ('Moradia', 'Moradia'),('Mercado', 'Mercado'),('Alimentação', 'Alimentação'),
     ('Transporte', 'Transporte'),('Saúde', 'Saúde'),('Entretenimento', 'Entretenimento'),
     ('Educação', 'Educação'),('Outros', 'Outros'),('Manutenção', 'Manutenção'),
-    ('Compras grandes', 'Compras grandes'),('Férias', 'Férias'),
+    ('Compras grandes', 'Compras grandes'),('Férias', 'Férias'),('Pet', 'Pet')
 ]
 
 saving_choices = [
-    ('Reserva','Reserva'),('Carro/Casa','Carro/Casa'),
-    ('Previdência','Previdência'),('Longo Prazo','Longo Prazo')
+    ('Reserva','Reserva'),('Casa','Casa'),('Carro','Carro'),
+    ('Previdência','Previdência'),('Longo Prazo','Longo Prazo'),
+    ('Viagem','Viagem')
 ]
 
 months = [

@@ -12,8 +12,8 @@ from auth0.api_conn import delete_auth0_user
 
 def index(request):
     is_auth = is_authenticated(request)
-    get_user(request) if is_auth else None
-    payload = {'is_auth': is_auth}
+    user = get_user(request) if is_auth else None
+    payload = {'is_auth': is_auth, 'user': user}
     return render(request, 'index.html', payload)
 
 

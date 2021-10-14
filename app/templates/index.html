@@ -21,6 +21,7 @@
             <div>💵</div>
             <p class="app-label">Gastos</p>
         </a>
+        {% if user.data.role == 'owner' %}
         <a href="/wallet" class="trigger btn m-12-6 light shadow">
             <div class="status">💰</div>
             <p class="app-label">Investimentos</p>
@@ -29,10 +30,16 @@
             <div class="status">🏠</div>
             <p class="app-label">Smart Home</p>
         </a>
-      {% endif %}
+        {% endif %}
+        {% endif %}
+        {% if is_auth %}
+        <a href="/profile" class="trigger btn m-12-6 light shadow">
+            <div class="status">⚙️</div>
+            <p class="app-label">Conta</p>
+        </a>
+        {% endif %}
     </div>
     {% if is_auth %}
-    <a class="btn shadow m-b-12" href="/profile">Gerenciar conta</a>
     <a class="btn shadow light" href="/logout">Sair</a>
     {% else %}
     <a class="btn shadow" href="login/auth0">Entrar</a>

@@ -3,7 +3,7 @@ const setupPage = () => {
     
     const truncDate = truncCurrentDate()
 
-    let modalTitle = 'Gasto:'
+    let modalTitle = 'Disponível:'
     let objectName = 'expense'
     let paginationUri = '/load-expenses'
     let requestUri = '/expenses'
@@ -15,7 +15,7 @@ const setupPage = () => {
     new ExpenseCard(div, formExpense, modalTitle, objectName, paginationUri, 
         requestUri, realized, planned, balance, fontColor, cardColor)
     
-    modalTitle = 'Investido:'
+    modalTitle = 'A investir:'
     objectName = 'saving'
     paginationUri = '/load-savings'
     requestUri = '/savings'
@@ -56,9 +56,9 @@ class ExpenseCard{
         
         this.addShortcut(modalType, form)
         this.addLabel(cardTitle)
-        this.addTitle(realized)
+        this.addTitle(balance)
         this.addSubtext('Planejado: R$', planned)
-        this.addSubtext('Diferença: R$', balance)
+        this.addSubtext('Realizado: R$', realized)
         this.addRecent(requestURI)
         this.addLoadBtn(viewMoreURI)
         
@@ -99,20 +99,23 @@ class ExpenseCard{
 
     addSubtext = (text, value) => {
         const p = document.createElement('p')
-        p.classList.add('s9', 'm-0', 'str')
-        p.innerText = `${text} ${value}`
+        p.classList.add('s9', 'm-0')
+        p.innerHTML = `${text} ${value}`
         this.card.appendChild(p)
     }
 
     addRecent = async(requestURI) => {
         const p = document.createElement('p')
-        const uri = `${requestURI}?start=0&end=1`
-        p.classList.add('s9', 'm-0', 'str')
+        p.classList.add('s9', 'm-0')
         p.innerText = 'Recente: -'
         this.card.appendChild(p)
-        const obj = await fetch(uri)
-        let name = await obj.json()
-        p.innerText = `Recente: ${name['data'][0].name}`
+        
+        const uri = `${requestURI}?start=0&end=1`
+        const data = await fetch(uri)
+        let obj = await data.json()
+        let text = obj['data'][0]['type'] === undefined ? obj['data'][0]['objective'] : obj['data'][0]['type']
+        console.log(text)
+        p.innerText = `Recente: ${text}`
     }
 
     addLoadBtn = uri => {

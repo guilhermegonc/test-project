@@ -32,7 +32,7 @@ class GoalsTable {
 
     detailFirstRow = () => {
         const r = document.querySelectorAll('td')
-        r[0].innerText = 'Adicionar meta'
+        r[0].innerText = 'Adicionar planejamento'
         r[1].classList.remove('hide-mobile')
         r[2].remove()
     }
@@ -42,7 +42,7 @@ class GoalsTable {
             let row = document.createElement('tr')            
             
             row.innerHTML = `
-                <td class="s9 str">${data[i].date}</td>
+                <td class="s10 str">${data[i].date}</td>
                 <td class="s9 light-gray m-0 red t-right">R$ ${data[i].expenses}</td>
                 <td class="s9 light-gray m-0 green t-right">R$ ${data[i].savings}</td>
             `

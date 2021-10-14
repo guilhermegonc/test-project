@@ -45,6 +45,10 @@ def remove_saving(payload):
 
 
 def get_monthly_saving(user, year):
+    summary = {}
+    for i in range(12):
+        summary[f'{year}-{i+1:02d}-01'] = 0
+
     query = f'''
     SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
            sum(value) sum_value
@@ -58,12 +62,11 @@ def get_monthly_saving(user, year):
         cursor.execute(query)
         savings = cursor.fetchall()
     
-    summary = {}
-    [dict_monthly(d, v, summary) for d,v in savings]
+    [dict_monthly(m, v, summary) for m, v in savings]
     return summary
 
 
-def dict_monthly(date, value, summary):
-    summary[date] = value
+def dict_monthly(month, value, summary):
+    summary[month] = value
     return
 

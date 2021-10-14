@@ -18,7 +18,7 @@
     <h1 class="s3 m-0 m-b-24">
         <a href="/finance-dashboard" class="clean-a">
             <i class="material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
-        </a>Metas
+        </a>Plano Mensal
     </h1>
 </div>
 <div id="table-list" class="m-6 m-b-24">
@@ -30,6 +30,12 @@
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
+    const months = {
+        '01': 'Janeiro', '02': 'Fevereiro', '03': 'Março',
+        '04': 'Abril', '05': 'Maio', '06': 'Junho',
+        '07': 'Julho', '08': 'Agosto', '09': 'Setembro',
+        '10': 'Outubro', '11': 'Novembro', '12': 'Dezembro', 
+    }
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
     const div = document.querySelector('#table-list')
@@ -40,7 +46,7 @@
         mm = '{{ r.date.month }}'.padStart(2, '0')
         obj = {
             'id': {{ r.id }},
-            'date': `{{ r.date.year }}-${mm}-${dd}`,
+            'date': `${months[mm]} ({{ r.date.year }})`,
             'expenses': {{ r.expenses }}.toFixed(2),
             'savings': {{ r.savings }}.toFixed(2),
         }

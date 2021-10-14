@@ -10,7 +10,6 @@
     <script src="{% static 'general-table.js' %}"></script>
     <script src="{% static 'expenses-table.js' %}"></script>
     <script src="{% static 'edit-modal.js' %}"></script>
-    <script src="{% static 'services-dict.js' %}"></script>
     {% endblock %}
 
 {% block content%}
@@ -43,7 +42,7 @@
             'type': '{{ r.type }}',
             'recurring': '{{ r.recurring  }}' === 'True',
             'value': {{ r.value }},
-            'date': `{{ r.date.year }}-${mm}-${dd}`
+            'date': `${dd}/${mm}/{{ r.date.year }}`
         }
         expenses.push(obj)
     '{% endfor %}'

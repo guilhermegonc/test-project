@@ -16,8 +16,8 @@ class ExpensesTable {
 
     populateHeader = () => {
         const h = document.querySelectorAll('th')
-        h[0].innerText = 'Serviço'
-        h[1].innerText = 'Tipo'
+        h[0].innerText = 'Despesa'
+        h[1].innerText = 'Nome'
         h[2].innerText = 'Data'
         h[3].innerText = 'Valor'        
     }
@@ -35,8 +35,8 @@ class ExpensesTable {
             let valueDecoration = data[i].value > 0 ? 'red' : 'green'
             
             row.innerHTML = `
-                <td class="s10 str main-column ${valueDecoration}">${data[i].name}</td>
-                <td class="s9 light-gray m-0 hide-mobile">${data[i].type}</td>
+                <td class="s10 str main-column ${valueDecoration}">${data[i].type}</td>
+                <td class="s9 light-gray m-0 hide-mobile">${data[i].name}</td>
                 <td class="s9 light-gray m-0 hide-mobile">${data[i].date}</td>
                 <td class="s9 light-gray m-0 ${valueDecoration} t-right">R$ ${data[i].value} ${recurringDecoration}</td>
             `

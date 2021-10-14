@@ -9,7 +9,6 @@
 {% block extra-js %}
     <script src="{% static 'monthly-summary.js' %}"></script>
     <script src="{% static 'edit-modal.js' %}"></script>
-    <script src="{% static 'services-dict.js' %}"></script>
     {% endblock %}
 
 {% block content%}
@@ -40,13 +39,11 @@
         savings['{{ k }}'] = {{ v }}
     '{% endfor %}'
 
-    let dd, mm
     let goals = {}
-    '{% for l in limit %}'
-        dd = '{{ l.date.day }}'.padStart(2, '0')
-        mm = '{{ l.date.month }}'.padStart(2, '0')
-        goals[`{{ l.date.year }}-${mm}-${dd}`] = [{{ l.expenses }}, {{ l.savings }}]
+    '{% for k, v in goals.items %}'
+        goals['{{ k }}'] = [{{ v.0 }}, {{ v.1 }}]
     '{% endfor %}'
+
     setupPage()
     </script>
 {% endblock %}

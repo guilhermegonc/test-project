@@ -86,7 +86,7 @@ class SavingCard{
         this.balance = (this.planned - this.realized).toFixed(2)
         new SummaryCard(
             div, 
-            formExpense, 
+            formSaving, 
             'A Investir:',
             'saving',
             '/load-savings', 

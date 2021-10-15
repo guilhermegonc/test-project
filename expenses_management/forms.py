@@ -30,7 +30,7 @@ class ExpenseForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
     value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     type = forms.ChoiceField(required=False, choices=choices)
-    date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '2021-01-01'}), input_formats=settings.DATE_INPUT_FORMATS)
+    date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '15/10/2021'}), input_formats=settings.DATE_INPUT_FORMATS)
     name = forms.CharField(required=False, max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Nome (Opcional)'}))
     recurring = forms.BooleanField(widget=forms.HiddenInput(), required=False)
 
@@ -47,7 +47,7 @@ class SavingsForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
     value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
     objective = forms.ChoiceField(choices=saving_choices)
-    date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '2021-01-01'}))
+    date = forms.DateField(widget=forms.DateInput(attrs={'placeholder': '15/01/2021'}), input_formats=settings.DATE_INPUT_FORMATS)
     name = forms.CharField(required=False, max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Nome do Fundo ou Broker'}))
 
 

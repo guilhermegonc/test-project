@@ -9,6 +9,8 @@
 {% block Title %}Formulário Integrado{% endblock %}
 
 {% block content %}
+{% include "analytics-scripts/rd-tracking-code.html" %}
+{% include "analytics-scripts/hs-tracking-code.html" %}
 <div class="half-view fl-l m-b-24">
     <h2 class="s3 txt-center m-b-24 light">Novo contato:</h2>
     <form id="rd-int-form" class="form-group" action='/populate-personas' method="post">

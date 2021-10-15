@@ -18,7 +18,6 @@ from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals, get_mon
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
 import datetime
 
-
 @login_required
 def dashboard(request):
     user = get_user(request)

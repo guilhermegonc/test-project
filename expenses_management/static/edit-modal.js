@@ -40,13 +40,18 @@ class EditModal {
     prefillForm = () => {
         const id = document.querySelector('#id_id')
         id.value = 0
-
         this.addCurrentDate()
     }
 
     addCurrentDate = () => {
         const date = document.querySelector('#id_date')
-        date != undefined ? this.stringDate(date) : null   
+        date != undefined ? this.stringDate(date) : null
+        this.addNumericKeyBoard()  
+    }
+
+    addNumericKeyBoard = () => {
+        const val = document.querySelector('#id_value')
+        val.pattern= '[0-9]*'
     }
 
     stringDate = input => {

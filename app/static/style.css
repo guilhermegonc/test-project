@@ -287,8 +287,6 @@ input[type="checkbox" i] {
     }
 }
 
-
-
 .token {
     color: white;
     font-family: monospace;
@@ -358,6 +356,9 @@ span.token {
 }
 
 /* Margins */
+.w-400 {
+    max-width: 400px;
+}
 
 .m-0 {
     margin: 0;

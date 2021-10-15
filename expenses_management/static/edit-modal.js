@@ -7,7 +7,7 @@ class EditModal {
         this.addFormBtn()
         this.prefillForm()
         this.obj != null ? this.fullfillForm() : null
-        document.querySelectorAll('#id_value')[0].focus()
+        this.focusValue()
     }
 
     addInputModal = () => {
@@ -54,6 +54,7 @@ class EditModal {
         const val = document.querySelector('#id_value')
         val.pattern = '[0-9]*'
         val.inputmode = 'decimal'
+        val.step = '0.01'
     }
 
     stringDate = input => {
@@ -97,5 +98,9 @@ class EditModal {
         btn.innerText = 'Remover'
         btn.classList.add('shadow', 'btn', 'clean-a', 'danger')
         this.form.appendChild(btn)
+    }
+
+    focusValue = () => {
+        document.querySelector('#id_value').focus()
     }
 }

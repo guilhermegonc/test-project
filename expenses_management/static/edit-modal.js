@@ -7,6 +7,7 @@ class EditModal {
         this.addFormBtn()
         this.prefillForm()
         this.obj != null ? this.fullfillForm() : null
+        document.querySelectorAll('#id_value')[0].focus()
     }
 
     addInputModal = () => {
@@ -51,7 +52,8 @@ class EditModal {
 
     addNumericKeyBoard = () => {
         const val = document.querySelector('#id_value')
-        val.pattern= '[0-9]*'
+        val.pattern = '[0-9]*'
+        val.inputmode = 'decimal'
     }
 
     stringDate = input => {

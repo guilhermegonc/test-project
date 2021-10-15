@@ -13,8 +13,8 @@
 
 {% block content%}
 <div class="txt-center m-b-24 light">
-    <i id="previous" class="material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
-    <i id="next" class="material-icons icon-hover icon-adjust p-12 light">arrow_forward</i>
+    <i id="previous" class=" fl-l material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
+    <i id="next" class="fl-r material-icons icon-hover icon-adjust p-12 light">arrow_forward</i>
     <h1 id="title" class="s3 m-a m-b-24">
         <span id="title-text">Esse mês</span>
         <span id="title-month-value" class="hide"></span>
@@ -29,6 +29,7 @@
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
+    adjustSideScroll()
     const token = `{% csrf_token %}`
     const date = new Date()
     const div = document.querySelector('#summary')

@@ -47,3 +47,7 @@ const createParagraph = (content, text) => {
     content.appendChild(paragraph)
 }
 
+const adjustSideScroll = () => {
+    document.querySelector('.default-margin-bg').classList.add('scroll')
+}
+

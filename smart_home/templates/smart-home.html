@@ -35,6 +35,7 @@
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
+    adjustSideScroll()
     '{% for m in microcontrollers %}'
         '{% for d in m.device %}'
             '{% if d.active == True %}'

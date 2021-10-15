@@ -109,7 +109,10 @@ a.db-results {
 @media (max-width: 992px) {
     .default-margin-bg {
         margin: 36px 0;
-        padding: 12px;
+        padding: 12px 12px;
+    }
+    .default-margin-bg.scroll {
+        padding: 12px 0;
     }
 
     .db-results {

@@ -37,7 +37,7 @@ const writePageTitle = (month, year) => {
     }
     const title = document.querySelector('#title-text')
     const mm = monthDict[month]
-    title.innerText = `${mm} ${year}`
+    title.innerText = `${mm}\n${year}`
 
     const monthHTML = document.querySelector('#title-month-value')
     monthHTML.innerText = month

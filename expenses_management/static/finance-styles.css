@@ -1,15 +1,3 @@
-#title-text {
-    min-width: 400px;
-    display: inline-block;
-}
-
-@media (max-width: 992px) {
-    #title-text {
-        min-width: 280px;
-        font-size: 33px;
-    }
-}
-
 .input-title {
     background: transparent;
     color: white;

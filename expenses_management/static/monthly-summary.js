@@ -62,7 +62,7 @@ class ExpenseCard{
         this.realized = expenses[truncDate].toFixed(2)
         this.planned = goals[truncDate][0].toFixed(2)
         this.balance = (this.planned - this.realized).toFixed(2)
-        this.color = this.planned * 0.9 < this.balance ? 'good' : 'danger'
+        this.color = this.planned * 0.95 > this.realized ? 'good' : 'danger'
         new SummaryCard(
             div, 
             formExpense, 

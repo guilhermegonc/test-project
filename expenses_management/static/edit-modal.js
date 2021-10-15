@@ -53,7 +53,7 @@ class EditModal {
     addNumericKeyBoard = () => {
         const val = document.querySelector('#id_value')
         val.pattern = '[0-9]*'
-        val.inputmode = 'decimal'
+        val.inputMode = 'decimal'
         val.step = '0.01'
     }
 

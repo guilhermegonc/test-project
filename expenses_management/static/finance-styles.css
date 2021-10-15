@@ -55,13 +55,13 @@
 @media (max-width: 992px) {
     .card-footer {
         left: -24px;
-        bottom: -156px;
+        bottom: -166px;
         width: calc(100% - 48px);
         border-radius: 0px;
     }
 
     .card-footer.primary {
-        width: calc(100% - 72px);
+        width: calc(100% - 70px);
     }
     
     .card-footer.secondary {

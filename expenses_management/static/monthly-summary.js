@@ -1,51 +1,106 @@
-const setupPage = () => {
-    writePageTitle()
-    
-    const truncDate = truncCurrentDate()
+const addControls = () => {
+    let date
 
-    let modalTitle = 'Disponível:'
-    let objectName = 'expense'
-    let paginationUri = '/load-expenses'
-    let requestUri = '/expenses'
-    let realized = expenses[truncDate].toFixed(2)
-    let planned = goals[truncDate][0].toFixed(2)
-    let balance = (planned - realized).toFixed(2)
-    let fontColor = 'light'
-    let cardColor = planned * 0.9 > realized  || realized == 0 ? 'good' : 'danger'
-    new ExpenseCard(div, formExpense, modalTitle, objectName, paginationUri, 
-        requestUri, realized, planned, balance, fontColor, cardColor)
-    
-    modalTitle = 'A investir:'
-    objectName = 'saving'
-    paginationUri = '/load-savings'
-    requestUri = '/savings'
-    realized = savings[truncDate].toFixed(2)
-    planned = goals[truncDate][1].toFixed(2)
-    balance = (planned - realized).toFixed(2)
-    fontColor = 'black'
-    cardColor = 'generic'
-    new ExpenseCard(div, formSaving, modalTitle, objectName, paginationUri, 
-        requestUri, realized, planned, balance, fontColor, cardColor)
+    const previous = document.querySelector('#previous')
+    previous.addEventListener('click', function(){
+        date = changeMonth('subtract')
+        deleteCards()
+        setupCards(date['month'], date['year'])
+    })
+
+    const next = document.querySelector('#next')
+    next.addEventListener('click', function(){
+        date = changeMonth('add')
+        deleteCards()
+        setupCards(date['month'], date['year'])
+    })
 }
 
-const truncCurrentDate = () => {
-    let yyyy = String(date.getFullYear())
-    let mm = String(date.getMonth() + 1).padStart(2, '0')
-    return `${yyyy}-${mm}-01`
+const changeMonth = method => {
+    const monthHTML = document.querySelector('#title-month-value')
+    let month = monthHTML.innerText
+    let newMonth = method === 'add' ? parseInt(month) + 1 : parseInt(month) - 1   
+    month = newMonth > 0 && newMonth <= 12 ? newMonth : month
+    
+    const yearHTML = document.querySelector('#title-year-value')
+    let year = yearHTML.innerText
+    
+    writePageTitle(month, year)
+    return {'month': month, 'year': year}
 }
 
-const writePageTitle = () => {
-    const months = {
-        0: 'Janeiro', 1: 'Favereiro', 2: 'Março', 3: 'Abril',
-        4: 'Maio', 5: 'Junho', 6: 'Julho', 7: 'Agosto',
-        8: 'Setembro', 9: 'Outubro', 10: 'Novembro', 11: 'Dezembro'
+const writePageTitle = (month, year) => {
+    const monthDict = {
+        1: 'Janeiro', 2: 'Fevereiro', 3: 'Março', 4: 'Abril',
+        5: 'Maio', 6: 'Junho', 7: 'Julho', 8: 'Agosto',
+        9: 'Setembro', 10: 'Outubro', 11: 'Novembro', 12: 'Dezembro'
     }
-    const title = document.querySelector('#title')
-    const month = months[new Date().getMonth()]
-    title.innerText = month
+    const title = document.querySelector('#title-text')
+    const mm = monthDict[month]
+    title.innerText = `${mm} ${year}`
+
+    const monthHTML = document.querySelector('#title-month-value')
+    monthHTML.innerText = month
+
+    const yearHTML = document.querySelector('#title-year-value')
+    yearHTML.innerText = year
+}
+
+const deleteCards = () => {
+    const cards = document.querySelector('#summary')
+    cards.innerHTML = ''
+}
+
+const setupCards = (month, year) => {
+    const truncDate = `${year}-${String(month).padStart(2, '0')}-01`
+    new ExpenseCard(truncDate)
+    new SavingCard(truncDate)
 }
 
 class ExpenseCard{
+    constructor(truncDate){
+        this.realized = expenses[truncDate].toFixed(2)
+        this.planned = goals[truncDate][0].toFixed(2)
+        this.balance = (this.planned - this.realized).toFixed(2)
+        this.color = this.planned * 0.9 < this.balance ? 'good' : 'danger'
+        new SummaryCard(
+            div, 
+            formExpense, 
+            'Disponível:',
+            'expense',
+            '/load-expenses', 
+            '/expenses', 
+            this.realized, 
+            this.planned, 
+            this.balance, 
+            'light', 
+            this.color
+            )
+    }
+}
+
+class SavingCard{
+    constructor(truncDate){
+        this.realized = savings[truncDate].toFixed(2)
+        this.planned = goals[truncDate][1].toFixed(2)
+        this.balance = (this.planned - this.realized).toFixed(2)
+        new SummaryCard(
+            div, 
+            formExpense, 
+            'A Investir:',
+            'saving',
+            '/load-savings', 
+            '/savings', 
+            this.realized, 
+            this.planned, 
+            this.balance,
+            'black', 
+            'generic',
+            )
+    }
+}
+
+class SummaryCard{
     constructor(div, form, cardTitle, modalType, requestURI, 
         viewMoreURI, realized, planned, balance, fontColor, cardColor) {
         
@@ -114,7 +169,6 @@ class ExpenseCard{
         const data = await fetch(uri)
         let obj = await data.json()
         let text = obj['data'][0]['type'] === undefined ? obj['data'][0]['objective'] : obj['data'][0]['type']
-        console.log(text)
         p.innerText = `Recente: ${text}`
     }
 

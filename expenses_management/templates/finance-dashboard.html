@@ -13,7 +13,13 @@
 
 {% block content%}
 <div class="txt-center m-b-24 light">
-    <h1 id="title" class="s3 m-0 m-b-24">Esse mês</h1>
+    <h1 id="title" class="s3 m-a m-b-24">
+        <i id="previous" class="material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
+        <span id="title-text">Esse mês</span>
+        <span id="title-month-value" class="hide"></span>
+        <span id="title-year-value" class="hide"></span>
+        <i id="next" class="material-icons icon-hover icon-adjust p-12 light">arrow_forward</i>
+    </h1>
 </div>
 <div class="txt-center m-b-24">
     <div id="summary" class="m-b-24 header-scroll">
@@ -43,7 +49,10 @@
     '{% for k, v in goals.items %}'
         goals['{{ k }}'] = [{{ v.0 }}, {{ v.1 }}]
     '{% endfor %}'
+    
 
-    setupPage()
+    addControls()
+    writePageTitle(date.getMonth()+1, date.getFullYear())
+    setupCards(date.getMonth()+1, date.getFullYear())
     </script>
 {% endblock %}

@@ -94,9 +94,8 @@ a.db-results {
 
 @media (max-width: 992px) {
     .modal {
-        margin-top: 48px;
-        width: 100%;
-        max-width: 400px;
+        width: 300px;
+        margin-top: 48px 0;
     }
 }
 
@@ -536,5 +535,5 @@ span.token {
 }
 
 input[type=date] {
-    -webkit-appearance: none;
+    -webkit-appearance: textfield;
   }

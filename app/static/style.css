@@ -3,7 +3,7 @@ body {
     margin: 0px;
 }
 
-input, select {
+input, select, input[type=date] {
     font-size: 21px;
     height: 60px;
     border-radius: 4px;
@@ -13,6 +13,10 @@ input, select {
     width: calc(100% - 26px);
     display: block;
 }
+
+input[type=date] {
+    -webkit-appearance: none;
+  }
 
 .modal select {
     width: 300px;
@@ -95,7 +99,7 @@ a.db-results {
 @media (max-width: 992px) {
     .modal {
         width: 300px;
-        margin-top: 48px 0;
+        margin-top: 24px 0;
     }
 }
 
@@ -533,7 +537,3 @@ span.token {
 .hidden {
     display: none;
 }
-
-input[type=date] {
-    -webkit-appearance: textfield;
-  }

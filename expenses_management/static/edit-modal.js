@@ -46,6 +46,7 @@ class EditModal {
 
     addCurrentDate = () => {
         const date = document.querySelector('#id_date')
+        date.type = 'date'
         date != undefined ? this.stringDate(date) : null
         this.addNumericKeyBoard()  
     }
@@ -62,7 +63,7 @@ class EditModal {
         const yyyy = String(date.getFullYear())
         const mm = String(date.getMonth() + 1).padStart(2, '0')
         const dd = String(date.getDate()).padStart(2, '0')
-        input.value =  `${dd}/${mm}/${yyyy}`
+        input.value =  `${yyyy}-${mm}-${dd}`
     }
 
     fullfillForm = () => {

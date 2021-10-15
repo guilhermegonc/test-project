@@ -40,7 +40,7 @@
             'name': '{{ r.name }}',
             'objective': '{{ r.objective }}',
             'value': {{ r.value }},
-            'date': `${dd}/${mm}/{{ r.date.year }}`
+            'date': `{{ r.date.year }}-${mm}-${dd}`
         }
         savings.push(obj)
     '{% endfor %}'

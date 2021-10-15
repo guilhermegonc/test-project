@@ -42,7 +42,7 @@
             'type': '{{ r.type }}',
             'recurring': '{{ r.recurring  }}' === 'True',
             'value': {{ r.value }},
-            'date': `${dd}/${mm}/{{ r.date.year }}`
+            'date': `{{ r.date.year }}-${mm}-${dd}`
         }
         expenses.push(obj)
     '{% endfor %}'

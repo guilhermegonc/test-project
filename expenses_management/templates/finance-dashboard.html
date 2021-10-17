@@ -8,6 +8,7 @@
 {% endblock %}
 {% block extra-js %}
     <script src="{% static 'monthly-summary.js' %}"></script>
+    <script src="{% static 'dashboard-cards.js' %}"></script>
     <script src="{% static 'edit-modal.js' %}"></script>
     {% endblock %}
 
@@ -35,6 +36,7 @@
     const div = document.querySelector('#summary')
     const formExpense = `{{ form_expense }}`
     const formSaving = `{{ form_saving }}`
+    const formGoal = 'pending'
 
     let expenses = {}
     '{% for k,v in expenses.items %}'
@@ -51,7 +53,6 @@
         goals['{{ k }}'] = [{{ v.0 }}, {{ v.1 }}]
     '{% endfor %}'
     
-
     addControls()
     writePageTitle(date.getMonth()+1, date.getFullYear())
     setupCards(date.getMonth()+1, date.getFullYear())

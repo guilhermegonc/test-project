@@ -4,7 +4,6 @@ class ExpenseModal {
         this.modal.addCurrentDate()
         obj != null ? this.modal.fullfillForm() : null
         this.modal.focusValue('value')
-        // id, name, type, value, date, recurring
     }
 }
 

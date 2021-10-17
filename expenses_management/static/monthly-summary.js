@@ -131,7 +131,14 @@ class SummaryCard{
         i.classList.add('fl-r', 'material-icons', 'p-12', 'action-icon')
         i.innerText = 'add'
         i.addEventListener('click', function(){
-            new EditModal(modalType, form)
+            switch (modalType) {
+                case 'expense':
+                    new ExpenseModal(form)
+                    break
+                case 'saving':
+                    new SavingModal(form)
+                    break
+            }
         })
         this.card.appendChild(i)
     }

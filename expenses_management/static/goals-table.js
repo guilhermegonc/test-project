@@ -4,10 +4,6 @@ class GoalsTable {
         this.html = new Table('goal')
         div.appendChild(this.html.table)
 
-        this.table = this.html.table
-        this.header = this.html.header
-        this.firstRow = this.html.firstRow
-        
         this.html.btn.remove()
         this.populateHeader()
         this.detailFirstRow()
@@ -46,9 +42,9 @@ class GoalsTable {
                 <td class="s9 light-gray m-0 red t-right">R$ ${data[i].expenses}</td>
                 <td class="s9 light-gray m-0 green t-right">R$ ${data[i].savings}</td>
             `
-            this.table.appendChild(row)
+            this.html.table.appendChild(row)
             row.addEventListener('click', function(){
-                new EditModal('goal', forms, data[i])
+                new GoalModal(forms, data[i])
             })
         }
     }

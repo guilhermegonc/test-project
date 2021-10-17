@@ -34,7 +34,20 @@ class Table {
         `
         this.table.appendChild(row)
         row.addEventListener('click', function(){
-            new EditModal(type, forms)
+            switch (type) {
+                case 'expense':
+                    new ExpenseModal(forms)
+                    break
+                case 'saving':
+                    new SavingModal(forms)
+                    break
+                case 'goal':
+                    new GoalModal(forms)
+                    break
+                case 'recurring':
+                    new RecurringModal(forms)
+                    break
+            }
         })
     }
 

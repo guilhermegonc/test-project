@@ -4,16 +4,13 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from app.userHelper import get_user, get_user_object
+from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals, get_monthly_goals
 from .expensesHelper import create_expense, edit_expense, remove_expense,\
     get_expenses, dict_expenses, get_monthly_balance
-
 from .savingsHelper import create_saving, edit_saving, remove_saving,\
     get_savings, dict_savings, get_monthly_saving
-
 from .recurringHelper import create_recurring, edit_recurring,\
     remove_recurring, get_recurring
-
-from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals, get_monthly_goals
 
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
 import datetime
@@ -137,7 +134,7 @@ def update_goal(request):
             payload = {
                 'id': int(form.cleaned_data['id']),
                 'user': user,
-                'date': form.cleaned_data['date'],
+                'date': form.cleaned_data['month_date'],
                 'saving': form.cleaned_data['savings'],
                 'expense': form.cleaned_data['expenses'],
             }

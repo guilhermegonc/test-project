@@ -53,6 +53,6 @@ class SavingsForm(forms.Form):
 
 class GoalsForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
-    date = forms.ChoiceField(choices=month_choices)
+    month_date = forms.ChoiceField(choices=month_choices)
     savings = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'A guardar R$ 00,00'}))
     expenses = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'A gastar R$ 00,00'}))

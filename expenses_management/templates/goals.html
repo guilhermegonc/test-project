@@ -46,7 +46,7 @@
         mm = '{{ r.date.month }}'.padStart(2, '0')
         obj = {
             'id': {{ r.id }},
-            'date': `${months[mm]} ({{ r.date.year }})`,
+            'date': `${months[mm]} - {{ r.date.year }}`,
             'expenses': {{ r.expenses }}.toFixed(2),
             'savings': {{ r.savings }}.toFixed(2),
         }

@@ -70,3 +70,24 @@ def dict_monthly(month, value, summary):
     summary[month] = value
     return
 
+
+def summary_savings(user):
+    summary = {}
+    query = f'''
+    SELECT objective,
+           sum(value) sum_value
+    FROM user_savings
+    WHERE user_id = {user}
+    GROUP BY objective;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        savings = cursor.fetchall()
+
+    [dict_objectives(o, v, summary) for o, v in savings]
+    return summary
+
+
+def dict_objectives(objective, value, result):
+    result[objective] = value
+    return

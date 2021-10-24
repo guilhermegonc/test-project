@@ -8,7 +8,7 @@ from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals, get_mon
 from .expensesHelper import create_expense, edit_expense, remove_expense,\
     get_expenses, dict_expenses, get_monthly_balance
 from .savingsHelper import create_saving, edit_saving, remove_saving,\
-    get_savings, dict_savings, get_monthly_saving
+    get_savings, dict_savings, get_monthly_saving, summary_savings
 from .recurringHelper import create_recurring, edit_recurring,\
     remove_recurring, get_recurring
 
@@ -22,8 +22,9 @@ def dashboard(request):
     expenses_sum = get_monthly_balance(user.data.id, year)
     savings_sum = get_monthly_saving(user.data.id, year)
     goals = get_monthly_goals(user.data.id, year)
+    goal_balances = summary_savings(user.data.id)
     payload = {'expenses': expenses_sum, 'savings': savings_sum, 'goals': goals, 
-        'form_expense': ExpenseForm(), 'form_saving': SavingsForm()}
+        'goal_balances': goal_balances, 'form_expense': ExpenseForm(), 'form_saving': SavingsForm()}
     return render(request, 'finance-dashboard.html', payload)
 
 

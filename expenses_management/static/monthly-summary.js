@@ -1,3 +1,10 @@
+const setupPage = () => {
+    addControls()
+    writePageTitle(date.getMonth()+1, date.getFullYear())
+    setupCards(date.getMonth()+1, date.getFullYear())
+    addDetails()
+}
+
 const addControls = () => {
     let date
     const previous = document.querySelector('#previous')

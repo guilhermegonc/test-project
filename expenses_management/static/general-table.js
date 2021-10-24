@@ -49,6 +49,7 @@ class Table {
                     break
             }
         })
+        return row
     }
 
     addPaginationBtn = () => {

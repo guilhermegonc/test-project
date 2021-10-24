@@ -10,6 +10,10 @@
     <script src="{% static 'monthly-summary.js' %}"></script>
     <script src="{% static 'dashboard-cards.js' %}"></script>
     <script src="{% static 'edit-modal.js' %}"></script>
+    <script src="{% static 'finance-chart.js' %}"></script>
+    <script src="{% static 'general-table.js' %}"></script>
+    <script src="{% static 'savings-summary-table.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
     {% endblock %}
 
 {% block content%}
@@ -23,8 +27,16 @@
     </h1>
 </div>
 <div class="txt-center m-b-24">
-    <div id="summary" class="m-b-24 header-scroll">
-    </div>
+    <div id="summary" class="m-b-24 header-scroll"></div>
+</div>
+<div class="m-b-24 light">
+    <h2 class="s6 db-results m-b-12 txt-center">Detalhes</h2>
+</div>
+<div id="chart" class="shadow summary-card chart-card">
+    <!-- <h3 class="s8 txt-center">Despesas</p> -->
+    <canvas id="expense-chart"></canvas>
+</div>
+<div id="details">
 </div>
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
@@ -39,8 +51,10 @@
     const formGoal = 'pending'
 
     let expenses = {}
+    let expenseValues = []
     '{% for k,v in expenses.items %}'
         expenses['{{ k }}'] = {{ v }}
+        expenseValues.push({{ v }})
     '{% endfor %}'
     
     let savings = {}
@@ -49,12 +63,17 @@
     '{% endfor %}'
 
     let goals = {}
+    let goalExpValues = []
     '{% for k, v in goals.items %}'
         goals['{{ k }}'] = [{{ v.0 }}, {{ v.1 }}]
+        goalExpValues.push({{ v.0 }})
+    '{% endfor %}'
+
+    let goalBalances = {}
+    '{% for k, v in goal_balances.items %}'
+        goalBalances['{{ k }}'] = {{ v }}
     '{% endfor %}'
     
-    addControls()
-    writePageTitle(date.getMonth()+1, date.getFullYear())
-    setupCards(date.getMonth()+1, date.getFullYear())
-    </script>
+    setupPage()
+</script>
 {% endblock %}

@@ -47,6 +47,7 @@
         obj = {
             'id': {{ r.id }},
             'date': `${months[mm]} - {{ r.date.year }}`,
+            'month_date': `{{ r.date.year }}-${mm}-01`,
             'expenses': {{ r.expenses }}.toFixed(2),
             'savings': {{ r.savings }}.toFixed(2),
         }

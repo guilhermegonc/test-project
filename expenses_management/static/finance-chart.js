@@ -36,12 +36,12 @@ const startChart = chartCanvas => {
                     gridLines: {drawBorder: false}
                 }]
             },
-            title: {
-                display: true,
-                text: 'Despesas',
-            },
             legend: false,
-            aspectRatio: 3,
+            aspectRatio: 2,
         }
     })
+}
+
+Chart.defaults.font = {
+    family: 'Arial',
 }

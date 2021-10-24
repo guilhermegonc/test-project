@@ -5,16 +5,28 @@ import datetime
 
 
 choices = [
-    ('Moradia', 'Moradia'),('Mercado', 'Mercado'),('Alimentação', 'Alimentação'),
-    ('Transporte', 'Transporte'),('Saúde', 'Saúde'),('Entretenimento', 'Entretenimento'),
-    ('Educação', 'Educação'),('Outros', 'Outros'),('Manutenção', 'Manutenção'),
-    ('Compras grandes', 'Compras grandes'),('Férias', 'Férias'),('Pet', 'Pet')
+    ('Alimentação', 'Alimentação'),
+    ('Compras grandes', 'Compras grandes'),
+    ('Educação', 'Educação'),
+    ('Entretenimento', 'Entretenimento'),
+    ('Férias', 'Férias'),
+    ('Manutenção', 'Manutenção'),
+    ('Mercado', 'Mercado'),
+    ('Moradia', 'Moradia'),
+    ('Pet', 'Pet'),
+    ('Saúde', 'Saúde'),
+    ('Transporte', 'Transporte'),
+    ('Vestuário', 'Vestuário'),
+    ('Outros', 'Outros'),
 ]
 
 saving_choices = [
-    ('Reserva','Reserva'),('Casa','Casa'),('Carro','Carro'),
-    ('Previdência','Previdência'),('Longo Prazo','Longo Prazo'),
-    ('Viagem','Viagem')
+    ('Casa','Casa'),
+    ('Carro','Carro'),
+    ('Longo Prazo','Longo Prazo'),
+    ('Previdência','Previdência'),
+    ('Reserva','Reserva'),
+    ('Viagem','Viagem'),
 ]
 
 months = [

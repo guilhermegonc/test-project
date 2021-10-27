@@ -6,5 +6,6 @@ label[for="id_active"]{
     top: 21px;
     font-size: 17px;
     font-family: sans-serif;
-    height:0px;
+    height: 0px;
+    width: 100px;
 }

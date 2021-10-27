@@ -6,25 +6,39 @@ from django.contrib.auth.decorators import login_required
 from app.userHelper import get_user, get_user_object
 from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals, get_monthly_goals
 from .expensesHelper import create_expense, edit_expense, remove_expense,\
-    get_expenses, dict_expenses, get_monthly_balance
+    get_expenses, dict_expenses, get_monthly_balance, get_expenses_by_category
+
 from .savingsHelper import create_saving, edit_saving, remove_saving,\
     get_savings, dict_savings, get_monthly_saving, summary_savings
+
 from .recurringHelper import create_recurring, edit_recurring,\
     remove_recurring, get_recurring
 
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
 import datetime
 
+
 @login_required
 def dashboard(request):
     user = get_user(request)
     year = datetime.datetime.now().year
+    
     expenses_sum = get_monthly_balance(user.data.id, year)
+    # expenses_category = get_expenses_by_category(user.data.id, year)
     savings_sum = get_monthly_saving(user.data.id, year)
+    saving_balances = summary_savings(user.data.id)
     goals = get_monthly_goals(user.data.id, year)
-    goal_balances = summary_savings(user.data.id)
-    payload = {'expenses': expenses_sum, 'savings': savings_sum, 'goals': goals, 
-        'goal_balances': goal_balances, 'form_expense': ExpenseForm(), 'form_saving': SavingsForm()}
+    
+    payload = {
+        'expenses': expenses_sum, 
+        'expenses_category': 1, 
+        'savings': savings_sum, 
+        'goals': goals, 
+        'saving_balances': saving_balances, 
+        'form_expense': ExpenseForm(), 
+        'form_saving': SavingsForm()
+    }
+    
     return render(request, 'finance-dashboard.html', payload)
 
 

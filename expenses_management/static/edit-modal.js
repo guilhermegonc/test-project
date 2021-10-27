@@ -10,6 +10,8 @@ class ExpenseModal {
 class RecurringModal {
     constructor(forms, obj=null) {
         this.modal = new EditModal('recurring', forms, obj)
+        this.modal.addNumericKeyBoard()
+        this.checkActive()
         obj != null ? this.modal.fullfillForm() : null
         this.modal.focusValue('value')
     }
@@ -121,7 +123,6 @@ class EditModal {
             'date': this.obj.date,
             'month_date': this.obj.month_date,
             'recurring': this.obj.recurring,
-            'active': this.obj.active,
             'expenses': this.obj.expenses,
             'savings': this.obj.savings,
             'objective': this.obj.objective,
@@ -138,6 +139,11 @@ class EditModal {
         if (input != null) {
             input.value = objectValue
         }
+    }
+
+    checkActive = () => {
+        const input = document.querySelector(`#id_active`)
+        input.checked = this.obj.active
     }
 
     addDestroyBtn = () => {

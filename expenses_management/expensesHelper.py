@@ -71,3 +71,30 @@ def get_monthly_balance(user, year):
 def dict_monthly(month, value, summary):
     summary[month] = value
     return
+
+
+def get_expenses_by_category(user, year):
+    summary = {}
+    for i in range(12):
+        summary[f'{year}-{i+1:02d}-01'] = 0
+
+    query = f'''
+    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
+           type,
+           sum(value) sum_value
+    FROM user_expenses
+    WHERE user_id = {user}
+    AND date > '{year}-01-01'
+    AND date < '{year + 1}-01-01'
+    GROUP BY mth, type;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        expenses = cursor.fetchall()
+    
+    [dict_monthly_types(m, v, t, summary) for m, t, v in expenses]
+
+
+def dict_monthly_types(month, value, type, summary):
+    summary[month][type] = value
+    return

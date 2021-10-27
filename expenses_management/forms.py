@@ -49,8 +49,8 @@ class ExpenseForm(forms.Form):
 
 class RecurringForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput())
-    type = forms.ChoiceField(required=False, choices=choices)
     value = forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'R$ 00,00'}))
+    type = forms.ChoiceField(required=False, choices=choices)
     name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Serviço'}))
     active = forms.BooleanField(label='Ativo', required=False)
 

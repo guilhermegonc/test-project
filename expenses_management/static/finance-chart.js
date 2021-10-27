@@ -2,7 +2,8 @@ const addDetails = () => {
     const details = document.querySelector('#details')
     const chartCanvas = document.querySelector('#expense-chart')
     startChart(chartCanvas)
-    new SavingBalanceTable(details)
+    const table = new SavingBalanceTable(details)
+    table.addTitle('details')
 }
 
 const startChart = chartCanvas => {
@@ -40,8 +41,4 @@ const startChart = chartCanvas => {
             aspectRatio: 2,
         }
     })
-}
-
-Chart.defaults.font = {
-    family: 'Arial',
 }

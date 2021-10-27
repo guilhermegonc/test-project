@@ -18,13 +18,13 @@
 
 {% block content%}
 <div class="txt-center m-a m-b-24 light w-400">
-    <i id="previous" class=" fl-l material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
-    <i id="next" class="fl-r material-icons icon-hover icon-adjust p-12 light">arrow_forward</i>
     <h1 id="title" class="s3 m-a m-b-24">
         <span id="title-text">Esse mês</span>
         <span id="title-month-value" class="hide"></span>
         <span id="title-year-value" class="hide"></span>
     </h1>
+    <i id="previous" class="material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
+    <i id="next" class="material-icons icon-hover icon-adjust p-12 light">arrow_forward</i>
 </div>
 <div class="txt-center m-b-24">
     <div id="summary" class="m-b-24 header-scroll"></div>
@@ -43,12 +43,13 @@
 </div>
 <script>
     adjustSideScroll()
+    
     const token = `{% csrf_token %}`
-    const date = new Date()
-    const div = document.querySelector('#summary')
     const formExpense = `{{ form_expense }}`
     const formSaving = `{{ form_saving }}`
-    const formGoal = 'pending'
+    
+    const date = new Date()
+    const div = document.querySelector('#summary')
 
     let expenses = {}
     let expenseValues = []
@@ -62,6 +63,11 @@
         savings['{{ k }}'] = {{ v }}
     '{% endfor %}'
 
+    let savingBalances = {}
+    '{% for k, v in saving_balances.items %}'
+        savingBalances['{{ k }}'] = {{ v }}
+    '{% endfor %}'
+
     let goals = {}
     let goalExpValues = []
     '{% for k, v in goals.items %}'
@@ -69,11 +75,6 @@
         goalExpValues.push({{ v.0 }})
     '{% endfor %}'
 
-    let goalBalances = {}
-    '{% for k, v in goal_balances.items %}'
-        goalBalances['{{ k }}'] = {{ v }}
-    '{% endfor %}'
-    
     setupPage()
 </script>
 {% endblock %}

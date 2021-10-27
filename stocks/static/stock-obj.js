@@ -85,7 +85,7 @@ class StockObject {
 
     addTransactionListener = method => {
         const action = method === 'buy' ? 'Comprar' : 'Vender'
-        const title = `${action} cotas ${this.code}`
+        const title = `Cotas ${this.code}`
         const code = this.code
         this.card.addEventListener('click', function () {
             new TransactionModal(title, method)

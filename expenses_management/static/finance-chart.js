@@ -11,17 +11,17 @@ const startChart = chartCanvas => {
         type: 'bar',
         data: {
             labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D',],
-            datasets: [
-                {
-                    type: 'line',
-                    backgroundColor: 'rgba(50, 72, 190)',
-                    data: goalExpValues,
-                    tension: 0,
-                    fill: false,
-                },{
-                    backgroundColor: 'rgba(50, 72, 190)',
-                    data: expenseValues,
-                    tension: 0,
+            datasets: [{
+                type: 'line',
+                backgroundColor: 'rgba(50, 72, 190)',
+                data: goalExpValues,
+                tension: 0,
+                fill: false,
+            },{
+                type: 'bar',
+                backgroundColor: 'rgba(50, 72, 190)',
+                data: expenseValues,
+                tension: 0,
             }]
         },
         options: {

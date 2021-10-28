@@ -32,6 +32,7 @@ class SavingCard {
         this.card.label.innerText = 'A investir:'
         this.card.title.innerText = `R$ ${this.balance}`
         this.card.addSubtext(`Planejado: R$ ${this.planned}`)
+        this.card.addSubtext(`.`)
         this.card.footerBtn.firstChild.href = 'savings'
         this.card.addSettingsBtn()
 

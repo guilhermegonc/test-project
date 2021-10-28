@@ -41,7 +41,7 @@ const inWallet = value => {
 const createTransactionControl = () => {
     const btn = document.querySelector('#wallet')
     btn.addEventListener("click", function () {
-        new TransactionModal('Comprar cotas', 'buy')
+        new TransactionModal('Comprar cotas')
     })
 }
 

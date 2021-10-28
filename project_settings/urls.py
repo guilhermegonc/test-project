@@ -58,22 +58,14 @@ urlpatterns = [
     path('change-recommendation-status', stocks.views.change_recommendation_status, name='update-recommendation-status'),
 
     path('finance-dashboard', expenses_management.views.dashboard, name='finance-dashboard'),
-
+    path('load-transactions/<str:transaction_type>', expenses_management.views.load_older),
+    path('destroy-transaction/<str:transaction_type>', expenses_management.views.destroy_transaction),
     path('expenses', expenses_management.views.expenses, name='expenses'),
-    path('load-expenses', expenses_management.views.load_older_expenses, name='load-expenses'),
-    path('update-expense', expenses_management.views.update_expense, name='update-expense'),
-    path('destroy-expense', expenses_management.views.destroy_expense, name='destroy-expense'),
-    
     path('recurring-payments', expenses_management.views.recurring, name='recurring-payments'),
-    path('update-recurring', expenses_management.views.update_recurring, name='update-recurring'),
-    path('destroy-recurring', expenses_management.views.destroy_recurring, name='destroy-recurring'),
-    
     path('goals', expenses_management.views.goals, name='goals'),
-    path('update-goal', expenses_management.views.update_goal, name='update-goal'),
-    path('destroy-goal', expenses_management.views.destroy_goal, name='destroy-goal'),
-
     path('savings', expenses_management.views.savings, name='savings'),
-    path('load-savings', expenses_management.views.load_older_savings, name='load-savings'),
+    path('update-expense', expenses_management.views.update_expense, name='update-expense'),    
+    path('update-recurring', expenses_management.views.update_recurring, name='update-recurring'),
+    path('update-goal', expenses_management.views.update_goal, name='update-goal'),
     path('update-saving', expenses_management.views.update_saving, name='update-saving'),
-    path('destroy-saving', expenses_management.views.destroy_saving, name='destroy-saving'),
 ]

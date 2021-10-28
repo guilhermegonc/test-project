@@ -83,12 +83,11 @@ class StockObject {
         this.label.classList.add(colorClass)
     }
 
-    addTransactionListener = method => {
-        const action = method === 'buy' ? 'Comprar' : 'Vender'
+    addTransactionListener = () => {
         const title = `Cotas ${this.code}`
         const code = this.code
         this.card.addEventListener('click', function () {
-            new TransactionModal(title, method)
+            new TransactionModal(title)
             const inp = document.querySelector('#id_code')
             inp.value = code
             inp.type = 'hidden'

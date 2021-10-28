@@ -54,7 +54,7 @@ class ExpensesTable {
     requestData = async() => {
         const start = counter * 20
         const end = start + 20
-        const uri = `load-expenses?start=${start}&end=${end}`
+        const uri = `load-transactions/expenses?start=${start}&end=${end}`
         let response = await fetch(uri)
         response = await response.json()
         expenses = expenses.concat(response.data)

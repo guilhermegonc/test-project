@@ -54,7 +54,7 @@ class SavingsTable {
     requestData = async() => {
         const start = counter * 20
         const end = start + 20
-        const uri = `load-savings?start=${start}&end=${end}`
+        const uri = `load-transactions/savings?start=${start}&end=${end}`
         let response = await fetch(uri)
         response = await response.json()
         savings = savings.concat(response.data)

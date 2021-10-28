@@ -4,17 +4,15 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from app.userHelper import get_user, get_user_object
-from .goalsHelper import create_goal, edit_goal, remove_goal, get_goals, get_monthly_goals
-from .expensesHelper import create_expense, edit_expense, remove_expense,\
-    get_expenses, dict_expenses, get_monthly_balance, get_expenses_by_category
-
-from .savingsHelper import create_saving, edit_saving, remove_saving,\
-    get_savings, dict_savings, get_monthly_saving, summary_savings
-
-from .recurringHelper import create_recurring, edit_recurring,\
-    remove_recurring, get_recurring
+from .transactionsHelper import get_transactions, remove_transaction
+from .goalsHelper import edit_goal, get_goals, get_monthly_goals
+from .expensesHelper import edit_expense, get_monthly_balance
+from .savingsHelper import edit_saving, get_monthly_saving, summary_savings
+from .recurringHelper import edit_recurring, get_recurring
 
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
+from .models import UserExpenses, UserGoals, UserRecurringExpenses, UserSavings
+
 import datetime
 
 
@@ -24,9 +22,10 @@ def dashboard(request):
     year = datetime.datetime.now().year
     
     expenses_sum = get_monthly_balance(user.data.id, year)
-    # expenses_category = get_expenses_by_category(user.data.id, year)
+    
     savings_sum = get_monthly_saving(user.data.id, year)
     saving_balances = summary_savings(user.data.id)
+    
     goals = get_monthly_goals(user.data.id, year)
     
     payload = {
@@ -44,20 +43,76 @@ def dashboard(request):
 
 @login_required
 def expenses(request):
-    user = get_user(request)
-    form = ExpenseForm()
-    expenses = get_expenses(user.data.id)
-    payload = {'user': user, 'form': form, 'rows': expenses}
+    user = get_user(request)    
+    payload = {
+        'user': user, 
+        'rows': get_transactions(UserExpenses, user.data.id),
+        'form': ExpenseForm(), 
+    }
     return render(request, 'expenses.html', payload)
 
 
 @login_required
-def load_older_expenses(request):
+def savings(request):
+    user = get_user(request)    
+    payload = {
+        'user': user, 
+        'rows': get_transactions(UserSavings, user.data.id),
+        'form': SavingsForm(), 
+    }
+    return render(request, 'savings.html', payload)
+
+
+@login_required
+def recurring(request):
+    user = get_user(request)
+    payload = {
+        'user': user, 
+        'rows': get_recurring(user.data.id),
+        'form': RecurringForm(),
+    }
+    return render(request, 'recurring-payments.html', payload)
+
+
+@login_required
+def goals(request):
+    user = get_user(request)    
+    payload = {
+        'user': user, 
+        'rows': get_goals(user.data.id),
+        'form': GoalsForm()
+    }
+    return render(request, 'goals.html', payload)
+
+
+@login_required
+def load_older(request, transaction_type):
+    model = UserExpenses if transaction_type == 'expenses' else UserSavings
     user = get_user(request)
     start = int(request.GET.get('start'))
     end = int(request.GET.get('end'))
-    expenses = get_expenses(user.data.id, start, end)
-    return JsonResponse(dict_expenses(expenses))
+    transaction = get_transactions(model, user.data.id, start, end)
+    transaction = {'data': list(transaction.values())}
+    return JsonResponse(transaction)
+
+
+@login_required
+def destroy_transaction(request, transaction_type):
+    if transaction_type == 'expense':
+        model = UserExpenses
+    if transaction_type == 'recurring':
+        model = UserRecurringExpenses
+    if transaction_type == 'goal':
+        model = UserGoals
+    if transaction_type == 'saving':
+        model = UserSavings
+    
+    user = get_user_object(request)
+    id = int(request.GET.get('id'))
+    payload = {'user': user, 'id': id}
+    remove_transaction(model, payload)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 @login_required
 def update_expense(request):
@@ -76,27 +131,8 @@ def update_expense(request):
                 'value': float(form.cleaned_data['value']),
                 'recurring': bool(form.cleaned_data['recurring']),
             }
-            create_expense(payload) if payload['id'] == 0 else edit_expense(payload)
-    
-    return HttpResponseRedirect('/expenses')
-
-
-@login_required
-def destroy_expense(request):
-    user = get_user_object(request)
-    id = int(request.GET.get('id'))
-    payload = {'user': user, 'id': id}
-    remove_expense(payload)
-    return HttpResponseRedirect('/expenses')
-
-
-@login_required
-def recurring(request):
-    user = get_user(request)
-    form = RecurringForm()
-    recurring = get_recurring(user.data.id)
-    payload = {'user': user, 'form': form, 'rows': recurring}
-    return render(request, 'recurring-payments.html', payload)
+            edit_expense(payload)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -115,27 +151,8 @@ def update_recurring(request):
                 'value': float(form.cleaned_data['value']),
                 'active': bool(form.cleaned_data['active']),
             }
-            create_recurring(payload) if payload['id'] == 0 else edit_recurring(payload)
-    
-    return HttpResponseRedirect('/recurring-payments')
-
-
-@login_required
-def destroy_recurring(request):
-    user = get_user_object(request)
-    id = int(request.GET.get('id'))
-    payload = {'user': user, 'id': id}
-    remove_recurring(payload)
-    return HttpResponseRedirect('/recurring-payments')
-
-
-@login_required
-def goals(request):
-    user = get_user(request)
-    form = GoalsForm()
-    goals = get_goals(user.data.id)
-    payload = {'user': user, 'form': form, 'rows': goals}
-    return render(request, 'goals.html', payload)
+            edit_recurring(payload)
+    return HttpResponseRedirect(request.path_info)
 
 
 @login_required
@@ -153,35 +170,8 @@ def update_goal(request):
                 'saving': form.cleaned_data['savings'],
                 'expense': form.cleaned_data['expenses'],
             }
-            create_goal(payload) if payload['id'] == 0 else edit_goal(payload)
-    
-    return HttpResponseRedirect('/goals')
-
-@login_required
-def destroy_goal(request):
-    user = get_user_object(request)
-    id = int(request.GET.get('id'))
-    payload = {'user': user, 'id': id}
-    remove_goal(payload)
-    return HttpResponseRedirect('/goals')
-
-
-@login_required
-def savings(request):
-    user = get_user(request)
-    form = SavingsForm()
-    expenses = get_savings(user.data.id)
-    payload = {'user': user, 'form': form, 'rows': expenses}
-    return render(request, 'savings.html', payload)
-
-
-@login_required
-def load_older_savings(request):
-    user = get_user(request)
-    start = int(request.GET.get('start'))
-    end = int(request.GET.get('end'))
-    savings = get_savings(user.data.id, start, end)
-    return JsonResponse(dict_savings(savings))
+            edit_goal(payload)
+    return HttpResponseRedirect(request.path_info)
 
 
 @login_required
@@ -200,15 +190,5 @@ def update_saving(request):
                 'date': form.cleaned_data['date'],
                 'value': float(form.cleaned_data['value']),
             }
-            create_saving(payload) if payload['id'] == 0 else edit_saving(payload)
-    
-    return HttpResponseRedirect('/savings')
-
-
-@login_required
-def destroy_saving(request):
-    user = get_user_object(request)
-    id = int(request.GET.get('id'))
-    payload = {'user': user, 'id': id}
-    remove_saving(payload)
-    return HttpResponseRedirect('/savings')
+            edit_saving(payload)
+    return HttpResponseRedirect(request.path_info)

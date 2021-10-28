@@ -17,7 +17,7 @@ class ExpenseCard {
             new ExpenseModal(formExpense)
         })
 
-        this.card.loadRecent('load-expenses')
+        this.card.loadRecent('load-transactions/expenses')
     }
 }
 
@@ -32,7 +32,6 @@ class SavingCard {
         this.card.label.innerText = 'A investir:'
         this.card.title.innerText = `R$ ${this.balance}`
         this.card.addSubtext(`Planejado: R$ ${this.planned}`)
-        this.card.addSubtext(`Realizado: R$ ${this.realized}`)
         this.card.footerBtn.firstChild.href = 'savings'
         this.card.addSettingsBtn()
 
@@ -40,7 +39,7 @@ class SavingCard {
             new SavingModal(formSaving)
         })
 
-        this.card.loadRecent('load-savings')
+        this.card.loadRecent('load-transactions/savings')
     }
 }
 
@@ -131,4 +130,5 @@ class SummaryCard{
         let text = obj['data'][0]['type'] === undefined ? obj['data'][0]['objective'] : obj['data'][0]['type']
         recent.innerText = `Recente: ${text}`
     }
+
 }

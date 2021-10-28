@@ -148,7 +148,7 @@ class EditModal {
 
     addDestroyBtn = () => {
         const btn = document.createElement('a')
-        btn.href = `/destroy-${this.type}?id=${this.obj.id}`
+        btn.href = `/destroy-transaction/${this.type}?id=${this.obj.id}`
         btn.innerText = 'Remover'
         btn.classList.add('shadow', 'btn', 'clean-a', 'danger')
         this.form.appendChild(btn)

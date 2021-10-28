@@ -52,6 +52,7 @@
     const div = document.querySelector('#summary')
 
     let expenses = {}
+    let recurringExpenses = {}
     let expenseValues = []
     '{% for k,v in expenses.items %}'
         expenses['{{ k }}'] = {{ v }}

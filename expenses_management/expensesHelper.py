@@ -28,26 +28,8 @@ def create_expense(payload):
     )
 
 
-def get_monthly_balance(user, year):
-    summary = dict((f'{year}-{i+1:02d}-01', 0) for i in range(12))
-    query = f'''
-    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
-           sum(value) sum_value
-    FROM user_expenses
-    WHERE user_id = {user}
-    AND date > '{year}-01-01'
-    AND date < '{year + 1}-01-01'
-    GROUP BY mth;
-    '''
-    with connection.cursor() as cursor:
-        cursor.execute(query)
-        expenses = cursor.fetchall()
-    
-    return {**summary, **dict((x,y) for x,y in expenses)}
-
-
 def get_expenses_by_category(user, year):
-    summary = dict((f'{year}-{i+1:02d}-01', 0) for i in range(12))
+    summary = dict((f'{year}-{i+1:02d}-01', [{'': 0}]) for i in range(12))
     query = f'''
     SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
            type,
@@ -56,15 +38,17 @@ def get_expenses_by_category(user, year):
     WHERE user_id = {user}
     AND date > '{year}-01-01'
     AND date < '{year + 1}-01-01'
-    GROUP BY mth, type;
+    GROUP BY mth, type
+    ORDER BY mth, type;
     '''
     with connection.cursor() as cursor:
         cursor.execute(query)
         expenses = cursor.fetchall()
     
-    [dict_monthly_types(m, v, t, summary) for m, t, v in expenses]
+    [dict_monthly_types(m, t, v, summary) for m, t, v in expenses]
+    return summary
 
 
-def dict_monthly_types(month, value, type, summary):
-    summary[month][type] = value
+def dict_monthly_types(month, type, value, summary):
+    summary[month].append({type : value})
     return

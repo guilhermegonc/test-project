@@ -11,7 +11,7 @@ class RecurringModal {
     constructor(forms, obj=null) {
         this.modal = new EditModal('recurring', forms, obj)
         this.modal.addNumericKeyBoard()
-        this.checkActive()
+        this.modal.checkActive()
         obj != null ? this.modal.fullfillForm() : null
         this.modal.focusValue('value')
     }

@@ -1,11 +1,3 @@
-const addDetails = () => {
-    const details = document.querySelector('#details')
-    const chartCanvas = document.querySelector('#expense-chart')
-    startChart(chartCanvas)
-    const table = new SavingBalanceTable(details)
-    table.addTitle('details')
-}
-
 const startChart = chartCanvas => {
     new Chart(chartCanvas, {
         type: 'bar',

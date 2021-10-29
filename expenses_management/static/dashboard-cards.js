@@ -1,6 +1,6 @@
 class ExpenseCard {
-    constructor(month) {
-        this.realized = expenses[month].toFixed(2)
+    constructor(month, transactions) {
+        this.realized = transactions[month].toFixed(2)
         this.planned = goals[month][0].toFixed(2)
         this.balance = (this.planned - this.realized).toFixed(2)
         this.color = this.planned * 0.95 > this.realized ? 'good' : 'danger'
@@ -22,8 +22,8 @@ class ExpenseCard {
 }
 
 class SavingCard {
-    constructor(month) {
-        this.realized = savings[month].toFixed(2)
+    constructor(month, transactions) {
+        this.realized = transactions[month].toFixed(2)
         this.planned = goals[month][1].toFixed(2)
         this.balance = (this.planned - this.realized).toFixed(2)
         this.color = 'generic'

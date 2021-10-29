@@ -12,7 +12,7 @@
     <script src="{% static 'edit-modal.js' %}"></script>
     <script src="{% static 'finance-chart.js' %}"></script>
     <script src="{% static 'general-table.js' %}"></script>
-    <script src="{% static 'savings-summary-table.js' %}"></script>
+    <script src="{% static 'finance-summary-table.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
     {% endblock %}
 
@@ -36,14 +36,14 @@
     <h3 class="s8 txt-center p-12">Despesas</p>
     <canvas id="expense-chart"></canvas>
 </div>
-<div id="details">
+<div id="details-expenses">
+</div>
+<div id="details-savings">
 </div>
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
 <script>
-    adjustSideScroll()
-    
     const token = `{% csrf_token %}`
     const formExpense = `{{ form_expense }}`
     const formSaving = `{{ form_saving }}`
@@ -51,14 +51,25 @@
     const date = new Date()
     const div = document.querySelector('#summary')
 
-    let expenses = {}
-    let recurringExpenses = {}
-    let expenseValues = []
+    const expensesMonth = {}
+    const expenseCategories = {}
     '{% for k,v in expenses.items %}'
-        expenses['{{ k }}'] = {{ v }}
-        expenseValues.push({{ v }})
+        expensesMonth['{{ k }}'] = 0
+        expenseCategories['{{ k }}'] = {}
+        '{% for type in v %}'
+            '{% for name, value in type.items %}'
+                expensesMonth['{{ k }}'] += {{ value }}
+                expenseCategories['{{ k }}']['{{ name }}'] = {{ value }}
+            '{% endfor %}'
+            delete expenseCategories['{{ k }}'][''];
+        '{% endfor %}'
     '{% endfor %}'
     
+    const expenseValues = []
+    for (m in expensesMonth) {
+        expenseValues.push(expensesMonth[m])
+    }
+
     let savings = {}
     '{% for k,v in savings.items %}'
         savings['{{ k }}'] = {{ v }}
@@ -76,6 +87,7 @@
         goalExpValues.push({{ v.0 }})
     '{% endfor %}'
 
+    adjustSideScroll()
     setupPage()
 </script>
 {% endblock %}

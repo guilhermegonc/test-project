@@ -1,7 +1,23 @@
 class SavingBalanceTable {
     constructor(div) {
+        this.summary = new SummaryTable(div, savingBalances, 'saving-summary')
+        this.summary.populateHeader('details-savings', 'Caixa', 'Saldo')
+        this.summary.addTitle('details-savings', 'Economias')
+    }
+}
+
+class ExpenseTypeTable {
+    constructor(div, month) {
+        this.summary = new SummaryTable(div, expenseCategories[month], 'expense-summary')
+        this.summary.populateHeader('details-expenses', 'Categoria', 'Soma')
+        this.summary.addTitle('details-expenses', 'Gastos por categoria')
+    }
+}
+
+class SummaryTable {
+    constructor(div, values, type=null) {
         this.parent = div
-        this.html = new Table('saving-summary')
+        this.html = new Table(type)
         div.appendChild(this.html.table)        
 
         this.table = this.html.table
@@ -10,14 +26,13 @@ class SavingBalanceTable {
         this.html.firstRow.remove()
         this.html.btn.remove()
         
-        this.populateHeader()
-        this.populateTable(savingBalances)
+        this.populateTable(values)
     }
 
-    populateHeader = () => {
-        const h = document.querySelectorAll('th')
-        h[0].innerText = 'Reservas'
-        h[3].innerText = 'Total'
+    populateHeader = (id, name, value) => {
+        const h = document.querySelectorAll(`#${id} table th`)
+        h[0].innerText = name
+        h[3].innerText = value
         h[1].remove()
         h[2].remove()
     }
@@ -35,12 +50,12 @@ class SavingBalanceTable {
         })
     }
     
-    addTitle = id => {
+    addTitle = (id, text) => {
         const details = document.querySelector(`#${id}`)
 
         const h3 = document.createElement('h3')
-        h3.classList.add('s8', 'txt-center', 'p-12')
-        h3.innerText = 'Economias'
+        h3.classList.add('s8', 'txt-center', 'p-24')
+        h3.innerText = text
 
         details.insertBefore(h3, this.table)
         this.changeStyles(details)

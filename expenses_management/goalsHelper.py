@@ -39,7 +39,7 @@ def get_monthly_goals(user, year):
            sum(savings) sum_expenses
     FROM user_goals
     WHERE user_id = {user}
-    AND date > '{year}-01-01'
+    AND date >= '{year}-01-01'
     AND date < '{year + 1}-01-01'
     GROUP BY mth;
     '''

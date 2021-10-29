@@ -1,42 +1,50 @@
 const setupPage = () => {
+    const mm = String(date.getMonth()+1)
+    const yyyy = date.getFullYear()
+    adjustSideScroll()
     addControls()
-    writePageTitle(date.getMonth()+1, date.getFullYear())
-    setupCards(date.getMonth()+1, date.getFullYear())
+    writePageTitle(mm, yyyy)
+    setupCards(mm, yyyy)
     addChart()
-    updateExpenseTable(`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-01`)
+    updateExpenseTable(mm, yyyy)
     updateSavingTable()
 }
 
 const addControls = () => {
-    let date
     const previous = document.querySelector('#previous')
     previous.addEventListener('click', function(){
-        date = changeMonth('subtract')
-        deleteCards()
-        setupCards(date['month'], date['year'])
-        updateExpenseTable(`${date['year']}-${String(date['month']).padStart(2, '0')}-01`)
+        let monthValue = document.querySelector('#title-month-value').innerText
+        monthValue = parseInt(monthValue)
+        subtractMonth(monthValue)
     })
 
     const next = document.querySelector('#next')
     next.addEventListener('click', function(){
-        date = changeMonth('add')
-        deleteCards()
-        setupCards(date['month'], date['year'])
-        updateExpenseTable(`${date['year']}-${String(date['month']).padStart(2, '0')}-01`)        
+        let monthValue = document.querySelector('#title-month-value').innerText
+        monthValue = parseInt(monthValue)
+        addMonth(monthValue)
     })
 }
 
-const changeMonth = method => {
-    const monthHTML = document.querySelector('#title-month-value')
-    let month = monthHTML.innerText
-    let newMonth = method === 'add' ? parseInt(month) + 1 : parseInt(month) - 1   
+const addMonth = month => {
+    const newMonth = month + 1  
     month = newMonth > 0 && newMonth <= 12 ? newMonth : month
-    
+    changeMonth(month)
+}
+
+const subtractMonth = month => {
+    const newMonth = month - 1   
+    month = newMonth > 0 && newMonth <= 12 ? newMonth : month
+    changeMonth(month)
+}
+
+const changeMonth = month => {
     const yearHTML = document.querySelector('#title-year-value')
-    let year = yearHTML.innerText
-    
+    const year = yearHTML.innerText
     writePageTitle(month, year)
-    return {'month': month, 'year': year}
+    deleteCards()
+    setupCards(month, year)
+    updateExpenseTable(month, year)
 }
 
 const writePageTitle = (month, year) => {
@@ -72,18 +80,14 @@ const addChart = () => {
     startChart(chartCanvas)
 }
 
-const updateExpenseTable = month => {
+const updateExpenseTable = (month, year) => {
+    const truncDate = `${year}-${String(month).padStart(2, '0')}-01`
     const expDetails = document.querySelector('#details-expenses')
     expDetails.innerHTML = ''
-    console.log(month)
-    const expTable = new ExpenseTypeTable(expDetails, month)
+    const expTable = new ExpenseTypeTable(expDetails, truncDate)
 }
 
 const updateSavingTable = () => {
     const savDetails = document.querySelector('#details-savings')
     const savTable = new SavingBalanceTable(savDetails)
 }
-
-// const deleteExpenseTable = () => {
-
-// }

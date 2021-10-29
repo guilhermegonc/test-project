@@ -36,7 +36,7 @@ def get_expenses_by_category(user, year):
            sum(value) sum_value
     FROM user_expenses
     WHERE user_id = {user}
-    AND date > '{year}-01-01'
+    AND date >= '{year}-01-01'
     AND date < '{year + 1}-01-01'
     GROUP BY mth, type
     ORDER BY mth, type;

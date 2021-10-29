@@ -93,3 +93,19 @@
 .generic {
     background-color: white;
 }
+
+#previous {
+    position: fixed;
+    left: 6px;
+    background-color: black;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#next {
+    position: fixed;
+    right: 6px;
+    background-color: black;
+    border-radius: 50%;
+    cursor: pointer;
+}

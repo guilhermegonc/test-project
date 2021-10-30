@@ -83,9 +83,10 @@ const addChart = () => {
 }
 
 const updateExpenseTable = (month, year) => {
-    const truncDate = `${year}-${String(month).padStart(2, '0')}-01`
     const expDetails = document.querySelector('#details-expenses')
     expDetails.innerHTML = ''
+
+    const truncDate = `${year}-${String(month).padStart(2, '0')}-01`
     const expTable = new ExpenseTypeTable(expDetails, truncDate)
 }
 

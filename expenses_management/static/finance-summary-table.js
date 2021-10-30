@@ -9,7 +9,7 @@ class SavingBalanceTable {
 class ExpenseTypeTable {
     constructor(div, month) {
         this.summary = new SummaryTable(div, expenseCategories[month], 'expense-summary')
-        this.summary.populateHeader('details-expenses', 'Categoria', 'Soma')
+        this.summary.populateHeader('details-expenses', 'Categoria', 'Soma (Média)')
         this.summary.addTitle('details-expenses', 'Gastos por categoria')
     }
 }
@@ -44,7 +44,7 @@ class SummaryTable {
 
             row.innerHTML = `
                 <td class="s10 str main-column">${key}</td>
-                <td class="s9 light-gray m-0 t-right">R$ ${data[key].toFixed(2)}</td>
+                <td class="s9 light-gray m-0 t-right">R$ ${data[key]}</td>
             `
             this.html.table.appendChild(row)
         })

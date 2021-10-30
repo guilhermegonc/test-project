@@ -51,6 +51,14 @@
     const date = new Date()
     const div = document.querySelector('#summary')
 
+    let val
+    let categoryAverages = {}
+    '{% for k,v in expenses_category.items %}'
+        val = {{ v }}
+        categoryAverages['{{ k }}'] = val.toFixed(2)
+    '{% endfor %}'
+
+    let avg
     const expensesMonth = {}
     const expenseCategories = {}
     '{% for k,v in expenses.items %}'
@@ -59,7 +67,9 @@
         '{% for type in v %}'
             '{% for name, value in type.items %}'
                 expensesMonth['{{ k }}'] += {{ value }}
-                expenseCategories['{{ k }}']['{{ name }}'] = {{ value }}
+                avg = categoryAverages['{{ name }}']
+                val = {{ value }}
+                expenseCategories['{{ k }}']['{{ name }}'] = `${val.toFixed(2)} (R$ ${avg})`
             '{% endfor %}'
             delete expenseCategories['{{ k }}'][''];
         '{% endfor %}'
@@ -77,7 +87,8 @@
 
     let savingBalances = {}
     '{% for k, v in saving_balances.items %}'
-        savingBalances['{{ k }}'] = {{ v }}
+        val = {{ v }}
+        savingBalances['{{ k }}'] = val.toFixed(2)
     '{% endfor %}'
 
     let goals = {}

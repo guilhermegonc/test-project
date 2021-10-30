@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from app.userHelper import get_user, get_user_object
 from .transactionsHelper import get_transactions, remove_transaction
 from .goalsHelper import edit_goal, get_goals, get_monthly_goals
-from .expensesHelper import edit_expense, get_expenses_by_category
+from .expensesHelper import edit_expense, get_expenses_by_category, get_expenses_averages
 from .savingsHelper import edit_saving, get_monthly_saving, summary_savings
 from .recurringHelper import edit_recurring, get_recurring
 
@@ -23,12 +23,12 @@ def dashboard(request):
     expenses_sum = get_expenses_by_category(user.data.id, year)
     savings_sum = get_monthly_saving(user.data.id, year)
     saving_balances = summary_savings(user.data.id)
-    
     goals = get_monthly_goals(user.data.id, year)
+    averages = get_expenses_averages(user.data.id)
     
     payload = {
         'expenses': expenses_sum,  
-        'expenses_category': 1, 
+        'expenses_category': averages, 
         'savings': savings_sum, 
         'goals': goals, 
         'saving_balances': saving_balances, 

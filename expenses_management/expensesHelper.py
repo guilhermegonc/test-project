@@ -52,3 +52,29 @@ def get_expenses_by_category(user, year):
 def dict_monthly_types(month, type, value, summary):
     summary[month].append({type : value})
     return
+
+
+def get_expenses_averages(user):
+    query = f'''
+    WITH monthly_ticket AS (
+        SELECT DATE_TRUNC('month', date)::DATE::TEXT mth, 
+           type,
+           sum(value) sum_value
+        FROM user_expenses
+        WHERE user_id = {user}
+        AND date >= now() - INTERVAL '6 month'
+        AND date < now()
+        GROUP BY mth, type
+        ORDER BY type
+    )
+    SELECT type,
+           avg(sum_value) avg
+    FROM monthly_ticket
+    GROUP BY type
+    ORDER BY type;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        expenses = cursor.fetchall()
+    
+    return dict((x,y) for x,y in expenses)

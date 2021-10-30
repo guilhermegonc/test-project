@@ -1,17 +1,17 @@
-const startChart = chartCanvas => {
+const startChart = (chartCanvas, barColors) => {
     new Chart(chartCanvas, {
         type: 'bar',
         data: {
             labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D',],
             datasets: [{
                 type: 'line',
-                backgroundColor: 'rgba(50, 72, 190)',
+                backgroundColor: 'rgba(221, 221, 221)',
                 data: goalExpValues,
                 tension: 0,
                 fill: false,
             },{
                 type: 'bar',
-                backgroundColor: 'rgba(50, 72, 190)',
+                backgroundColor: barColors,
                 data: expenseValues,
                 tension: 0,
             }]

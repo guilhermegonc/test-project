@@ -5,7 +5,7 @@ const setupPage = () => {
     addControls()
     writePageTitle(mm, yyyy)
     setupCards(mm, yyyy)
-    addChart()
+    addChart(mm)
     updateExpenseTable(mm, yyyy)
     updateSavingTable()
 
@@ -59,6 +59,7 @@ const changeMonth = month => {
     deleteCards()
     setupCards(month, year)
     updateExpenseTable(month, year)
+    addChart(month)
 }
 
 const writePageTitle = (month, year) => {
@@ -91,9 +92,26 @@ const setupCards = (month, year) => {
     new SavingCard(truncDate, savings)
 }
 
-const addChart = () => {
+const addChart = mm => {
+    mm = parseInt(mm) - 1
     const chartCanvas = document.querySelector('#expense-chart')
-    startChart(chartCanvas)
+    chartCanvas.innerHTML = ''
+    let barColors = [
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+        'rgba(221, 221, 221)',
+    ]
+    barColors[mm] = 'rgba(0,0,0)'
+    startChart(chartCanvas, barColors)
 }
 
 const updateExpenseTable = (month, year) => {

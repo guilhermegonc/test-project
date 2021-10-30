@@ -2,7 +2,7 @@ class SavingBalanceTable {
     constructor(div) {
         this.summary = new SummaryTable(div, savingBalances, 'saving-summary')
         this.summary.populateHeader('details-savings', 'Caixa', 'Saldo')
-        this.summary.addTitle('details-savings', 'Economias')
+        this.summary.addTitle('details-savings', 'Economias (acumulado)')
     }
 }
 

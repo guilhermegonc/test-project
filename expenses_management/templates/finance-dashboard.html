@@ -58,13 +58,24 @@
         val = {{ v }}
         categoryAverages['{{ k }}'] = val.toFixed(2)
     '{% endfor %}'
+    const categories = Object.keys(categoryAverages)
+
+
+    let truncDate
+    let expenseCategories = {}
+    for (let i = 1; i < 13; i++) {
+        truncDate = `${date.getFullYear()}-${String(i).padStart(2, '0')}-01`
+        expenseCategories[truncDate] = {}
+        for (c in categories) {
+            val = categoryAverages[categories[c]]
+            expenseCategories[truncDate][categories[c]] = `R$ 0.00<br>(R$ ${val})`
+        }
+    }
 
     let avg
     const expensesMonth = {}
-    const expenseCategories = {}
     '{% for k,v in expenses.items %}'
         expensesMonth['{{ k }}'] = 0
-        expenseCategories['{{ k }}'] = {}
         '{% for type in v %}'
             '{% for name, value in type.items %}'
                 expensesMonth['{{ k }}'] += {{ value }}

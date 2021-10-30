@@ -69,7 +69,7 @@
                 expensesMonth['{{ k }}'] += {{ value }}
                 avg = categoryAverages['{{ name }}']
                 val = {{ value }}
-                expenseCategories['{{ k }}']['{{ name }}'] = `${val.toFixed(2)} (R$ ${avg})`
+                expenseCategories['{{ k }}']['{{ name }}'] = `${val.toFixed(2)}<br>(R$ ${avg})`
             '{% endfor %}'
             delete expenseCategories['{{ k }}'][''];
         '{% endfor %}'

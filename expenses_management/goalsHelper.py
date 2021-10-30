@@ -2,8 +2,10 @@ from django.db import connection
 from .models import UserGoals
 
 
-def get_goals(user):
-    return UserGoals.objects.filter(user=user).order_by('date')
+def get_goals(user, year):
+    return UserGoals.objects.filter(user=user, 
+        date__gte=f'{year}-01-01', 
+        date__lt=f'{year + 1}-01-01').order_by('date')
 
 
 def edit_goal(payload):
@@ -36,7 +38,7 @@ def get_monthly_goals(user, year):
     query = f'''
     SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
            sum(expenses) sum_expenses,
-           sum(savings) sum_expenses
+           sum(savings) sum_savings
     FROM user_goals
     WHERE user_id = {user}
     AND date >= '{year}-01-01'

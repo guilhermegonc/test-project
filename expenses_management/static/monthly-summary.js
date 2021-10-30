@@ -13,7 +13,6 @@ const setupPage = () => {
 const addControls = () => {
     const previous = document.querySelector('#previous')
     previous.addEventListener('click', function(){
-        scroll(0,0)
         let monthValue = document.querySelector('#title-month-value').innerText
         monthValue = parseInt(monthValue)
         subtractMonth(monthValue)
@@ -21,7 +20,6 @@ const addControls = () => {
 
     const next = document.querySelector('#next')
     next.addEventListener('click', function(){
-        scroll(0,0)
         let monthValue = document.querySelector('#title-month-value').innerText
         monthValue = parseInt(monthValue)
         addMonth(monthValue)

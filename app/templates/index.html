@@ -3,46 +3,50 @@
 {% block content %}
 <h1 class="s3 p-12 light txt-center">Boas vindas!</h1>
 <div class="m-0">
-    <div class="txt-center m-b-24">
-        <a href="/custom-form" class="trigger btn m-12-6 light shadow">
+    <div class="txt-center m-l-a m-r-a m-b-24 flex-container w-500">
+        <a href="/custom-form" class="trigger btn m-6 light shadow">
             <div>✅</div>
             <p class="app-label">Form. Integrado</p>
         </a>
-        <a href="/embed-form" class="trigger btn m-12-6 light shadow">
+        <a href="/embed-form" class="trigger btn m-6 light shadow">
             <div class="status">🔘</div>
             <p class="app-label">Form. Embutido</p>
         </a>
-        <a href="/tictactoe" class="trigger btn m-12-6 light shadow">
+        <a href="/tictactoe" class="trigger btn m-6 light shadow">
             <div class="status">♦️</div>
             <p class="app-label">Tic tac toe</p>
         </a>
         {% if is_auth %}
-        <a href="/finance-dashboard" class="trigger btn m-12-6 light shadow">
+        <a href="/finance-dashboard" class="trigger btn m-6 light shadow">
             <div>💵</div>
             <p class="app-label">Gastos</p>
         </a>
         {% if user.data.role == 'owner' %}
-        <a href="/wallet" class="trigger btn m-12-6 light shadow">
+        <a href="/wallet" class="trigger btn m-6 light shadow">
             <div class="status">💰</div>
             <p class="app-label">Investimentos</p>
         </a>
-        <a href="smart-home" class="trigger btn m-12-6 light shadow">
+        <a href="smart-home" class="trigger btn m-6 light shadow">
             <div class="status">🏠</div>
             <p class="app-label">Smart Home</p>
         </a>
         {% endif %}
         {% endif %}
         {% if is_auth %}
-        <a href="/profile" class="trigger btn m-12-6 light shadow">
+        <a href="/profile" class="trigger btn m-6 light shadow">
             <div class="status">⚙️</div>
             <p class="app-label">Conta</p>
         </a>
+        <a href="/logout" class="trigger btn m-6 light shadow">
+            <div class="status">❌</div>
+            <p class="app-label">Sair</p>
+        </a>
+        {% else %}
+        <a href="/login/auth0" class="trigger btn m-6 light shadow">
+            <div class="status">🔐</div>
+            <p class="app-label">Entrar</p>
+        </a>
         {% endif %}
     </div>
-    {% if is_auth %}
-    <a class="btn shadow light" href="/logout">Sair</a>
-    {% else %}
-    <a class="btn shadow" href="login/auth0">Entrar</a>
-    {% endif %}
 </div>
 {% endblock %}

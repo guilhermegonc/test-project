@@ -48,8 +48,16 @@ label{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-image: url("https://images.unsplash.com/photo-1553356084-58ef4a67b2a7");
+    background-image: url("https://images.unsplash.com/photo-1513569771920-c9e1d31714af");
+    /* background-image: url("https://images.unsplash.com/photo-1553356084-58ef4a67b2a7"); */
     background-size: cover;
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .empty-bg {
@@ -366,10 +374,15 @@ span.token {
     width: 80px;
 }
 
-/* Margins */
 .w-400 {
     max-width: 400px;
 }
+
+.w-500 {
+    max-width: 500px;
+}
+
+/* Margins */
 
 .m-0 {
     margin: 0;

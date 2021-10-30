@@ -74,10 +74,11 @@ def recurring(request):
 
 @login_required
 def goals(request):
+    year = datetime.datetime.now().year
     user = get_user(request)    
     payload = {
         'user': user, 
-        'rows': get_goals(user.data.id),
+        'rows': get_goals(user.data.id, year),
         'form': GoalsForm()
     }
     return render(request, 'goals.html', payload)

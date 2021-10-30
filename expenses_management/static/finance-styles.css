@@ -71,6 +71,7 @@ html {
     height: 30px;
     position: relative;
     top:50px;
+    cursor: pointer;
 }
 
 .action-icon:hover {
@@ -99,9 +100,10 @@ html {
 }
 
 #previous {
+    background-color:white;
+    color: black;
     position: fixed;
     left: 6px;
-    background-color: rgba(50,72,190,1);
     border-radius: 50%;
     cursor: pointer;
     z-index: 1;
@@ -111,9 +113,10 @@ html {
 }
 
 #next {
+    background-color:white;
+    color: black;
     position: fixed;
     right: 6px;
-    background-color: rgba(50,72,190,1);
     border-radius: 50%;
     cursor: pointer;
     z-index: 1;

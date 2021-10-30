@@ -8,6 +8,20 @@ const setupPage = () => {
     addChart()
     updateExpenseTable(mm, yyyy)
     updateSavingTable()
+
+    document.addEventListener('scroll', function() {
+        window.scrollY > 172 ? fixTitle() : releaseTitle()
+    })
+}
+
+const fixTitle = () => {
+    const title = document.querySelector('#aux-title')
+    title.classList.remove('hide')
+}
+
+const releaseTitle = () => {
+    const title = document.querySelector('#aux-title')
+    title.classList.add('hide')
 }
 
 const addControls = () => {
@@ -54,8 +68,10 @@ const writePageTitle = (month, year) => {
         9: 'Setembro', 10: 'Outubro', 11: 'Novembro', 12: 'Dezembro'
     }
     const title = document.querySelector('#title-text')
+    const auxTitle = document.querySelector('#aux-title')
     const mm = monthDict[month]
     title.innerText = `${mm}\n${year}`
+    auxTitle.innerText = `${mm} - ${year}`
 
     const monthHTML = document.querySelector('#title-month-value')
     monthHTML.innerText = month

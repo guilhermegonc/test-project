@@ -130,3 +130,17 @@ html {
         bottom: 24px;
     }
 }
+
+@media (max-width: 992px) {
+    .fixed-title-mobile {
+        z-index: 1000;
+        position: fixed;
+        text-align: center;
+        font: white;
+        background-color: black;
+        width: 100%;
+        left: 0;
+        top: 0;
+        transition: 0.2;
+    }
+}

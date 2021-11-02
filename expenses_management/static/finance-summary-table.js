@@ -44,7 +44,7 @@ class SummaryTable {
 
             row.innerHTML = `
                 <td class="s10 str main-column">${key}</td>
-                <td class="s9 light-gray m-0 t-right">${data[key]}</td>
+                <td id ="table-${key}-value" class="s9 light-gray m-0 t-right">${data[key]}</td>
             `
             this.html.table.appendChild(row)
         })

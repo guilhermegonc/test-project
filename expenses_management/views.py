@@ -14,6 +14,7 @@ from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
 from .models import UserExpenses, UserGoals, UserRecurringExpenses, UserSavings
 
 import datetime
+import sys
 
 
 @login_required
@@ -138,7 +139,7 @@ def update_recurring(request):
                 'active': bool(form.cleaned_data['active']),
             }
             edit_recurring(payload)
-    return HttpResponseRedirect(request.path_info)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -157,7 +158,7 @@ def update_goal(request):
                 'expense': form.cleaned_data['expenses'],
             }
             edit_goal(payload)
-    return HttpResponseRedirect(request.path_info)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -177,4 +178,4 @@ def update_saving(request):
                 'value': float(form.cleaned_data['value']),
             }
             edit_saving(payload)
-    return HttpResponseRedirect(request.path_info)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

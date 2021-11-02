@@ -1,171 +1,151 @@
-const setupPage = () => {
-    const date = new Date()
-    const mm = String(date.getMonth()+1)
-    const yyyy = date.getFullYear()
+class PageData {
+    constructor(){
+        this.months = Object.keys(userFinances.months)
+        this.step = this.updateStep(12)
+        this.changeMonth()
+        this.updateSavingTable()
+        this.addNav('previous', false)
+        this.addNav('next', true)
+    }
+
+    updateStep = step => {
+        this.step = step
+        this.date = this.months[step]
+        this.month = this.parseDate()[1]
+        this.year = this.parseDate()[0]
+        return step
+    }
+
+    parseDate = () => {
+        return this.date.split('-')
+    }
+
+    changeMonth = () => {
+        this.clearCards()
+        this.writePageTitle()
+        this.setupCards()
+        this.updateExpenseTable()
+        this.updateChart()
+    }
+
+    clearCards = () => {
+        const cards = document.querySelector('#summary')
+        cards.innerHTML = ''
+    }
+
+    writePageTitle = () => {
+        const monthDict = { 
+            1: 'Janeiro', 2: 'Fevereiro', 3: 'Março', 4: 'Abril',
+            5: 'Maio', 6: 'Junho', 7: 'Julho', 8: 'Agosto',
+            9: 'Setembro', 10: 'Outubro', 11: 'Novembro', 12: 'Dezembro'
+        }
+        const title = document.querySelector('#title-text')
+        const text = `${monthDict[parseInt(this.month)]}\n${this.year}`
+        title.innerText = text
+        this.addSubtitle(text)
+    }
+
+    addSubtitle = text => {
+        const title = document.querySelector('#aux-title')
+        title.innerText = text
+        const showMethod = this.fixTitle
+        const hideMethod = this.releaseTitle
+        document.addEventListener('scroll', function() {
+            window.scrollY > 172 ? showMethod() : hideMethod()
+        })
+    }
+
+    fixTitle = () => {
+        const title = document.querySelector('#aux-title')
+        title.classList.remove('hide')
+    }
+
+    releaseTitle = () => {
+        const title = document.querySelector('#aux-title')
+        title.classList.add('hide')
+    }
+
+    setupCards = () => {
+        const div = document.querySelector('#summary')
+        new ExpenseCard(div, this.date, userFinances.months)
+        new SavingCard(div, this.date, userFinances.months)
+    }
+
+    updateChart = () => {
+        const month = parseInt(this.month) - 1
+        const chartCanvas = document.querySelector('#expense-chart')
+        chartCanvas.innerHTML = ''
+        let color
+        const barColors = []
+        for (let i = 0; i < 12; i++){
+            color = i === month ? 'rgba(0,0,0)' : 'rgba(221, 221, 221)'
+            barColors.push(color)
+        }
+        const budgetValues = this.loadYearBudget()
+        const realizedValues = this.loadYearRealized()
+        startChart(chartCanvas, barColors, budgetValues, realizedValues)
+    }
     
-    adjustSideScroll()
-    addControls()
-    writePageTitle(mm, yyyy)
-    setupCards(mm, yyyy)
-    updateChart(mm, yyyy)
-    updateExpenseTable(mm, yyyy)
-    updateSavingTable()
-
-    document.addEventListener('scroll', function() {
-        window.scrollY > 172 ? fixTitle() : releaseTitle()
-    })
-}
-
-const addControls = () => {
-    const previous = document.querySelector('#previous')
-    previous.addEventListener('click', function(){
-        let monthValue = document.querySelector('#title-month-value').innerText
-        monthValue = parseInt(monthValue)
-        subtractMonth(monthValue)
-    })
-
-    const next = document.querySelector('#next')
-    next.addEventListener('click', function(){
-        let monthValue = document.querySelector('#title-month-value').innerText
-        monthValue = parseInt(monthValue)
-        addMonth(monthValue)
-    })
-}
-
-const addMonth = month => {
-    const newMonth = month + 1  
-    month = newMonth > 0 && newMonth <= 12 ? newMonth : month
-    changeMonth(month)
-}
-
-const subtractMonth = month => {
-    const newMonth = month - 1   
-    month = newMonth > 0 && newMonth <= 12 ? newMonth : month
-    changeMonth(month)
-}
-
-const changeMonth = month => {
-    const yearHTML = document.querySelector('#title-year-value')
-    const year = yearHTML.innerText
-    writePageTitle(month, year)
-    deleteCards()
-    setupCards(month, year)
-    updateExpenseTable(month, year)
-    updateChart(month, year)
-}
-
-const writePageTitle = (month, year) => {
-    const monthDict = {
-        1: 'Janeiro', 2: 'Fevereiro', 3: 'Março', 4: 'Abril',
-        5: 'Maio', 6: 'Junho', 7: 'Julho', 8: 'Agosto',
-        9: 'Setembro', 10: 'Outubro', 11: 'Novembro', 12: 'Dezembro'
+    loadYearBudget = () => {
+        const budget = []
+        let truncDate, val
+        for (let i = 1; i < 13; i++) {
+            truncDate = `${this.year}-${String(i).padStart(2,'0')}-01`
+            val = userFinances.months[truncDate].expenses.goal
+            budget.push(val)
+        }
+        return budget
     }
-    const title = document.querySelector('#title-text')
-    const auxTitle = document.querySelector('#aux-title')
-    const mm = monthDict[month]
-    title.innerText = `${mm}\n${year}`
-    auxTitle.innerText = `${mm} - ${year}`
-
-    const monthHTML = document.querySelector('#title-month-value')
-    monthHTML.innerText = month
-
-    const yearHTML = document.querySelector('#title-year-value')
-    yearHTML.innerText = year
-}
-
-const deleteCards = () => {
-    const cards = document.querySelector('#summary')
-    cards.innerHTML = ''
-}
-
-const setupCards = (month, year) => {
-    const div = document.querySelector('#summary')
-    const truncDate = `${year}-${String(month).padStart(2, '0')}-01`
-    new ExpenseCard(div, truncDate, userFinances.months)
-    new SavingCard(div, truncDate, userFinances.months)
-}
-
-const updateChart = (mm, yyyy) => {
-    mm = parseInt(mm) - 1
-    const chartCanvas = document.querySelector('#expense-chart')
-    chartCanvas.innerHTML = ''
-    let barColors = [
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-        'rgba(221, 221, 221)',
-    ]
-    barColors[mm] = 'rgba(0,0,0)'
-    let budgetValues = loadYearBudget(yyyy)
-    let realizedValues = loadYearRealized(yyyy)
-
-    startChart(chartCanvas, barColors, budgetValues, realizedValues)
-}
-
-const loadYearBudget = year => {
-    const budget = []
-    let truncDate, val
-    for (let i = 1; i < 13; i++) {
-        truncDate = `${year}-${String(i).padStart(2,'0')}-01`
-        val = userFinances.months[truncDate].expenses.goal
-        budget.push(val)
+    
+    loadYearRealized = () => {
+        const realized = []
+        let truncDate, val
+        for (let i = 1; i < 13; i++) {
+            truncDate = `${this.year}-${String(i).padStart(2,'0')}-01`
+            val = userFinances.months[truncDate].expenses.total
+            realized.push(val)
+        }
+        return realized
     }
-    return budget
-}
 
-const loadYearRealized = year => {
-    const realized = []
-    let truncDate, val
-    for (let i = 1; i < 13; i++) {
-        truncDate = `${year}-${String(i).padStart(2,'0')}-01`
-        val = userFinances.months[truncDate].expenses.total
-        realized.push(val)
+    updateExpenseTable = () => {
+        const expDetails = document.querySelector('#details-expenses')
+        expDetails.innerHTML = ''    
+        const values = this.getExpenseCategories(this.date) 
+        const expTable = new ExpenseTypeTable(expDetails, values)
     }
-    return realized
-}
 
-const updateExpenseTable = (month, year) => {
-    const expDetails = document.querySelector('#details-expenses')
-    expDetails.innerHTML = ''
-
-    const truncDate = `${year}-${String(month).padStart(2, '0')}-01`
-    const values = getExpenseCategories(truncDate) 
-    const expTable = new ExpenseTypeTable(expDetails, values)
-}
-
-const getExpenseCategories = date => {
-    const expenses = {}
-    const categories = Object.keys(userFinances.averages)
-    for (c in categories) {
-        avg = userFinances.averages[categories[c]].toFixed(2)
-        val = userFinances.months[date].expenses.categories[categories[c]]
-        val = val === undefined ? '0.00' : val.toFixed(2)
-        expenses[categories[c]] = `R$ ${val}<br>(R$ ${avg})`   
+    getExpenseCategories = () => {
+        const expenses = {}
+        const categories = Object.keys(userFinances.averages)
+        let avg, val
+        for (let i = 0; i < categories.length; i++) {
+            avg = userFinances.averages[categories[i]].toFixed(2)
+            val = userFinances.months[this.date].expenses.categories[categories[i]]
+            val = val === undefined ? '0.00' : val.toFixed(2)
+            expenses[categories[i]] = `R$ ${val}<br>(R$ ${avg})`   
+        }
+        return expenses
     }
-    return expenses
-}
+    
+    updateSavingTable = () => {
+        const savDetails = document.querySelector('#details-savings')
+        let values = userFinances.savingsSum
+        const savTable = new SavingBalanceTable(savDetails, values)
+    }
+    
+    addNav = (id, inverse) => {
+        const previous = document.querySelector(`#${id}`)
+        const method = this.addMonth
+        previous.addEventListener('click', function(){
+            method(inverse)
+        })
+    }
 
-const updateSavingTable = () => {
-    const savDetails = document.querySelector('#details-savings')
-    const values = userFinances.savingsSum 
-    const savTable = new SavingBalanceTable(savDetails, values)
-}
-
-
-const fixTitle = () => {
-    const title = document.querySelector('#aux-title')
-    title.classList.remove('hide')
-}
-
-const releaseTitle = () => {
-    const title = document.querySelector('#aux-title')
-    title.classList.add('hide')
+    addMonth = direction => {
+        direction = direction === true ? 1 : -1
+        const newStep = this.step + (1 * direction)
+        newStep > 0 && newStep < this.months.length ? this.updateStep(newStep) : null
+        this.changeMonth()
+    }
 }

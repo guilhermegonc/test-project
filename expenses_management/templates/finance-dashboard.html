@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Gestão financeira{% endblock %}
 {% include "chart-js/chart.html"%}
-
 {% load static %}
 {% block extra-css %}
 <link rel="stylesheet" type="text/css" href="{% static 'finance-styles.css' %}">
@@ -14,8 +13,8 @@
     <script src="{% static 'general-table.js' %}"></script>
     <script src="{% static 'finance-summary-table.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    {{ data|json_script:"user-finances" }}
     {% endblock %}
-
 {% block content%}
 <div class="txt-center m-a m-b-24 light w-400">
     <div id="aux-title" class="s8 fixed-title shadow clean-a hide">Esse mês</div>
@@ -44,12 +43,12 @@
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
-{{ data|json_script:"user-finances" }}
 <script>
     const token = `{% csrf_token %}`
     const formExpense = `{{ form_expense }}`
     const formSaving = `{{ form_saving }}`
     const userFinances = JSON.parse(document.getElementById('user-finances').textContent);
-    setupPage()
+    const page = new PageData()
+    adjustSideScroll()
 </script>
 {% endblock %}

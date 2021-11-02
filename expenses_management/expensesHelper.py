@@ -13,7 +13,7 @@ def edit_expense(payload):
         expense.date = payload['date']
         expense.value = payload['value']
         expense.recurring = payload['recurring']
-    expense.save()
+        expense.save()
     return expense
 
 
@@ -25,33 +25,7 @@ def create_expense(payload):
         date=payload['date'],
         value=payload['value'],
         recurring=payload['recurring']
-    )
-
-
-def get_expenses_by_category(user, year):
-    summary = dict((f'{year}-{i+1:02d}-01', [{'': 0}]) for i in range(12))
-    query = f'''
-    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
-           type,
-           sum(value) sum_value
-    FROM user_expenses
-    WHERE user_id = {user}
-    AND date >= '{year}-01-01'
-    AND date < '{year + 1}-01-01'
-    GROUP BY mth, type
-    ORDER BY mth, type;
-    '''
-    with connection.cursor() as cursor:
-        cursor.execute(query)
-        expenses = cursor.fetchall()
-    
-    [dict_monthly_types(m, t, v, summary) for m, t, v in expenses]
-    return summary
-
-
-def dict_monthly_types(month, type, value, summary):
-    summary[month].append({type : value})
-    return
+    ).save()
 
 
 def get_expenses_averages(user):
@@ -62,7 +36,7 @@ def get_expenses_averages(user):
            sum(value) sum_value
         FROM user_expenses
         WHERE user_id = {user}
-        AND date >= now() - INTERVAL '6 month'
+        AND date >= now() - INTERVAL '3 month'
         AND date < now()
         GROUP BY mth, type
         ORDER BY type
@@ -78,3 +52,46 @@ def get_expenses_averages(user):
         expenses = cursor.fetchall()
     
     return dict((x,y) for x,y in expenses)
+
+
+def get_expenses_by_category(user, min_date, max_date):
+    query = f'''
+    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
+           type,
+           sum(value) sum_value
+    FROM user_expenses
+    WHERE user_id = {user}
+    AND date >= '{min_date}'
+    AND date <= '{max_date}'
+    GROUP BY mth, type
+    ORDER BY mth, type;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        expenses = cursor.fetchall()
+    
+    summary = {}
+    [dict_monthly_types(m, t, v, summary) for m, t, v in expenses]
+    return summary
+
+
+def dict_monthly_types(month, type, value, summary):
+    if summary.get(month) is None:
+        summary[month] = {}
+    summary[month][type] = value
+    return
+
+
+def empty_averages(user, min_date):
+    query = f'''
+    SELECT DISTINCT type
+      FROM user_expenses
+    WHERE user_id = {user}
+    AND date >= '{min_date}'
+    ORDER BY type;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        types = cursor.fetchall()
+    
+    return dict((t[0], 0) for t in types)

@@ -4,38 +4,26 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 from app.userHelper import get_user, get_user_object
-from .transactionsHelper import get_transactions, remove_transaction
-from .goalsHelper import edit_goal, get_goals, get_monthly_goals
-from .expensesHelper import edit_expense, get_expenses_by_category, get_expenses_averages
-from .savingsHelper import edit_saving, get_monthly_saving, summary_savings
+from .transactionsHelper import get_transactions, remove_transaction, get_finances_summary
+from .goalsHelper import edit_goal, get_goals
+from .expensesHelper import edit_expense
+from .savingsHelper import edit_saving
 from .recurringHelper import edit_recurring, get_recurring
 
 from .forms import ExpenseForm, RecurringForm, GoalsForm, SavingsForm
 from .models import UserExpenses, UserGoals, UserRecurringExpenses, UserSavings
 
 import datetime
-import sys
+
 
 @login_required
 def dashboard(request):
     user = get_user(request)
-    year = datetime.datetime.now().year
-    expenses_sum = get_expenses_by_category(user.data.id, year)
-    savings_sum = get_monthly_saving(user.data.id, year)
-    saving_balances = summary_savings(user.data.id)
-    goals = get_monthly_goals(user.data.id, year)
-    averages = get_expenses_averages(user.data.id)
-    
     payload = {
-        'expenses': expenses_sum,  
-        'expenses_category': averages, 
-        'savings': savings_sum, 
-        'goals': goals, 
-        'saving_balances': saving_balances, 
+        'data': get_finances_summary(user.data.id),
         'form_expense': ExpenseForm(), 
-        'form_saving': SavingsForm()
+        'form_saving': SavingsForm(),
     }
-    
     return render(request, 'finance-dashboard.html', payload)
 
 
@@ -91,7 +79,6 @@ def load_older(request, transaction_type):
     start = int(request.GET.get('start'))
     end = int(request.GET.get('end'))
     transaction = get_transactions(model, user.data.id, start, end)
-    transaction = {'data': list(transaction.values())}
     return JsonResponse(transaction)
 
 

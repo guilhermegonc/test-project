@@ -1,4 +1,4 @@
-const startChart = (chartCanvas, barColors) => {
+const startChart = (chartCanvas, barColors, chartBudget, chartRealized) => {
     new Chart(chartCanvas, {
         type: 'bar',
         data: {
@@ -6,13 +6,13 @@ const startChart = (chartCanvas, barColors) => {
             datasets: [{
                 type: 'line',
                 backgroundColor: 'rgba(221, 221, 221)',
-                data: goalExpValues,
+                data: chartBudget,
                 tension: 0,
                 fill: false,
             },{
                 type: 'bar',
                 backgroundColor: barColors,
-                data: expenseValues,
+                data: chartRealized,
                 tension: 0,
             }]
         },

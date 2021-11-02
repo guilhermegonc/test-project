@@ -30,29 +30,26 @@ def create_goal(payload):
     )
 
 
-def get_monthly_goals(user, year):
-    summary = {}
-    for i in range(12):
-        summary[f'{year}-{i+1:02d}-01'] = (0, 0)
-
+def get_monthly_goals(user, min_date, max_date):
     query = f'''
     SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
            sum(expenses) sum_expenses,
            sum(savings) sum_savings
     FROM user_goals
     WHERE user_id = {user}
-    AND date >= '{year}-01-01'
-    AND date < '{year + 1}-01-01'
+    AND date >= '{min_date}'
+    AND date < '{max_date}'
     GROUP BY mth;
     '''
     with connection.cursor() as cursor:
         cursor.execute(query)
         goals = cursor.fetchall()
 
+    summary={}
     [dict_monthly(m, e, s, summary) for m, e, s in goals]
     return summary
 
 
 def dict_monthly(month, expenses, savings, summary):
-    summary[month] = (expenses, savings)
+    summary[month] = {'expenses': expenses, 'savings': savings}
     return

@@ -1,4 +1,5 @@
-const addExpensesTable = div => {
+const addExpensesTable = () => {
+    const div = document.querySelector('#table-list')
     const html = new ExpensesTable(div)
 }
 
@@ -18,6 +19,7 @@ const addGoalsTable = div => {
     const html = new GoalsTable(div)
 }
 
-const addSavingsTable = div => {
+const addSavingsTable = () => {
+    const div = document.querySelector('#table-list')
     const html = new SavingsTable(div)
 }

@@ -28,5 +28,5 @@ class Command(BaseCommand):
 
     def write_payload(self, recurring, date):
         payload = {'user': recurring.user, 'name': recurring.name, 'type': recurring.type, 
-            'date': date, 'value': recurring.value,'recurring': True}
+            'date': date, 'value': recurring.value,'recurring': True}        
         return create_expense(payload)

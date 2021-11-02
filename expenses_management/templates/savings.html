@@ -28,26 +28,12 @@
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
+{{ rows|json_script:"user-savings" }}
 <script>
     let counter = 1
-    let savings = []
-    let obj, dd, mm
-    '{% for r in rows %}'
-        dd = '{{ r.date.day }}'.padStart(2, '0')
-        mm = '{{ r.date.month }}'.padStart(2, '0')
-        obj = {
-            'id': {{ r.id }},
-            'name': '{{ r.name }}',
-            'objective': '{{ r.objective }}',
-            'value': {{ r.value }},
-            'date': `{{ r.date.year }}-${mm}-${dd}`
-        }
-        savings.push(obj)
-    '{% endfor %}'
-
+    let savings = JSON.parse(document.getElementById('user-savings').textContent).data
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    const div = document.querySelector('#table-list')
-    addSavingsTable(div)
+    addSavingsTable()
 </script>
 {% endblock %}

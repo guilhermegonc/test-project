@@ -26,24 +26,6 @@ def create_saving(payload):
     )
 
 
-def get_monthly_saving(user, year):
-    summary = dict((f'{year}-{i+1:02d}-01', 0) for i in range(12))
-    query = f'''
-    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
-           sum(value) sum_value
-    FROM user_savings
-    WHERE user_id = {user}
-    AND date > '{year}-01-01'
-    AND date < '{year + 1}-01-01'
-    GROUP BY mth;
-    '''
-    with connection.cursor() as cursor:
-        cursor.execute(query)
-        savings = cursor.fetchall()
-    
-    return {**summary, **dict((x,y) for x,y in savings)}
-
-
 def summary_savings(user):
     query = f'''
     SELECT objective,
@@ -58,3 +40,30 @@ def summary_savings(user):
 
     return dict((o, v) for o, v in savings)
 
+
+def get_monthly_saving(user, min_date, max_date):
+    query = f'''
+    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
+           objective,
+           sum(value) sum_value
+    FROM user_savings
+    WHERE user_id = {user}
+    AND date >= '{min_date}'
+    AND date <= '{max_date}'
+    GROUP BY mth, objective
+    ORDER BY mth, objective;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        savings = cursor.fetchall()
+    
+    summary = {}
+    [dict_monthly_types(m, o, v, summary) for m, o, v in savings]
+    return summary
+
+
+def dict_monthly_types(month, objective, value, summary):
+    if summary.get(month) is None:
+        summary[month] = {}
+    summary[month][objective] = value
+    return

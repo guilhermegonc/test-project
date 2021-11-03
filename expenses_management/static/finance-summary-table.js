@@ -52,11 +52,9 @@ class SummaryTable {
     
     addTitle = (id, text) => {
         const details = document.querySelector(`#${id}`)
-
         const h3 = document.createElement('h3')
         h3.classList.add('s8', 'txt-center', 'p-24')
         h3.innerText = text
-
         details.insertBefore(h3, this.table)
         this.changeStyles(details)
     }

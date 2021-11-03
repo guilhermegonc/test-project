@@ -111,27 +111,41 @@ class PageData {
     updateExpenseTable = () => {
         const expDetails = document.querySelector('#details-expenses')
         expDetails.innerHTML = ''    
-        const values = this.getExpenseCategories(this.date) 
-        const expTable = new ExpenseTypeTable(expDetails, values)
+        let values = this.getExpenseCategories(this.date)
+        new ExpenseTypeTable(expDetails, values)
     }
 
     getExpenseCategories = () => {
         const expenses = {}
+        let classification = []
+        let inBudget
         const categories = Object.keys(userFinances.averages)
         let avg, val
         for (let i = 0; i < categories.length; i++) {
             avg = userFinances.averages[categories[i]].toFixed(2)
             val = userFinances.months[this.date].expenses.categories[categories[i]]
             val = val === undefined ? '0.00' : val.toFixed(2)
-            expenses[categories[i]] = `R$ ${val}<br>(R$ ${avg})`   
+            expenses[categories[i]] = `R$ ${val}<br>(R$ ${avg})`
+
         }
         return expenses
+    }
+
+    addColors = classification => {
+        let cells = document.querySelectorAll('td')
+        cells = [1,2,3,4,5,6]
+        console.log(cells)
+        const filterItems = cells.filter(item => cells.indexOf(item) != 2)
+        console.log(cells)
     }
     
     updateSavingTable = () => {
         const savDetails = document.querySelector('#details-savings')
         let values = userFinances.savingsSum
-        const savTable = new SavingBalanceTable(savDetails, values)
+        Object.keys(values).forEach((key, value) => {
+            values[key] = `R$ ${values[key].toFixed(2)}`
+        })
+        new SavingBalanceTable(savDetails, values)
     }
     
     addNav = (id, inverse) => {

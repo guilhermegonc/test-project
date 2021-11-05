@@ -1,3 +1,16 @@
+const addRecurringTable = () => {
+    const container = document.querySelector('#table-list')
+    const html = new RecurringTable(container)
+    const info = document.querySelector('#info')
+    const text = `No dia 01 de cada mês, as despesas recorrentes "ativas" são adicionadas às suas "despesas" com o ícone ⏱. É possível EDITAR e REMOVÊ-LAS normalmente.\nPara evitar que esses custos sejam adicionados novamente no próximo mês, basta inativá-los por aqui.`
+
+    info.addEventListener('click', function(){
+        const modal = addModal()
+        createTitle(modal, 'Recorrentes')
+        createParagraph(modal, text)
+    })
+}
+
 class RecurringTable {
     constructor(div) {
         this.html = new Table('recurring')

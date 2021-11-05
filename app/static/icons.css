@@ -1,0 +1,17 @@
+
+.menu-icon {
+    font-size: 17px !important;
+    padding: 0;
+    height: 17px;
+    vertical-align: middle;
+}
+
+.icon-adjust {
+    vertical-align: middle;
+    font-size: 21px;
+}
+
+.icon-hover:hover {
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 50%;
+}

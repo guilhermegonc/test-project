@@ -3,10 +3,10 @@ from .models import UserGoals
 
 
 def get_goals(user, year):
-    return UserGoals.objects.filter(user=user, 
+    goals = UserGoals.objects.filter(user=user, 
         date__gte=f'{year}-01-01', 
         date__lt=f'{year + 1}-01-01').order_by('date')
-
+    return {'data': list(goals.values())}
 
 def edit_goal(payload):
     if not UserGoals.objects.filter(id=payload['id']).exists():

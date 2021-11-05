@@ -1,0 +1,30 @@
+.modal {
+    margin: 100px auto;
+    width: 300px;
+    padding: 24px;
+    border-radius: 4px;
+    background-color: white;
+    height: 340px;
+    overflow: scroll;
+}
+
+@media (max-width: 992px) {
+    .modal {
+        width: 300px;
+        margin-top: 24px 0;
+    }
+}
+
+.modal-bg {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background-color: #5b798e87;
+}
+
+.modal .btn {
+    line-height: 48px;
+}

@@ -1,3 +1,8 @@
+const addExpensesTable = () => {
+    const div = document.querySelector('#table-list')
+    const html = new ExpensesTable(div)
+}
+
 class ExpensesTable {
     constructor(div) {
         this.html = new Table('expense')

@@ -1,0 +1,64 @@
+body {
+    margin: 0px;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.m-6 {
+    margin: 6px;
+}
+
+.m-12 {
+    margin: 12px;
+}
+
+.m-12-6 {
+    margin: 12px 6px;
+}
+
+.m-12-r {
+    margin: 12%;
+}
+
+.m-b-6 {
+    margin-bottom: 6px;
+}
+
+.m-b-12 {
+    margin-bottom: 12px;
+}
+
+.m-b-24 {
+    margin-bottom: 24px;
+}
+
+.m-b-84 {
+    margin-bottom: 84px;
+}
+
+.p-12 {
+    padding: 12px;
+}
+
+.p-24 {
+    padding: 24px;
+}
+
+.m-a {
+    margin: auto;
+}
+
+.m-l-a {
+    margin-left: auto;
+}
+
+.m-r-a {
+    margin-right: auto;
+}
+
+.no-indent {
+    margin-left: 0;
+    padding-left: 0;
+}

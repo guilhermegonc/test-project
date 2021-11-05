@@ -1,0 +1,77 @@
+.btn {
+    font-size: 14px;
+    font-family: sans-serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 60px;
+    display: block;
+    border-radius: 3px;
+    color: white;
+    background-color: rgba(50,72,190,1);
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    border: 0px;
+}
+
+.btn.danger {
+    background-color: rgb(216, 93, 44);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: rgb(26, 38, 107);
+}
+
+.menu-btn {
+    border: none;
+    background-color: transparent;
+    vertical-align: middle;
+    padding: 24px;
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 17px;
+
+}
+
+.menu-btn:hover, .menu-icon:hover {
+    background-color:rgba(0,0,0,0.05);
+}
+
+.btn.light {
+    background-color: white;
+    color: #444;
+}
+
+.btn.transparent-gray {
+    background-color: rgba(50, 50, 50, 0.2);
+    color: #444;
+}
+
+.btn.light:hover {
+    background-color: #ddd;
+}
+
+.btn.transparent-gray:hover {
+    background-color: rgba(50, 50, 50, 0.4);
+}
+
+.footer-btn {
+    display: block;
+    margin-top: 60px;
+    width: 100%;
+}
+
+.footer-btn>.btn {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin: 0px;
+    width: 100%;
+}

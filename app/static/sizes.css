@@ -1,0 +1,34 @@
+.w-300 {
+    width: 300px;
+}
+
+.w-400 {
+    max-width: 400px;
+}
+
+.w-522 {
+    max-width: 522px;
+}
+
+.half-view {
+    width: 50%;
+    min-width: 300px;
+}
+
+@media (max-width: 992px) {
+    .half-view {
+        width: 100%;
+    }
+}
+
+.one-third {
+    width: 34%;
+    margin: auto;
+    min-width: 300px;
+}
+
+.two-thirds {
+    width: 66%;
+    margin: auto;
+    min-width: 300px;
+}

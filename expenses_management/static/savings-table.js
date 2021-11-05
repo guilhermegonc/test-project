@@ -1,3 +1,8 @@
+const addSavingsTable = () => {
+    const div = document.querySelector('#table-list')
+    const html = new SavingsTable(div)
+}
+
 class SavingsTable {
     constructor(div) {
         this.parent = div

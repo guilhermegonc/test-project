@@ -1,3 +1,8 @@
+const addGoalsTable = () => {
+    const container = document.querySelector('#table-list')
+    const html = new GoalsTable(container)
+}
+
 class GoalsTable {
     constructor(div) {
         this.parent = div
@@ -34,11 +39,18 @@ class GoalsTable {
     }
 
     populateTable = data => {
+        const months = {
+            0: 'Janeiro', 1: 'Fevereiro', 2: 'Março',
+            3: 'Abril', 4: 'Maio', 5: 'Junho',
+            6: 'Julho', 7: 'Agosto', 8: 'Setembro',
+            9: 'Outubro', 10: 'Novembro', 11: 'Dezembro', 
+        }
+
         for (let i = 0; i < data.length; i++) {
             let row = document.createElement('tr')            
             
             row.innerHTML = `
-                <td class="s10 str">${data[i].date}</td>
+                <td class="s10 str">${months[i]} ${data[i].date.split('-')[0]}</td>
                 <td class="s9 light-gray m-0 red t-right">R$ ${data[i].expenses}</td>
                 <td class="s9 light-gray m-0 green t-right">R$ ${data[i].savings}</td>
             `

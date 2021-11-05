@@ -3,6 +3,14 @@ class SavingBalanceTable {
         this.summary = new SummaryTable(div, values, 'saving-summary')
         this.summary.populateHeader('details-savings', 'Caixa', 'Saldo')
         this.summary.addTitle('details-savings', 'Economias (acumulado)')
+        this.addCurrency()
+    }
+
+    addCurrency = () => {
+        this.summary.values.forEach(key => {
+            key.children[1].innerText = `R$ ${key.children[1].innerText}`
+            key.children[1].classList.add('light-grey')
+        })
     }
 }
 
@@ -11,6 +19,23 @@ class ExpenseTypeTable {
         this.summary = new SummaryTable(div, values, 'expense-summary')
         this.summary.populateHeader('details-expenses', 'Categoria', 'Soma (Média)')
         this.summary.addTitle('details-expenses', 'Gastos por categoria')
+        this.addCurrency()
+    }
+    
+    addCurrency = () => {
+        let values
+        this.summary.values.forEach(key => {
+            values = key.children[1].innerText.split(',')
+            key.children[1].innerText = `R$ ${values[0]}\n(R$ ${values[1]})`
+            this.colorCell(key, values[0], values[1])
+        })
+    }
+
+    colorCell = (cell, value, average) => {
+        value = parseFloat(value)
+        average = parseFloat(average)
+        const color = value < average || value <= 0 ? 'green' : 'red'
+        cell.classList.add(color)
     }
 }
 
@@ -26,7 +51,7 @@ class SummaryTable {
         this.html.firstRow.remove()
         this.html.btn.remove()
         
-        this.populateTable(values)
+        this.values = this.populateTable(values)
     }
 
     populateHeader = (id, name, value) => {
@@ -38,18 +63,27 @@ class SummaryTable {
     }
 
     populateTable = data => {
+        const values = []
         const keys  = Object.keys(data)
-        keys.forEach((key, value) => {
+        keys.forEach((key) => {
             let row = document.createElement('tr')
+            
+            let tdName = document.createElement('td')
+            tdName.classList.add('s10', 'str', 'main-column')
+            tdName.innerText = key
+            row.appendChild(tdName)
 
-            row.innerHTML = `
-                <td class="s10 str main-column">${key}</td>
-                <td id ="table-${key}-value" class="s9 light-gray m-0 t-right">${data[key]}</td>
-            `
+            let tdValue =  document.createElement('td')
+            tdValue.classList.add('s9', 'm-0', 't-right')
+            tdValue.innerText = data[key]
+            row.appendChild(tdValue)
+
+            values.push(row)
             this.html.table.appendChild(row)
         })
+        return values
     }
-    
+
     addTitle = (id, text) => {
         const details = document.querySelector(`#${id}`)
         const h3 = document.createElement('h3')

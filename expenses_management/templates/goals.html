@@ -6,11 +6,9 @@
 {% block extra-css %}
 {% endblock %}
 {% block extra-js %}
-    <script src="{% static 'expenses.js' %}"></script>
     <script src="{% static 'general-table.js' %}"></script>
     <script src="{% static 'goals-table.js' %}"></script>
     <script src="{% static 'edit-modal.js' %}"></script>
-
 {% endblock %}
 
 {% block content%}
@@ -29,30 +27,11 @@
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
+{{ rows|json_script:"user-goals" }}
 <script>
-    const months = {
-        '01': 'Janeiro', '02': 'Fevereiro', '03': 'Março',
-        '04': 'Abril', '05': 'Maio', '06': 'Junho',
-        '07': 'Julho', '08': 'Agosto', '09': 'Setembro',
-        '10': 'Outubro', '11': 'Novembro', '12': 'Dezembro', 
-    }
+    let goals = JSON.parse(document.getElementById('user-goals').textContent).data
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    const div = document.querySelector('#table-list')
-    let goals = []
-    let obj, dd, mm
-    '{% for r in rows %}'
-        dd = '{{ r.date.day }}'.padStart(2, '0')
-        mm = '{{ r.date.month }}'.padStart(2, '0')
-        obj = {
-            'id': {{ r.id }},
-            'date': `${months[mm]} - {{ r.date.year }}`,
-            'month_date': `{{ r.date.year }}-${mm}-01`,
-            'expenses': {{ r.expenses }}.toFixed(2),
-            'savings': {{ r.savings }}.toFixed(2),
-        }
-        goals.push(obj)
-    '{% endfor %}'
-    addGoalsTable(div)
+    addGoalsTable()
 </script>
 {% endblock %}

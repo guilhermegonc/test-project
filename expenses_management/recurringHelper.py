@@ -2,7 +2,8 @@ from .models import UserRecurringExpenses
 
 
 def get_recurring(user, active=[True, False]):
-    return UserRecurringExpenses.objects.filter(user=user, active__in=active).order_by('name')
+    recurring = UserRecurringExpenses.objects.filter(user=user, active__in=active).order_by('name')
+    return {'data': list(recurring.values())}
 
 
 def edit_recurring(payload):

@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'recurring-style.css' %}">
 {% endblock %}
 {% block extra-js %}
-    <script src="{% static 'expenses.js' %}"></script>
     <script src="{% static 'general-table.js' %}"></script>
     <script src="{% static 'recurring-table.js' %}"></script>
     <script src="{% static 'edit-modal.js' %}"></script>
@@ -27,22 +26,11 @@
 <div class="fl-l btn-full">
     <a class="btn shadow light m-b-12" href="/expenses">Voltar</a>
 </div>
+{{ rows|json_script:"user-recurring" }}
 <script>
+    let recurring = JSON.parse(document.getElementById('user-recurring').textContent).data
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
-    const tableDiv = document.querySelector('#table-list')
-    let recurring = []
-    let obj
-    '{% for r in rows %}'
-        obj = {
-            'id': {{ r.id }},
-            'name': '{{ r.name }}',
-            'type': '{{ r.type }}',
-            'active': '{{ r.active  }}' === 'True',
-            'value': {{ r.value }}.toFixed(2),
-        }
-        recurring.push(obj)
-    '{% endfor %}'
-    addRecurringTable(tableDiv)
+    addRecurringTable()
 </script>
 {% endblock %}

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block title %}Carteira{% endblock %}
-{% include "chart-js/chart.html"%}
 
 {% load static %}
 {% block extra-css %}
@@ -9,10 +8,12 @@
 {% block extra-js %}
     <script src="{% static 'wallet-actions.js' %}"></script>
     <script src="{% static 'wallet-overview.js' %}"></script>
+    <script src="{% static 'wallet-chart.js' %}"></script>
     <script src="{% static 'stock-obj.js' %}"></script>
     <script src="{% static 'transaction-modals.js' %}"></script>
     <script src="{% static 'balance-modals.js' %}"></script>
     <script src="{% static 'balance-calculator.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
 {% endblock %}
 
 {% block content%}
@@ -23,7 +24,8 @@
     <p id="card-label" class="s9 str m-0">Valor estimado:</p>
     <h1 id="wallet-value" class="s3 m-b-12">Carteira</h1>
     <p id="wallet-cost" class="s9 m-0">Custo</p>
-    <p id="reference-date" class="s9 m-b-84">Atualizado em: {{ stocks.0.close_date.0 }}</p>
+    <p id="reference-date" class="s9 m-0">Atualizado em: {{ stocks.0.close_date.0 }}</p>
+    <canvas id="wallet-chart"></canvas>
     <p class="light-gray s9 m-0">Clique para adicionar cotas</p>
 </div>
 <div class="m-b-24">
@@ -54,7 +56,9 @@
 <div class="footer-btn fl-r">
     <a class="btn light m-b-12" href="/">Início</a>
 </div>
+{{ chart|json_script:"stocks-chart" }}
 <script>
+    const chart = JSON.parse(document.getElementById('stocks-chart').textContent);
     let stocks = {}
     '{% for s in stocks %}'
         stocks.{{ s.code }} = {
@@ -81,5 +85,6 @@
     const token = `{% csrf_token %}`
     const forms = `{{ form }}`
     setupWallet()
+    startChart()
 </script>
 {% endblock %}

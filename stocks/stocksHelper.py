@@ -6,7 +6,7 @@ from .models import UserStocksTransactions,\
                     StockValues
 
 import datetime
-
+import sys
 
 class EnrichedStock:
     def __init__(self, code, quantity, price, value, recommended, close_date):
@@ -137,7 +137,7 @@ def get_valid_dates_from_range():
 
 def sum_daily_values(user, dates):
     query = f'''
-    SELECT DATE(reference_date),
+    SELECT DATE(reference_date) date,
         sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END)
     FROM user_stocks_transactions ust
     INNER JOIN stock_values sv on ust.code = sv.code
@@ -161,7 +161,9 @@ def sum_daily_values(user, dates):
         HAVING sum(CASE WHEN ust.action = 'buy' THEN ust.quantity ELSE ust.quantity * -1 END) > 0
         '''
     
+    query += 'ORDER BY date ASC'
+    
     with connection.cursor() as cursor:
         cursor.execute(query)
         data = cursor.fetchall()
-    return [(d[0].strftime('%Y-%m-%d'), d[1]) for d in data]
+    return dict((d[0].strftime('%Y-%m-%d'), d[1]) for d in data)

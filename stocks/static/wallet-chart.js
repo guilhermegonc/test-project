@@ -2,18 +2,31 @@ const startChart = () => {
     const chartCanvas = document.querySelector('#wallet-chart')
     const walletLabels = Object.keys(chart)
     const walletValues = Object.values(chart)
+    var relativeWallet = walletValues.map(num => ((num - 1) * 100).toFixed(2))
+    var zeros = walletValues.map(() => 0)
+    const color = walletValues[walletValues.length - 1] >= 1 ? 'rgb(113, 218, 97)' : 'rgb(208, 68, 26)'
     new Chart(chartCanvas, {
         type: 'line',
         data: {
             labels: walletLabels,
             datasets: [{
                 type: 'line',
-                backgroundColor: 'rgb(113, 218, 97)',
-                borderColor: 'rgb(113, 218, 97)',
-                pointBackgroundColor: 'rgb(113, 218, 97)',
+                backgroundColor: color,
+                borderColor: color,
+                pointBackgroundColor: color,
                 pointBorderColor: 'rgba(0, 0, 0, 0)',
-                data: walletValues,
-                tension: 0.5,
+                data: relativeWallet,
+                tension: 0,
+                fill: false,
+            },{
+                type: 'line',
+                backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                borderColor: 'rgba(0, 0, 0, 0.4)',
+                pointBackgroundColor: 'rgba(0, 0, 0, 0.4)',
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                borderWidth: 1,
+                data: zeros,
+                tension: 0,
                 fill: false,
             }]
         },

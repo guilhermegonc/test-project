@@ -123,7 +123,7 @@ def get_valid_dates_from_range():
     start = end - datetime.timedelta(days=180)
     end = end.strftime('%Y-%m-%d')
     start = start.strftime('%Y-%m-%d')
-
+    # Pegar primeira transacao, listar todos os dias ate hoje
     with connection.cursor() as cursor:
         cursor.execute(f'''
         SELECT DISTINCT reference_date
@@ -138,7 +138,7 @@ def get_valid_dates_from_range():
 def sum_daily_values(user, dates):
     query = f'''
     SELECT DATE(reference_date) date,
-        sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END)
+        sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END) / (SELECT SUM(CASE WHEN action = 'buy' THEN ROUND(quantity::FLOAT * ust.value::FLOAT) ELSE ROUND(quantity::FLOAT * ust.value::FLOAT) * -1 END) FROM user_stocks_transactions ust WHERE user_id = {user} AND transaction_date < '{dates[0]}') AS growth
     FROM user_stocks_transactions ust
     INNER JOIN stock_values sv on ust.code = sv.code
     WHERE ust.user_id = {user}
@@ -151,7 +151,7 @@ def sum_daily_values(user, dates):
         query += f'''
         UNION ALL
         SELECT DATE(reference_date),
-            sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END)
+            sum(CASE WHEN ust.action = 'buy' THEN ust.quantity * sv.value ELSE ust.quantity * sv.value * -1 END) / (SELECT SUM(CASE WHEN action = 'buy' THEN ROUND(quantity::FLOAT * ust.value::FLOAT) ELSE ROUND(quantity::FLOAT * ust.value::FLOAT) * -1 END) FROM user_stocks_transactions ust WHERE user_id = {user} AND transaction_date < '{d}') AS growth
         FROM user_stocks_transactions ust
         INNER JOIN stock_values sv on ust.code = sv.code
         WHERE ust.user_id = {user}

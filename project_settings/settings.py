@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'smart_home',
     'stocks',
     'stocks_background',
-    'expenses_management'
+    'expenses_management',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

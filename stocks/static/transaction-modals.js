@@ -5,6 +5,7 @@ class TransactionModal {
         this.form = this.createForm()
         this.btn = this.createSubmissionBtn()
         this.addIncrementControl()
+        this.setMethod()
     }
 
     addTransactionContent = () => {
@@ -29,7 +30,7 @@ class TransactionModal {
 
     createSubmissionBtn = () => {
         const submissionBtn = document.createElement('input')
-        const btnLabel = 'Salvar'
+        const btnLabel = '...'
         submissionBtn.id = 'input-btn'
         submissionBtn.type = 'submit'
         submissionBtn.value = btnLabel
@@ -42,8 +43,21 @@ class TransactionModal {
     setMethod = () => {
         const hiddenInput = document.querySelector('#id_action')
         const quantity = document.querySelector('#id_quantity').value
-        hiddenInput.value = quantity > 0 ? 'buy' : 'sell'
-        this.btn.value = quantity > 0 ? 'Comprar' : 'Vender'
+        quantity === '0' || quantity === '' ? this.disableBtn() : this.enableBtn()
+        hiddenInput.value = quantity >= 0 ? 'buy' : 'sell'
+        this.btn.value = quantity >= 0 ? 'Comprar' : 'Vender'
+    }
+
+    disableBtn = () => {
+        this.btn.disabled = true
+        this.btn.classList.remove('shadow')
+        this.btn.classList.add('disabled')
+    }
+
+    enableBtn = () => {
+        this.btn.disabled = false
+        this.btn.classList.remove('disabled')
+        this.btn.classList.add('shadow')
     }
 
     addIncrementControl = () => {
@@ -66,11 +80,17 @@ class TransactionModal {
         input.parentElement.insertBefore(dec, input)
 
         dec.addEventListener('click', method => this.setQuantity(method, '-'))
+        this.addBlur()
     }
 
     setQuantity = (method, action) => {
         const input = document.querySelector('#id_quantity')
         action === '+' ? input.value++ : input.value--
         this.setMethod()
+    }
+
+    addBlur = () => {
+        const quantity = document.querySelector('#id_quantity')
+        quantity.addEventListener('change', this.setMethod)
     }
 }

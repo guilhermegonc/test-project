@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'stocks',
     'stocks_background',
     'expenses_management',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [

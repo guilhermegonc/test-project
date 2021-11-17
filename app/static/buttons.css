@@ -23,6 +23,10 @@
     background-color: #ddd;
 }
 
+.btn.disabled:hover {
+    background-color: #ddd;
+}
+
 .btn-full {
     width: 100%;
 }

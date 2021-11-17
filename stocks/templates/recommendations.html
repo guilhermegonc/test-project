@@ -13,9 +13,12 @@
 {% block content%}
 <div class="m-b-24">
     <div class="txt-center m-b-24 light">
-        <h1 class="s3 m-0 m-b-24">Recomendações</h1>
+        <h1 class="s5 m-0 m-b-24">
+            <a href="/wallet" class="clean-a">
+                <i class="material-icons icon-hover icon-adjust p-12 light">arrow_back</i>
+            </a>Recomendações
+        </h1>
         <p class="db-results s8 p-12 token light txt-center m-b-24">Atualizado em: {{ stocks.0.month.day }}/{{ stocks.0.month.month }}/{{ stocks.0.month.year }}</p>
-
     </div>
     <div id="recommendations"></div>
 </div>

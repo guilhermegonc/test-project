@@ -121,7 +121,7 @@ class EditModal {
             'type': this.obj.type,
             'value': this.obj.value,
             'date': this.obj.date,
-            'month_date': this.obj.month_date,
+            'month_date': this.obj.date,
             'recurring': this.obj.recurring,
             'expenses': this.obj.expenses,
             'savings': this.obj.savings,

@@ -40,7 +40,7 @@ def update_wallet(user, transaction):
     if transaction.action == 'sell':
         profit = transaction.value - stock.weighted_average_cost
         register_profit(transaction, profit)
-        # transaction.quantity *= -1
+        transaction.quantity *= -1
 
     stock.quantity += transaction.quantity
     
@@ -123,7 +123,6 @@ def get_valid_dates_from_range():
     start = end - datetime.timedelta(days=180)
     end = end.strftime('%Y-%m-%d')
     start = start.strftime('%Y-%m-%d')
-    # Pegar primeira transacao, listar todos os dias ate hoje
     with connection.cursor() as cursor:
         cursor.execute(f'''
         SELECT DISTINCT reference_date

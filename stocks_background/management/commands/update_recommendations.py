@@ -17,6 +17,8 @@ class Command(BaseCommand):
 
 
     def get_momentum(self, step=6, size=20):
+        if datetime.today().day != 10:
+            return
         end_date = datetime.today().strftime('%Y-%m-10')
         ibov = self.get_companies()
         start_date = self.get_reference_date(end_date, step)
@@ -71,7 +73,7 @@ class Command(BaseCommand):
 
     def parse_data(self, df):
         df = df.iloc[:,1:]
-        df.columns = ['price', 'growth']
+        df.columns `= ['price', 'growth']
         return df.sort_values(by='growth', ascending=False)
 
 

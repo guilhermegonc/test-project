@@ -20,12 +20,12 @@ class Command(BaseCommand):
 
 
     def log_payments(self):
-        if datetime.today().day != 1:
-            return
-        date = datetime.today().strftime('%Y-%m-01')
-        users = get_all_users()
-        to_register = [get_recurring(u.id, [True]) for u in users]
-        return [self.register_payment(ur['data'], date) for ur in to_register]
+        if datetime.today().day == 1:
+            date = datetime.today().strftime('%Y-%m-01')
+            users = get_all_users()
+            to_register = [get_recurring(u.id, [True]) for u in users]
+            [self.register_payment(ur['data'], date) for ur in to_register]
+        return
 
 
     def register_payment(self, recurring, date):

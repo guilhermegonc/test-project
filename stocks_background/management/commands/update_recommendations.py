@@ -17,14 +17,13 @@ class Command(BaseCommand):
 
 
     def get_momentum(self, step=6, size=20):
-        if datetime.today().day != 10:
-            return
-        end_date = datetime.today().strftime('%Y-%m-10')
-        ibov = self.get_companies()
-        start_date = self.get_reference_date(end_date, step)
-        prices = self.retrieve_results(ibov, start_date)
-        recommendation = self.df_dict(prices, size)
-        update_companies(recommendation, end_date)
+        if datetime.today().day == 10:
+            end_date = datetime.today().strftime('%Y-%m-10')
+            ibov = self.get_companies()
+            start_date = self.get_reference_date(end_date, step)
+            prices = self.retrieve_results(ibov, start_date)
+            recommendation = self.df_dict(prices, size)
+            update_companies(recommendation, end_date)
         return
 
 

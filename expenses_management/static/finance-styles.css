@@ -106,7 +106,7 @@ html {
     bottom: 24px;
     border-radius: 50%;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 1;
     width: 18px;
     height: 18px;
     line-height: 18px;

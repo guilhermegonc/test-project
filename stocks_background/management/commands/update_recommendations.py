@@ -72,7 +72,7 @@ class Command(BaseCommand):
 
     def parse_data(self, df):
         df = df.iloc[:,1:]
-        df.columns `= ['price', 'growth']
+        df.columns = ['price', 'growth']
         return df.sort_values(by='growth', ascending=False)
 
 

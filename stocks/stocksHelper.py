@@ -40,7 +40,6 @@ def update_wallet(user, transaction):
     if transaction.action == 'sell':
         profit = transaction.value - stock.weighted_average_cost
         register_profit(transaction, profit)
-        transaction.quantity *= -1
 
     stock.quantity += transaction.quantity
     

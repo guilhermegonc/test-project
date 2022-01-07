@@ -79,7 +79,7 @@ class SummaryCard{
 
     addTitle = value => {
         const h1 = document.createElement('h1')
-        h1.classList.add('s3', 'm-b-12')
+        h1.classList.add('s4', 'm-b-12')
         h1.innerText = `Título`
         this.card.appendChild(h1)
         return h1

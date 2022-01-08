@@ -1,6 +1,7 @@
 class ExpenseModal {
     constructor(forms, obj=null) {
         this.modal = new EditModal('expense', forms, obj)
+        this.modal.addOrRemove()
         this.modal.addCurrentDate()
         obj != null ? this.modal.fullfillForm() : null
         this.modal.focusValue('value')
@@ -12,6 +13,7 @@ class RecurringModal {
         this.modal = new EditModal('recurring', forms, obj)
         this.modal.addNumericKeyBoard()
         this.modal.checkActive()
+        this.modal.addOrRemove()
         obj != null ? this.modal.fullfillForm() : null
         this.modal.focusValue('value')
     }
@@ -20,6 +22,7 @@ class RecurringModal {
 class SavingModal {
     constructor(forms, obj=null) {
         this.modal = new EditModal('saving', forms, obj)
+        this.modal.addOrRemove()
         this.modal.addCurrentDate()
         obj != null ? this.modal.fullfillForm() : null
         this.modal.focusValue('value')
@@ -63,6 +66,25 @@ class EditModal {
     
         this.content.appendChild(form)
         return form
+    }
+
+    addOrRemove = () => {
+        const qty = document.querySelector('#id_value')
+        qty.classList.add('fl-l', 'second-btn')
+
+        const change = document.createElement('span')
+        change.classList.add('fl-l', 'gui')
+        let text = '🔀'
+        change.innerText = text        
+        change.classList.add('increment')
+        qty.after(change)
+
+        change.addEventListener('click', () => this.changeValue())
+    }
+
+    changeValue = () => {
+        const valueInput = document.querySelector('#id_value')
+        valueInput.value *= -1
     }
     
     addFormBtn = () => {

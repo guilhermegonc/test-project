@@ -18,6 +18,20 @@ input[type="submit"] {
     margin: 0;
 }
 
+input.modal-options {
+    float:  left;
+    width:  10px;
+}
+
+label.modal-options {
+    float: left;
+    display:  inherit;
+}
+
+.second-btn {
+    width: calc(100% - 76px);
+}
+
 select {
     -webkit-appearance: none;
 }
@@ -70,4 +84,19 @@ label{
 .form-group-compact {
     margin: 12px auto 12px;
     max-width: 480px;
+}
+
+.increment {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin-top: 7px;
+    border-radius: 2px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.increment:hover {
+    background-color: #ddd;
 }

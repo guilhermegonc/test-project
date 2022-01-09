@@ -2,6 +2,8 @@ boto3
 django
 django-decouple
 django-heroku
+djangorestframework 
+django-cors-headers
 gunicorn
 pandas
 python-jose

@@ -1,4 +1,4 @@
-from .expensesHelper import get_expenses_averages, empty_averages, get_expenses_by_category
+from .expensesHelper import get_expenses_averages, empty_averages, get_expenses_by_category, get_recurring_expenses
 from .savingsHelper import get_monthly_saving, summary_savings
 from .goalsHelper import get_monthly_goals
 
@@ -44,6 +44,7 @@ def empty_month():
     return {
         'expenses': {
             'total': 0,
+            'total_recurring': 0,
             'goal': 0,
             'categories': {}
         },
@@ -62,6 +63,10 @@ def populate_finance_data(user_finances, user):
 
     expenses = load_expenses(user, min_date, max_date)
     [add_expenses(user_finances['months'][m]['expenses'], expenses, m)\
+        for m in user_finances['months'].keys()]
+
+    recurring = load_recurring_expenses(user, min_date, max_date)
+    [add_recurring(user_finances['months'][m]['expenses'], recurring, m)\
         for m in user_finances['months'].keys()]
 
     savings = load_savings(user, min_date, max_date)
@@ -89,6 +94,16 @@ def add_expenses(expense_object, expenses, key):
         expense_object['categories'] = expenses[key]
         expense_object['total'] = sum(expenses[key].values())
     return expense_object
+
+
+def load_recurring_expenses(user, min_date, max_date):
+    return get_recurring_expenses(user, min_date, max_date)
+
+
+def add_recurring(recurring_object, recurring, key):
+    if recurring.get(key):
+        recurring_object['total_recurring'] = recurring[key]
+    return recurring_object
 
 
 def load_savings(user, min_date, max_date):

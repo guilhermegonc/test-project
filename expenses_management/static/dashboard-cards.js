@@ -1,6 +1,7 @@
 class ExpenseCard {
     constructor(div, month, transactions) {
         this.realized = transactions[month].expenses.total.toFixed(2)
+        this.recurring = transactions[month].expenses.total_recurring.toFixed(2)
         this.planned = transactions[month].expenses.goal.toFixed(2)
         this.balance = (this.planned - this.realized).toFixed(2)
         this.color = this.planned * 0.95 > this.realized ? 'good' : 'danger'
@@ -9,7 +10,7 @@ class ExpenseCard {
         this.card.label.innerText = 'Disponível:'
         this.card.title.innerText = `R$ ${this.balance}`
         this.card.addSubtext(`Planejado: R$ ${this.planned}`)
-        this.card.addSubtext(`Realizado: R$ ${this.realized}`)
+        this.card.addSubtext(`Realizado: R$ ${this.realized} (R$ ${this.recurring} ⏱)`)
         this.card.footerBtn.firstChild.href = 'expenses'
         this.card.addSettingsBtn()
 

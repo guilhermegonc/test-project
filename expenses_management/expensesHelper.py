@@ -82,6 +82,34 @@ def dict_monthly_types(month, type, value, summary):
     return
 
 
+def get_recurring_expenses(user, min_date, max_date):
+    query = f'''
+    SELECT DATE_TRUNC('month', date)::DATE::TEXT mth,
+           sum(value) sum_value
+    FROM user_expenses
+    WHERE user_id = {user}
+    AND date >= '{min_date}'
+    AND date <= '{max_date}'
+    AND recurring = TRUE
+    GROUP BY mth
+    ORDER BY mth;
+    '''
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        expenses = cursor.fetchall()
+    
+    summary = {}
+    [dict_monthly_recurring(m, v, summary) for m, v in expenses]
+    return summary
+
+
+def dict_monthly_recurring(month, value, summary):
+    if summary.get(month) is None:
+        summary[month] = 0
+    summary[month] = value
+    return
+
+
 def empty_averages(user, min_date):
     query = f'''
     SELECT DISTINCT type

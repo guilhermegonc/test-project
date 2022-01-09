@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
     'social_django',
     'auth0',
     'app',
@@ -43,7 +45,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'project_settings.urls'
@@ -120,5 +122,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]
 
 django_heroku.settings(locals())

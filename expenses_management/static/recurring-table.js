@@ -1,7 +1,7 @@
 const addRecurringTable = () => {
     const container = document.querySelector('#table-list')
-    const html = new RecurringTable(container)
     const info = document.querySelector('#info')
+    const html = new RecurringTable(container)
     const text = `No dia 01 de cada mês, as despesas recorrentes "ativas" são adicionadas às suas "despesas" com o ícone ⏱. É possível EDITAR e REMOVÊ-LAS normalmente.\nPara evitar que esses custos sejam adicionados novamente no próximo mês, basta inativá-los por aqui.`
 
     info.addEventListener('click', function(){
@@ -24,6 +24,7 @@ class RecurringTable {
         this.populateHeader()
         this.detailFirstRow()
         this.populateTable(recurring)
+        this.summaryTable()
     }
 
     populateHeader = () => {
@@ -57,5 +58,27 @@ class RecurringTable {
                 new RecurringModal(forms, data[i])
             })
         }
+    }
+
+    summaryTable = () => {
+        let value = recurring.filter(rec => rec.active == true)
+        value = value.reduce((previous, val) => previous + val.value, 0)
+
+        const container = document.querySelector('#summary')
+        
+        const headingText = document.createElement('p')
+        headingText.classList.add('s9', 'str', 'm-0')
+        headingText.innerText = 'Custo recorrente:'
+        container.appendChild(headingText)
+
+        const mainValue = document.createElement('h1')
+        mainValue.classList.add('s3', 'm-b-12')
+        mainValue.innerText = `R$${value.toFixed(2)}`
+        container.appendChild(mainValue)
+
+        const caption = document.createElement('p')
+        caption.classList.add('s9', 'm-0')
+        caption.innerText = 'Somente valores ativos.'
+        container.appendChild(caption)
     }
 }

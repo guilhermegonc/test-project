@@ -133,3 +133,4 @@ staticfiles
 
 # Folders
 .DS_Store
+.notas-corretagem

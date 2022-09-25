@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     'app',
     'forms',
     'tic_tac_toe',
-    'smart_home',
     'stocks',
     'stocks_background',
     'expenses_management',

@@ -5,7 +5,6 @@ import app.views
 import auth0.views
 import forms.views
 import tic_tac_toe.views
-import smart_home.views
 import app.views
 import stocks.views
 import expenses_management.views
@@ -16,8 +15,6 @@ handler404 = app.views.handler_404
 
 urlpatterns = [
     path('', app.views.index, name='index'),
-    path('webhook', app.views.webhook),
-    path('automation_webhook', app.views.automation_webhook),
     path('profile', app.views.profile),
     path('destroy-user', app.views.destroy_user),
 
@@ -33,23 +30,6 @@ urlpatterns = [
     path('logout', auth0.views.logout),
     path('', include('django.contrib.auth.urls')),
     path('', include('social_django.urls')),
-
-    path('smart-home', smart_home.views.smart_home, name='smart-home'),
-    path('settings', smart_home.views.settings, name='settings'),
-    
-    path('join', smart_home.views.join, name='join'),
-    path('join-account', smart_home.views.join_account, name='join-account'),
-    
-    path('create-account', smart_home.views.create_account, name='create-account'),
-    
-    path('m/<str:microcontroller_token>', smart_home.views.microcontroller, name='microcontroller'),
-    path('m/<str:microcontroller_token>/update', smart_home.views.update_microcontroller, name='update-microcontroller'),
-    path('m/<str:microcontroller_token>/device', smart_home.views.device_settings, name='device-settings'),
-    path('m/<str:microcontroller_token>/destroy', smart_home.views.destroy_microcontroller, name='destroy-microcontroller'),
-    path('add-microcontroller', smart_home.views.add_microcontroller, name='add-microcontrollers'),
-    path('populate-microcontroller', smart_home.views.populate_microcontroller, name='populate-microcontroller'),
-
-    path('update-pins', smart_home.views.update_device, name='update-pins'),
 
     path('wallet', stocks.views.wallet, name='wallet'),
     path('update-wallet', stocks.views.update_wallet, name='wallet-update'),

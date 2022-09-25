@@ -8,7 +8,6 @@ from expenses_management.recurringHelper import get_recurring
 from app.userHelper import get_all_users
 from app.models import Users
 
-
 import sys
 
 class Command(BaseCommand):
